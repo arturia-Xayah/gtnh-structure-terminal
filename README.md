@@ -12,7 +12,7 @@
 
 物品注册名为 `structureterminal:structure_terminal`，显示名为“结构终端”，暂用原版地图图标，位于工具创造标签页。若 StructureLib 投影仪注册成功，提供临时无序配方：**多方块结构投影仪 + 末影珍珠 + 书**。该配方尚未作 GTNH 科技阶段平衡。
 
-GitHub Release 的发布包与解压目录使用 `structureterminal-0.1.2-alpha-GTNH-2.9.0-RC-2` 命名，JAR 下载名也注明目标 GTNH 版本；发布包内附安装说明。
+GitHub Release 仅提供可安装的 `structureterminal-0.1.2-alpha-GTNH-2.9.0-RC-2.jar`，文件名注明目标 GTNH 版本。完整源码与构建说明保留在本仓库及 GitHub 自动生成的源码归档。
 
 ## 使用
 
