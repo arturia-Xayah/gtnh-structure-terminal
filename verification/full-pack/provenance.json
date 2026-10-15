@@ -1,0 +1,16 @@
+{
+  "baseline_test_jar_sha256": "f10b8bf4537371f62626c49a092f9c7a1ebdb568d9d9e6bebcf8b21e9253581a",
+  "baseline_embedded_version": "0.1.1-alpha development snapshot; fixes subsequently packaged as 0.1.2-alpha",
+  "release_changed_main_classes": [
+    "dev/structureterminal/StructureTerminal.class",
+    "dev/structureterminal/TerminalSettings.class",
+    "dev/structureterminal/Tags.class"
+  ],
+  "release_config_retry_version": "0.1.2-alpha",
+  "client_started": false,
+  "native_build_budget": 200,
+  "scan_budget_millis": 5000,
+  "stage_tick_limit": 240,
+  "world": "terminal-pack-validation",
+  "registry_entries": 336
+}

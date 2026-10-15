@@ -1,0 +1,32 @@
+{
+  "pack": "2.9.0-RC-2",
+  "profile": "configuration-retry",
+  "controllers_attempted": 30,
+  "classification_counts": {
+    "OPERATION_CHECKS_PASS": 20,
+    "DEMOLITION_REMAINDER": 1,
+    "BUILD_TIME_LIMIT": 1,
+    "MATERIAL_ACCOUNTING_REVIEW": 1,
+    "POST_OPERATION_NOT_FORMED": 3,
+    "BUILD_BLOCKED": 1,
+    "REPLACE_BLOCKED": 1,
+    "BUILT_NOT_FORMED": 2
+  },
+  "scan_success": 30,
+  "native_build_complete": 28,
+  "formed_after_build": 26,
+  "replacement_native_complete": 4,
+  "idle_scan_state_preserved": 30,
+  "idle_scan_state_changed": 0,
+  "phase_attempts": {
+    "baseline_build": 30,
+    "partial_rebuild": 28,
+    "demolish": 30,
+    "replace": 6
+  },
+  "machines_with_any_material_delta": 4,
+  "scans_over_default_500ms": 0,
+  "scans_with_unknown_cells": 2,
+  "running_recipe_tested": false,
+  "gui_tested": false
+}

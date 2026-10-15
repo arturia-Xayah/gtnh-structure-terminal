@@ -1,0 +1,5 @@
+dependencies {
+    implementation("com.github.GTNewHorizons:StructureLib:1.4.45:dev")
+    compileOnly("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-1080-GTNH:dev") { transitive = false }
+    testImplementation("junit:junit:4.13.2")
+}

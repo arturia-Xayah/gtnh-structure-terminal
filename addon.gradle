@@ -1,0 +1,101 @@
+// Keep the distributable usable with the Java 8 bytecode expected by 1.7.10.
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+tasks.named('compileJava', JavaCompile) { options.release = 8 }
+tasks.named('compileTestJava', JavaCompile) { options.release = 8 }
+tasks.named('compileInjectedTagsJava', JavaCompile) { options.release = 8 }
+version = '0.1.2-alpha'
+
+
+ext.modVersion = '0.1.2-alpha'
+
+// Test-only build for installation into the isolated official GTNH server. Normal artifacts exclude it.
+if (providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean()) {
+    sourceSets.main.java.srcDir('src/packTest/java')
+    tasks.named('jar') { archiveClassifier = 'pack-tests' }
+}
+
+if (providers.gradleProperty('terminalMirror').getOrElse('false').toBoolean()) {
+    repositories.all { repo ->
+        if (repo instanceof org.gradle.api.artifacts.repositories.MavenArtifactRepository) {
+            if (repo.url.host in ['maven.minecraftforge.net', 'files.minecraftforge.net']) repo.url = uri('https://maven.cleanroommc.com/')
+            if (repo.url.host == 'libraries.minecraft.net') repo.url = uri('https://bmclapi2.bangbang93.com/maven/')
+        }
+    }
+}
+
+// Distribution validation is deliberately headless: never launch Minecraft as part of build/check.
+tasks.register('verifyDistribution') {
+    dependsOn(tasks.named('reobfJar'))
+    doLast {
+        def jarFile = tasks.named('reobfJar').get().archiveFile.get().asFile
+        new java.util.zip.ZipFile(jarFile).withCloseable { zip ->
+            def classes = 0
+            zip.entries().each { entry ->
+                if (entry.name.endsWith('.class')) {
+                    classes++
+                    if (entry.name.contains('/qa/') || entry.name.contains('/servertest/')) throw new GradleException('Test fixture leaked into mod JAR')
+                    if (entry.name.contains('/packtest/') && !providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean()) throw new GradleException('Pack test fixture leaked into normal mod JAR')
+                    def bytes = zip.getInputStream(entry).bytes
+                    def major = ((bytes[6] & 255) << 8) | (bytes[7] & 255)
+                    if (major > 52) throw new GradleException("${entry.name} needs newer than Java 8: ${major}")
+                }
+            }
+            if (classes == 0) throw new GradleException('Distribution contains no class files')
+            if (!new String(zip.getInputStream(zip.getEntry('dev/structureterminal/TerminalItem.class')).bytes, java.nio.charset.StandardCharsets.ISO_8859_1).contains('func_77655_b'))
+                throw new GradleException('Distribution is a development JAR, not the remapped runtime JAR')
+            def manifest = new java.util.jar.Manifest(zip.getInputStream(zip.getEntry('META-INF/MANIFEST.MF')))
+            if (manifest.mainAttributes.getValue('FMLCorePlugin') != 'dev.structureterminal.coremod.TerminalLoadingPlugin')
+                throw new GradleException('Missing terminal hint-collection coremod manifest')
+            logger.lifecycle("Verified ${classes} Java 8 compatible classes and coremod manifest; no game launched.")
+        }
+    }
+}
+tasks.named('check') { dependsOn(tasks.named('verifyDistribution')) }
+
+// Explicit opt-in dedicated-server integration suite; there is no client or GUI entry point.
+if (providers.gradleProperty('terminalServerTests').getOrElse('false').toBoolean()) {
+    sourceSets {
+        serverTest {
+            java.srcDir('src/serverTest/java')
+            compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+            runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+        }
+    }
+    tasks.named('compileServerTestJava', JavaCompile) { options.release = 8 }
+    tasks.named('runServer', JavaExec) {
+        dependsOn(tasks.named('serverTestClasses'))
+        classpath += sourceSets.serverTest.output
+        workingDir(layout.buildDirectory.dir('headless-tests').get().asFile)
+        jvmArgs('-Dstructureterminal.serverTests=true', '-Djava.awt.headless=true')
+        args('nogui')
+        doFirst {
+            def folder = workingDir
+            folder.mkdirs()
+            new File(folder, 'eula.txt').text = 'eula=true\n'
+            new File(folder, 'server.properties').text = '''server-ip=127.0.0.1
+server-port=0
+online-mode=false
+level-name=terminal-test-world
+level-type=FLAT
+generator-settings=2;7,2x3,2;1;
+spawn-protection=0
+view-distance=3
+allow-nether=false
+spawn-monsters=false
+spawn-animals=false
+enable-query=false
+enable-rcon=false
+'''
+            new File(folder, 'terminal-server-tests.json').delete()
+        }
+        doLast {
+            def report = new File(workingDir, 'terminal-server-tests.json')
+            if (!report.isFile()) throw new GradleException('Dedicated server did not produce a test report')
+            def result = new groovy.json.JsonSlurper().parse(report)
+            if (!result.passed) throw new GradleException('Headless integration tests failed; see ' + report)
+            logger.lifecycle('Headless integration tests passed: ' + result.tests.size())
+        }
+    }
+}

@@ -1,0 +1,510 @@
+Initialized native services in: <workspace>/work/terminal_port_sources/gradle-cache/native
+Initialized jansi services in: <workspace>/work/terminal_port_sources/gradle-cache/native
+The current JVM process isn't compatible with build requirement. The maximum heap size is insufficient.
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Starting process 'command '/usr/libexec/java_home''. Working directory: <workspace>/outputs/structure_terminal Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Java Toolchain auto-detection failed to find local MacOS system JVMs
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home, JAVA_VERSION=25.0.4.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.4.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.4.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm17251564384672131169probe Command: <workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home, JAVA_VERSION=17.0.20.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.20.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.20.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm15030216809455783451probe Command: <workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre, JAVA_VERSION=1.8.0_504, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=1.8.0_504-b01, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.504-b01, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'Gradle build daemon'. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/daemon/9.7.1 Command: <workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --enable-native-access=ALL-UNNAMED -XX:MaxMetaspaceSize=384m -XX:+HeapDumpOnOutOfMemoryError -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -cp <workspace>/work/terminal_port_sources/gradle/gradle-9.7.1/lib/gradle-daemon-main-9.7.1.jar -javaagent:<workspace>/work/terminal_port_sources/gradle/gradle-9.7.1/lib/agents/gradle-instrumentation-agent-9.7.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.7.1
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 0.346 secs.
+The client will now receive all logging from the daemon (pid: 27415). The daemon log file: <workspace>/work/terminal_port_sources/gradle-cache/daemon/9.7.1/daemon-27415.out.log
+Daemon will be stopped at the end of the build
+Using 2 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, isolatedProjectsDiagnostics=false, isolatedProjectsDangerouslyIgnoreProblems=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=true, vintage=true}
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home, JAVA_VERSION=25.0.4.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.4.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.4.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Watching the file system is configured to be enabled if available
+Now considering [<workspace>/outputs/structure_terminal] as hierarchies to watch
+File system watching is active
+Starting Build
+Resolved plugin [id: 'com.gtnewhorizons.gtnhsettingsconvention', version: '2.0.33']
+Adding Spotless 8.10.2 to classpath due to Java 25
+Settings evaluated using settings file '<workspace>/outputs/structure_terminal/settings.gradle.kts'.
+Projects loaded. Root project using build file '<workspace>/outputs/structure_terminal/build.gradle.kts'.
+Included projects: [root project 'structure_terminal']
+
+> Configure project :
+Evaluating root project 'structure_terminal' using build file '<workspace>/outputs/structure_terminal/build.gradle.kts'.
+Resolved plugin [id: 'com.gtnewhorizons.gtnhconvention']
+file or directory '<workspace>/outputs/structure_terminal/src/api/resources', not found
+You might want to check out './gradlew :faq' if your build fails.
+Cached resource https://nexus.gtnewhorizons.com/repository/public/com/gtnewhorizons/gtnhgradle/maven-metadata.xml is up-to-date (lastModified: Thu Oct 15 06:15:02 CST 2026).
+Build script update from 2.0.33 to 2.0.34 available! Run ./gradlew updateBuildScript
+All projects evaluated.
+Task name matched 'spotlessApply'
+Task name matched 'build'
+Selected primary task 'spotlessApply' from project :
+Recommend replacing '4.19.0' with '4.19' for Eclipse JDT
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+Selected primary task 'build' from project :
+Starting process 'command '/usr/libexec/java_home''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/daemon/9.7.1 Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Java Toolchain auto-detection failed to find local MacOS system JVMs
+Starting process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm16318173375188241863probe Command: <workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home, JAVA_VERSION=17.0.20.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.20.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.20.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm10569261623911756581probe Command: <workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre, JAVA_VERSION=1.8.0_504, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=1.8.0_504-b01, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.504-b01, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Tasks to be executed: [task ':spotlessJava', task ':spotlessJavaApply', task ':spotlessKotlin', task ':spotlessKotlinApply', task ':spotlessMisc', task ':spotlessMiscApply', task ':spotlessScala', task ':spotlessScalaApply', task ':spotlessApply', task ':compileInjectedInterfacesJava', task ':extractDependencyATs', task ':generateForgeSrgMappings', task ':downloadVanillaJars', task ':mergeVanillaSidedJars', task ':deobfuscateMergedJarToSrg', task ':downloadFernflower', task ':decompileSrgJar', task ':cleanupDecompSrgJar', task ':patchDecompiledJar', task ':applyJST', task ':remapDecompiledJar', task ':decompressDecompiledSources', task ':processInjectedInterfacesResources', task ':injectedInterfacesClasses', task ':compilePatchedMcJava', task ':processPatchedMcResources', task ':patchedMcClasses', task ':compileApiJava', task ':processApiResources', task ':apiClasses', task ':injectTags', task ':compileInjectedTagsJava', task ':extractNatives2', task ':createMcLauncherFiles', task ':compileMcLauncherJava', task ':processInjectedTagsResources', task ':injectedTagsClasses', task ':processMcLauncherResources', task ':mcLauncherClasses', task ':compileJava', task ':processResources', task ':classes', task ':jar', task ':packageMcLauncher', task ':packagePatchedMc', task ':reobfJar', task ':sourcesJar', task ':assemble', task ':checkstyleApi', task ':compileIdeVirtualMainJava', task ':processIdeVirtualMainResources', task ':spotlessJavaCheck', task ':spotlessKotlinCheck', task ':spotlessMiscCheck', task ':spotlessScalaCheck', task ':spotlessCheck', task ':ideVirtualMainClasses', task ':checkstyleIdeVirtualMain', task ':checkstyleInjectedInterfaces', task ':checkstyleInjectedTags', task ':checkstyleMain', task ':checkstyleMcLauncher', task ':checkstylePatchedMc', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':checkstyleTest', task ':test', task ':verifyDistribution', task ':check', task ':build']
+Tasks that were excluded: []
+Resolve mutations for :spotlessJava (Thread[#88,included builds,5,main]) started.
+destroyer locations for task group 0 (Thread[#89,Execution worker,5,main]) started.
+:spotlessJava (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessJava UP-TO-DATE
+Caching disabled for task ':spotlessJava' because:
+  Build cache is disabled
+Skipping task ':spotlessJava' as it is up-to-date.
+Resolve mutations for :spotlessJavaApply (Thread[#88,included builds,5,main]) started.
+:spotlessJavaApply (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessJavaApply UP-TO-DATE
+Caching disabled for task ':spotlessJavaApply' because:
+  Build cache is disabled
+Task ':spotlessJavaApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessKotlin (Thread[#88,included builds,5,main]) started.
+:spotlessKotlin (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessKotlin UP-TO-DATE
+Caching disabled for task ':spotlessKotlin' because:
+  Build cache is disabled
+Skipping task ':spotlessKotlin' as it is up-to-date.
+Resolve mutations for :spotlessKotlinApply (Thread[#88,included builds,5,main]) started.
+:spotlessKotlinApply (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessKotlinApply UP-TO-DATE
+Caching disabled for task ':spotlessKotlinApply' because:
+  Build cache is disabled
+Task ':spotlessKotlinApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessMisc (Thread[#88,included builds,5,main]) started.
+:spotlessMisc (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessMisc UP-TO-DATE
+Caching disabled for task ':spotlessMisc' because:
+  Build cache is disabled
+Skipping task ':spotlessMisc' as it is up-to-date.
+Resolve mutations for :spotlessMiscApply (Thread[#88,included builds,5,main]) started.
+:spotlessMiscApply (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessMiscApply UP-TO-DATE
+Caching disabled for task ':spotlessMiscApply' because:
+  Build cache is disabled
+Task ':spotlessMiscApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessScala (Thread[#88,included builds,5,main]) started.
+:spotlessScala (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessScala UP-TO-DATE
+Caching disabled for task ':spotlessScala' because:
+  Build cache is disabled
+Skipping task ':spotlessScala' as it is up-to-date.
+Resolve mutations for :spotlessScalaApply (Thread[#88,included builds,5,main]) started.
+:spotlessScalaApply (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessScalaApply UP-TO-DATE
+Caching disabled for task ':spotlessScalaApply' because:
+  Build cache is disabled
+Task ':spotlessScalaApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessApply (Thread[#88,included builds,5,main]) started.
+:spotlessApply (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessApply UP-TO-DATE
+Skipping task ':spotlessApply' as it has no actions.
+Resolve mutations for :compileInjectedInterfacesJava (Thread[#88,included builds,5,main]) started.
+:compileInjectedInterfacesJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileInjectedInterfacesJava NO-SOURCE
+Skipping task ':compileInjectedInterfacesJava' as it has no source files and no previous output files.
+Resolve mutations for :extractDependencyATs (Thread[#88,included builds,5,main]) started.
+:extractDependencyATs (Thread[#88,included builds,5,main]) started.
+
+> Task :extractDependencyATs SKIPPED
+Skipping task ':extractDependencyATs' as task onlyIf 'useDependencyAccessTransformers set in minecraft{}' is false.
+Resolve mutations for :generateForgeSrgMappings (Thread[#88,included builds,5,main]) started.
+:generateForgeSrgMappings (Thread[#88,included builds,5,main]) started.
+
+> Task :generateForgeSrgMappings SKIPPED
+Skipping task ':generateForgeSrgMappings' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :downloadVanillaJars (Thread[#88,included builds,5,main]) started.
+:downloadVanillaJars (Thread[#88,included builds,5,main]) started.
+
+> Task :downloadVanillaJars SKIPPED
+Skipping task ':downloadVanillaJars' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :mergeVanillaSidedJars (Thread[#88,included builds,5,main]) started.
+:mergeVanillaSidedJars (Thread[#88,included builds,5,main]) started.
+
+> Task :mergeVanillaSidedJars SKIPPED
+Skipping task ':mergeVanillaSidedJars' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :deobfuscateMergedJarToSrg (Thread[#88,included builds,5,main]) started.
+:deobfuscateMergedJarToSrg (Thread[#88,included builds,5,main]) started.
+
+> Task :deobfuscateMergedJarToSrg SKIPPED
+Skipping task ':deobfuscateMergedJarToSrg' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :downloadFernflower (Thread[#88,included builds,5,main]) started.
+:downloadFernflower (Thread[#88,included builds,5,main]) started.
+
+> Task :downloadFernflower SKIPPED
+Skipping task ':downloadFernflower' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :decompileSrgJar (Thread[#88,included builds,5,main]) started.
+:decompileSrgJar (Thread[#88,included builds,5,main]) started.
+
+> Task :decompileSrgJar SKIPPED
+Skipping task ':decompileSrgJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :cleanupDecompSrgJar (Thread[#88,included builds,5,main]) started.
+:cleanupDecompSrgJar (Thread[#88,included builds,5,main]) started.
+
+> Task :cleanupDecompSrgJar SKIPPED
+Skipping task ':cleanupDecompSrgJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :patchDecompiledJar (Thread[#88,included builds,5,main]) started.
+:patchDecompiledJar (Thread[#88,included builds,5,main]) started.
+
+> Task :patchDecompiledJar SKIPPED
+Skipping task ':patchDecompiledJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :applyJST (Thread[#88,included builds,5,main]) started.
+:applyJST (Thread[#88,included builds,5,main]) started.
+
+> Task :applyJST SKIPPED
+Skipping task ':applyJST' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :remapDecompiledJar (Thread[#88,included builds,5,main]) started.
+:remapDecompiledJar (Thread[#88,included builds,5,main]) started.
+
+> Task :remapDecompiledJar SKIPPED
+Skipping task ':remapDecompiledJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :decompressDecompiledSources (Thread[#88,included builds,5,main]) started.
+:decompressDecompiledSources (Thread[#88,included builds,5,main]) started.
+
+> Task :decompressDecompiledSources UP-TO-DATE
+Caching disabled for task ':decompressDecompiledSources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':decompressDecompiledSources' as it is up-to-date.
+Resolve mutations for :processInjectedInterfacesResources (Thread[#88,included builds,5,main]) started.
+:processInjectedInterfacesResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processInjectedInterfacesResources NO-SOURCE
+Skipping task ':processInjectedInterfacesResources' as it has no source files and no previous output files.
+Resolve mutations for :injectedInterfacesClasses (Thread[#88,included builds,5,main]) started.
+:injectedInterfacesClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :injectedInterfacesClasses UP-TO-DATE
+Skipping task ':injectedInterfacesClasses' as it has no actions.
+Resolve mutations for :compilePatchedMcJava (Thread[#88,included builds,5,main]) started.
+:compilePatchedMcJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compilePatchedMcJava UP-TO-DATE
+Caching disabled for task ':compilePatchedMcJava' because:
+  Build cache is disabled
+Skipping task ':compilePatchedMcJava' as it is up-to-date.
+Resolve mutations for :processPatchedMcResources (Thread[#88,included builds,5,main]) started.
+:processPatchedMcResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processPatchedMcResources UP-TO-DATE
+Caching disabled for task ':processPatchedMcResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processPatchedMcResources' as it is up-to-date.
+Resolve mutations for :patchedMcClasses (Thread[#88,included builds,5,main]) started.
+:patchedMcClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :patchedMcClasses UP-TO-DATE
+Skipping task ':patchedMcClasses' as it has no actions.
+Resolve mutations for :compileApiJava (Thread[#88,included builds,5,main]) started.
+:compileApiJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileApiJava NO-SOURCE
+Skipping task ':compileApiJava' as it has no source files and no previous output files.
+Resolve mutations for :processApiResources (Thread[#88,included builds,5,main]) started.
+:processApiResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processApiResources NO-SOURCE
+Skipping task ':processApiResources' as it has no source files and no previous output files.
+Resolve mutations for :apiClasses (Thread[#88,included builds,5,main]) started.
+:apiClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :apiClasses UP-TO-DATE
+Skipping task ':apiClasses' as it has no actions.
+Resolve mutations for :injectTags (Thread[#88,included builds,5,main]) started.
+:injectTags (Thread[#88,included builds,5,main]) started.
+
+> Task :injectTags UP-TO-DATE
+Caching disabled for task ':injectTags' because:
+  Build cache is disabled
+Skipping task ':injectTags' as it is up-to-date.
+Resolve mutations for :compileInjectedTagsJava (Thread[#88,included builds,5,main]) started.
+:compileInjectedTagsJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileInjectedTagsJava UP-TO-DATE
+Caching disabled for task ':compileInjectedTagsJava' because:
+  Build cache is disabled
+Skipping task ':compileInjectedTagsJava' as it is up-to-date.
+Resolve mutations for :extractNatives2 (Thread[#88,included builds,5,main]) started.
+:extractNatives2 (Thread[#88,included builds,5,main]) started.
+
+> Task :extractNatives2 UP-TO-DATE
+Caching disabled for task ':extractNatives2' because:
+  Build cache is disabled
+  Caching has not been enabled for the task
+Skipping task ':extractNatives2' as it is up-to-date.
+Resolve mutations for :createMcLauncherFiles (Thread[#88,included builds,5,main]) started.
+:createMcLauncherFiles (Thread[#88,included builds,5,main]) started.
+
+> Task :createMcLauncherFiles UP-TO-DATE
+Caching disabled for task ':createMcLauncherFiles' because:
+  Build cache is disabled
+  Caching has not been enabled for the task
+Skipping task ':createMcLauncherFiles' as it is up-to-date.
+Resolve mutations for :compileMcLauncherJava (Thread[#88,included builds,5,main]) started.
+:compileMcLauncherJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileMcLauncherJava UP-TO-DATE
+Caching disabled for task ':compileMcLauncherJava' because:
+  Build cache is disabled
+Skipping task ':compileMcLauncherJava' as it is up-to-date.
+Resolve mutations for :processInjectedTagsResources (Thread[#88,included builds,5,main]) started.
+:processInjectedTagsResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processInjectedTagsResources NO-SOURCE
+Skipping task ':processInjectedTagsResources' as it has no source files and no previous output files.
+Resolve mutations for :injectedTagsClasses (Thread[#88,included builds,5,main]) started.
+:injectedTagsClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :injectedTagsClasses UP-TO-DATE
+Skipping task ':injectedTagsClasses' as it has no actions.
+Resolve mutations for :processMcLauncherResources (Thread[#88,included builds,5,main]) started.
+:processMcLauncherResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processMcLauncherResources NO-SOURCE
+Skipping task ':processMcLauncherResources' as it has no source files and no previous output files.
+Resolve mutations for :mcLauncherClasses (Thread[#88,included builds,5,main]) started.
+:mcLauncherClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :mcLauncherClasses UP-TO-DATE
+Skipping task ':mcLauncherClasses' as it has no actions.
+Resolve mutations for :compileJava (Thread[#88,included builds,5,main]) started.
+:compileJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileJava UP-TO-DATE
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Skipping task ':compileJava' as it is up-to-date.
+Resolve mutations for :processResources (Thread[#88,included builds,5,main]) started.
+:processResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[#88,included builds,5,main]) started.
+:classes (Thread[#88,included builds,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :jar (Thread[#88,included builds,5,main]) started.
+:jar (Thread[#88,included builds,5,main]) started.
+
+> Task :jar UP-TO-DATE
+Caching disabled for task ':jar' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':jar' as it is up-to-date.
+Resolve mutations for :packageMcLauncher (Thread[#88,included builds,5,main]) started.
+:packageMcLauncher (Thread[#88,included builds,5,main]) started.
+
+> Task :packageMcLauncher UP-TO-DATE
+Caching disabled for task ':packageMcLauncher' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':packageMcLauncher' as it is up-to-date.
+Resolve mutations for :packagePatchedMc (Thread[#88,included builds,5,main]) started.
+:packagePatchedMc (Thread[#88,included builds,5,main]) started.
+
+> Task :packagePatchedMc UP-TO-DATE
+Caching disabled for task ':packagePatchedMc' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':packagePatchedMc' as it is up-to-date.
+Resolve mutations for :reobfJar (Thread[#88,included builds,5,main]) started.
+:reobfJar (Thread[#88,included builds,5,main]) started.
+
+> Task :reobfJar UP-TO-DATE
+Caching disabled for task ':reobfJar' because:
+  Build cache is disabled
+Skipping task ':reobfJar' as it is up-to-date.
+Resolve mutations for :sourcesJar (Thread[#88,included builds,5,main]) started.
+:sourcesJar (Thread[#88,included builds,5,main]) started.
+
+> Task :sourcesJar UP-TO-DATE
+Caching disabled for task ':sourcesJar' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':sourcesJar' as it is up-to-date.
+Resolve mutations for :assemble (Thread[#88,included builds,5,main]) started.
+:assemble (Thread[#88,included builds,5,main]) started.
+
+> Task :assemble UP-TO-DATE
+Skipping task ':assemble' as it has no actions.
+Resolve mutations for :checkstyleApi (Thread[#88,included builds,5,main]) started.
+:checkstyleApi (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleApi NO-SOURCE
+Skipping task ':checkstyleApi' as it has no source files and no previous output files.
+Resolve mutations for :compileIdeVirtualMainJava (Thread[#88,included builds,5,main]) started.
+:compileIdeVirtualMainJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileIdeVirtualMainJava SKIPPED
+Skipping task ':compileIdeVirtualMainJava' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :processIdeVirtualMainResources (Thread[#88,included builds,5,main]) started.
+:processIdeVirtualMainResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processIdeVirtualMainResources SKIPPED
+Skipping task ':processIdeVirtualMainResources' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :spotlessJavaCheck (Thread[#88,included builds,5,main]) started.
+:spotlessJavaCheck (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessJavaCheck UP-TO-DATE
+Caching disabled for task ':spotlessJavaCheck' because:
+  Build cache is disabled
+Task ':spotlessJavaCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessKotlinCheck (Thread[#88,included builds,5,main]) started.
+:spotlessKotlinCheck (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessKotlinCheck UP-TO-DATE
+Caching disabled for task ':spotlessKotlinCheck' because:
+  Build cache is disabled
+Task ':spotlessKotlinCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessMiscCheck (Thread[#88,included builds,5,main]) started.
+:spotlessMiscCheck (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessMiscCheck UP-TO-DATE
+Caching disabled for task ':spotlessMiscCheck' because:
+  Build cache is disabled
+Task ':spotlessMiscCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessScalaCheck (Thread[#88,included builds,5,main]) started.
+:spotlessScalaCheck (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessScalaCheck UP-TO-DATE
+Caching disabled for task ':spotlessScalaCheck' because:
+  Build cache is disabled
+Task ':spotlessScalaCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessCheck (Thread[#88,included builds,5,main]) started.
+:spotlessCheck (Thread[#88,included builds,5,main]) started.
+
+> Task :spotlessCheck UP-TO-DATE
+Skipping task ':spotlessCheck' as it has no actions.
+Resolve mutations for :ideVirtualMainClasses (Thread[#88,included builds,5,main]) started.
+:ideVirtualMainClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :ideVirtualMainClasses SKIPPED
+Skipping task ':ideVirtualMainClasses' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstyleIdeVirtualMain (Thread[#88,included builds,5,main]) started.
+:checkstyleIdeVirtualMain (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleIdeVirtualMain SKIPPED
+Skipping task ':checkstyleIdeVirtualMain' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstyleInjectedInterfaces (Thread[#88,included builds,5,main]) started.
+:checkstyleInjectedInterfaces (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleInjectedInterfaces NO-SOURCE
+Skipping task ':checkstyleInjectedInterfaces' as it has no source files and no previous output files.
+Resolve mutations for :checkstyleInjectedTags (Thread[#88,included builds,5,main]) started.
+:checkstyleInjectedTags (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleInjectedTags SKIPPED
+Skipping task ':checkstyleInjectedTags' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstyleMain (Thread[#88,included builds,5,main]) started.
+:checkstyleMain (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleMain UP-TO-DATE
+Caching disabled for task ':checkstyleMain' because:
+  Build cache is disabled
+Skipping task ':checkstyleMain' as it is up-to-date.
+Resolve mutations for :checkstyleMcLauncher (Thread[#88,included builds,5,main]) started.
+:checkstyleMcLauncher (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleMcLauncher SKIPPED
+Skipping task ':checkstyleMcLauncher' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstylePatchedMc (Thread[#88,included builds,5,main]) started.
+:checkstylePatchedMc (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstylePatchedMc SKIPPED
+Skipping task ':checkstylePatchedMc' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :compileTestJava (Thread[#88,included builds,5,main]) started.
+:compileTestJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileTestJava UP-TO-DATE
+Caching disabled for task ':compileTestJava' because:
+  Build cache is disabled
+Skipping task ':compileTestJava' as it is up-to-date.
+Resolve mutations for :processTestResources (Thread[#88,included builds,5,main]) started.
+:processTestResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processTestResources NO-SOURCE
+Skipping task ':processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :testClasses (Thread[#88,included builds,5,main]) started.
+:testClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :testClasses UP-TO-DATE
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :checkstyleTest (Thread[#88,included builds,5,main]) started.
+:checkstyleTest (Thread[#88,included builds,5,main]) started.
+
+> Task :checkstyleTest UP-TO-DATE
+Caching disabled for task ':checkstyleTest' because:
+  Build cache is disabled
+Skipping task ':checkstyleTest' as it is up-to-date.
+Resolve mutations for :test (Thread[#88,included builds,5,main]) started.
+:test (Thread[#88,included builds,5,main]) started.
+
+> Task :test UP-TO-DATE
+Caching disabled for task ':test' because:
+  Build cache is disabled
+Skipping task ':test' as it is up-to-date.
+Resolve mutations for :verifyDistribution (Thread[#88,included builds,5,main]) started.
+:verifyDistribution (Thread[#88,included builds,5,main]) started.
+
+> Task :verifyDistribution
+Caching disabled for task ':verifyDistribution' because:
+  Build cache is disabled
+Task ':verifyDistribution' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Verified 47 Java 8 compatible classes and coremod manifest; no game launched.
+Resolve mutations for :check (Thread[#88,included builds,5,main]) started.
+:check (Thread[#88,included builds,5,main]) started.
+
+> Task :check
+Skipping task ':check' as it has no actions.
+Resolve mutations for :build (Thread[#88,included builds,5,main]) started.
+:build (Thread[#88,included builds,5,main]) started.
+
+> Task :build
+Skipping task ':build' as it has no actions.
+
+[Incubating] Problems report is available at: file://<workspace>/outputs/structure_terminal/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 6s
+32 actionable tasks: 1 executed, 31 up-to-date
+Watched directory hierarchies: [<workspace>/outputs/structure_terminal]

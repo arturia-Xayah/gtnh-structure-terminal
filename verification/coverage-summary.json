@@ -1,0 +1,8 @@
+{
+  "distinct_controllers": 336,
+  "retry_trials": 30,
+  "baseline_passed": 160,
+  "additional_controllers_passed_in_retry": 19,
+  "at_least_one_tested_configuration_passed": 179,
+  "note": "Different configurations remain separate; this is not an all-machines compatibility certificate."
+}

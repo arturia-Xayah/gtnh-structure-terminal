@@ -1,0 +1,38 @@
+{
+  "pack": "2.9.0-RC-2",
+  "profile": "baseline",
+  "controllers_attempted": 336,
+  "classification_counts": {
+    "FORMATION_NOT_ASSESSED": 1,
+    "BUILT_NOT_FORMED": 69,
+    "OPERATION_CHECKS_PASS": 160,
+    "BUILD_TIME_LIMIT": 11,
+    "BUILD_BLOCKED": 23,
+    "MATERIAL_ACCOUNTING_REVIEW": 14,
+    "NO_STRUCTURELIB_INTERFACE": 2,
+    "REPLACE_BLOCKED": 3,
+    "SCAN_ERROR": 1,
+    "POST_OPERATION_NOT_FORMED": 8,
+    "NO_NATIVE_SURVIVAL_BUILDER": 40,
+    "TEST_ERROR": 2,
+    "SCAN_ENVIRONMENT_OR_LIMIT": 1,
+    "PARTIAL_REBUILD_BLOCKED": 1
+  },
+  "scan_success": 332,
+  "native_build_complete": 256,
+  "formed_after_build": 189,
+  "replacement_native_complete": 68,
+  "idle_scan_state_preserved": 330,
+  "idle_scan_state_changed": 0,
+  "phase_attempts": {
+    "baseline_build": 290,
+    "partial_rebuild": 256,
+    "demolish": 290,
+    "replace": 73
+  },
+  "machines_with_any_material_delta": 29,
+  "scans_over_default_500ms": 9,
+  "scans_with_unknown_cells": 18,
+  "running_recipe_tested": false,
+  "gui_tested": false
+}

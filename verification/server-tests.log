@@ -1,0 +1,666 @@
+Initialized native services in: <workspace>/work/terminal_port_sources/gradle-cache/native
+Initialized jansi services in: <workspace>/work/terminal_port_sources/gradle-cache/native
+The current JVM process isn't compatible with build requirement. The maximum heap size is insufficient.
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Starting process 'command '/usr/libexec/java_home''. Working directory: <workspace>/outputs/structure_terminal Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Java Toolchain auto-detection failed to find local MacOS system JVMs
+Starting process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm784027036621832426probe Command: <workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre, JAVA_VERSION=1.8.0_504, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=1.8.0_504-b01, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.504-b01, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm205731947119114428probe Command: <workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home, JAVA_VERSION=17.0.20.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.20.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.20.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home, JAVA_VERSION=25.0.4.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.4.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.4.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'Gradle build daemon'. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/daemon/9.7.1 Command: <workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --enable-native-access=ALL-UNNAMED -XX:MaxMetaspaceSize=384m -XX:+HeapDumpOnOutOfMemoryError -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -cp <workspace>/work/terminal_port_sources/gradle/gradle-9.7.1/lib/gradle-daemon-main-9.7.1.jar -javaagent:<workspace>/work/terminal_port_sources/gradle/gradle-9.7.1/lib/agents/gradle-instrumentation-agent-9.7.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.7.1
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 0.357 secs.
+The client will now receive all logging from the daemon (pid: 27355). The daemon log file: <workspace>/work/terminal_port_sources/gradle-cache/daemon/9.7.1/daemon-27355.out.log
+Daemon will be stopped at the end of the build
+Using 2 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, isolatedProjectsDiagnostics=false, isolatedProjectsDangerouslyIgnoreProblems=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=true, vintage=true}
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home, JAVA_VERSION=25.0.4.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.4.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.4.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Watching the file system is configured to be enabled if available
+Now considering [<workspace>/outputs/structure_terminal] as hierarchies to watch
+File system watching is active
+Starting Build
+Resolved plugin [id: 'com.gtnewhorizons.gtnhsettingsconvention', version: '2.0.33']
+Adding Spotless 8.10.2 to classpath due to Java 25
+Settings evaluated using settings file '<workspace>/outputs/structure_terminal/settings.gradle.kts'.
+Projects loaded. Root project using build file '<workspace>/outputs/structure_terminal/build.gradle.kts'.
+Included projects: [root project 'structure_terminal']
+
+> Configure project :
+Evaluating root project 'structure_terminal' using build file '<workspace>/outputs/structure_terminal/build.gradle.kts'.
+Resolved plugin [id: 'com.gtnewhorizons.gtnhconvention']
+file or directory '<workspace>/outputs/structure_terminal/src/api/resources', not found
+You might want to check out './gradlew :faq' if your build fails.
+Cached resource https://nexus.gtnewhorizons.com/repository/public/com/gtnewhorizons/gtnhgradle/maven-metadata.xml is up-to-date (lastModified: Thu Oct 15 06:15:02 CST 2026).
+Build script update from 2.0.33 to 2.0.34 available! Run ./gradlew updateBuildScript
+All projects evaluated.
+Task name matched 'runServer'
+Selected primary task 'runServer' from project :
+Starting process 'command '/usr/libexec/java_home''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/daemon/9.7.1 Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Java Toolchain auto-detection failed to find local MacOS system JVMs
+Starting process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm14100890905478080953probe Command: <workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre, JAVA_VERSION=1.8.0_504, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=1.8.0_504-b01, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.504-b01, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm1119678502762616770probe Command: <workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home': {JAVA_HOME=<workspace>/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home, JAVA_VERSION=17.0.20.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.20.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.20.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Tasks to be executed: [task ':compileInjectedInterfacesJava', task ':extractDependencyATs', task ':generateForgeSrgMappings', task ':downloadVanillaJars', task ':mergeVanillaSidedJars', task ':deobfuscateMergedJarToSrg', task ':downloadFernflower', task ':decompileSrgJar', task ':cleanupDecompSrgJar', task ':patchDecompiledJar', task ':applyJST', task ':remapDecompiledJar', task ':decompressDecompiledSources', task ':processInjectedInterfacesResources', task ':injectedInterfacesClasses', task ':compilePatchedMcJava', task ':processPatchedMcResources', task ':patchedMcClasses', task ':compileApiJava', task ':processApiResources', task ':apiClasses', task ':injectTags', task ':compileInjectedTagsJava', task ':extractNatives2', task ':createMcLauncherFiles', task ':compileMcLauncherJava', task ':processInjectedTagsResources', task ':injectedTagsClasses', task ':processMcLauncherResources', task ':mcLauncherClasses', task ':compileJava', task ':processResources', task ':classes', task ':compileServerTestJava', task ':jar', task ':packageMcLauncher', task ':packagePatchedMc', task ':processServerTestResources', task ':serverTestClasses', task ':runServer']
+Tasks that were excluded: []
+Resolve mutations for :compileInjectedInterfacesJava (Thread[#88,included builds,5,main]) started.
+:compileInjectedInterfacesJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileInjectedInterfacesJava NO-SOURCE
+Skipping task ':compileInjectedInterfacesJava' as it has no source files and no previous output files.
+Resolve mutations for :extractDependencyATs (Thread[#88,included builds,5,main]) started.
+:extractDependencyATs (Thread[#88,included builds,5,main]) started.
+
+> Task :extractDependencyATs SKIPPED
+Skipping task ':extractDependencyATs' as task onlyIf 'useDependencyAccessTransformers set in minecraft{}' is false.
+Resolve mutations for :generateForgeSrgMappings (Thread[#88,included builds,5,main]) started.
+:generateForgeSrgMappings (Thread[#88,included builds,5,main]) started.
+
+> Task :generateForgeSrgMappings SKIPPED
+Skipping task ':generateForgeSrgMappings' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :downloadVanillaJars (Thread[#88,included builds,5,main]) started.
+:downloadVanillaJars (Thread[#88,included builds,5,main]) started.
+
+> Task :downloadVanillaJars SKIPPED
+Skipping task ':downloadVanillaJars' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :mergeVanillaSidedJars (Thread[#88,included builds,5,main]) started.
+:mergeVanillaSidedJars (Thread[#88,included builds,5,main]) started.
+
+> Task :mergeVanillaSidedJars SKIPPED
+Skipping task ':mergeVanillaSidedJars' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :deobfuscateMergedJarToSrg (Thread[#88,included builds,5,main]) started.
+:deobfuscateMergedJarToSrg (Thread[#88,included builds,5,main]) started.
+
+> Task :deobfuscateMergedJarToSrg SKIPPED
+Skipping task ':deobfuscateMergedJarToSrg' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :downloadFernflower (Thread[#88,included builds,5,main]) started.
+:downloadFernflower (Thread[#88,included builds,5,main]) started.
+
+> Task :downloadFernflower SKIPPED
+Skipping task ':downloadFernflower' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :decompileSrgJar (Thread[#88,included builds,5,main]) started.
+:decompileSrgJar (Thread[#88,included builds,5,main]) started.
+
+> Task :decompileSrgJar SKIPPED
+Skipping task ':decompileSrgJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :cleanupDecompSrgJar (Thread[#88,included builds,5,main]) started.
+:cleanupDecompSrgJar (Thread[#88,included builds,5,main]) started.
+
+> Task :cleanupDecompSrgJar SKIPPED
+Skipping task ':cleanupDecompSrgJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :patchDecompiledJar (Thread[#88,included builds,5,main]) started.
+:patchDecompiledJar (Thread[#88,included builds,5,main]) started.
+
+> Task :patchDecompiledJar SKIPPED
+Skipping task ':patchDecompiledJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :applyJST (Thread[#88,included builds,5,main]) started.
+:applyJST (Thread[#88,included builds,5,main]) started.
+
+> Task :applyJST SKIPPED
+Skipping task ':applyJST' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :remapDecompiledJar (Thread[#88,included builds,5,main]) started.
+:remapDecompiledJar (Thread[#88,included builds,5,main]) started.
+
+> Task :remapDecompiledJar SKIPPED
+Skipping task ':remapDecompiledJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :decompressDecompiledSources (Thread[#88,included builds,5,main]) started.
+:decompressDecompiledSources (Thread[#88,included builds,5,main]) started.
+
+> Task :decompressDecompiledSources UP-TO-DATE
+Caching disabled for task ':decompressDecompiledSources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':decompressDecompiledSources' as it is up-to-date.
+Resolve mutations for :processInjectedInterfacesResources (Thread[#88,included builds,5,main]) started.
+:processInjectedInterfacesResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processInjectedInterfacesResources NO-SOURCE
+Skipping task ':processInjectedInterfacesResources' as it has no source files and no previous output files.
+Resolve mutations for :injectedInterfacesClasses (Thread[#88,included builds,5,main]) started.
+:injectedInterfacesClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :injectedInterfacesClasses UP-TO-DATE
+Skipping task ':injectedInterfacesClasses' as it has no actions.
+Resolve mutations for :compilePatchedMcJava (Thread[#88,included builds,5,main]) started.
+:compilePatchedMcJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compilePatchedMcJava UP-TO-DATE
+Caching disabled for task ':compilePatchedMcJava' because:
+  Build cache is disabled
+Skipping task ':compilePatchedMcJava' as it is up-to-date.
+Resolve mutations for :processPatchedMcResources (Thread[#88,included builds,5,main]) started.
+:processPatchedMcResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processPatchedMcResources UP-TO-DATE
+Caching disabled for task ':processPatchedMcResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processPatchedMcResources' as it is up-to-date.
+Resolve mutations for :patchedMcClasses (Thread[#88,included builds,5,main]) started.
+:patchedMcClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :patchedMcClasses UP-TO-DATE
+Skipping task ':patchedMcClasses' as it has no actions.
+Resolve mutations for :compileApiJava (Thread[#88,included builds,5,main]) started.
+:compileApiJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileApiJava NO-SOURCE
+Skipping task ':compileApiJava' as it has no source files and no previous output files.
+Resolve mutations for :processApiResources (Thread[#88,included builds,5,main]) started.
+:processApiResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processApiResources NO-SOURCE
+Skipping task ':processApiResources' as it has no source files and no previous output files.
+Resolve mutations for :apiClasses (Thread[#88,included builds,5,main]) started.
+:apiClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :apiClasses UP-TO-DATE
+Skipping task ':apiClasses' as it has no actions.
+Resolve mutations for :injectTags (Thread[#88,included builds,5,main]) started.
+:injectTags (Thread[#88,included builds,5,main]) started.
+
+> Task :injectTags UP-TO-DATE
+Caching disabled for task ':injectTags' because:
+  Build cache is disabled
+Skipping task ':injectTags' as it is up-to-date.
+Resolve mutations for :compileInjectedTagsJava (Thread[#88,included builds,5,main]) started.
+:compileInjectedTagsJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileInjectedTagsJava UP-TO-DATE
+Caching disabled for task ':compileInjectedTagsJava' because:
+  Build cache is disabled
+Skipping task ':compileInjectedTagsJava' as it is up-to-date.
+Resolve mutations for :extractNatives2 (Thread[#88,included builds,5,main]) started.
+:extractNatives2 (Thread[#88,included builds,5,main]) started.
+
+> Task :extractNatives2 UP-TO-DATE
+Caching disabled for task ':extractNatives2' because:
+  Build cache is disabled
+  Caching has not been enabled for the task
+Skipping task ':extractNatives2' as it is up-to-date.
+Resolve mutations for :createMcLauncherFiles (Thread[#88,included builds,5,main]) started.
+:createMcLauncherFiles (Thread[#88,included builds,5,main]) started.
+
+> Task :createMcLauncherFiles UP-TO-DATE
+Caching disabled for task ':createMcLauncherFiles' because:
+  Build cache is disabled
+  Caching has not been enabled for the task
+Skipping task ':createMcLauncherFiles' as it is up-to-date.
+Resolve mutations for :compileMcLauncherJava (Thread[#88,included builds,5,main]) started.
+:compileMcLauncherJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileMcLauncherJava UP-TO-DATE
+Caching disabled for task ':compileMcLauncherJava' because:
+  Build cache is disabled
+Skipping task ':compileMcLauncherJava' as it is up-to-date.
+Resolve mutations for :processInjectedTagsResources (Thread[#88,included builds,5,main]) started.
+:processInjectedTagsResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processInjectedTagsResources NO-SOURCE
+Skipping task ':processInjectedTagsResources' as it has no source files and no previous output files.
+Resolve mutations for :injectedTagsClasses (Thread[#88,included builds,5,main]) started.
+:injectedTagsClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :injectedTagsClasses UP-TO-DATE
+Skipping task ':injectedTagsClasses' as it has no actions.
+Resolve mutations for :processMcLauncherResources (Thread[#88,included builds,5,main]) started.
+:processMcLauncherResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processMcLauncherResources NO-SOURCE
+Skipping task ':processMcLauncherResources' as it has no source files and no previous output files.
+Resolve mutations for :mcLauncherClasses (Thread[#88,included builds,5,main]) started.
+:mcLauncherClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :mcLauncherClasses UP-TO-DATE
+Skipping task ':mcLauncherClasses' as it has no actions.
+Resolve mutations for :compileJava (Thread[#88,included builds,5,main]) started.
+:compileJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileJava UP-TO-DATE
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Skipping task ':compileJava' as it is up-to-date.
+Resolve mutations for :processResources (Thread[#88,included builds,5,main]) started.
+:processResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[#88,included builds,5,main]) started.
+:classes (Thread[#88,included builds,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :compileServerTestJava (Thread[#88,included builds,5,main]) started.
+:compileServerTestJava (Thread[#88,included builds,5,main]) started.
+
+> Task :compileServerTestJava
+Caching disabled for task ':compileServerTestJava' because:
+  Build cache is disabled
+Task ':compileServerTestJava' is not up-to-date because:
+  Input property 'classpath' file <workspace>/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/bridge/ItemKeys.class has been removed.
+  Input property 'classpath' file <workspace>/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/bridge/CandidateDiscovery$Result.class has been added.
+  Input property 'classpath' file <workspace>/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/bridge/NativeBridge.class has been removed.
+  and more...
+Compilation mode: in-process compilation
+Created classpath snapshot for incremental compilation in 0.081 secs.
+Compiling with toolchain '<workspace>/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home'.
+Compiling with JDK Java compiler API.
+警告: [options] 源值 8 已过时，将在未来发行版中删除
+警告: [options] 目标值 8 已过时，将在未来发行版中删除
+警告: [options] 要隐藏有关已过时选项的警告, 请使用 -Xlint:-options。
+3 个警告
+Incremental compilation of 6 classes completed in 0.472 secs.
+Class dependency analysis for incremental compilation took 0.003 secs.
+Resolve mutations for :jar (Thread[#88,included builds,5,main]) started.
+:jar (Thread[#88,included builds,5,main]) started.
+
+> Task :jar UP-TO-DATE
+Caching disabled for task ':jar' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':jar' as it is up-to-date.
+Resolve mutations for :packageMcLauncher (Thread[#88,included builds,5,main]) started.
+:packageMcLauncher (Thread[#88,included builds,5,main]) started.
+
+> Task :packageMcLauncher UP-TO-DATE
+Caching disabled for task ':packageMcLauncher' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':packageMcLauncher' as it is up-to-date.
+Resolve mutations for :packagePatchedMc (Thread[#88,included builds,5,main]) started.
+:packagePatchedMc (Thread[#88,included builds,5,main]) started.
+
+> Task :packagePatchedMc UP-TO-DATE
+Caching disabled for task ':packagePatchedMc' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':packagePatchedMc' as it is up-to-date.
+Resolve mutations for :processServerTestResources (Thread[#88,included builds,5,main]) started.
+:processServerTestResources (Thread[#88,included builds,5,main]) started.
+
+> Task :processServerTestResources NO-SOURCE
+Skipping task ':processServerTestResources' as it has no source files and no previous output files.
+Resolve mutations for :serverTestClasses (Thread[#88,included builds,5,main]) started.
+:serverTestClasses (Thread[#88,included builds,5,main]) started.
+
+> Task :serverTestClasses
+Skipping task ':serverTestClasses' as it has no actions.
+Resolve mutations for :runServer (Thread[#88,included builds,5,main]) started.
+:runServer (Thread[#88,included builds,5,main]) started.
+
+> Task :runServer
+Caching disabled for task ':runServer' because:
+  Build cache is disabled
+Task ':runServer' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Starting process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: <workspace>/outputs/structure_terminal/build/headless-tests Command: <workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Dfml.ignoreInvalidMinecraftCertificates=true -Djava.awt.headless=true -Dstructureterminal.serverTests=true -ea:dev.structureterminal -Xms1G -Xmx4G -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -cp <workspace>/outputs/structure_terminal/build/rfg/mclauncher-1.7.10.jar:<workspace>/outputs/structure_terminal/build/rfg/recompiled_minecraft-1.7.10.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/me.eigenraven.java8unsupported/java-8-unsupported-shim/1.0.0/2d0687782e2d091a6f3cf4709c54368fe6ab47e8/java-8-unsupported-shim-1.0.0.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.12/111e7bea9c968cdb3d06ef4632bf7ff0824d0f36/launchwrapper-1.12.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.mojang/authlib/1.5.21/aefba0d5b53fbcb70860bc8046ab95d5854c07a5/authlib-1.5.21.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.typesafe.akka/akka-actor_2.11/2.3.3/ed62e9fc709ca0f2ff1a3220daa8b70a2870078e/akka-actor_2.11-2.3.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.typesafe/config/1.2.1/f771f71fdae3df231bcd54d5ca2d57f0bf93f467/config-1.2.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-actors-migration_2.11/1.1.0/dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f/scala-actors-migration_2.11-1.1.0.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-compiler/2.11.5/eb2631e425d240f55ffc060c3262caa4d05d8d1a/scala-compiler-2.11.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-library_2.11/1.0.2/e517c53a7e9acd6b1668c5a35eccbaa3bab9aac/scala-continuations-library_2.11-1.0.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang.plugins/scala-continuations-plugin_2.11.1/1.0.2/f361a3283452c57fa30c1ee69448995de23c60f7/scala-continuations-plugin_2.11.1-1.0.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-library/2.11.5/a5544bb030c5e6c3d81ad116b7dc5024f047df26/scala-library-2.11.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-parser-combinators_2.11/1.0.1/f05d7345bf5a58924f2837c6c1f4d73a938e1ff0/scala-parser-combinators_2.11-1.0.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-reflect/2.11.5/69ce65b0f0767c4e5eafaf789fdde7aab78bd9d/scala-reflect-2.11.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-swing_2.11/1.0.1/b1cdd92bd47b1e1837139c1c53020e86bb9112ae/scala-swing_2.11-1.0.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.scala-lang/scala-xml_2.11/1.0.2/7a80ec00aec122fba7cd4e0d4cdd87ff7e4cb6d0/scala-xml_2.11-1.0.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/lzma/lzma/0.0.1/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.ow2.asm/asm-debug-all/5.0.3/f9e364ae2a66ce2a543012a4668856e84e5dab74/asm-debug-all-5.0.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.paulscode/codecjorbis/20101023/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.paulscode/codecwav/20101023/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.paulscode/libraryjavasound/20101123/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.paulscode/librarylwjglopenal/20100824/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.paulscode/soundsystem/20120107/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.mojang/netty/1.8.8/a796914d1c8a55b4da9f4a8856dd9623375d8bb/netty-1.8.8.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.mojang/realms/1.3.5/807ae355ee63583becd7ea60e76aab1532bb42e/realms-1.3.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.8.1/a698750c16740fd5b3871425f4cb3bbaa87f529d/commons-compress-1.8.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/commons-logging/commons-logging/1.1.3/f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f/commons-logging-1.1.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/java3d/vecmath/1.3.1/a0ae4f51da409fa0c20fa0ca59e6bbc9413ae71d/vecmath-1.3.1.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.sf.trove4j/trove4j/3.0.3/42ccaf4761f0dfdfa805c9e340d99a755907e2dd/trove4j-3.0.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.ibm.icu/icu4j-core-mojang/51.2/63d216a9311cca6be337c1e458e587f99d382b84/icu4j-core-mojang-51.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.5/6065cc95c661255349c1d0756657be17c29a4fd3/jopt-simple-4.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/io.netty/netty-all/4.0.10.Final/9e50bd52ffe257a0e2cd8d971688d6ce7d174325/netty-all-4.0.10.Final.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.5/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.0-beta9-fixed/b61eaf2e64d8b0277e188262a8b771bbfa1502b3/log4j-api-2.0-beta9-fixed.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.0-beta9-fixed/677991ea2d7426f76309a73739cecf609679492c/log4j-core-2.0-beta9-fixed.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.java.jinput/jinput-platform-natives-osx-arm64/2.0.5/5189eb40db3087fb11ca063b68fa4f4c20b199dd/jinput-platform-natives-osx-arm64-2.0.5.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/tv.twitch/twitch/5.16/1f55f009c61637c10c0acfb8b5ffc600f30044b4/twitch-5.16.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/net.java.jinput/jinput-platform/2.0.5/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/tv.twitch/twitch-platform/5.16/7c6affe439099806a4f552da14c42f9d643d8b23/twitch-platform-5.16-natives-windows-32.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/tv.twitch/twitch-platform/5.16/39d0c3d363735b4785598e0e7fbf8297c706a9f9/twitch-platform-5.16-natives-windows-64.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/tv.twitch/twitch-platform/5.16/62503ee712766cf77f97252e5902786fd834b8c5/twitch-platform-5.16-natives-osx.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/18215140f010c05b9f86ef6f0f8871954d2ccebf/twitch-external-platform-4.5-natives-windows-32.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/tv.twitch/twitch-external-platform/4.5/c3cde57891b935d41b6680a9c5e1502eeab76d86/twitch-external-platform-4.5-natives-windows-64.jar:<workspace>/outputs/structure_terminal/build/libs/structureterminal-0.1.2-alpha-dev.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/StructureLib/1.4.45/eb4a795732b93dbe42d4a546c21428cc32cbcc92/StructureLib-1.4.45-dev.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/NotEnoughItems/2.8.110-GTNH/93edaeab0314b976ede8e3425a803da827698cc5/NotEnoughItems-2.8.110-GTNH-dev.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/CodeChickenCore/1.4.16/4db37cb4250f811d56469144784ac934803b602d/CodeChickenCore-1.4.16-dev.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/io.github.legacymoddingmc/unimixins/0.3.1/d31b8111844e4899d3d14caeedec1aae7e8a241b/unimixins-0.3.1-dev.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.antlr/antlr4/4.13.2/a2bc0d399506a7297568baee188b481727d45d3b/antlr4-4.13.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.antlr/antlr4-runtime/4.13.2/fc3db6d844df652a3d5db31c87fa12757f13691d/antlr4-runtime-4.13.2.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.antlr/ST4/4.3.4/bf68d049dd4e6e104055a79ac3bf9e6307d29258/ST4-4.3.4.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.antlr/antlr-runtime/3.5.3/9011fb189c5ed6d99e5f3322514848d1ec1e1416/antlr-runtime-3.5.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.abego.treelayout/org.abego.treelayout.core/1.0.3/457216e8e6578099ae63667bb1e4439235892028/org.abego.treelayout.core-1.0.3.jar:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.ibm.icu/icu4j/72.1/bc9057df4b5efddf7f6d1880bf7f3399f4ce5633/icu4j-72.1.jar:<workspace>/outputs/structure_terminal/build/classes/java/serverTest:<workspace>/outputs/structure_terminal/build/resources/serverTest GradleStartServer nogui nogui
+Successfully started process 'command '<workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+[16:20:01] [main/INFO] [GradleStart]: Extra: [nogui, nogui]
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: dev.structureterminal.coremod.TerminalLoadingPlugin
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: com.gtnewhorizon.structurelib.core.StructureLibCore
+[16:20:01] [main/INFO] [GradleStart]: Found and added cascading tweaker: org.spongepowered.asm.launch.MixinTweaker
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: codechicken.nei.asm.NEICorePlugin
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: codechicken.core.launch.CodeChickenCorePlugin
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: com.gtnewhorizon.gtnhlib.core.GTNHLibCore
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: io.github.legacymoddingmc.unimixins.all.AllCore
+[16:20:01] [main/INFO] [GradleStart]: Found and added coremod: com.gtnewhorizons.gtnhextlib.core.GTNHExtLibCore
+[16:20:01] [main/INFO] [GradleStart]: Running with arguments: [--tweakClass, cpw.mods.fml.common.launcher.FMLServerTweaker, nogui, nogui, --tweakClass, org.spongepowered.asm.launch.MixinTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLServerTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Using primary tweak class name cpw.mods.fml.common.launcher.FMLServerTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name org.spongepowered.asm.launch.MixinTweaker
+[16:20:02] [main/INFO] [mixin]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/io.github.legacymoddingmc/unimixins/0.3.1/d31b8111844e4899d3d14caeedec1aae7e8a241b/unimixins-0.3.1-dev.jar Service=LaunchWrapper Env=SERVER
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLServerTweaker
+[16:20:02] [main/INFO] [FML]: Forge Mod Loader version 7.99.40.1614 for Minecraft 1.7.10 loading
+[16:20:02] [main/INFO] [FML]: Java is OpenJDK 64-Bit Server VM, version 1.8.0_504, running on Mac OS X:aarch64:26.5, installed at <workspace>/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre
+[16:20:02] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : dev.structureterminal.coremod.TerminalLoadingPlugin
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : com.gtnewhorizons.gtnhextlib.core.GTNHExtLibCore
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: [LetsEncryptHelper] Starting patcher
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: [LetsEncryptHelper] Added certificates to trust store.
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: it.unimi.dsi:fastutil:8.5.18 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: org.joml:joml:1.10.8 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: com.mojang:brigadier:1.0.18 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: xyz.wagyourtail.jvmdowngrader:jvmdowngrader-java-api:1.3.5:downgraded-8 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps8.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: xyz.wagyourtail.jvmdowngrader:jvmdowngrader-java-api:2.0.1:downgraded-8 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps8.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: it.unimi.dsi:fastutil:8.5.18 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: org.joml:joml:1.10.8 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Found dependency: com.mojang:brigadier:1.0.18 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: Replacing dependency xyz.wagyourtail.jvmdowngrader:jvmdowngrader-java-api:1.3.5 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps8.json with version 2.0.1 from jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps8.json
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: -----------------------------------------------------------
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: FalsePatternLib is downloading dependencies. Please wait...
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: -----------------------------------------------------------
+[16:20:02] [main/INFO] [FalsePatternLib DepLoader]: MacOS detected, not creating progress window (your OS is buggy)
+[16:20:02] [Dependency Download Thread/INFO] [FalsePatternLib DepLoader]: Adding library com.mojang:brigadier:1.0.18, requested by mod jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps.json
+[16:20:02] [Dependency Download Thread/INFO] [FalsePatternLib DepLoader]: Adding library xyz.wagyourtail.jvmdowngrader:jvmdowngrader-java-api:2.0.1-downgraded-8, requested by mod jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps8.json
+[16:20:02] [Dependency Download Thread/INFO] [FalsePatternLib DepLoader]: Adding library it.unimi.dsi:fastutil:8.5.18, requested by mod jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHLib/0.11.48/2bd3922c6bd6acee63e75199f01aba3078d60936/GTNHLib-0.11.48-dev.jar!/META-INF/gtnhlib_deps.json
+[16:20:02] [Dependency Download Thread/INFO] [FalsePatternLib DepLoader]: Adding library org.joml:joml:1.10.8, requested by mod jar:file:<workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/com.github.GTNewHorizons/GTNHExtLib/1.0.4/71ba0eb42623e9ba1d60c7cdfe87c8562245a4c7/GTNHExtLib-1.0.4.jar!/META-INF/gtnhextlib_deps.json
+[16:20:02] [main/INFO] [GTNHExtLib]: Mirrored jvmdg stub file:<workspace>/outputs/structure_terminal/build/headless-tests/./falsepattern/xyz.wagyourtail.jvmdowngrader-jvmdowngrader-java-api-2.0.1-downgraded-8.jar onto system classloader
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : codechicken.nei.asm.NEICorePlugin
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : io.github.legacymoddingmc.unimixins.all.AllCore
+[16:20:02] [main/INFO] [MixinBooter]: MixinBootstrap Initializing...
+[16:20:02] [main/INFO] [mixin]: Compatibility level set to JAVA_8
+[16:20:02] [main/INFO] [unimixins]: Instantiating AllCore
+[16:20:02] [main/INFO] [unimixins]: Instantiating CompatCore
+[16:20:02] [main/INFO] [unimixins-mixinextras]: Instantiating MixinExtrasCore
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : codechicken.core.launch.CodeChickenCorePlugin
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : com.gtnewhorizon.structurelib.core.StructureLibCore
+[16:20:02] [main/INFO] [FML]: Found a command line coremod : com.gtnewhorizon.gtnhlib.core.GTNHLibCore
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class org.spongepowered.asm.launch.MixinTweaker
+[16:20:02] [main/INFO] [mixin]: Initialised Mixin FML Remapper Adapter with cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper@52851b44
+[16:20:02] [main/INFO] [mixin]: Initialised Legacy FML Dev Remapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod cpw.mods.fml.relauncher.FMLCorePlugin
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod dev.structureterminal.coremod.TerminalLoadingPlugin
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod com.gtnewhorizons.gtnhextlib.core.GTNHExtLibCore
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod codechicken.nei.asm.NEICorePlugin
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod io.github.legacymoddingmc.unimixins.all.AllCore
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod codechicken.core.launch.CodeChickenCorePlugin
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod com.gtnewhorizon.structurelib.core.StructureLibCore
+[16:20:02] [main/INFO] [GradleStart]: Injecting location in coremod com.gtnewhorizon.gtnhlib.core.GTNHLibCore
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.FMLDeobfTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name org.spongepowered.asm.mixin.EnvironmentStateTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLInjectionAndSortingTweaker
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/ERROR] [FML]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
+[16:20:02] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [GTNHMixins]: Searching coremodList for IEarlyMixinLoaders
+[16:20:02] [main/INFO] [GTNHMixins]: LoadedCoreMods [dev.structureterminal.coremod.TerminalLoadingPlugin, codechicken.nei.asm.NEICorePlugin, cpw.mods.fml.relauncher.FMLCorePlugin, org.spongepowered.asm.mixin.EnvironmentStateTweaker, codechicken.core.launch.CodeChickenCorePlugin, net.minecraftforge.classloading.FMLForgePlugin, codechicken.lib, com.gtnewhorizons.gtnhextlib.core.GTNHExtLibCore, io.github.legacymoddingmc.unimixins.all.AllCore, GTNHLib Core, com.gtnewhorizon.structurelib.core.StructureLibCore, net.minecraftforge.gradle.tweakers.AccessTransformerTweaker, cpw.mods.fml.common.launcher.FMLDeobfTweaker]
+[16:20:02] [main/INFO] [GTNHMixins]: Loading mixins from IEarlyMixinLoader [com.gtnewhorizon.structurelib.core.StructureLibCore]
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.structurelib.early.json] blockChangeNotifier.MixinForgeHooks
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.structurelib.early.json] blockChangeNotifier.MixinWorld
+[16:20:02] [main/INFO] [GTNHMixins]: Loading mixins from IEarlyMixinLoader [com.gtnewhorizon.gtnhlib.core.GTNHLibCore]
+[16:20:02] [main/INFO] [GTNHMixins]: ITargetMods found during Phase EARLY: []
+[16:20:02] [main/INFO] [GTNHMixins]: ITargetMods not found during Phase EARLY: [LWJGL3IFY]
+[16:20:02] [main/INFO] [GTNHMixins]: Not loading the following EARLY mixins: [MixinTessellator, MixinWavefrontObject, fml.MixinGuiModList, MixinGuiScreen, MixinFontRenderer, models.FRMAccessor, models.MixinFileResourcePack, models.MixinFolderResourcePack, models.MixinRenderBlocks, models.MixinTextureAtlasSprite, models.MixinTextureMap, models.SRRMAccessor, models.particles.MixinEffectRenderer, models.particles.MixinEntity, models.particles.MixinRenderGlobal, models.particles.RenderGlobalAccessor, models.particles.WorldAccessor, models.MixinModelFHC, models.MixinRenderGlobal, block_sounds.MixinPlayerControllerMP, block_sounds.MixinRenderGlobal, EntityRendererAccessor, MixinItemRenderer_Translucency, MixinRenderItem_Translucency, MixinMinecraft_PickBlockTrap, fml.MixinGuiConfig, MixinGuiSelectWorld]
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] fml.EventBusAccessor
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] fml.EnumHolderAccessor
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinEntityLivingBase
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinMinecraftServer
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinGameRules
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinCommandHandler
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinCommandHelp
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinTileEntitySkull
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] block_sounds.MixinEntity
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] block_sounds.MixinEntityLivingBase
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] block_sounds.MixinEntityHorse
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] block_sounds.MixinItemBlock
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] block_sounds.MixinItemSlab
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinIChatComponentSerializer
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] fml.MixinJarDiscoverer
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] AccessorGuiNotification
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] AccessorStartupQuery
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinBlockFlowerPot
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinTileEntityFlowerPot
+[16:20:02] [main/INFO] [GTNHMixins]: Loading [mixins.gtnhlib.early.json] MixinRenderBlocks_FlowerPot
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:02] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.relauncher.CoreModManager$FMLPluginWrapper
+[16:20:03] [main/INFO] [LaunchWrapper]: Calling tweak class org.spongepowered.asm.mixin.EnvironmentStateTweaker
+[16:20:03] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.FMLDeobfTweaker
+[16:20:03] [main/INFO] [MixinExtras|Service]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0).
+[16:20:03] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[16:20:03] [main/INFO] [GradleStart]: Remapping AccessTransformer rules...
+[16:20:03] [main/INFO] [LaunchWrapper]: Loading tweak class name cpw.mods.fml.common.launcher.TerminalTweaker
+[16:20:03] [main/INFO] [LaunchWrapper]: Calling tweak class cpw.mods.fml.common.launcher.TerminalTweaker
+[16:20:03] [main/WARN] [mixin]: Error loading class: net/minecraft/client/renderer/RenderBlocks (java.lang.RuntimeException: Attempted to load class net/minecraft/client/renderer/RenderBlocks for invalid side SERVER)
+[16:20:03] [main/WARN] [mixin]: @Mixin target net.minecraft.client.renderer.RenderBlocks was not found mixins.gtnhlib.early.json:MixinRenderBlocks_FlowerPot from mod gtnhlib
+[16:20:03] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.server.MinecraftServer}
+[16:20:03] [Server thread/INFO]: Starting minecraft server version 1.7.10
+[16:20:03] [Server thread/INFO] [unimixins]: Transforming FMLCommonHandler to add hook for enhancing crash reports
+[16:20:03] [Server thread/INFO] [MinecraftForge]: Attempting early MinecraftForge initialization
+[16:20:03] [Server thread/INFO] [FML]: MinecraftForge v10.13.4.1614 Initialized
+[16:20:03] [Server thread/INFO] [FML]: Replaced 183 ore recipies
+[16:20:03] [Server thread/INFO] [MinecraftForge]: Completed early MinecraftForge initialization
+[16:20:03] [Server thread/INFO] [FML]: Found 0 mods from the command line. Injecting into mod discoverer
+[16:20:03] [Server thread/INFO] [FML]: Searching <workspace>/outputs/structure_terminal/build/headless-tests/mods for mods
+[16:20:03] [Server thread/INFO] [FML]: Also searching <workspace>/outputs/structure_terminal/build/headless-tests/mods/1.7.10 for mods
+[16:20:05] [Server thread/ERROR] [FML]: Unable to read a class file correctly
+java.lang.IllegalArgumentException
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:153) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:424) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:52) [ASMModParser.class:?]
+	at cpw.mods.fml.common.discovery.JarDiscoverer.discover(JarDiscoverer.java:72) [JarDiscoverer.class:?]
+	at cpw.mods.fml.common.discovery.ContainerType.findMods(ContainerType.java:42) [ContainerType.class:?]
+	at cpw.mods.fml.common.discovery.ModCandidate.explore(ModCandidate.java:71) [ModCandidate.class:?]
+	at cpw.mods.fml.common.discovery.ModDiscoverer.identifyMods(ModDiscoverer.java:131) [ModDiscoverer.class:?]
+	at cpw.mods.fml.common.Loader.identifyMods(Loader.java:364) [Loader.class:?]
+	at cpw.mods.fml.common.Loader.loadMods(Loader.java:489) [Loader.class:?]
+	at cpw.mods.fml.server.FMLServerHandler.beginServerLoading(FMLServerHandler.java:87) [FMLServerHandler.class:?]
+	at cpw.mods.fml.common.FMLCommonHandler.onServerStart(FMLCommonHandler.java:314) [FMLCommonHandler.class:?]
+	at net.minecraft.server.dedicated.DedicatedServer.startServer(DedicatedServer.java:120) [DedicatedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:449) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:756) [MinecraftServer$2.class:?]
+[16:20:05] [Server thread/ERROR] [FML]: There was a problem reading the entry org/antlr/v4/Tool$1UndefChecker.class in the jar <workspace>/work/terminal_port_sources/gradle-cache/caches/modules-2/files-2.1/org.antlr/antlr4/4.13.2/a2bc0d399506a7297568baee188b481727d45d3b/antlr4-4.13.2.jar - probably a corrupt zip
+cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException
+
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:58) ~[ASMModParser.class:?]
+	at cpw.mods.fml.common.discovery.JarDiscoverer.discover(JarDiscoverer.java:72) [JarDiscoverer.class:?]
+	at cpw.mods.fml.common.discovery.ContainerType.findMods(ContainerType.java:42) [ContainerType.class:?]
+	at cpw.mods.fml.common.discovery.ModCandidate.explore(ModCandidate.java:71) [ModCandidate.class:?]
+	at cpw.mods.fml.common.discovery.ModDiscoverer.identifyMods(ModDiscoverer.java:131) [ModDiscoverer.class:?]
+	at cpw.mods.fml.common.Loader.identifyMods(Loader.java:364) [Loader.class:?]
+	at cpw.mods.fml.common.Loader.loadMods(Loader.java:489) [Loader.class:?]
+	at cpw.mods.fml.server.FMLServerHandler.beginServerLoading(FMLServerHandler.java:87) [FMLServerHandler.class:?]
+	at cpw.mods.fml.common.FMLCommonHandler.onServerStart(FMLCommonHandler.java:314) [FMLCommonHandler.class:?]
+	at net.minecraft.server.dedicated.DedicatedServer.startServer(DedicatedServer.java:120) [DedicatedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:449) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:756) [MinecraftServer$2.class:?]
+Caused by: java.lang.IllegalArgumentException
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:153) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:424) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:52) ~[ASMModParser.class:?]
+	... 11 more
+[16:20:05] [Server thread/WARN] [FML]: Zip file antlr4-4.13.2.jar failed to read properly, it will be ignored
+cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException
+
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:58) ~[ASMModParser.class:?]
+	at cpw.mods.fml.common.discovery.JarDiscoverer.discover(JarDiscoverer.java:72) [JarDiscoverer.class:?]
+	at cpw.mods.fml.common.discovery.ContainerType.findMods(ContainerType.java:42) [ContainerType.class:?]
+	at cpw.mods.fml.common.discovery.ModCandidate.explore(ModCandidate.java:71) [ModCandidate.class:?]
+	at cpw.mods.fml.common.discovery.ModDiscoverer.identifyMods(ModDiscoverer.java:131) [ModDiscoverer.class:?]
+	at cpw.mods.fml.common.Loader.identifyMods(Loader.java:364) [Loader.class:?]
+	at cpw.mods.fml.common.Loader.loadMods(Loader.java:489) [Loader.class:?]
+	at cpw.mods.fml.server.FMLServerHandler.beginServerLoading(FMLServerHandler.java:87) [FMLServerHandler.class:?]
+	at cpw.mods.fml.common.FMLCommonHandler.onServerStart(FMLCommonHandler.java:314) [FMLCommonHandler.class:?]
+	at net.minecraft.server.dedicated.DedicatedServer.startServer(DedicatedServer.java:120) [DedicatedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:449) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:756) [MinecraftServer$2.class:?]
+Caused by: java.lang.IllegalArgumentException
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:153) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:424) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:52) ~[ASMModParser.class:?]
+	... 11 more
+[16:20:06] [Server thread/ERROR] [FML]: Unable to read a class file correctly
+java.lang.IllegalArgumentException
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:153) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:424) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:52) [ASMModParser.class:?]
+	at cpw.mods.fml.common.discovery.JarDiscoverer.discover(JarDiscoverer.java:72) [JarDiscoverer.class:?]
+	at cpw.mods.fml.common.discovery.ContainerType.findMods(ContainerType.java:42) [ContainerType.class:?]
+	at cpw.mods.fml.common.discovery.ModCandidate.explore(ModCandidate.java:71) [ModCandidate.class:?]
+	at cpw.mods.fml.common.discovery.ModDiscoverer.identifyMods(ModDiscoverer.java:131) [ModDiscoverer.class:?]
+	at cpw.mods.fml.common.Loader.identifyMods(Loader.java:364) [Loader.class:?]
+	at cpw.mods.fml.common.Loader.loadMods(Loader.java:489) [Loader.class:?]
+	at cpw.mods.fml.server.FMLServerHandler.beginServerLoading(FMLServerHandler.java:87) [FMLServerHandler.class:?]
+	at cpw.mods.fml.common.FMLCommonHandler.onServerStart(FMLCommonHandler.java:314) [FMLCommonHandler.class:?]
+	at net.minecraft.server.dedicated.DedicatedServer.startServer(DedicatedServer.java:120) [DedicatedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:449) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:756) [MinecraftServer$2.class:?]
+[16:20:06] [Server thread/ERROR] [FML]: There was a problem reading the entry module-info.class in the jar <workspace>/outputs/structure_terminal/build/headless-tests/./falsepattern/org.joml-joml-1.10.8.jar - probably a corrupt zip
+cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException
+
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:58) ~[ASMModParser.class:?]
+	at cpw.mods.fml.common.discovery.JarDiscoverer.discover(JarDiscoverer.java:72) [JarDiscoverer.class:?]
+	at cpw.mods.fml.common.discovery.ContainerType.findMods(ContainerType.java:42) [ContainerType.class:?]
+	at cpw.mods.fml.common.discovery.ModCandidate.explore(ModCandidate.java:71) [ModCandidate.class:?]
+	at cpw.mods.fml.common.discovery.ModDiscoverer.identifyMods(ModDiscoverer.java:131) [ModDiscoverer.class:?]
+	at cpw.mods.fml.common.Loader.identifyMods(Loader.java:364) [Loader.class:?]
+	at cpw.mods.fml.common.Loader.loadMods(Loader.java:489) [Loader.class:?]
+	at cpw.mods.fml.server.FMLServerHandler.beginServerLoading(FMLServerHandler.java:87) [FMLServerHandler.class:?]
+	at cpw.mods.fml.common.FMLCommonHandler.onServerStart(FMLCommonHandler.java:314) [FMLCommonHandler.class:?]
+	at net.minecraft.server.dedicated.DedicatedServer.startServer(DedicatedServer.java:120) [DedicatedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:449) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:756) [MinecraftServer$2.class:?]
+Caused by: java.lang.IllegalArgumentException
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:153) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:424) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:52) ~[ASMModParser.class:?]
+	... 11 more
+[16:20:06] [Server thread/WARN] [FML]: Zip file org.joml-joml-1.10.8.jar failed to read properly, it will be ignored
+cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException
+
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:58) ~[ASMModParser.class:?]
+	at cpw.mods.fml.common.discovery.JarDiscoverer.discover(JarDiscoverer.java:72) [JarDiscoverer.class:?]
+	at cpw.mods.fml.common.discovery.ContainerType.findMods(ContainerType.java:42) [ContainerType.class:?]
+	at cpw.mods.fml.common.discovery.ModCandidate.explore(ModCandidate.java:71) [ModCandidate.class:?]
+	at cpw.mods.fml.common.discovery.ModDiscoverer.identifyMods(ModDiscoverer.java:131) [ModDiscoverer.class:?]
+	at cpw.mods.fml.common.Loader.identifyMods(Loader.java:364) [Loader.class:?]
+	at cpw.mods.fml.common.Loader.loadMods(Loader.java:489) [Loader.class:?]
+	at cpw.mods.fml.server.FMLServerHandler.beginServerLoading(FMLServerHandler.java:87) [FMLServerHandler.class:?]
+	at cpw.mods.fml.common.FMLCommonHandler.onServerStart(FMLCommonHandler.java:314) [FMLCommonHandler.class:?]
+	at net.minecraft.server.dedicated.DedicatedServer.startServer(DedicatedServer.java:120) [DedicatedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:449) [MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:756) [MinecraftServer$2.class:?]
+Caused by: java.lang.IllegalArgumentException
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:170) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:153) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at org.objectweb.asm.ClassReader.<init>(ClassReader.java:424) ~[asm-debug-all-5.0.3.jar:5.0.3]
+	at cpw.mods.fml.common.discovery.asm.ASMModParser.<init>(ASMModParser.java:52) ~[ASMModParser.class:?]
+	... 11 more
+[16:20:06] [Server thread/INFO] [FML]: Forge Mod Loader has identified 19 mods to load
+[16:20:06] [Server thread/INFO] [MixinBooter]: Instantiating all ILateMixinLoader implemented classes...
+[16:20:06] [Server thread/INFO] [GTNHMixins]: Searching ASMData for ILateMixinLoaders
+[16:20:06] [Server thread/INFO] [GTNHMixins]: LiteLoader not present
+[16:20:06] [Server thread/INFO] [GTNHMixins]: LoadedMods [mixingasm, gtnhmixins, NotEnoughItems, mixinextras, FML, spongemixins, unimixins-compat, gtnhextlib, Forge, gtnhlib, CodeChickenCore, unimixins, GTNHLib Core, structureterminal, mixinbooterlegacy, structureterminalservertest, mcp, unimixins-mixin, structurelib]
+[16:20:06] [Server thread/INFO] [GTNHMixins]: Loading mixins from ILateMixinLoader [com.gtnewhorizon.gtnhlib.core.GTNHLibLateMixinLoader]
+[16:20:06] [Server thread/INFO] [GTNHMixins]: ITargetMods found during Phase LATE: []
+[16:20:06] [Server thread/INFO] [GTNHMixins]: ITargetMods not found during Phase LATE: [BIOMES_O_PLENTY, THAUMCRAFT]
+[16:20:06] [Server thread/INFO] [GTNHMixins]: Not loading the following LATE mixins: [MixinEnhancedInfusionRecipe, flowerpotcompat.MixinBOPColorizedSapling, flowerpotcompat.MixinBOPSapling, flowerpotcompat.MixinBOPFlower, flowerpotcompat.MixinBOPFlower2, flowerpotcompat.MixinBOPPlant, flowerpotcompat.MixinBOPMushroom]
+[16:20:06] [Server thread/INFO] [FML]: Attempting connection with missing mods [mcp, FML, Forge, NotEnoughItems, CodeChickenCore, GTNHLib Core, structureterminal, structurelib, gtnhlib, unimixins, unimixins-mixin, unimixins-compat, mixingasm, spongemixins, mixinbooterlegacy, gtnhmixins, mixinextras, gtnhextlib, structureterminalservertest] at CLIENT
+[16:20:06] [Server thread/INFO] [FML]: Attempting connection with missing mods [mcp, FML, Forge, NotEnoughItems, CodeChickenCore, GTNHLib Core, structureterminal, structurelib, gtnhlib, unimixins, unimixins-mixin, unimixins-compat, mixingasm, spongemixins, mixinbooterlegacy, gtnhmixins, mixinextras, gtnhextlib, structureterminalservertest] at SERVER
+[16:20:06] [Server thread/INFO] [FML]: Processing ObjectHolder annotations
+[16:20:06] [Server thread/INFO] [FML]: Found 341 ObjectHolder annotations
+[16:20:06] [Server thread/INFO] [FML]: Identifying ItemStackHolder annotations
+[16:20:06] [Server thread/INFO] [FML]: Found 0 ItemStackHolder annotations
+[16:20:06] [Server thread/INFO] [FML]: Configured a dormant chunk cache size of 0
+[16:20:06] [Server thread/INFO] [gtnhlib]: GTNHLib MUI2 integration enabled (for teams UI): false
+[16:20:06] [Server thread/INFO] [gtnhlib]: GTNHLib version 0.11.48 loaded.
+[16:20:06] [Server thread/INFO] [gtnhlib]: Number formatting: Using System Default (zh_CN)
+[16:20:06] [Server thread/INFO] [FML]: Applying holder lookups
+[16:20:06] [Server thread/INFO] [FML]: Holder lookups applied
+[16:20:06] [Server thread/INFO] [FML]: Injecting itemstacks
+[16:20:06] [Server thread/INFO] [FML]: Itemstack injection complete
+[16:20:06] [Server thread/INFO]: Loading properties
+[16:20:06] [Server thread/INFO]: Default game type: SURVIVAL
+[16:20:06] [Server thread/INFO]: Generating keypair
+[16:20:06] [Server thread/INFO]: Starting Minecraft server on 127.0.0.1:0
+[16:20:06] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[16:20:06] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[16:20:06] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[16:20:06] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[16:20:06] [Server thread/INFO] [FML]: Injecting itemstacks
+[16:20:06] [Server thread/INFO] [FML]: Itemstack injection complete
+[16:20:06] [Server thread/INFO] [FML]: Forge Mod Loader has successfully loaded 19 mods
+[16:20:06] [Server thread/INFO]: Preparing level "terminal-test-world"
+[16:20:06] [Server thread/INFO] [fml.ModTracker]: This world was saved with mod structureterminal version 0.1.1-alpha and it is now at version 0.1.2-alpha, things may not work well
+[16:20:06] [Server thread/INFO] [FML]: Injecting existing block and item data into this server instance
+[16:20:06] [Server thread/INFO] [FML]: Applying holder lookups
+[16:20:06] [Server thread/INFO] [FML]: Holder lookups applied
+[16:20:06] [Server thread/INFO] [FML]: Loading dimension 0 (terminal-test-world) (net.minecraft.server.dedicated.DedicatedServer@dd963f0)
+[16:20:06] [Server thread/INFO] [FML]: Loading dimension 1 (terminal-test-world) (net.minecraft.server.dedicated.DedicatedServer@dd963f0)
+[16:20:06] [Server thread/INFO] [FML]: Loading dimension -1 (terminal-test-world) (net.minecraft.server.dedicated.DedicatedServer@dd963f0)
+[16:20:06] [Server thread/INFO]: Preparing start region for level 0
+[16:20:07] [Server thread/INFO]: Done (0.118s)! For help, type "help" or "?"
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.Gson.fromJson(Gson.java:815)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.Gson.fromJson(Gson.java:768)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.Gson.fromJson(Gson.java:717)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.Gson.fromJson(Gson.java:689)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at net.minecraftforge.common.ForgeVersion$1.run(ForgeVersion.java:94)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:374)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:183)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:145)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	at com.google.gson.Gson.fromJson(Gson.java:803)
+[16:20:07] [Forge Version Check/INFO] [STDERR]: [java.lang.Throwable$WrappedPrintStream:println:749]: 	... 4 more
+[16:20:09] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST empty_survival_build PASS
+[16:20:11] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST partial_correct_coils_preserved PASS
+[16:20:14] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST already_complete_consumes_nothing PASS
+[16:20:16] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replace_partial_matching_coils_no_double_charge PASS
+[16:20:19] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replace_all_coils_to_new_tier PASS
+[16:20:21] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replace_mixed_existing_coil_tiers PASS
+[16:20:24] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replacement_missing_new_material_preserves_old PASS
+[16:20:26] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replacement_requires_confirmation PASS
+[16:20:29] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replacement_place_cancel_rolls_back PASS
+[16:20:31] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replacement_keeps_filled_container PASS
+[16:20:34] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replace_glass_across_block_ids PASS
+[16:20:36] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST build_with_independent_glass_channel PASS
+[16:20:38] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replacement_break_event_cancellation_respected PASS
+[16:20:41] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST replacement_foreign_obstruction_is_preserved PASS
+[16:20:43] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST wrong_coil_is_not_silently_destroyed PASS
+[16:20:46] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST missing_materials_stop_without_free_blocks PASS
+[16:20:48] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST resume_after_materials_restocked PASS
+[16:20:51] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST foreign_obstruction_preserved PASS
+[16:20:53] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST demolition_returns_all_ordinary_materials PASS
+[16:20:56] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST demolition_requires_confirmation PASS
+[16:20:58] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST filled_chest_is_never_demolished PASS
+[16:21:00] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST empty_tile_entity_also_skipped_by_default PASS
+[16:21:03] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST break_event_cancellation_respected PASS
+[16:21:05] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST full_inventory_demolition_drops_are_conserved PASS
+[16:21:08] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST invalid_selected_material_rejected PASS
+[16:21:10] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST readonly_scan_keeps_running_state PASS
+[16:21:13] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST mirrored_preview_does_not_call_orientation_setter PASS
+[16:21:15] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST shift_right_click_has_no_native_force_check PASS
+[16:21:18] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST logout_cancels_job PASS
+[16:21:20] [Server thread/INFO] [STDOUT]: [dev.structureterminal.servertest.HeadlessSuite:record:708]: TERMINAL_SERVER_TEST changing_held_tool_stops_job PASS
+[16:21:20] [Server thread/INFO]: Stopping server
+[16:21:20] [Server thread/INFO]: Saving players
+[16:21:20] [Server thread/INFO]: Saving worlds
+[16:21:20] [Server thread/INFO]: Saving chunks for level 'terminal-test-world'/Overworld
+[16:21:20] [Server thread/INFO]: Saving chunks for level 'terminal-test-world'/Nether
+[16:21:20] [Server thread/INFO]: Saving chunks for level 'terminal-test-world'/The End
+[16:21:20] [Server thread/INFO] [FML]: Unloading dimension 0
+[16:21:20] [Server thread/INFO] [FML]: Unloading dimension -1
+[16:21:20] [Server thread/INFO] [FML]: Unloading dimension 1
+[16:21:20] [Server thread/INFO] [FML]: Applying holder lookups
+[16:21:20] [Server thread/INFO] [FML]: Holder lookups applied
+Headless integration tests passed: 30
+
+[Incubating] Problems report is available at: file://<workspace>/outputs/structure_terminal/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 24s
+15 actionable tasks: 2 executed, 13 up-to-date
+Watched directory hierarchies: [<workspace>/outputs/structure_terminal]

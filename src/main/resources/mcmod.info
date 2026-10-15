@@ -1,0 +1,25 @@
+{
+  "modListVersion": 2,
+  "modList": [
+    {
+      "modid": "${modId}",
+      "name": "${modName}",
+      "description": "A standalone GTNH StructureLib terminal with GTO-style structure preview and part selection.",
+      "version": "${modVersion}",
+      "mcversion": "${minecraftVersion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": [
+        "Structure Terminal contributors"
+      ],
+      "credits": "GTO/GregTech-Modern and Low-Drag-MC/LDLib2: Ore UI design and atlas; GTNH: StructureLib API",
+      "logoFile": "",
+      "screenshots": [],
+      "parent": "",
+      "requiredMods": [],
+      "dependencies": [],
+      "dependants": [],
+      "useDependencyInformation": false
+    }
+  ]
+}

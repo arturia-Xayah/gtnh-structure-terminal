@@ -1,0 +1,162 @@
+{
+  "release": "0.1.2-alpha",
+  "target_pack": "GTNH 2.9.0-RC-2",
+  "build_result": "SUCCESS",
+  "tests": [
+    {
+      "name": "dev.structureterminal.bridge.CandidateDiscoveryTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "dev.structureterminal.core.CanonicalNbtTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "dev.structureterminal.core.CoreTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "dev.structureterminal.core.HintTransformerTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "dev.structureterminal.core.SettingsTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "dev.structureterminal.core.SurvivalCapabilityTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "unit_tests_total": 21,
+  "dedicated_server_integration_tests_total": 30,
+  "dedicated_server_integration_tests_passed": 30,
+  "client_started_this_round": false,
+  "full_gtnh_pack_tested": true,
+  "controller_baseline": {
+    "pack": "2.9.0-RC-2",
+    "profile": "baseline",
+    "controllers_attempted": 336,
+    "classification_counts": {
+      "FORMATION_NOT_ASSESSED": 1,
+      "BUILT_NOT_FORMED": 69,
+      "OPERATION_CHECKS_PASS": 160,
+      "BUILD_TIME_LIMIT": 11,
+      "BUILD_BLOCKED": 23,
+      "MATERIAL_ACCOUNTING_REVIEW": 14,
+      "NO_STRUCTURELIB_INTERFACE": 2,
+      "REPLACE_BLOCKED": 3,
+      "SCAN_ERROR": 1,
+      "POST_OPERATION_NOT_FORMED": 8,
+      "NO_NATIVE_SURVIVAL_BUILDER": 40,
+      "TEST_ERROR": 2,
+      "SCAN_ENVIRONMENT_OR_LIMIT": 1,
+      "PARTIAL_REBUILD_BLOCKED": 1
+    },
+    "scan_success": 332,
+    "native_build_complete": 256,
+    "formed_after_build": 189,
+    "replacement_native_complete": 68,
+    "idle_scan_state_preserved": 330,
+    "idle_scan_state_changed": 0,
+    "phase_attempts": {
+      "baseline_build": 290,
+      "partial_rebuild": 256,
+      "demolish": 290,
+      "replace": 73
+    },
+    "machines_with_any_material_delta": 29,
+    "scans_over_default_500ms": 9,
+    "scans_with_unknown_cells": 18,
+    "running_recipe_tested": false,
+    "gui_tested": false
+  },
+  "configuration_retry": {
+    "pack": "2.9.0-RC-2",
+    "profile": "configuration-retry",
+    "controllers_attempted": 30,
+    "classification_counts": {
+      "OPERATION_CHECKS_PASS": 20,
+      "DEMOLITION_REMAINDER": 1,
+      "BUILD_TIME_LIMIT": 1,
+      "MATERIAL_ACCOUNTING_REVIEW": 1,
+      "POST_OPERATION_NOT_FORMED": 3,
+      "BUILD_BLOCKED": 1,
+      "REPLACE_BLOCKED": 1,
+      "BUILT_NOT_FORMED": 2
+    },
+    "scan_success": 30,
+    "native_build_complete": 28,
+    "formed_after_build": 26,
+    "replacement_native_complete": 4,
+    "idle_scan_state_preserved": 30,
+    "idle_scan_state_changed": 0,
+    "phase_attempts": {
+      "baseline_build": 30,
+      "partial_rebuild": 28,
+      "demolish": 30,
+      "replace": 6
+    },
+    "machines_with_any_material_delta": 4,
+    "scans_over_default_500ms": 0,
+    "scans_with_unknown_cells": 2,
+    "running_recipe_tested": false,
+    "gui_tested": false
+  },
+  "coverage": {
+    "distinct_controllers": 336,
+    "retry_trials": 30,
+    "baseline_passed": 160,
+    "additional_controllers_passed_in_retry": 19,
+    "at_least_one_tested_configuration_passed": 179,
+    "note": "Different configurations remain separate; this is not an all-machines compatibility certificate."
+  },
+  "running_recipe_tested": false,
+  "gui_pixel_parity": "INCOMPLETE, NOT_VERIFIED",
+  "ae_network_tested": false,
+  "artifacts": [
+    {
+      "file": "structureterminal-0.1.2-alpha.jar",
+      "bytes": 109257,
+      "sha256": "7a61b409289b8c29c5cdc63b00b30c419a64f03e40e1c0c327eb82819a4eba53",
+      "classes": 47,
+      "class_file_versions": [
+        52
+      ]
+    },
+    {
+      "file": "structureterminal-0.1.2-alpha-dev.jar",
+      "bytes": 108511,
+      "sha256": "65e55000a61c698f8f1dbb5926239b31bc1260179a51f2ec580b77635eacf00f",
+      "classes": 47,
+      "class_file_versions": [
+        52
+      ]
+    },
+    {
+      "file": "structureterminal-0.1.2-alpha-sources.jar",
+      "bytes": 53715,
+      "sha256": "197f524ff8911a937ec01b77d35c4871138342ecd0f8a35fc3971be7fd02daed",
+      "classes": 0,
+      "class_file_versions": []
+    }
+  ]
+}
