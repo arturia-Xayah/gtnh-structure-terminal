@@ -28,15 +28,18 @@ if (providers.gradleProperty('terminalMirror').getOrElse('false').toBoolean()) {
 // Distribution validation is deliberately headless: never launch Minecraft as part of build/check.
 tasks.register('verifyDistribution') {
     dependsOn(tasks.named('reobfJar'))
-    doLast {
-        def jarFile = tasks.named('reobfJar').get().archiveFile.get().asFile
+    inputs.file(tasks.named('reobfJar').flatMap { it.archiveFile })
+    inputs.property('allowPackTests', providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean())
+    doLast { task ->
+        def jarFile = task.inputs.files.singleFile
+        def allowPackTests = task.inputs.properties.allowPackTests
         new java.util.zip.ZipFile(jarFile).withCloseable { zip ->
             def classes = 0
             zip.entries().each { entry ->
                 if (entry.name.endsWith('.class')) {
                     classes++
                     if (entry.name.contains('/qa/') || entry.name.contains('/servertest/')) throw new GradleException('Test fixture leaked into mod JAR')
-                    if (entry.name.contains('/packtest/') && !providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean()) throw new GradleException('Pack test fixture leaked into normal mod JAR')
+                    if (entry.name.contains('/packtest/') && !allowPackTests) throw new GradleException('Pack test fixture leaked into normal mod JAR')
                     def bytes = zip.getInputStream(entry).bytes
                     def major = ((bytes[6] & 255) << 8) | (bytes[7] & 255)
                     if (major > 52) throw new GradleException("${entry.name} needs newer than Java 8: ${major}")
