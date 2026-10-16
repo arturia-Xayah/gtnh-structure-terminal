@@ -2,13 +2,13 @@
 
 <div align="center">
 
-<img src="docs/assets/readme-banner.svg" alt="Structure Terminal — GT New Horizons 结构终端" width="100%">
+<img src="docs/assets/readme-banner.png" alt="Structure Terminal — GT New Horizons 结构终端" width="100%">
 
 **简体中文** · [English](README.en.md)
 
 把 GTO 结构终端的交互方式带到 GTNH。<br>在一个界面中预览多方块、配置材料，并完成生存搭建、替换与拆除。
 
-[**下载 Mod**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.2-alpha-GTNH-2.9.0-RC-2) · [快速上手](#快速上手) · [兼容性](#兼容性) · [构建与开发](docs/BUILDING.md)
+[**下载 Mod**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2) · [快速上手](#快速上手) · [兼容性](#兼容性) · [构建与开发](docs/BUILDING.md)
 
 </div>
 
@@ -31,9 +31,9 @@
 | GTNH | **2.9.0-RC-2** |
 | Minecraft / Forge | 1.7.10 / 10.13.4.1614 |
 | StructureLib / GTNHLib | 1.4.45 / 0.11.52 |
-| Structure Terminal | 0.1.2-alpha |
+| Structure Terminal | 0.1.3-alpha |
 
-1. 从 [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.2-alpha-GTNH-2.9.0-RC-2) 下载 `structureterminal-0.1.2-alpha-GTNH-2.9.0-RC-2.jar`。
+1. 从 [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2) 下载 `structureterminal-0.1.3-alpha-GTNH-2.9.0-RC-2.jar`。
 2. 放入 GTNH 实例的 `mods` 目录，客户端与服务端均需安装；单人游戏只需安装到客户端。
 3. 移除同一 Mod 的旧版本，再启动实例。
 
@@ -41,7 +41,7 @@
 
 ## 快速上手
 
-**取得终端**：物品名为“结构终端”，位于创造模式的工具标签页，当前游戏内使用地图图标。注册名为 `structureterminal:structure_terminal`。
+**取得终端**：物品名为“结构终端”，位于创造模式的工具标签页，使用蓝白外壳与青色立方体屏幕图标。注册名为 `structureterminal:structure_terminal`。
 
 **当前配方**：多方块结构投影仪 + 末影珍珠 + 书，无序合成。
 
@@ -90,4 +90,4 @@
 
 [构建与开发](docs/BUILDING.md) · [后台测试方法](verification/PACK_TESTING.md) · [运行状态与结构检查](STATE_CHECKS.md)
 
-界面参考 GTO 结构终端；页头使用 GTO 的终端贴图。代码与素材的许可、来源和上游信息见 [LICENSE](LICENSE)、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 与 [LICENSES](LICENSES)。
+界面参考 GTO 结构终端；游戏图标与页头使用参考 GTO 终端轮廓设计的蓝白科技风贴图。代码与素材的许可、来源和上游信息见 [LICENSE](LICENSE)、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 与 [LICENSES](LICENSES)。

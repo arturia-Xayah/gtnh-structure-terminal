@@ -5,10 +5,10 @@ tasks.withType(JavaCompile).configureEach {
 tasks.named('compileJava', JavaCompile) { options.release = 8 }
 tasks.named('compileTestJava', JavaCompile) { options.release = 8 }
 tasks.named('compileInjectedTagsJava', JavaCompile) { options.release = 8 }
-version = '0.1.2-alpha'
+version = '0.1.3-alpha'
 
 
-ext.modVersion = '0.1.2-alpha'
+ext.modVersion = '0.1.3-alpha'
 
 // Test-only build for installation into the isolated official GTNH server. Normal artifacts exclude it.
 if (providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean()) {

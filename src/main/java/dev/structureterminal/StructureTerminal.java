@@ -19,7 +19,7 @@ import dev.structureterminal.server.BuildService;
 @Mod(
     modid = StructureTerminal.ID,
     name = "Structure Terminal",
-    version = "0.1.2-alpha",
+    version = "0.1.3-alpha",
     acceptedMinecraftVersions = "[1.7.10]",
     dependencies = "required-after:structurelib@[1.4.45,);after:gregtech")
 public final class StructureTerminal {

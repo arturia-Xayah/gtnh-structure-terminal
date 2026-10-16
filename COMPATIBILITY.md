@@ -1,6 +1,6 @@
 # 兼容性
 
-版本：0.1.2-alpha，目标 GTNH 2.9.0-RC-2。验证分为真实 Minecraft / Forge / StructureLib 的合成结构夹具，以及官方 GTNH 完整整包的逐控制器后台测试。两类结果分别记录，见 [VERIFICATION.md](VERIFICATION.md) 和 `verification/full-pack/`。
+版本：0.1.3-alpha，目标 GTNH 2.9.0-RC-2。验证分为真实 Minecraft / Forge / StructureLib 的合成结构夹具，以及官方 GTNH 完整整包的逐控制器后台测试。两类结果分别记录，见 [VERIFICATION.md](VERIFICATION.md) 和 `verification/full-pack/`。
 
 | 项目 | 当前实现 | 验证 / 限制 |
 |---|---|---|

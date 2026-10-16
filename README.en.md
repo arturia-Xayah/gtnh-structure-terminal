@@ -2,13 +2,13 @@
 
 <div align="center">
 
-<img src="docs/assets/readme-banner.svg" alt="Structure Terminal for GT New Horizons" width="100%">
+<img src="docs/assets/readme-banner.png" alt="Structure Terminal for GT New Horizons" width="100%">
 
 [简体中文](README.md) · **English**
 
 Bring the GTO structure terminal workflow to GTNH.<br>Preview multiblocks, configure parts, and build, replace or dismantle structures from one interface.
 
-[**Download**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.2-alpha-GTNH-2.9.0-RC-2) · [Quick start](#quick-start) · [Compatibility](#compatibility) · [Build & develop](docs/BUILDING.md#english)
+[**Download**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2) · [Quick start](#quick-start) · [Compatibility](#compatibility) · [Build & develop](docs/BUILDING.md#english)
 
 </div>
 
@@ -31,9 +31,9 @@ Bring the GTO structure terminal workflow to GTNH.<br>Preview multiblocks, confi
 | GTNH | **2.9.0-RC-2** |
 | Minecraft / Forge | 1.7.10 / 10.13.4.1614 |
 | StructureLib / GTNHLib | 1.4.45 / 0.11.52 |
-| Structure Terminal | 0.1.2-alpha |
+| Structure Terminal | 0.1.3-alpha |
 
-1. Download `structureterminal-0.1.2-alpha-GTNH-2.9.0-RC-2.jar` from [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.2-alpha-GTNH-2.9.0-RC-2).
+1. Download `structureterminal-0.1.3-alpha-GTNH-2.9.0-RC-2.jar` from [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2).
 2. Place it in the instance's `mods` directory on both the client and server. For single-player, install it on the client.
 3. Remove older versions of this mod before starting the instance.
 
@@ -41,7 +41,7 @@ Players only need the JAR. Source code and build scripts are available in this r
 
 ## Quick start
 
-**Get the terminal**: Find **Structure Terminal** in the creative Tools tab. The current in-game item uses the map icon. Registry ID: `structureterminal:structure_terminal`.
+**Get the terminal**: Find **Structure Terminal** in the creative Tools tab. Look for the blue-and-white terminal with a cyan cube on its screen. Registry ID: `structureterminal:structure_terminal`.
 
 **Current recipe**: Multiblock Structure Hologram Projector + Ender Pearl + Book, shapeless crafting.
 
@@ -90,4 +90,4 @@ One construction round runs every 6 server ticks, with up to 4 active tasks. If 
 
 [Build & develop](docs/BUILDING.md#english) · [Headless test procedure](verification/PACK_TESTING.md) · [Running state & structure checks](STATE_CHECKS.md)
 
-The interface is based on the GTO structure terminal, and the header uses GTO's terminal texture. Code and artwork licenses, sources and upstream credits are recorded in [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [LICENSES](LICENSES).
+The interface is based on the GTO structure terminal, and the in-game icon and header use a blue-and-white design inspired by the GTO terminal silhouette. Code and artwork licenses, sources and upstream credits are recorded in [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [LICENSES](LICENSES).

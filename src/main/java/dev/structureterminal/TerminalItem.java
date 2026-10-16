@@ -15,7 +15,7 @@ public final class TerminalItem extends Item {
 
     public TerminalItem() {
         setUnlocalizedName("structureterminal.terminal");
-        setTextureName("minecraft:map_filled");
+        setTextureName("structureterminal:structure_terminal");
         setCreativeTab(CreativeTabs.tabTools);
         setMaxStackSize(1);
     }
