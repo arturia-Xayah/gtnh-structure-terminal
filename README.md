@@ -1,88 +1,93 @@
-# Structure Terminal — GTNH 1.7.10 移植工程
+> 本 Mod 由 **GPT-6（Codex）** 实现移植与开发。
 
-独立 Mod，版本 **0.1.2-alpha**。参考 GTO 当前公开 `gto` 分支的新结构终端，实现 Minecraft 1.7.10 / GTNH 的结构读取、配置界面与原生生存搭建桥接。
+<div align="center">
 
-**这是 Alpha 实现，尚未达到“所有 GTNH 多方块完全兼容、GUI 与 GTO 完全一致”的完成标准。** 已执行真实后台服务器夹具测试，并对官方 GTNH 2.9.0-RC-2 整包的 GT 注册表多方块开展逐台测试。逐台结果和未通过项见 [验证记录](VERIFICATION.md)。全量 336 项已尝试，基线 160 项通过适用的完整操作检查，配置复测新增 19 项通过；详细未通过项仍保留。具体边界见 [COMPATIBILITY.md](COMPATIBILITY.md)。
+<img src="docs/assets/readme-banner.svg" alt="Structure Terminal — GT New Horizons 结构终端" width="100%">
 
-## 安装与取得
+**简体中文** · [English](README.en.md)
 
-目标环境为 GTNH **2.9.0-RC-2** 对应的 Minecraft 1.7.10 / Forge 10.13.4.1614、StructureLib **1.4.45**。模组需要客户端与服务端同时安装，单人游戏安装在客户端即可。普通玩家安装只需 JAR，不需要构建用 JDK 或 Python。
+把 GTO 结构终端的交互方式带到 GTNH。<br>在一个界面中预览多方块、配置材料，并完成生存搭建、替换与拆除。
 
-将 `dist/structureterminal-0.1.2-alpha.jar` 放入实例的 `mods` 目录。不要把 `-dev.jar` 或 `-sources.jar` 当作游戏模组安装，也不要同时装两个版本。本工程不捆绑 Minecraft、GTNH、AE2 或 StructureLib。
+[**下载 Mod**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.2-alpha-GTNH-2.9.0-RC-2) · [快速上手](#快速上手) · [兼容性](#兼容性) · [构建与开发](docs/BUILDING.md)
 
-物品注册名为 `structureterminal:structure_terminal`，显示名为“结构终端”，暂用原版地图图标，位于工具创造标签页。若 StructureLib 投影仪注册成功，提供临时无序配方：**多方块结构投影仪 + 末影珍珠 + 书**。该配方尚未作 GTNH 科技阶段平衡。
+</div>
 
-GitHub Release 仅提供可安装的 `structureterminal-0.1.2-alpha-GTNH-2.9.0-RC-2.jar`，文件名注明目标 GTNH 版本。完整源码与构建说明保留在本仓库及 GitHub 自动生成的源码归档。
+---
 
-## 使用
+## 功能
 
-1. 手持终端右键已放置的多方块控制器。控制器需要公开 StructureLib 结构接口。
-2. 在右侧设置尺寸 / 模式及子信道。玻璃、线圈等候选物品来自当前已安装模组注册的数据，不使用 GTO 的物品 ID 或机器表。
-3. 在部件列表中选择普通外壳等成组材料；仓室位置请点击预览中的具体方块选择，避免把整组位置指定成一种仓室。
-4. 左键拖动旋转，右键或中键拖动平移，滚轮缩放。`F` 按钮适配视图；可切换显示层。右侧卡片内容过长时滚轮滚动。
-5. “投影”调用原机的提示投影；“搭建”提交服务端任务。背包先供料，缺料时停止，补料后可再次搭建。“停止任务”取消当前任务。
-6. 操作按钮可切换“搭建 / 替换并补建 / 拆除”。替换和拆除都需要再次点击确认。替换仅处理可识别的普通结构材料，已符合目标的方块不重复消耗；当前方块缺料或放置失败会保留或恢复原状。普通方块回收按服务端物品映射返回完整结构材料，包含玻璃；背包满时掉落在玩家附近。
-7. 默认跳过所有 TileEntity，替换始终跳过 TileEntity。运行中的机器若被实际替换、拆除或改变朝向，可能因结构变化而停机。
+| | 可以做什么 |
+|---|---|
+| **结构预览** | 旋转、平移、缩放、分层显示，点击预览中的方块选择部件 |
+| **部件配置** | 设置机器公开的尺寸、模式、线圈、玻璃等子信道；按组选择外壳，按位置选择仓室 |
+| **生存搭建** | 从背包供料，调用原机搭建规则；保留符合要求的已有方块，缺料时停止，补料后可继续 |
+| **替换与回收** | 替换普通结构材料并补建，或拆除并回收；已符合目标的方块不重复扣料 |
+| **AE 库存** | 可选读取已绑定无线终端对应网络中的现有材料，不发起自动合成；实际网络取料尚待验证 |
 
-普通预览与 Shift 右键都不调用原生 `checkStructure(true, ...)`。扫描和镜像预览只变换坐标，不调用机器朝向设置方法。**目前 Shift 右键仍打开预览，没有另行绑定“强制原生重检”功能。** 后台夹具已验证扫描不改变运行状态、进度持续增长；这不能代替对任意附属 Mod 的 `construct` 实现做逐台检查。
+## 安装
 
-“使用 AE 库存”是可选项：目标接口为 GTNH AE2 **rv3-beta-1080-GTNH**。玩家需要携带已绑定、已供电且在有效范围内的无线终端，并具备网络取出权限；只取网络现有库存，不发起自动合成。此路径通过 API 编译检查，但未完成实际网络取料验收。
+| 项目 | 对应版本 |
+|---|---|
+| GTNH | **2.9.0-RC-2** |
+| Minecraft / Forge | 1.7.10 / 10.13.4.1614 |
+| StructureLib / GTNHLib | 1.4.45 / 0.11.52 |
+| Structure Terminal | 0.1.2-alpha |
 
-部分老结构只提供原生搭建而不提供可枚举候选材料，界面会标记“由原生搭建器处理”。这类结构保留原机搭建行为，不能据此声称候选选择完整。不能读取结构或没有生存搭建实现的机器会明确拒绝相应操作。StructureLib 的默认 survival 接口不代表机器真正实现了生存搭建，终端会检查实际覆盖的方法，避免默认方法递归。仓室候选会合并链式结构的普通外壳与谓词候选；明确选择仓室后，自动启用 GT 原生 `gt_hatch` 规则（已有设置保留），数量与朝向仍由原机控制。
+1. 从 [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.2-alpha-GTNH-2.9.0-RC-2) 下载 `structureterminal-0.1.2-alpha-GTNH-2.9.0-RC-2.jar`。
+2. 放入 GTNH 实例的 `mods` 目录，客户端与服务端均需安装；单人游戏只需安装到客户端。
+3. 移除同一 Mod 的旧版本，再启动实例。
+
+普通玩家只需下载 JAR。源码与构建脚本保留在本仓库。
+
+## 快速上手
+
+**取得终端**：物品名为“结构终端”，位于创造模式的工具标签页，当前游戏内使用地图图标。注册名为 `structureterminal:structure_terminal`。
+
+**当前配方**：多方块结构投影仪 + 末影珍珠 + 书，无序合成。
+
+1. **打开**：手持终端，右键已放置的多方块控制器。
+2. **配置**：在右侧调整尺寸 / 模式与子信道，选择线圈、玻璃或外壳。仓室请点击预览中的具体位置选择，避免把整组位置都指定为同一种仓室。
+3. **备料**：把材料放入背包；选择 AE 库存时，还需携带已绑定、已供电且在范围内的无线终端，并拥有网络取出权限。
+4. **执行**：点击“投影”查看世界提示，或选择“搭建 / 替换并补建 / 拆除”。替换和拆除需要再次点击确认；“停止任务”可取消当前任务。
+
+### 视图操作
+
+| 操作 | 效果 |
+|---|---|
+| 左键拖动 | 旋转结构 |
+| 右键 / 中键拖动 | 平移视图 |
+| 滚轮 | 缩放；指向右侧长列表时滚动内容 |
+| 点击方块 | 选择该位置的部件 |
+| `F` 按钮 | 适配视图 |
+| 显示层 | 切换整机或单层预览 |
+
+## 兼容性
+
+- **机器接口**：预览需要控制器提供可读取的 StructureLib 结构；生存搭建需要原机实现相应接口。仓室数量、朝向、电压和特殊材料仍遵循机器自身规则。
+- **已有结构**：补建会保留符合目标的方块。替换和默认拆除跳过 TileEntity，包括仓室、容器等；只处理可识别的结构材料。
+- **运行中的机器**：普通预览和 Shift 右键打开预览，不主动强制重检或改变实际朝向。替换、拆除或改变朝向会实际影响结构，可能导致机器停止。
+- **界面与模型**：当前使用方块图标构建立方体预览；复杂模型、结构树、挂载机器导航和 AE 样板编码等功能尚未提供。
+- **验证范围**：已进行后台结构操作测试；真实运行配方、客户端 GUI 和实际 AE 网络取料尚待验证。特殊机器及具体失败原因可查逐台结果。
+
+[**兼容性明细**](COMPATIBILITY.md) · [**逐台测试结果**](verification/machine-coverage.csv) · [验证记录](VERIFICATION.md)
 
 ## 配置
 
-Forge 配置文件为 `config/structureterminal.cfg`，修改后重启实例。主要配置：
+配置文件：`config/structureterminal.cfg`，修改后重启实例。
 
-| 配置 | 默认 | 含义 |
+| 配置 | 默认值 | 用途 |
 |---|---:|---|
 | `limits.maxPreviewCells` | 100000 | 扫描位置上限 |
-| `limits.maxScanMillis` | 500 | 扫描时间预算，防止正常遍历无限扩展；不能中断卡在模组内部的单次调用 |
-| `limits.placementBudget` | 25 | 每轮请求原生搭建器最多放置的数量；实际行为由机器实现决定 |
-| `limits.maxBuildRounds` | 10000 | 任务轮数上限；无进展会提前停止 |
-| `limits.controllerReach` | 8 | 搭建期间玩家与控制器最大距离 |
-| `features.allowDemolition` | true | 允许二次确认后的拆除 |
-| `features.allowTileEntityDemolition` | false | 可检查为空的容器是否允许拆除；尚未验证盖板和各模组容器，不建议开启 |
+| `limits.maxScanMillis` | 500 | 扫描时间预算，单位毫秒 |
+| `limits.placementBudget` | 25 | 每轮请求原生搭建器放置的数量 |
+| `limits.controllerReach` | 8 | 玩家与控制器的最大操作距离 |
+| `features.allowDemolition` | true | 启用确认后的拆除 |
+| `features.allowTileEntityDemolition` | false | 保持关闭时，拆除跳过全部 TileEntity |
 
-每 6 个服务端 tick 执行一轮搭建，最多同时 4 个任务。设置保存在终端物品 NBT 中。机器权限、已加载区块、持有的终端、距离及方向会在服务端检查；材料选择由服务端重建结构后校验。
+每 6 个服务端 tick 执行一轮搭建，最多同时执行 4 个任务。大结构若触发扫描上限，可根据服务器情况调整预算。更多参数与测试方法见[开发文档](docs/BUILDING.md)。
 
-## 构建与无游戏验证
+## 项目资料
 
-macOS / Linux 需要 Python 3、Bash 及网络连接：
+[构建与开发](docs/BUILDING.md) · [后台测试方法](verification/PACK_TESTING.md) · [运行状态与结构检查](STATE_CHECKS.md)
 
-```sh
-chmod +x build.sh
-./build.sh spotlessApply build
-```
-
-脚本优先使用 `STRUCTURE_TERMINAL_JAVA25`、`STRUCTURE_TERMINAL_JAVA17`、`STRUCTURE_TERMINAL_JAVA8` 指定的 JDK；没有配置时自动下载项目本地 Azul JDK。Gradle 运行使用 JDK 25，旧版工具链需要 JDK 8 / 17，发布类文件统一为 Java 8。JDK 与 Gradle 缓存只保存在 `.tools/` 或指定的 `GRADLE_USER_HOME`，不会改动系统默认 Java。
-
-若旧 Mojang / Forge 下载域名不可用，可运行：
-
-```sh
-./build.sh --mirror spotlessApply build
-```
-
-镜像辅助脚本用固定哈希校验 Minecraft 1.7.10、Forge userdev、MCP 与 Fernflower 构建资源。Gradle 分发包也有 SHA-256 校验。初次构建需下载较大的开发依赖；离线状态只能复用已有缓存。
-
-Windows 可手动安装上述 JDK，使用 `gradlew.bat build` 并配置 Gradle toolchain 路径；自动安装脚本目前支持 macOS / Linux。
-
-`build` / `check` **不启动游戏**。包括单元测试、Checkstyle、Spotless 及 `verifyDistribution`。后者检查发布 JAR 中所有类均不高于 Java 8 字节码、没有测试夹具、核心插件清单正确。标准构建输出位于 `build/libs/`，交付副本位于 `dist/`。
-
-显式运行无界面服务器集成测试：
-
-```sh
-./build.sh runServer -PterminalServerTests=true
-```
-
-该选项加载 `src/serverTest/` 中的夹具，生成专用的 `build/headless-tests/terminal-test-world` 世界，只绑定本机随机端口，使用 `nogui` 与 `java.awt.headless=true`，不会启动客户端。测试通过实际服务器 tick 和同一套 `BuildService` 执行，逐项检查世界方块、背包及掉落物；结束自动关闭。结果写入 `build/headless-tests/terminal-server-tests.json`，任何用例失败会令 Gradle 任务失败。夹具不会进入发布 JAR。
-
-## 接口审计工具
-
-工程附带 `/structureterminal audit` 及 `/structureterminal inspect x y z` 管理员命令，供以后人工运行整合包时导出实际注册表和单机结构候选。这些命令不自动启动游戏；本次没有执行。报告中的接口能力标记不等于游戏内测试通过。完整整包逐台后台测试与配置复测的方法见 [PACK_TESTING.md](verification/PACK_TESTING.md)。
-
-新增专用兼容层时，优先扩展 `bridge/StructureScanner.java` 与 `bridge/NativeBridge.java`，保留原机 `survivalConstruct` 的放置规则。GUI 在 `client/`；AE 取料适配在 `server/AeSupply.java`。
-
-## 来源与许可
-
-本工程是非官方移植，未获 GTO / GTNH 官方背书。参考公开分支快照 `16abc4041714b0098324b86e10d119a2c84fa720`，包含 GTO / LDLib2 的 Ore UI 图集，工程代码采用 LGPL-3.0-or-later。来源、上游许可与原始 MIT 构建模板声明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)、[LICENSE](LICENSE) 及 `LICENSES/`。
+界面参考 GTO 结构终端；页头使用 GTO 的终端贴图。代码与素材的许可、来源和上游信息见 [LICENSE](LICENSE)、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 与 [LICENSES](LICENSES)。
