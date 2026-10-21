@@ -1,0 +1,322 @@
+{
+  "scenario": "single_main_output_DAG_with_explicit_extra_supply",
+  "source_sha256": "2de1a2cf0d474e3e023cdbec7fc9c2a6078d7069dc96f5c220898fe3350b0b26",
+  "patterns_excluding_kit": 1694,
+  "raw_types": 448,
+  "extra_supplies": {
+    "gregtech:gt.blockmachines@2740": {
+      "reason": "feedback edge",
+      "cycle": [
+        "gregtech:gt.blockmachines@2740",
+        "gregtech:gt.metaitem.01@32759",
+        "gregtech:gt.blockmachines@2740"
+      ],
+      "name": "Ultimate Solar Panel",
+      "required": 2732813
+    },
+    "kekztech:kekztech_lapotronicenergyunit_block@5": {
+      "reason": "feedback edge",
+      "cycle": [
+        "kekztech:kekztech_lapotronicenergyunit_block@5",
+        "gregtech:gt.metaitem.01@32609",
+        "kekztech:kekztech_lapotronicenergyunit_block@5"
+      ],
+      "name": "Ultimate Capacitor (UHV)",
+      "required": 570597
+    },
+    "dreamcraft:GTNHBioItems@1": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Gelatin",
+      "required": 981317743232832
+    },
+    "fluid:stablebaryonicmatter": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:stablebaryonicmatter",
+      "required": 3285902000
+    },
+    "fluid:grade8purifiedwater": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:grade8purifiedwater",
+      "required": 137475363200
+    },
+    "fluid:superheavyradox": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:superheavyradox",
+      "required": 3287302000
+    },
+    "fluid:grade3purifiedwater": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:grade3purifiedwater",
+      "required": 42735059000
+    },
+    "harvestcraft:seaweedItem@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Seaweed",
+      "required": 1106184239144960
+    },
+    "gregtech:gt.comb@157": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Unknown Liquid Comb",
+      "required": 1728412873664
+    },
+    "dreamcraft:PikoCircuit@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Pico Circuit",
+      "required": 29019015
+    },
+    "fluid:hot super coolant": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:hot super coolant",
+      "required": 6435538199000
+    },
+    "dreamcraft:QuantumCircuit@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Quantum Circuit",
+      "required": 7735730
+    },
+    "gregtech:gt.comb@152": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Nether Shard Comb",
+      "required": 24751359872
+    },
+    "fluid:lava": {
+      "reason": "feedback edge",
+      "cycle": [
+        "fluid:lava",
+        "IguanaTweaksTConstruct:clayBucketLava@0",
+        "fluid:lava"
+      ],
+      "name": "fluid:lava",
+      "required": 38673999800
+    },
+    "fluid:netherair": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:netherair",
+      "required": 96685000000000
+    },
+    "fluid:poornetherwaste": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:poornetherwaste",
+      "required": 3480659984000
+    },
+    "gregtech:gt.metaitem.01@32429": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Black Body Naquadria Supersolid",
+      "required": 2843744
+    },
+    "gregtech:gt.metaitem.01@32145": {
+      "reason": "feedback edge",
+      "cycle": [
+        "gregtech:gt.metaitem.01@32145",
+        "kekztech:kekztech_lapotronicenergyunit_block@9",
+        "gregtech:gt.metaitem.01@32145"
+      ],
+      "name": "Insanely Ultimate Battery",
+      "required": 1282
+    },
+    "gregtech:gt.blockmachines@124": {
+      "reason": "feedback edge",
+      "cycle": [
+        "gregtech:gt.blockmachines@124",
+        "kekztech:kekztech_tfftstoragefield_block@8",
+        "gregtech:gt.blockmachines@124"
+      ],
+      "name": "Quantum Tank V",
+      "required": 2008464
+    },
+    "fluid:molten.magnetohydrodynamicallyconstrainedstarmatter": {
+      "reason": "feedback edge",
+      "cycle": [
+        "fluid:molten.magnetohydrodynamicallyconstrainedstarmatter",
+        "gregtech:gt.metaitem.02@19583",
+        "fluid:molten.magnetohydrodynamicallyconstrainedstarmatter"
+      ],
+      "name": "fluid:molten.magnetohydrodynamicallyconstrainedstarmatter",
+      "required": 1378394960
+    },
+    "dreamcraft:PlanckCircuit@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Planck-Scale Circuit",
+      "required": 52274
+    },
+    "fluid:rawstarmatter": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:rawstarmatter",
+      "required": 1194410850
+    },
+    "fluid:temporalfluid": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:temporalfluid",
+      "required": 441315344
+    },
+    "gregtech:gt.metaitem.01@32428": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Superconductor Rare-Earth Composite",
+      "required": 30922
+    },
+    "fluid:naquadah solution": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:naquadah solution",
+      "required": 9318400000
+    },
+    "DraconicEvolution:chaosFragment@1": {
+      "reason": "feedback edge",
+      "cycle": [
+        "DraconicEvolution:chaosFragment@1",
+        "DraconicEvolution:chaosFragment@0",
+        "DraconicEvolution:chaosFragment@1"
+      ],
+      "name": "Small Chaos Fragment",
+      "required": 3132
+    },
+    "gregtech:gt.metaitem.01@32146": {
+      "reason": "feedback edge",
+      "cycle": [
+        "gregtech:gt.metaitem.01@32146",
+        "kekztech:kekztech_lapotronicenergyunit_block@10",
+        "gregtech:gt.metaitem.01@32146"
+      ],
+      "name": "Mega Ultimate Battery",
+      "required": 11
+    },
+    "gregtech:gt.metaitem.01@32594": {
+      "reason": "feedback edge",
+      "cycle": [
+        "gregtech:gt.metaitem.01@32594",
+        "kekztech:kekztech_lapotronicenergyunit_block@8",
+        "gregtech:gt.metaitem.01@32594"
+      ],
+      "name": "Extremely Ultimate Battery",
+      "required": 40
+    },
+    "gregtech:gt.blockmachines@12730": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Mega Electric Blast Furnace",
+      "required": 320
+    },
+    "gregtech:gt.blockmachines@148": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Infinite Fluid Drilling Rig",
+      "required": 320
+    },
+    "dreamcraft:CircuitUMV@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Any UMV Circuit",
+      "required": 16
+    },
+    "dreamcraft:CircuitUXV@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Any UXV Circuit",
+      "required": 16
+    },
+    "GoodGenerator:yottaFluidTankCells@9": {
+      "reason": "feedback edge",
+      "cycle": [
+        "GoodGenerator:yottaFluidTankCells@9",
+        "GoodGenerator:fluidCore@9",
+        "GoodGenerator:yottaFluidTankCells@9"
+      ],
+      "name": "Fluid Cell Block T10",
+      "required": 4
+    },
+    "fluid:soulinfusedmedium": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:soulinfusedmedium",
+      "required": 368640
+    },
+    "universalsingularities:universal.circuit.singularity@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Ultra Low Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit2.singularity@2": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Mega Ultimate Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@1": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Low Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit2.singularity@1": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Insanely Ultimate Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit2.singularity@4": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Maximum Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit2.singularity@3": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Extended Mega Ultimate Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@7": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "ZPM Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@6": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Ludicrous Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@5": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Insane Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@4": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Extreme Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit2.singularity@0": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Extremely Ultimate Computation Singularity",
+      "required": 1
+    },
+    "fluid:boundlesscosmicsolder": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "fluid:boundlesscosmicsolder",
+      "required": 21475000
+    },
+    "universalsingularities:universal.circuit.singularity@8": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Ultimate Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@3": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "High Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@9": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Highly Ultimate Computation Singularity",
+      "required": 1
+    },
+    "universalsingularities:universal.circuit.singularity@2": {
+      "reason": "no eligible main-output recipe in complete exported registry",
+      "name": "Medium Computation Singularity",
+      "required": 1
+    },
+    "fluid:refinedglue": {
+      "reason": "feedback edge",
+      "cycle": [
+        "fluid:refinedglue",
+        "fluid:glue",
+        "fluid:refinedglue"
+      ],
+      "name": "fluid:refinedglue",
+      "required": 576
+    }
+  },
+  "removed_coproduct_slots": 115,
+  "notes": "Only actual first (main) outputs retained; all coproducts discarded. Original recipe input quantities retained. Additional feedback/frontier supplies are explicit. One benchmark kit aggregates base1/ring8/chevron7/controller1. Planning only; no full machine production.",
+  "grounded_variants": 70553,
+  "original_supply_types_used": 397
+}

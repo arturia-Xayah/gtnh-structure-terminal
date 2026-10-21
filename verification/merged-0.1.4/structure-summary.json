@@ -1,0 +1,25 @@
+{
+  "pack": "2.9.0-RC-2",
+  "profile": "baseline",
+  "controllers_attempted": 3,
+  "classification_counts": {
+    "OPERATION_CHECKS_PASS": 3
+  },
+  "scan_success": 3,
+  "native_build_complete": 3,
+  "formed_after_build": 3,
+  "replacement_native_complete": 1,
+  "idle_scan_state_preserved": 3,
+  "idle_scan_state_changed": 0,
+  "phase_attempts": {
+    "baseline_build": 3,
+    "partial_rebuild": 3,
+    "demolish": 3,
+    "replace": 1
+  },
+  "machines_with_any_material_delta": 0,
+  "scans_over_default_500ms": 0,
+  "scans_with_unknown_cells": 0,
+  "running_recipe_tested": false,
+  "gui_tested": false
+}

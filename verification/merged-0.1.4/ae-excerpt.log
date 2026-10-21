@@ -1,0 +1,6 @@
+[13:05:25] [Server thread/INFO]: Done (0.944s)! For help, type "help" or "?"
+[13:05:43] [Server thread/WARN] [aeorderoptimizer]: AEO_CYCLE: A --[pattern#96441c5a11057a67 [A x1 + B x1 -> A x1]]--> A
+[13:05:43] [Server thread/WARN] [aeorderoptimizer]: AEO_CYCLE: A --[pattern#f49ed9e72803bfab [C x1 + D x1 -> A x1]]--> C --[pattern#2068e50ce742451f [A x1 + B x1 -> C x1]]--> A
+[13:05:43] [Server thread/WARN] [aeorderoptimizer]: AEO_MULTI_OUTPUT: A [pattern#586184e0e4ff4099 [Iron Ingot x1 -> A x1 + B x1]] outputs=2
+[13:05:43] [Server thread/INFO] [aeorderoptimizer]: AEO_ALTERNATIVES: A
+[13:06:05] [Server thread/WARN] [aeorderoptimizer]: Duplicate optimizer disconnected at 10,81,8

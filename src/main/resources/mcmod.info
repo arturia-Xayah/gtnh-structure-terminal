@@ -4,7 +4,7 @@
     {
       "modid": "${modId}",
       "name": "${modName}",
-      "description": "A standalone GTNH StructureLib terminal with GTO-style structure preview and part selection.",
+      "description": "GTNH structure preview, part selection and building, bundled with opt-in AE order planning and bulk dispatch.",
       "version": "${modVersion}",
       "mcversion": "${minecraftVersion}",
       "url": "",
@@ -13,6 +13,26 @@
         "Structure Terminal contributors"
       ],
       "credits": "GTO/GregTech-Modern and Low-Drag-MC/LDLib2: Ore UI design and atlas; GTNH: StructureLib API",
+      "logoFile": "",
+      "screenshots": [],
+      "parent": "",
+      "requiredMods": [],
+      "dependencies": [],
+      "dependants": [],
+      "useDependencyInformation": false
+    },
+    {
+      "modid": "aeorderoptimizer",
+      "name": "AE Order Optimizer",
+      "description": "Bundled Structure Terminal module: network opt-in, selected-route checks, diagnostics and bulk dispatch.",
+      "version": "${modVersion}",
+      "mcversion": "${minecraftVersion}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": [
+        "Structure Terminal contributors"
+      ],
+      "credits": "GTNH Applied Energistics 2 Lite planner, LGPL-3.0-or-later",
       "logoFile": "",
       "screenshots": [],
       "parent": "",

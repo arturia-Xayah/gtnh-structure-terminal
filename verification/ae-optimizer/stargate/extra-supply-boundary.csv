@@ -1,0 +1,52 @@
+﻿key,name,reason,required
+gregtech:gt.blockmachines@2740,Ultimate Solar Panel,feedback edge,2732813
+kekztech:kekztech_lapotronicenergyunit_block@5,Ultimate Capacitor (UHV),feedback edge,570597
+dreamcraft:GTNHBioItems@1,Gelatin,no eligible main-output recipe in complete exported registry,981317743232832
+fluid:stablebaryonicmatter,fluid:stablebaryonicmatter,no eligible main-output recipe in complete exported registry,3285902000
+fluid:grade8purifiedwater,fluid:grade8purifiedwater,no eligible main-output recipe in complete exported registry,137475363200
+fluid:superheavyradox,fluid:superheavyradox,no eligible main-output recipe in complete exported registry,3287302000
+fluid:grade3purifiedwater,fluid:grade3purifiedwater,no eligible main-output recipe in complete exported registry,42735059000
+harvestcraft:seaweedItem@0,Seaweed,no eligible main-output recipe in complete exported registry,1106184239144960
+gregtech:gt.comb@157,Unknown Liquid Comb,no eligible main-output recipe in complete exported registry,1728412873664
+dreamcraft:PikoCircuit@0,Pico Circuit,no eligible main-output recipe in complete exported registry,29019015
+fluid:hot super coolant,fluid:hot super coolant,no eligible main-output recipe in complete exported registry,6435538199000
+dreamcraft:QuantumCircuit@0,Quantum Circuit,no eligible main-output recipe in complete exported registry,7735730
+gregtech:gt.comb@152,Nether Shard Comb,no eligible main-output recipe in complete exported registry,24751359872
+fluid:lava,fluid:lava,feedback edge,38673999800
+fluid:netherair,fluid:netherair,no eligible main-output recipe in complete exported registry,96685000000000
+fluid:poornetherwaste,fluid:poornetherwaste,no eligible main-output recipe in complete exported registry,3480659984000
+gregtech:gt.metaitem.01@32429,Black Body Naquadria Supersolid,no eligible main-output recipe in complete exported registry,2843744
+gregtech:gt.metaitem.01@32145,Insanely Ultimate Battery,feedback edge,1282
+gregtech:gt.blockmachines@124,Quantum Tank V,feedback edge,2008464
+fluid:molten.magnetohydrodynamicallyconstrainedstarmatter,fluid:molten.magnetohydrodynamicallyconstrainedstarmatter,feedback edge,1378394960
+dreamcraft:PlanckCircuit@0,Planck-Scale Circuit,no eligible main-output recipe in complete exported registry,52274
+fluid:rawstarmatter,fluid:rawstarmatter,no eligible main-output recipe in complete exported registry,1194410850
+fluid:temporalfluid,fluid:temporalfluid,no eligible main-output recipe in complete exported registry,441315344
+gregtech:gt.metaitem.01@32428,Superconductor Rare-Earth Composite,no eligible main-output recipe in complete exported registry,30922
+fluid:naquadah solution,fluid:naquadah solution,no eligible main-output recipe in complete exported registry,9318400000
+DraconicEvolution:chaosFragment@1,Small Chaos Fragment,feedback edge,3132
+gregtech:gt.metaitem.01@32146,Mega Ultimate Battery,feedback edge,11
+gregtech:gt.metaitem.01@32594,Extremely Ultimate Battery,feedback edge,40
+gregtech:gt.blockmachines@12730,Mega Electric Blast Furnace,no eligible main-output recipe in complete exported registry,320
+gregtech:gt.blockmachines@148,Infinite Fluid Drilling Rig,no eligible main-output recipe in complete exported registry,320
+dreamcraft:CircuitUMV@0,Any UMV Circuit,no eligible main-output recipe in complete exported registry,16
+dreamcraft:CircuitUXV@0,Any UXV Circuit,no eligible main-output recipe in complete exported registry,16
+GoodGenerator:yottaFluidTankCells@9,Fluid Cell Block T10,feedback edge,4
+fluid:soulinfusedmedium,fluid:soulinfusedmedium,no eligible main-output recipe in complete exported registry,368640
+universalsingularities:universal.circuit.singularity@0,Ultra Low Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit2.singularity@2,Mega Ultimate Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@1,Low Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit2.singularity@1,Insanely Ultimate Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit2.singularity@4,Maximum Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit2.singularity@3,Extended Mega Ultimate Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@7,ZPM Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@6,Ludicrous Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@5,Insane Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@4,Extreme Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit2.singularity@0,Extremely Ultimate Computation Singularity,no eligible main-output recipe in complete exported registry,1
+fluid:boundlesscosmicsolder,fluid:boundlesscosmicsolder,no eligible main-output recipe in complete exported registry,21475000
+universalsingularities:universal.circuit.singularity@8,Ultimate Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@3,High Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@9,Highly Ultimate Computation Singularity,no eligible main-output recipe in complete exported registry,1
+universalsingularities:universal.circuit.singularity@2,Medium Computation Singularity,no eligible main-output recipe in complete exported registry,1
+fluid:refinedglue,fluid:refinedglue,feedback edge,576

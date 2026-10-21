@@ -1,14 +1,21 @@
 // Keep the distributable usable with the Java 8 bytecode expected by 1.7.10.
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.compilerArgs += ['-proc:none']
 }
 tasks.named('compileJava', JavaCompile) { options.release = 8 }
 tasks.named('compileTestJava', JavaCompile) { options.release = 8 }
 tasks.named('compileInjectedTagsJava', JavaCompile) { options.release = 8 }
-version = '0.1.3-alpha'
+version = '0.1.4-alpha'
 
 
-ext.modVersion = '0.1.3-alpha'
+ext.modVersion = version
+
+if (providers.gradleProperty('optimizerPackTests').getOrElse('false').toBoolean()) {
+    if (providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean())
+        throw new GradleException('Run the terminal and AE integration fixtures in separate disposable servers')
+    sourceSets.main.java.srcDir('src/optimizerPackTest/java')
+}
 
 // Test-only build for installation into the isolated official GTNH server. Normal artifacts exclude it.
 if (providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean()) {
@@ -29,7 +36,7 @@ if (providers.gradleProperty('terminalMirror').getOrElse('false').toBoolean()) {
 tasks.register('verifyDistribution') {
     dependsOn(tasks.named('reobfJar'))
     inputs.file(tasks.named('reobfJar').flatMap { it.archiveFile })
-    inputs.property('allowPackTests', providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean())
+    inputs.property('allowPackTests', providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean() || providers.gradleProperty('optimizerPackTests').getOrElse('false').toBoolean())
     doLast { task ->
         def jarFile = task.inputs.files.singleFile
         def allowPackTests = task.inputs.properties.allowPackTests
@@ -51,6 +58,12 @@ tasks.register('verifyDistribution') {
             def manifest = new java.util.jar.Manifest(zip.getInputStream(zip.getEntry('META-INF/MANIFEST.MF')))
             if (manifest.mainAttributes.getValue('FMLCorePlugin') != 'dev.structureterminal.coremod.TerminalLoadingPlugin')
                 throw new GradleException('Missing terminal hint-collection coremod manifest')
+            for (String required : ['dev/aeoptimizer/OrderOptimizer.class', 'dev/aeoptimizer/LateMixins.class', 'mixins.aeorderoptimizer.late.json', 'assets/aeorderoptimizer/textures/blocks/core.png', 'assets/aeorderoptimizer/lang/zh_CN.lang', 'assets/aeorderoptimizer/lang/en_US.lang', 'NOTICE-AE-OPTIMIZER']) {
+                if (!zip.getEntry(required)) throw new GradleException('Missing bundled AE component: ' + required)
+            }
+            def optimizerTile = zip.getEntry('dev/aeoptimizer/network/TileOptimizer.class')
+            if (!new String(zip.getInputStream(optimizerTile).bytes, java.nio.charset.StandardCharsets.ISO_8859_1).contains('func_74757_a'))
+                throw new GradleException('AE module is not remapped for runtime')
             logger.lifecycle("Verified ${classes} Java 8 compatible classes and coremod manifest; no game launched.")
         }
     }

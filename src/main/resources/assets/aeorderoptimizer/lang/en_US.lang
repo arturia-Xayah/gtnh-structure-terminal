@@ -1,0 +1,7 @@
+tile.aeorderoptimizer.core.name=ME Order Optimizer
+aeo.title=ME Order Optimizer
+aeo.detail=Detailed route reports
+aeo.on=ON
+aeo.off=OFF
+aeo.ready=One optimizer per ME grid
+aeo.conflict=Duplicate optimizer disconnected

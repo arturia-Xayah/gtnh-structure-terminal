@@ -66,3 +66,23 @@ This starts an isolated dedicated test server with `nogui`, uses real server tic
 The administrative commands `/structureterminal audit` and `/structureterminal inspect x y z` export registry and controller capabilities. Capability detection is separate from a successful structure operation.
 
 The native interface bridge is in `bridge/NativeBridge.java` and `bridge/StructureScanner.java`; the UI is in `client/`, and optional AE supply integration is in `server/AeSupply.java`.
+
+## 合并版后台验证 / Merged integration suites
+
+默认构建包含结构终端与 AE 模块，不包含测试入口。两组整包夹具必须分别构建、在各自全新的独立目录运行：
+
+```sh
+./build.sh build -PoptimizerPackTests=true
+python3 tools/run_merged_backend.py --suite ae --pack /path/to/server --java /path/to/java25/bin/java \
+  --fixture build/libs/structureterminal-0.1.4-alpha.jar --run-dir /path/to/new-ae-test
+
+./build.sh build -PterminalPackTests=true
+python3 tools/run_merged_backend.py --suite structures --pack /path/to/server --java /path/to/java25/bin/java \
+  --fixture build/libs/structureterminal-0.1.4-alpha.jar --run-dir /path/to/new-structure-test
+
+./build.sh build
+```
+
+夹具没有客户端入口。默认复测 ID 141、1000、15750，HV 能源仓覆盖141，并开启明确仓室选择；可用 `--machine-ids` 改变控制器范围。夹具只供一次性测试世界，不能当作发布 JAR。AE 模块源码在 `src/main/java/dev/aeoptimizer`，API 批量接收协议在 `api/IBatchMedium.java`，详细使用见 [AE 模块](AE_ORDER_OPTIMIZER.md)。
+
+The normal artifact bundles both features and excludes test entry points. Build and run the AE and structure fixtures separately in fresh dedicated-server directories with the commands above, then rebuild without test flags for release. No client is launched. Default structure samples are controller IDs 141, 1000 and 15750; full historical coverage is a separate record. The native unit dispatcher remains the fallback for media that do not support the batch protocol.

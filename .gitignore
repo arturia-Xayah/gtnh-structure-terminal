@@ -42,3 +42,7 @@ layout.json
 # Superseded local alpha distributions
 /dist/*-0.1.0-alpha*.jar
 /dist/*-0.1.1-alpha*.jar
+
+# Python verification helpers
+__pycache__/
+*.pyc

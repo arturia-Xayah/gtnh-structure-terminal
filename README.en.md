@@ -8,7 +8,7 @@
 
 Bring the GTO structure terminal workflow to GTNH.<br>Preview multiblocks, configure parts, and build, replace or dismantle structures from one interface.
 
-[**Download**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2) · [Quick start](#quick-start) · [Compatibility](#compatibility) · [Build & develop](docs/BUILDING.md#english)
+[**Download**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.4-alpha-GTNH-2.9.0-RC-2) · [Quick start](#quick-start) · [Compatibility](#compatibility) · [Build & develop](docs/BUILDING.md#english)
 
 </div>
 
@@ -22,6 +22,7 @@ Bring the GTO structure terminal workflow to GTNH.<br>Preview multiblocks, confi
 | **Part configuration** | Adjust exposed size, mode, coil and glass channels; choose casings by group and hatches by position |
 | **Survival building** | Supply materials from your inventory and use the machine's native placement rules; keep matching blocks, stop when materials run out and resume after restocking |
 | **Replacement & recovery** | Replace ordinary structural materials and fill gaps, or dismantle and recover them; matching blocks are not charged twice |
+| **AE order component** | Opt into route checks, detailed choice reports and unit-pattern bulk dispatch on a network; retain native behavior without it |
 | **AE inventory** | Optionally extract existing materials through a linked wireless terminal, without requesting autocrafting; live network extraction remains to be validated |
 
 ## Installation
@@ -31,11 +32,12 @@ Bring the GTO structure terminal workflow to GTNH.<br>Preview multiblocks, confi
 | GTNH | **2.9.0-RC-2** |
 | Minecraft / Forge | 1.7.10 / 10.13.4.1614 |
 | StructureLib / GTNHLib | 1.4.45 / 0.11.52 |
-| Structure Terminal | 0.1.3-alpha |
+| AE2 / UniMixins | rv3-beta-1080-GTNH / bundled with GTNH |
+| Structure Terminal | 0.1.4-alpha |
 
-1. Download `structureterminal-0.1.3-alpha-GTNH-2.9.0-RC-2.jar` from [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2).
+1. Download `structureterminal-0.1.4-alpha-GTNH-2.9.0-RC-2.jar` from [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.4-alpha-GTNH-2.9.0-RC-2).
 2. Place it in the instance's `mods` directory on both the client and server. For single-player, install it on the client.
-3. Remove older versions of this mod before starting the instance.
+3. Remove the old Structure Terminal and any standalone `aeorderoptimizer` JAR before starting. Both features are bundled, with their registration IDs preserved.
 
 Players only need the JAR. Source code and build scripts are available in this repository.
 
@@ -60,6 +62,17 @@ Players only need the JAR. Source code and build scripts are available in this r
 | Click a block | Choose the part at that position |
 | `F` button | Fit the structure to the view |
 | Layer selector | Switch between the full structure and a single layer |
+
+## AE order optimization (new)
+
+The merged JAR includes the **ME Order Optimizer** (`aeorderoptimizer:core`), a separate block connected to an AE grid. Right-click it for the detailed-report toggle; it has its own UI alongside the structure-preview UI.
+
+- One active component per grid, 1 AE/t, no channel. Grid merges disconnect excess components and show the conflict.
+- The submitting grid controls opt-in. Without an active component, native standard/Lite choice and dispatch remain in use.
+- Native Lite route selection is retained. Cycles and multiple outputs in the selected graph stop planning and print the problem; detail mode reports alternatives and selection.
+- Native ME interfaces support bulk insertion within stock and receiver limits. When 4096-craft batches are allowed, 10,000 unit-pattern crafts dispatch as 4096 + 4096 + 1808, costing three operations. Workbench recipes and unsupported media retain unit dispatch.
+
+[Usage, recipe and limits](docs/AE_ORDER_OPTIMIZER.md) · [Stargate timing comparison](docs/AE_BENCHMARK.md). A simplified Stargate benchmark measured 9.36 ms for native Lite and 10.00 ms for this module; it does not establish a planning speedup over Lite. Validation currently expands the chosen graph before applying inventory, so it may inspect upstream recipes for already-stocked ingredients.
 
 ## Compatibility
 

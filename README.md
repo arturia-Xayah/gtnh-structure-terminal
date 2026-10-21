@@ -8,7 +8,7 @@
 
 把 GTO 结构终端的交互方式带到 GTNH。<br>在一个界面中预览多方块、配置材料，并完成生存搭建、替换与拆除。
 
-[**下载 Mod**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2) · [快速上手](#快速上手) · [兼容性](#兼容性) · [构建与开发](docs/BUILDING.md)
+[**下载 Mod**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.4-alpha-GTNH-2.9.0-RC-2) · [快速上手](#快速上手) · [兼容性](#兼容性) · [构建与开发](docs/BUILDING.md)
 
 </div>
 
@@ -22,6 +22,7 @@
 | **部件配置** | 设置机器公开的尺寸、模式、线圈、玻璃等子信道；按组选择外壳，按位置选择仓室 |
 | **生存搭建** | 从背包供料，调用原机搭建规则；保留符合要求的已有方块，缺料时停止，补料后可继续 |
 | **替换与回收** | 替换普通结构材料并补建，或拆除并回收；已符合目标的方块不重复扣料 |
+| **AE 下单元件** | 接入网络后启用路径校验与详细选路报告，支持单份样板批量派发；未接入时保留原版逻辑 |
 | **AE 库存** | 可选读取已绑定无线终端对应网络中的现有材料，不发起自动合成；实际网络取料尚待验证 |
 
 ## 安装
@@ -31,11 +32,12 @@
 | GTNH | **2.9.0-RC-2** |
 | Minecraft / Forge | 1.7.10 / 10.13.4.1614 |
 | StructureLib / GTNHLib | 1.4.45 / 0.11.52 |
-| Structure Terminal | 0.1.3-alpha |
+| AE2 / UniMixins | rv3-beta-1080-GTNH / 整合包自带 |
+| Structure Terminal | 0.1.4-alpha |
 
-1. 从 [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.3-alpha-GTNH-2.9.0-RC-2) 下载 `structureterminal-0.1.3-alpha-GTNH-2.9.0-RC-2.jar`。
+1. 从 [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.4-alpha-GTNH-2.9.0-RC-2) 下载 `structureterminal-0.1.4-alpha-GTNH-2.9.0-RC-2.jar`。
 2. 放入 GTNH 实例的 `mods` 目录，客户端与服务端均需安装；单人游戏只需安装到客户端。
-3. 移除同一 Mod 的旧版本，再启动实例。
+3. 移除旧版结构终端及独立 `aeorderoptimizer` JAR，再启动实例。合并包已包含两个功能，保留原有注册 ID。
 
 普通玩家只需下载 JAR。源码与构建脚本保留在本仓库。
 
@@ -60,6 +62,17 @@
 | 点击方块 | 选择该位置的部件 |
 | `F` 按钮 | 适配视图 |
 | 显示层 | 切换整机或单层预览 |
+
+## AE 下单优化（新增）
+
+合并版内置 **ME 下单优化元件**（`aeorderoptimizer:core`）。它是接入 AE 网络的独立方块，右键打开详细模式设置；与结构终端预览界面分别使用。
+
+- 每个网络最多一个有效元件，耗电 1 AE/t，不占频道；合网时额外元件断开并显示冲突。
+- 以下单网络是否有有效元件为准；没有元件时保持原版普通 / Lite 选择与派发。
+- 保留 Lite 原本选路；当前选定图遇到循环或多输出就中止并打印问题。详细模式报告候选及最终选择。
+- 原生 ME 接口可按实际库存和接收能力批量投料；允许 4096 份批次时，10,000 份可分为 4096＋4096＋1808，计三次派发操作。工作台和未适配接收器保留逐份逻辑。
+
+[使用方法、配方与限制](docs/AE_ORDER_OPTIMIZER.md) · [星门计算速度对比](docs/AE_BENCHMARK.md)。简化星门场景实测 Lite 9.36 ms、本模块 10.00 ms；未证明计算快于 Lite。路径检查目前先展开候选图再扣库存，可能检查已备足材料的上游配方。
 
 ## 兼容性
 

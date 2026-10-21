@@ -1,0 +1,5 @@
+[13:06:47] [Server thread/INFO]: Done (0.998s)! For help, type "help" or "?"
+[13:06:51] [Server thread/INFO] [STDOUT]: [dev.structureterminal.packtest.PackValidation:initialize:269]: PACK_VALIDATION_START machines=3
+[13:06:54] [Server thread/INFO] [STDOUT]: [dev.structureterminal.packtest.PackValidation:completeRow:762]: PACK_MACHINE 141 1/3 PASS NATIVE_COMPLETE
+[13:06:58] [Server thread/INFO] [STDOUT]: [dev.structureterminal.packtest.PackValidation:completeRow:762]: PACK_MACHINE 1000 2/3 PASS NATIVE_COMPLETE
+[13:07:02] [Server thread/INFO] [STDOUT]: [dev.structureterminal.packtest.PackValidation:completeRow:762]: PACK_MACHINE 15750 3/3 PASS NATIVE_COMPLETE

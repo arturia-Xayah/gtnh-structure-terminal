@@ -1,5 +1,8 @@
 dependencies {
     implementation("com.github.GTNewHorizons:StructureLib:1.4.45:dev")
     compileOnly("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-1080-GTNH:dev") { transitive = false }
+    compileOnly("io.github.legacymoddingmc:unimixins:0.3.1:dev") { transitive = false }
+    compileOnly("it.unimi.dsi:fastutil:8.5.15")
+    compileOnly("org.jetbrains:annotations:24.1.0")
     testImplementation("junit:junit:4.13.2")
 }

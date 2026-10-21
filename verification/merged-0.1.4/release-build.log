@@ -1,0 +1,900 @@
+Initialized native services in: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/native
+Initialized jansi services in: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/native
+The current JVM process isn't compatible with build requirement. The maximum heap size is insufficient.
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Starting process 'command '/usr/libexec/java_home''. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Java Toolchain auto-detection failed to find local MacOS system JVMs
+Received JVM installation metadata from '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home': {JAVA_HOME=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home, JAVA_VERSION=25.0.4.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.4.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.4.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm9450026781192414819probe Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home': {JAVA_HOME=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home, JAVA_VERSION=17.0.20.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.20.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.20.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm6642878283759718468probe Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home': {JAVA_HOME=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre, JAVA_VERSION=1.8.0_504, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=1.8.0_504-b01, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.504-b01, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'Gradle build daemon'. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/daemon/9.7.1 Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --enable-native-access=ALL-UNNAMED -XX:MaxMetaspaceSize=384m -XX:+HeapDumpOnOutOfMemoryError -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -cp /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle/gradle-9.7.1/lib/gradle-daemon-main-9.7.1.jar -javaagent:/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle/gradle-9.7.1/lib/agents/gradle-instrumentation-agent-9.7.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.7.1
+Successfully started process 'Gradle build daemon'
+An attempt to start the daemon took 0.39 secs.
+The client will now receive all logging from the daemon (pid: 87122). The daemon log file: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/daemon/9.7.1/daemon-87122.out.log
+Daemon will be stopped at the end of the build
+Using 10 worker leases.
+Operational build model parameters: {cachingModelBuilding=false, configurationCache=false, configurationCacheDisabledReason=null, configurationCacheParallelLoad=false, configurationCacheParallelStore=false, configureOnDemand=false, invalidateCoupledProjects=false, isolatedProjects=false, isolatedProjectsDiagnostics=false, isolatedProjectsDangerouslyIgnoreProblems=false, modelAsProjectDependency=false, modelBuilding=false, parallelModelBuilding=false, parallelProjectConfiguration=false, parallelProjectExecution=true, vintage=true}
+Received JVM installation metadata from '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home': {JAVA_HOME=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home, JAVA_VERSION=25.0.4.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=25.0.4.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.0.4.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Watching the file system is configured to be enabled if available
+Now considering [/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal] as hierarchies to watch
+File system watching is active
+Starting Build
+Resolved plugin [id: 'com.gtnewhorizons.gtnhsettingsconvention', version: '2.0.33']
+Adding Spotless 8.10.2 to classpath due to Java 25
+Settings evaluated using settings file '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/settings.gradle.kts'.
+Projects loaded. Root project using build file '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build.gradle.kts'.
+Included projects: [root project 'structure_terminal']
+
+> Configure project :
+Evaluating root project 'structure_terminal' using build file '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build.gradle.kts'.
+Resolved plugin [id: 'com.gtnewhorizons.gtnhconvention']
+file or directory '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/src/api/resources', not found
+You might want to check out './gradlew :faq' if your build fails.
+Cached resource https://nexus.gtnewhorizons.com/repository/public/com/gtnewhorizons/gtnhgradle/maven-metadata.xml is up-to-date (lastModified: Thu Oct 15 06:15:02 CST 2026).
+Build script update from 2.0.33 to 2.0.34 available! Run ./gradlew updateBuildScript
+All projects evaluated.
+Task name matched 'spotlessApply'
+Task name matched 'build'
+Selected primary task 'spotlessApply' from project :
+Recommend replacing '4.19.0' with '4.19' for Eclipse JDT
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+Selected primary task 'build' from project :
+Starting process 'command '/usr/libexec/java_home''. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/daemon/9.7.1 Command: /usr/libexec/java_home -V
+Successfully started process 'command '/usr/libexec/java_home''
+Java Toolchain auto-detection failed to find local MacOS system JVMs
+Starting process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm4436393711117373475probe Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home': {JAVA_HOME=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk8/zulu8.96.0.205-ca-jdk8.0.504-macosx_aarch64/Contents/Home/jre, JAVA_VERSION=1.8.0_504, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=1.8.0_504-b01, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=25.504-b01, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Starting process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/tmp-jvm18120912030554119402probe Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java -Xmx32m -Xms32m -cp . JavaProbe
+Successfully started process 'command '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home/bin/java''
+Received JVM installation metadata from '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home': {JAVA_HOME=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/.tools/jdk17/zulu17.68.203-ca-jdk17.0.20.1-macosx_aarch64/Contents/Home, JAVA_VERSION=17.0.20.1, JAVA_VENDOR=Azul Systems, Inc., RUNTIME_NAME=OpenJDK Runtime Environment, RUNTIME_VERSION=17.0.20.1+1-LTS, VM_NAME=OpenJDK 64-Bit Server VM, VM_VERSION=17.0.20.1+1-LTS, VM_VENDOR=Azul Systems, Inc., OS_ARCH=aarch64}
+Tasks to be executed: [task ':spotlessJava', task ':spotlessJavaApply', task ':spotlessKotlin', task ':spotlessKotlinApply', task ':spotlessMisc', task ':spotlessMiscApply', task ':spotlessScala', task ':spotlessScalaApply', task ':spotlessApply', task ':compileInjectedInterfacesJava', task ':extractDependencyATs', task ':generateForgeSrgMappings', task ':downloadVanillaJars', task ':mergeVanillaSidedJars', task ':deobfuscateMergedJarToSrg', task ':downloadFernflower', task ':decompileSrgJar', task ':cleanupDecompSrgJar', task ':patchDecompiledJar', task ':applyJST', task ':remapDecompiledJar', task ':decompressDecompiledSources', task ':processInjectedInterfacesResources', task ':injectedInterfacesClasses', task ':compilePatchedMcJava', task ':processPatchedMcResources', task ':patchedMcClasses', task ':compileApiJava', task ':processApiResources', task ':apiClasses', task ':injectTags', task ':compileInjectedTagsJava', task ':extractNatives2', task ':createMcLauncherFiles', task ':compileMcLauncherJava', task ':processInjectedTagsResources', task ':injectedTagsClasses', task ':processMcLauncherResources', task ':mcLauncherClasses', task ':compileJava', task ':processResources', task ':classes', task ':jar', task ':packageMcLauncher', task ':packagePatchedMc', task ':reobfJar', task ':sourcesJar', task ':assemble', task ':checkstyleApi', task ':compileIdeVirtualMainJava', task ':processIdeVirtualMainResources', task ':spotlessJavaCheck', task ':spotlessKotlinCheck', task ':spotlessMiscCheck', task ':spotlessScalaCheck', task ':spotlessCheck', task ':ideVirtualMainClasses', task ':checkstyleIdeVirtualMain', task ':checkstyleInjectedInterfaces', task ':checkstyleInjectedTags', task ':checkstyleMain', task ':checkstyleMcLauncher', task ':checkstylePatchedMc', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':checkstyleTest', task ':test', task ':verifyDistribution', task ':check', task ':build']
+Tasks that were excluded: []
+Resolve mutations for :spotlessJava (Thread[#100,Execution worker Thread 4,5,main]) started.
+destroyer locations for task group 0 (Thread[#97,Execution worker,5,main]) started.
+:spotlessJava (Thread[#100,Execution worker Thread 4,5,main]) started.
+
+> Task :spotlessJava UP-TO-DATE
+Caching disabled for task ':spotlessJava' because:
+  Build cache is disabled
+Skipping task ':spotlessJava' as it is up-to-date.
+Resolve mutations for :spotlessJavaApply (Thread[#100,Execution worker Thread 4,5,main]) started.
+:spotlessJavaApply (Thread[#100,Execution worker Thread 4,5,main]) started.
+
+> Task :spotlessJavaApply UP-TO-DATE
+Caching disabled for task ':spotlessJavaApply' because:
+  Build cache is disabled
+Task ':spotlessJavaApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessKotlin (Thread[#100,Execution worker Thread 4,5,main]) started.
+:spotlessKotlin (Thread[#100,Execution worker Thread 4,5,main]) started.
+
+> Task :spotlessKotlin UP-TO-DATE
+Caching disabled for task ':spotlessKotlin' because:
+  Build cache is disabled
+Skipping task ':spotlessKotlin' as it is up-to-date.
+Resolve mutations for :spotlessKotlinApply (Thread[#100,Execution worker Thread 4,5,main]) started.
+:spotlessKotlinApply (Thread[#100,Execution worker Thread 4,5,main]) started.
+
+> Task :spotlessKotlinApply UP-TO-DATE
+Caching disabled for task ':spotlessKotlinApply' because:
+  Build cache is disabled
+Task ':spotlessKotlinApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessMisc (Thread[#100,Execution worker Thread 4,5,main]) started.
+:spotlessMisc (Thread[#100,Execution worker Thread 4,5,main]) started.
+
+> Task :spotlessMisc UP-TO-DATE
+Caching disabled for task ':spotlessMisc' because:
+  Build cache is disabled
+Skipping task ':spotlessMisc' as it is up-to-date.
+Resolve mutations for :spotlessMiscApply (Thread[#100,Execution worker Thread 4,5,main]) started.
+:spotlessMiscApply (Thread[#100,Execution worker Thread 4,5,main]) started.
+
+> Task :spotlessMiscApply UP-TO-DATE
+Caching disabled for task ':spotlessMiscApply' because:
+  Build cache is disabled
+Task ':spotlessMiscApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessScala (Thread[#97,Execution worker,5,main]) started.
+:spotlessScala (Thread[#97,Execution worker,5,main]) started.
+
+> Task :spotlessScala UP-TO-DATE
+Caching disabled for task ':spotlessScala' because:
+  Build cache is disabled
+Skipping task ':spotlessScala' as it is up-to-date.
+Resolve mutations for :spotlessScalaApply (Thread[#97,Execution worker,5,main]) started.
+:spotlessScalaApply (Thread[#97,Execution worker,5,main]) started.
+
+> Task :spotlessScalaApply UP-TO-DATE
+Caching disabled for task ':spotlessScalaApply' because:
+  Build cache is disabled
+Task ':spotlessScalaApply' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessApply (Thread[#97,Execution worker,5,main]) started.
+:spotlessApply (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :spotlessApply UP-TO-DATE
+Skipping task ':spotlessApply' as it has no actions.
+Resolve mutations for :compileInjectedInterfacesJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compileInjectedInterfacesJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compileInjectedInterfacesJava NO-SOURCE
+Skipping task ':compileInjectedInterfacesJava' as it has no source files and no previous output files.
+Resolve mutations for :extractDependencyATs (Thread[#103,Execution worker Thread 7,5,main]) started.
+:extractDependencyATs (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :extractDependencyATs SKIPPED
+Skipping task ':extractDependencyATs' as task onlyIf 'useDependencyAccessTransformers set in minecraft{}' is false.
+Resolve mutations for :generateForgeSrgMappings (Thread[#103,Execution worker Thread 7,5,main]) started.
+:generateForgeSrgMappings (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :generateForgeSrgMappings SKIPPED
+Skipping task ':generateForgeSrgMappings' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :downloadVanillaJars (Thread[#103,Execution worker Thread 7,5,main]) started.
+:downloadVanillaJars (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :downloadVanillaJars SKIPPED
+Skipping task ':downloadVanillaJars' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :mergeVanillaSidedJars (Thread[#103,Execution worker Thread 7,5,main]) started.
+:mergeVanillaSidedJars (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :mergeVanillaSidedJars SKIPPED
+Skipping task ':mergeVanillaSidedJars' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :deobfuscateMergedJarToSrg (Thread[#103,Execution worker Thread 7,5,main]) started.
+:deobfuscateMergedJarToSrg (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :deobfuscateMergedJarToSrg SKIPPED
+Skipping task ':deobfuscateMergedJarToSrg' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :downloadFernflower (Thread[#103,Execution worker Thread 7,5,main]) started.
+:downloadFernflower (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :downloadFernflower SKIPPED
+Skipping task ':downloadFernflower' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :decompileSrgJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:decompileSrgJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :decompileSrgJar SKIPPED
+Skipping task ':decompileSrgJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :cleanupDecompSrgJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:cleanupDecompSrgJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :cleanupDecompSrgJar SKIPPED
+Skipping task ':cleanupDecompSrgJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :patchDecompiledJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:patchDecompiledJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :patchDecompiledJar SKIPPED
+Skipping task ':patchDecompiledJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :applyJST (Thread[#103,Execution worker Thread 7,5,main]) started.
+:applyJST (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :applyJST SKIPPED
+Skipping task ':applyJST' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :remapDecompiledJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:remapDecompiledJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :remapDecompiledJar SKIPPED
+Skipping task ':remapDecompiledJar' as task onlyIf 'Task satisfies onlyIf spec' is false.
+Resolve mutations for :decompressDecompiledSources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:decompressDecompiledSources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :decompressDecompiledSources UP-TO-DATE
+Caching disabled for task ':decompressDecompiledSources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':decompressDecompiledSources' as it is up-to-date.
+Resolve mutations for :processInjectedInterfacesResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processInjectedInterfacesResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processInjectedInterfacesResources NO-SOURCE
+Skipping task ':processInjectedInterfacesResources' as it has no source files and no previous output files.
+Resolve mutations for :injectedInterfacesClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+:injectedInterfacesClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :injectedInterfacesClasses UP-TO-DATE
+Skipping task ':injectedInterfacesClasses' as it has no actions.
+Resolve mutations for :compilePatchedMcJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compilePatchedMcJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compilePatchedMcJava UP-TO-DATE
+Caching disabled for task ':compilePatchedMcJava' because:
+  Build cache is disabled
+Skipping task ':compilePatchedMcJava' as it is up-to-date.
+Resolve mutations for :processPatchedMcResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processPatchedMcResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processPatchedMcResources UP-TO-DATE
+Caching disabled for task ':processPatchedMcResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processPatchedMcResources' as it is up-to-date.
+Resolve mutations for :patchedMcClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+:patchedMcClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :patchedMcClasses UP-TO-DATE
+Skipping task ':patchedMcClasses' as it has no actions.
+Resolve mutations for :compileApiJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compileApiJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compileApiJava NO-SOURCE
+Skipping task ':compileApiJava' as it has no source files and no previous output files.
+Resolve mutations for :processApiResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processApiResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processApiResources NO-SOURCE
+Skipping task ':processApiResources' as it has no source files and no previous output files.
+Resolve mutations for :apiClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+:apiClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :apiClasses UP-TO-DATE
+Skipping task ':apiClasses' as it has no actions.
+Resolve mutations for :injectTags (Thread[#103,Execution worker Thread 7,5,main]) started.
+:injectTags (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :injectTags UP-TO-DATE
+Caching disabled for task ':injectTags' because:
+  Build cache is disabled
+Skipping task ':injectTags' as it is up-to-date.
+Resolve mutations for :compileInjectedTagsJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compileInjectedTagsJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compileInjectedTagsJava UP-TO-DATE
+Caching disabled for task ':compileInjectedTagsJava' because:
+  Build cache is disabled
+Skipping task ':compileInjectedTagsJava' as it is up-to-date.
+Resolve mutations for :extractNatives2 (Thread[#103,Execution worker Thread 7,5,main]) started.
+:extractNatives2 (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :extractNatives2 UP-TO-DATE
+Caching disabled for task ':extractNatives2' because:
+  Build cache is disabled
+  Caching has not been enabled for the task
+Skipping task ':extractNatives2' as it is up-to-date.
+Resolve mutations for :createMcLauncherFiles (Thread[#103,Execution worker Thread 7,5,main]) started.
+:createMcLauncherFiles (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :createMcLauncherFiles UP-TO-DATE
+Caching disabled for task ':createMcLauncherFiles' because:
+  Build cache is disabled
+  Caching has not been enabled for the task
+Skipping task ':createMcLauncherFiles' as it is up-to-date.
+Resolve mutations for :compileMcLauncherJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compileMcLauncherJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compileMcLauncherJava UP-TO-DATE
+Caching disabled for task ':compileMcLauncherJava' because:
+  Build cache is disabled
+Skipping task ':compileMcLauncherJava' as it is up-to-date.
+Resolve mutations for :processInjectedTagsResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processInjectedTagsResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processInjectedTagsResources NO-SOURCE
+Skipping task ':processInjectedTagsResources' as it has no source files and no previous output files.
+Resolve mutations for :injectedTagsClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+:injectedTagsClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :injectedTagsClasses UP-TO-DATE
+Skipping task ':injectedTagsClasses' as it has no actions.
+Resolve mutations for :processMcLauncherResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processMcLauncherResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processMcLauncherResources NO-SOURCE
+Skipping task ':processMcLauncherResources' as it has no source files and no previous output files.
+Resolve mutations for :mcLauncherClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+:mcLauncherClasses (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :mcLauncherClasses UP-TO-DATE
+Skipping task ':mcLauncherClasses' as it has no actions.
+Resolve mutations for :compileJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compileJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compileJava UP-TO-DATE
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Task ':compileJava' is not up-to-date because:
+  Input property 'stableSources' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/src/packTest/java/dev/structureterminal/packtest/PackValidation.java has been removed.
+Compilation mode: in-process compilation
+Created classpath snapshot for incremental compilation in 0.104 secs.
+None of the classes needs to be compiled! Analysis took 0.135 secs.
+Resolve mutations for :processResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[#103,Execution worker Thread 7,5,main]) started.
+:classes (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :jar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:jar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :jar
+Caching disabled for task ':jar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':jar' is not up-to-date because:
+  Output property 'archiveFile' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/libs/structureterminal-0.1.4-alpha-pack-tests.jar has been removed.
+file or directory '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/resources/injectedTags', not found
+Resolve mutations for :packageMcLauncher (Thread[#103,Execution worker Thread 7,5,main]) started.
+:packageMcLauncher (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :packageMcLauncher UP-TO-DATE
+Caching disabled for task ':packageMcLauncher' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':packageMcLauncher' as it is up-to-date.
+Resolve mutations for :packagePatchedMc (Thread[#103,Execution worker Thread 7,5,main]) started.
+:packagePatchedMc (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :packagePatchedMc UP-TO-DATE
+Caching disabled for task ':packagePatchedMc' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':packagePatchedMc' as it is up-to-date.
+Resolve mutations for :reobfJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:reobfJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :reobfJar
+Caching disabled for task ':reobfJar' because:
+  Build cache is disabled
+Task ':reobfJar' is not up-to-date because:
+  Input property 'inputJar' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/libs/structureterminal-0.1.4-alpha-dev.jar has changed.
+Resolve mutations for :sourcesJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+:sourcesJar (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :sourcesJar
+Caching disabled for task ':sourcesJar' because:
+  Build cache is disabled
+  Not worth caching
+Task ':sourcesJar' is not up-to-date because:
+  Input property 'rootSpec$1' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/src/packTest/java/dev has been removed.
+  Input property 'rootSpec$1' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/src/packTest/java/dev/structureterminal has been removed.
+  Input property 'rootSpec$1' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/src/packTest/java/dev/structureterminal/packtest has been removed.
+  and more...
+Resolve mutations for :assemble (Thread[#103,Execution worker Thread 7,5,main]) started.
+:assemble (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :assemble
+Skipping task ':assemble' as it has no actions.
+Resolve mutations for :checkstyleApi (Thread[#103,Execution worker Thread 7,5,main]) started.
+:checkstyleApi (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :checkstyleApi NO-SOURCE
+Skipping task ':checkstyleApi' as it has no source files and no previous output files.
+Resolve mutations for :compileIdeVirtualMainJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+:compileIdeVirtualMainJava (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :compileIdeVirtualMainJava SKIPPED
+Skipping task ':compileIdeVirtualMainJava' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :processIdeVirtualMainResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+:processIdeVirtualMainResources (Thread[#103,Execution worker Thread 7,5,main]) started.
+
+> Task :processIdeVirtualMainResources SKIPPED
+Skipping task ':processIdeVirtualMainResources' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :spotlessJavaCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+:spotlessJavaCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :spotlessJavaCheck UP-TO-DATE
+Caching disabled for task ':spotlessJavaCheck' because:
+  Build cache is disabled
+Task ':spotlessJavaCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessKotlinCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+:spotlessKotlinCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :spotlessKotlinCheck UP-TO-DATE
+Caching disabled for task ':spotlessKotlinCheck' because:
+  Build cache is disabled
+Task ':spotlessKotlinCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessMiscCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+:spotlessMiscCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :spotlessMiscCheck UP-TO-DATE
+Caching disabled for task ':spotlessMiscCheck' because:
+  Build cache is disabled
+Task ':spotlessMiscCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessScalaCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+:spotlessScalaCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :spotlessScalaCheck UP-TO-DATE
+Caching disabled for task ':spotlessScalaCheck' because:
+  Build cache is disabled
+Task ':spotlessScalaCheck' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Resolve mutations for :spotlessCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+:spotlessCheck (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :spotlessCheck UP-TO-DATE
+Skipping task ':spotlessCheck' as it has no actions.
+Resolve mutations for :ideVirtualMainClasses (Thread[#104,Execution worker Thread 8,5,main]) started.
+:ideVirtualMainClasses (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :ideVirtualMainClasses SKIPPED
+Skipping task ':ideVirtualMainClasses' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstyleIdeVirtualMain (Thread[#104,Execution worker Thread 8,5,main]) started.
+:checkstyleIdeVirtualMain (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :checkstyleIdeVirtualMain SKIPPED
+Skipping task ':checkstyleIdeVirtualMain' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstyleInjectedInterfaces (Thread[#104,Execution worker Thread 8,5,main]) started.
+:checkstyleInjectedInterfaces (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :checkstyleInjectedInterfaces NO-SOURCE
+Skipping task ':checkstyleInjectedInterfaces' as it has no source files and no previous output files.
+Resolve mutations for :checkstyleInjectedTags (Thread[#104,Execution worker Thread 8,5,main]) started.
+:checkstyleInjectedTags (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :checkstyleInjectedTags SKIPPED
+Skipping task ':checkstyleInjectedTags' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstyleMain (Thread[#104,Execution worker Thread 8,5,main]) started.
+:checkstyleMain (Thread[#104,Execution worker Thread 8,5,main]) started.
+Resolve mutations for :checkstyleMcLauncher (Thread[#99,Execution worker Thread 3,5,main]) started.
+:checkstyleMcLauncher (Thread[#99,Execution worker Thread 3,5,main]) started.
+
+> Task :checkstyleMcLauncher SKIPPED
+Skipping task ':checkstyleMcLauncher' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :checkstylePatchedMc (Thread[#99,Execution worker Thread 3,5,main]) started.
+:checkstylePatchedMc (Thread[#99,Execution worker Thread 3,5,main]) started.
+
+> Task :checkstylePatchedMc SKIPPED
+Skipping task ':checkstylePatchedMc' as task onlyIf 'Task is enabled' is false.
+Resolve mutations for :compileTestJava (Thread[#99,Execution worker Thread 3,5,main]) started.
+:compileTestJava (Thread[#99,Execution worker Thread 3,5,main]) started.
+
+> Task :compileTestJava UP-TO-DATE
+Caching disabled for task ':compileTestJava' because:
+  Build cache is disabled
+Task ':compileTestJava' is not up-to-date because:
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation.class has been removed.
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/server/AeSupply.class has been added.
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/server/AeSupply.class has been removed.
+  and more...
+Compilation mode: in-process compilation
+Created classpath snapshot for incremental compilation in 0.014 secs.
+None of the classes needs to be compiled! Analysis took 0.023 secs.
+Resolve mutations for :processTestResources (Thread[#99,Execution worker Thread 3,5,main]) started.
+:processTestResources (Thread[#99,Execution worker Thread 3,5,main]) started.
+
+> Task :processTestResources NO-SOURCE
+Skipping task ':processTestResources' as it has no source files and no previous output files.
+Resolve mutations for :testClasses (Thread[#99,Execution worker Thread 3,5,main]) started.
+:testClasses (Thread[#99,Execution worker Thread 3,5,main]) started.
+
+> Task :testClasses UP-TO-DATE
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :checkstyleTest (Thread[#99,Execution worker Thread 3,5,main]) started.
+:checkstyleTest (Thread[#99,Execution worker Thread 3,5,main]) started.
+Resolve mutations for :test (Thread[#101,Execution worker Thread 5,5,main]) started.
+:test (Thread[#101,Execution worker Thread 5,5,main]) started.
+This JVM does not support getting OS memory, so no OS memory status updates will be broadcast
+Gradle Test Executor 3 started executing tests.
+This JVM does not support getting OS memory, so no OS memory status updates will be broadcast
+Gradle Test Executor 3 finished executing tests.
+
+> Task :checkstyleTest
+Caching disabled for task ':checkstyleTest' because:
+  Build cache is disabled
+Task ':checkstyleTest' is not up-to-date because:
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation$1.class has been removed.
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/server/AeSupply.class has been added.
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation$2.class has been removed.
+  and more...
+Starting process 'Gradle Worker Daemon 2'. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/workers Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java -Dcheckstyle.enableExternalDtdLoad=false --add-opens java.prefs/java.util.prefs=ALL-UNNAMED @/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/gradle-worker-classpath5203379355822080058txt --enable-native-access=ALL-UNNAMED -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Worker Daemon 2'
+Successfully started process 'Gradle Worker Daemon 2'
+Started Gradle worker daemon (0.195 secs) with fork options DaemonForkOptions{executable=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java, minHeapSize=null, maxHeapSize=null, jvmArgs=[--add-opens, java.prefs/java.util.prefs=ALL-UNNAMED], keepAliveMode=SESSION}.
+Running checkstyle with toolchain '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home'.
+[ant:checkstyle] Running Checkstyle 14.1.0 on 7 files
+[ant:xslt] Processing /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/checkstyle/test.xml to /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/checkstyle/test.html
+[ant:xslt] Loading stylesheet <?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" indent="yes"/>
+    <xsl:param name="gradleVersion"/>
+
+    <xsl:decimal-format decimal-separator="." grouping-separator="," />
+
+    <xsl:template match="checkstyle">
+        <html>
+            <head>
+                <title>Checkstyle Violations</title>
+                <!-- vaguely adapted from Gradle's CSS -->
+                <style type="text/css">
+                    body {
+                        background-color: #fff;
+                        color: #02303A;
+                    }
+
+                    a {
+                        color: #1DA2BD;
+                    }
+                    a.link {
+                        color: #02303A;
+                    }
+
+                    p {
+                        font-size: 1rem;
+                    }
+
+                    h1 a[name] {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    tr:nth-child(even) {
+                        background: white;
+                    }
+
+                    th {
+                        font-weight:bold;
+                    }
+                    tr {
+                        background: #efefef;
+                    }
+                    table th, td, tr {
+                        font-size:100%;
+                        border: none;
+                        text-align: left;
+                        vertical-align: top;
+                    }
+                </style>
+            </head>
+            <body>
+                <p>
+                    <a name="top"><h1>Checkstyle Results</h1></a>
+                </p>
+                <hr align="left" width="95%" size="1"/>
+                <h2>Summary</h2>
+                <table class="summary" width="95%" >
+                    <tr>
+                        <th>Total files checked</th>
+                        <th>Total violations</th>
+                        <th>Files with violations</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <xsl:number level="any" value="count(descendant::file)"/>
+                        </td>
+                        <td>
+                            <xsl:number level="any" value="count(descendant::error)"/>
+                        </td>
+                        <td>
+                            <xsl:number level="any" value="count(descendant::file[error])"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr align="left" width="95%" size="1"/>
+                <div class="violations">
+                    <h2>Violations</h2>
+                    <p>
+                        <xsl:choose>
+                            <xsl:when test="count(descendant::error) > 0">
+                                <table class="filelist" width="95%">
+                                    <tr>
+                                        <th>File</th>
+                                        <th>Total violations</th>
+                                    </tr>
+                                    <xsl:for-each select="file[error]">
+                                        <!-- sort by number of errors and then alphabetically -->
+                                        <xsl:sort data-type="number" order="descending" select="count(descendant::error)"/>
+                                        <xsl:sort select="@name"/>
+                                        <xsl:variable name="errors" select="count(descendant::error)"/>
+                                        <tr>
+                                            <td><a href="#{generate-id(@name)}"><xsl:value-of select="@name"/></a></td>
+                                            <td><xsl:value-of select="$errors"/></td>
+                                        </tr>
+                                    </xsl:for-each>
+                                </table>
+                                <p/>
+                                <xsl:apply-templates>
+                                    <!-- sort entries by file name alphabetically -->
+                                    <xsl:sort select="@name"/>
+                                </xsl:apply-templates>
+                                <p/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                No violations were found.
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </p>
+                </div>
+                <hr align="left" width="95%" size="1"/>
+                <p>Generated by <a href="https://gradle.org"><xsl:value-of select="$gradleVersion"/></a> with <a href="https://checkstyle.sourceforge.io/">Checkstyle <xsl:value-of select="@version"/></a>.</p>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- A single file with violations -->
+    <xsl:template match="file[error]">
+        <div class="file-violation">
+            <h3>
+                <a class="link" name="{generate-id(@name)}"><xsl:value-of select="@name"/></a>
+            </h3>
+            <table class="violationlist" width="95%">
+                <tr>
+                    <th>Severity</th>
+                    <th>Description</th>
+                    <th>Line Number</th>
+                </tr>
+                <xsl:apply-templates select="error"/>
+            </table>
+            <p/>
+            <a href="#top">Back to top</a>
+            <p/>
+        </div>
+    </xsl:template>
+
+    <!-- A single row in the list of violations -->
+    <xsl:template match="error">
+        <tr>
+            <td>
+                <xsl:value-of select="@severity"/>
+            </td>
+            <td>
+                <xsl:value-of select="@message"/>
+            </td>
+            <td>
+                <xsl:value-of select="@line"/>
+            </td>
+        </tr>
+    </xsl:template>
+
+</xsl:stylesheet>
+
+> Task :test
+Caching disabled for task ':test' because:
+  Build cache is disabled
+Task ':test' is not up-to-date because:
+  Input property 'stableClasspath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation$1.class has been removed.
+  Input property 'stableClasspath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/server/AeSupply.class has been added.
+  Input property 'stableClasspath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation$2.class has been removed.
+  and more...
+Starting process 'Gradle Test Executor 3'. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java -Dorg.gradle.internal.worker.tmpdir=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/tmp/test/work @/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/gradle-worker-classpath11782717859259592045txt -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 3'
+Successfully started process 'Gradle Test Executor 3'
+Generating HTML test report...
+Finished generating test html results (0.023 secs) into: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/tests/test
+Finished generating test XML results (0.006 secs) into: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/test-results/test
+Resolve mutations for :verifyDistribution (Thread[#101,Execution worker Thread 5,5,main]) started.
+:verifyDistribution (Thread[#101,Execution worker Thread 5,5,main]) started.
+
+> Task :verifyDistribution
+Caching disabled for task ':verifyDistribution' because:
+  Build cache is disabled
+Task ':verifyDistribution' is not up-to-date because:
+  Task has not declared any outputs despite executing actions.
+Verified 75 Java 8 compatible classes and coremod manifest; no game launched.
+
+> Task :checkstyleMain
+Caching disabled for task ':checkstyleMain' because:
+  Build cache is disabled
+Task ':checkstyleMain' is not up-to-date because:
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation$1.class has been removed.
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/server/AeSupply.class has been added.
+  Input property 'classpath' file /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/classes/java/main/dev/structureterminal/packtest/PackValidation$2.class has been removed.
+  and more...
+Starting process 'Gradle Worker Daemon 1'. Working directory: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/workers Command: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java -Dcheckstyle.enableExternalDtdLoad=false --add-opens java.prefs/java.util.prefs=ALL-UNNAMED @/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/gradle-cache/.tmp/gradle-worker-classpath15480492963441818678txt --enable-native-access=ALL-UNNAMED -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Worker Daemon 1'
+Successfully started process 'Gradle Worker Daemon 1'
+Started Gradle worker daemon (0.206 secs) with fork options DaemonForkOptions{executable=/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home/bin/java, minHeapSize=null, maxHeapSize=null, jvmArgs=[--add-opens, java.prefs/java.util.prefs=ALL-UNNAMED], keepAliveMode=SESSION}.
+Running checkstyle with toolchain '/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/work/terminal_port_sources/jdk/zulu25.36.205-ca-jdk25.0.4.1-macosx_aarch64/Contents/Home'.
+[ant:checkstyle] Running Checkstyle 14.1.0 on 52 files
+[ant:xslt] Processing /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/checkstyle/main.xml to /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/checkstyle/main.html
+[ant:xslt] Loading stylesheet <?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" indent="yes"/>
+    <xsl:param name="gradleVersion"/>
+
+    <xsl:decimal-format decimal-separator="." grouping-separator="," />
+
+    <xsl:template match="checkstyle">
+        <html>
+            <head>
+                <title>Checkstyle Violations</title>
+                <!-- vaguely adapted from Gradle's CSS -->
+                <style type="text/css">
+                    body {
+                        background-color: #fff;
+                        color: #02303A;
+                    }
+
+                    a {
+                        color: #1DA2BD;
+                    }
+                    a.link {
+                        color: #02303A;
+                    }
+
+                    p {
+                        font-size: 1rem;
+                    }
+
+                    h1 a[name] {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    tr:nth-child(even) {
+                        background: white;
+                    }
+
+                    th {
+                        font-weight:bold;
+                    }
+                    tr {
+                        background: #efefef;
+                    }
+                    table th, td, tr {
+                        font-size:100%;
+                        border: none;
+                        text-align: left;
+                        vertical-align: top;
+                    }
+                </style>
+            </head>
+            <body>
+                <p>
+                    <a name="top"><h1>Checkstyle Results</h1></a>
+                </p>
+                <hr align="left" width="95%" size="1"/>
+                <h2>Summary</h2>
+                <table class="summary" width="95%" >
+                    <tr>
+                        <th>Total files checked</th>
+                        <th>Total violations</th>
+                        <th>Files with violations</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <xsl:number level="any" value="count(descendant::file)"/>
+                        </td>
+                        <td>
+                            <xsl:number level="any" value="count(descendant::error)"/>
+                        </td>
+                        <td>
+                            <xsl:number level="any" value="count(descendant::file[error])"/>
+                        </td>
+                    </tr>
+                </table>
+                <hr align="left" width="95%" size="1"/>
+                <div class="violations">
+                    <h2>Violations</h2>
+                    <p>
+                        <xsl:choose>
+                            <xsl:when test="count(descendant::error) > 0">
+                                <table class="filelist" width="95%">
+                                    <tr>
+                                        <th>File</th>
+                                        <th>Total violations</th>
+                                    </tr>
+                                    <xsl:for-each select="file[error]">
+                                        <!-- sort by number of errors and then alphabetically -->
+                                        <xsl:sort data-type="number" order="descending" select="count(descendant::error)"/>
+                                        <xsl:sort select="@name"/>
+                                        <xsl:variable name="errors" select="count(descendant::error)"/>
+                                        <tr>
+                                            <td><a href="#{generate-id(@name)}"><xsl:value-of select="@name"/></a></td>
+                                            <td><xsl:value-of select="$errors"/></td>
+                                        </tr>
+                                    </xsl:for-each>
+                                </table>
+                                <p/>
+                                <xsl:apply-templates>
+                                    <!-- sort entries by file name alphabetically -->
+                                    <xsl:sort select="@name"/>
+                                </xsl:apply-templates>
+                                <p/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                No violations were found.
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </p>
+                </div>
+                <hr align="left" width="95%" size="1"/>
+                <p>Generated by <a href="https://gradle.org"><xsl:value-of select="$gradleVersion"/></a> with <a href="https://checkstyle.sourceforge.io/">Checkstyle <xsl:value-of select="@version"/></a>.</p>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- A single file with violations -->
+    <xsl:template match="file[error]">
+        <div class="file-violation">
+            <h3>
+                <a class="link" name="{generate-id(@name)}"><xsl:value-of select="@name"/></a>
+            </h3>
+            <table class="violationlist" width="95%">
+                <tr>
+                    <th>Severity</th>
+                    <th>Description</th>
+                    <th>Line Number</th>
+                </tr>
+                <xsl:apply-templates select="error"/>
+            </table>
+            <p/>
+            <a href="#top">Back to top</a>
+            <p/>
+        </div>
+    </xsl:template>
+
+    <!-- A single row in the list of violations -->
+    <xsl:template match="error">
+        <tr>
+            <td>
+                <xsl:value-of select="@severity"/>
+            </td>
+            <td>
+                <xsl:value-of select="@message"/>
+            </td>
+            <td>
+                <xsl:value-of select="@line"/>
+            </td>
+        </tr>
+    </xsl:template>
+
+</xsl:stylesheet>
+Resolve mutations for :check (Thread[#104,Execution worker Thread 8,5,main]) started.
+:check (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :check
+Skipping task ':check' as it has no actions.
+Resolve mutations for :build (Thread[#104,Execution worker Thread 8,5,main]) started.
+:build (Thread[#104,Execution worker Thread 8,5,main]) started.
+
+> Task :build
+Skipping task ':build' as it has no actions.
+
+[Incubating] Problems report is available at: file:///Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 7s
+32 actionable tasks: 7 executed, 25 up-to-date
+Watched directory hierarchies: [/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal]
+Stopped 2 worker daemon(s).

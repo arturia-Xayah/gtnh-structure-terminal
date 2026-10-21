@@ -1,0 +1,7 @@
+tile.aeorderoptimizer.core.name=ME 下单优化元件
+aeo.title=ME 下单优化元件
+aeo.detail=详细选路报告
+aeo.on=开启
+aeo.off=关闭
+aeo.ready=每个 ME 网络最多一个优化元件
+aeo.conflict=重复元件已断开连接

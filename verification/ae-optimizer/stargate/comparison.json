@@ -1,0 +1,160 @@
+{
+  "checks": {
+    "completed_24_cases": true,
+    "no_client": true,
+    "six_warmups": true,
+    "no_full_order_submitted": true,
+    "runtime_matches_test_fixture": true,
+    "original_standard_three_measured_runs": true,
+    "original_standard_correct_planner": true,
+    "original_lite_three_measured_runs": true,
+    "original_lite_correct_planner": true,
+    "original_optimizer_three_measured_runs": true,
+    "original_optimizer_correct_planner": true,
+    "dag_standard_three_measured_runs": true,
+    "dag_standard_correct_planner": true,
+    "dag_lite_three_measured_runs": true,
+    "dag_lite_correct_planner": true,
+    "dag_optimizer_three_measured_runs": true,
+    "dag_optimizer_correct_planner": true,
+    "original_route_rejected_by_optimizer": true,
+    "dag_optimizer_returns_valid_plan": true,
+    "dag_optimizer_bill_matches_oracle": true,
+    "dag_lite_bill_matches_oracle": true
+  },
+  "all_checks_pass": true,
+  "summary": {
+    "original": {
+      "standard": {
+        "measured_runs": 3,
+        "successful_plan_all_runs": false,
+        "active_ms_median": 3964.376787,
+        "active_ms_min": 3833.745142,
+        "active_ms_max": 4072.000043,
+        "wall_ms_median": 32754.360541,
+        "errors": {
+          "gui.appliedenergistics2.CraftingStepLimitExceeded": 3
+        },
+        "missing_counts": [
+          0,
+          0,
+          0
+        ],
+        "raw_bill_oracle": [
+          null,
+          null,
+          null
+        ]
+      },
+      "lite": {
+        "measured_runs": 3,
+        "successful_plan_all_runs": false,
+        "active_ms_median": 27.092666,
+        "active_ms_min": 20.005083,
+        "active_ms_max": 142.047792,
+        "wall_ms_median": 27.098166,
+        "errors": {
+          "none": 3
+        },
+        "missing_counts": [
+          15,
+          15,
+          15
+        ],
+        "raw_bill_oracle": [
+          null,
+          null,
+          null
+        ]
+      },
+      "optimizer": {
+        "measured_runs": 3,
+        "successful_plan_all_runs": false,
+        "active_ms_median": 4.575667,
+        "active_ms_min": 4.29225,
+        "active_ms_max": 7.127959,
+        "wall_ms_median": 4.576,
+        "errors": {
+          "AEO_MULTI_OUTPUT: Hydrogen [pattern#216ca0a82c0e5937 [Iron Dust x1 + Hydrochloric Acid x3000 -> Iron III Chloride x1000 + Hydrogen x3000]] outputs=2": 3
+        },
+        "missing_counts": [
+          0,
+          0,
+          0
+        ],
+        "raw_bill_oracle": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "dag": {
+      "standard": {
+        "measured_runs": 3,
+        "successful_plan_all_runs": false,
+        "active_ms_median": 3732.557987,
+        "active_ms_min": 3375.459002,
+        "active_ms_max": 3955.501968,
+        "wall_ms_median": 30664.139875,
+        "errors": {
+          "gui.appliedenergistics2.CraftingStepLimitExceeded": 3
+        },
+        "missing_counts": [
+          0,
+          0,
+          0
+        ],
+        "raw_bill_oracle": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lite": {
+        "measured_runs": 3,
+        "successful_plan_all_runs": true,
+        "active_ms_median": 9.35675,
+        "active_ms_min": 9.24225,
+        "active_ms_max": 10.326167,
+        "wall_ms_median": 9.357084,
+        "errors": {
+          "none": 3
+        },
+        "missing_counts": [
+          0,
+          0,
+          0
+        ],
+        "raw_bill_oracle": [
+          true,
+          true,
+          true
+        ]
+      },
+      "optimizer": {
+        "measured_runs": 3,
+        "successful_plan_all_runs": true,
+        "active_ms_median": 10.002792,
+        "active_ms_min": 6.140583,
+        "active_ms_max": 10.905708,
+        "wall_ms_median": 10.003667,
+        "errors": {
+          "none": 3
+        },
+        "missing_counts": [
+          0,
+          0,
+          0
+        ],
+        "raw_bill_oracle": [
+          true,
+          true,
+          true
+        ]
+      }
+    }
+  },
+  "dag_lite_to_optimizer_active_ratio": 0.9354138324579778,
+  "note": "DAG scenario explicitly changes supply boundary. Error/step-limit results are not successful full Stargate orders."
+}

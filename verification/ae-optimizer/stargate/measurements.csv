@@ -1,0 +1,25 @@
+﻿scenario,mode,repeat,warmup,patterns,calculation_active_ms,plan_ready_wall_ms,ticks,timed_out,simulation_missing,error,raw_bill_matches_independent_oracle
+original,standard,0,True,2398,3928.121617,28617.698292,570,False,True,gui.appliedenergistics2.CraftingStepLimitExceeded,
+original,lite,0,True,2398,42.412292,42.413042,1,False,True,,
+original,optimizer,0,True,2398,10.042375,10.049417,1,False,True,AEO_MULTI_OUTPUT: Hydrogen [pattern#216ca0a82c0e5937 [Iron Dust x1 + Hydrochloric Acid x3000 -> Iron III Chloride x1000 + Hydrogen x3000]] outputs=2,
+original,standard,1,False,2398,4072.000043,32754.360541,655,False,True,gui.appliedenergistics2.CraftingStepLimitExceeded,
+original,lite,1,False,2398,27.092666,27.098166,1,False,True,,
+original,optimizer,1,False,2398,4.575667,4.576,1,False,True,AEO_MULTI_OUTPUT: Hydrogen [pattern#216ca0a82c0e5937 [Iron Dust x1 + Hydrochloric Acid x3000 -> Iron III Chloride x1000 + Hydrogen x3000]] outputs=2,
+original,standard,2,False,2398,3833.745142,31359.236459,627,False,True,gui.appliedenergistics2.CraftingStepLimitExceeded,
+original,lite,2,False,2398,142.047792,142.048084,1,False,True,,
+original,optimizer,2,False,2398,7.127959,7.156709,1,False,True,AEO_MULTI_OUTPUT: Hydrogen [pattern#216ca0a82c0e5937 [Iron Dust x1 + Hydrochloric Acid x3000 -> Iron III Chloride x1000 + Hydrogen x3000]] outputs=2,
+original,standard,3,False,2398,3964.376787,33859.926667,677,False,True,gui.appliedenergistics2.CraftingStepLimitExceeded,
+original,lite,3,False,2398,20.005083,20.005375,1,False,True,,
+original,optimizer,3,False,2398,4.29225,4.292791,1,False,True,AEO_MULTI_OUTPUT: Hydrogen [pattern#216ca0a82c0e5937 [Iron Dust x1 + Hydrochloric Acid x3000 -> Iron III Chloride x1000 + Hydrogen x3000]] outputs=2,
+dag,standard,0,True,1695,3434.040159,26662.1805,533,False,False,gui.appliedenergistics2.CraftingStepLimitExceeded,False
+dag,lite,0,True,1695,9.489791,9.490125,1,False,False,,True
+dag,optimizer,0,True,1695,20.232083,20.232666,1,False,False,,True
+dag,standard,1,False,1695,3732.557987,30664.139875,613,False,False,gui.appliedenergistics2.CraftingStepLimitExceeded,False
+dag,lite,1,False,1695,9.24225,9.243083,1,False,False,,True
+dag,optimizer,1,False,1695,6.140583,6.141167,1,False,False,,True
+dag,standard,2,False,1695,3375.459002,27363.533042,547,False,False,gui.appliedenergistics2.CraftingStepLimitExceeded,False
+dag,lite,2,False,1695,9.35675,9.357084,1,False,False,,True
+dag,optimizer,2,False,1695,10.002792,10.003667,1,False,False,,True
+dag,standard,3,False,1695,3955.501968,34255.367417,685,False,False,gui.appliedenergistics2.CraftingStepLimitExceeded,False
+dag,lite,3,False,1695,10.326167,10.326792,1,False,False,,True
+dag,optimizer,3,False,1695,10.905708,10.912625,1,False,False,,True
