@@ -43,10 +43,12 @@ if (providers.gradleProperty('terminalMirror').getOrElse('false').toBoolean()) {
 tasks.register('verifyDistribution') {
     dependsOn(tasks.named('reobfJar'))
     inputs.file(tasks.named('reobfJar').flatMap { it.archiveFile })
+    inputs.property('expectedModVersion', version.toString())
     inputs.property('allowPackTests', modernizationTests || providers.gradleProperty('terminalPackTests').getOrElse('false').toBoolean() || providers.gradleProperty('optimizerPackTests').getOrElse('false').toBoolean())
     doLast { task ->
         def jarFile = task.inputs.files.singleFile
         def allowPackTests = task.inputs.properties.allowPackTests
+        def expectedModVersion = task.inputs.properties.expectedModVersion
         new java.util.zip.ZipFile(jarFile).withCloseable { zip ->
             def classes = 0
             zip.entries().each { entry ->
@@ -84,7 +86,7 @@ tasks.register('verifyDistribution') {
             def mods = new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('mcmod.info'))).modList
             if (mods.collect { it.modid }.toSet() != ['structureterminal','aeorderoptimizer','plasmaforgepower','aestoragevault'].toSet())
                 throw new GradleException('Compatibility registration namespaces changed')
-            if (!mods.every { it.version == project.version.toString() && it.logoFile == 'assets/structureterminal/textures/items/structure_terminal.png' })
+            if (!mods.every { it.version == expectedModVersion && it.logoFile == 'assets/structureterminal/textures/items/structure_terminal.png' })
                 throw new GradleException('Module version or approved terminal icon mismatch')
             logger.lifecycle("Verified ${classes} Java 8 compatible classes and coremod manifest; no game launched.")
         }
