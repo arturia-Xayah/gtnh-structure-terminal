@@ -1,6 +1,7 @@
 package dev.aestoragevault;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,9 @@ public final class LateMixins implements ILateMixinLoader {
 
     @Override
     public List<String> getMixins(Set<String> mods) {
-        return Collections.singletonList("VaultHatchSkinMixin");
+        List<String> mixins = new ArrayList<>(Arrays.asList("VaultHatchSkinMixin", "NativeBusOwnershipMixin"));
+        if (cpw.mods.fml.relauncher.FMLLaunchHandler.side()
+            .isClient()) mixins.add("client.VaultCasingRenderMixin");
+        return mixins;
     }
 }

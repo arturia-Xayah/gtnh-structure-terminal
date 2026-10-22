@@ -31,6 +31,10 @@
 
 ## 外部存储
 
+- [原生优先级、Reshuffle 与主动输出](VAULT_IO.md)
+
+- [整面蓝白紫材质、六方向与独占部件](VAULT_SMOOTH.md)
+
 - [LuV 材质、配方和升级说明](VAULT_LUV.md)
 - [贴图母图与生成提示词](../assets/vault/generation.json)
 

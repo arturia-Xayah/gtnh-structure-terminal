@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "priority_uses_native_container_and_persists_signed_int",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "36_mixed_filters_native_fuzzy_inverter_and_ore_cards",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_high_priority_insertion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_low_priority_insertion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_Reshuffle_moves_items_and_fluids_by_priority_without_loss",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "link_and_output_are_exclusive_and_output_has_native_channel",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_output_batches_one_million_items_and_fluid_without_exposing_private_stock",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "precise_whitelist_addresses_one_type_among_1000_others",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "full_network_preserves_all_stock_and_backs_off",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unpowered_network_preserves_stock",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "output_GUI_native_phantom_packets_validate_indices_and_distance",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "output_break_structure_blocks_export_and_retains_inventory",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "output_drop_preserves_real_cards_and_phantom_filters",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "client_launched": false,
+  "java": "25.0.4.1",
+  "export_call_p95_us": 655.875,
+  "export_call_max_us": 891.084,
+  "export_batches": 3,
+  "exported_units": 2000077
+}

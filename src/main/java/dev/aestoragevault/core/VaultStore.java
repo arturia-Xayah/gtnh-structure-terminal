@@ -19,8 +19,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -38,6 +42,7 @@ public final class VaultStore implements Closeable {
     private final Path journal;
     private final UUID id;
     private final Map<Resource, Long> stock = new HashMap<>();
+    private final Set<Resource> outputOrder = new LinkedHashSet<>();
     private final Set<UUID> receipts = new HashSet<>();
     private final RandomAccessFile wal;
     private FileLock lock;
@@ -94,6 +99,19 @@ public final class VaultStore implements Closeable {
 
     public synchronized Map<Resource, Long> entries() {
         return new HashMap<>(stock);
+    }
+
+    /** Bounded, fair traversal. No full-inventory copy/sort on the server tick. */
+    public synchronized List<Resource> nextOutputBatch(int limit) {
+        if (limit < 1 || limit > 256) throw new IllegalArgumentException("Invalid scan budget");
+        List<Resource> result = new ArrayList<>(Math.min(limit, outputOrder.size()));
+        Iterator<Resource> it = outputOrder.iterator();
+        while (it.hasNext() && result.size() < limit) {
+            result.add(it.next());
+            it.remove();
+        }
+        outputOrder.addAll(result);
+        return result;
     }
 
     public synchronized boolean hasReceipt(UUID receipt) {
@@ -172,8 +190,13 @@ public final class VaultStore implements Closeable {
     private void apply(Resource r, long delta) {
         long next = Math.addExact(amount(r), delta);
         if (next < 0) throw new IllegalArgumentException("Negative stock");
-        if (next == 0) stock.remove(r);
-        else stock.put(r, next);
+        if (next == 0) {
+            stock.remove(r);
+            outputOrder.remove(r);
+        } else {
+            stock.put(r, next);
+            outputOrder.add(r);
+        }
         used = used.add(
             BigInteger.valueOf(delta)
                 .multiply(BigInteger.valueOf(r.units())));

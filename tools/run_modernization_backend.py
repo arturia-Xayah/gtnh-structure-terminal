@@ -12,6 +12,7 @@ from summarize_pack_validation import classify
 
 EXCLUDED = ('structureterminal','aeorderoptimizer','aeoptimizer','aeorderbench','plasmaforgepower','aestoragevault','gtnh-modernization')
 SUITES = {
+    'vault_io': ('vault-io-validation', ['-Daestoragevault.ioTests=true'], ['vault-io-tests.json','vault-io-tests-restart.json']),
     'vault': ('vault-validation', ['-Daestoragevault.tests=true'], ['vault-tests.json','vault-tests-restart.json']),
     'forge': ('forge-power-validation', ['-Dplasmaforgepower.tests=true'], ['forge-power-tests.json']),
     'fusion': ('forge-power-validation', ['-Dplasmaforgepower.fusionTests=true'], ['fusion-power-tests.json']),

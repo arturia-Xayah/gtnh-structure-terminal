@@ -82,6 +82,30 @@ public class VaultStoreTest {
     }
 
     @Test
+    public void outputTraversalIsBoundedFairAndTracksRemovalsAcrossRestart() throws Exception {
+        try (VaultStore s = create(1000)) {
+            for (int n = 0; n < 100; n++) s.insert(item(n), 1, false);
+            java.util.Set<Resource> visited = new java.util.HashSet<>();
+            for (int n = 0; n < 100; n++) visited.addAll(s.nextOutputBatch(1));
+            assertEquals(100, visited.size());
+            assertEquals(100, s.types());
+            for (int n = 0; n < 50; n++) s.extract(item(n), 1, false);
+            visited.clear();
+            for (int n = 0; n < 50; n++) visited.addAll(s.nextOutputBatch(1));
+            assertEquals(50, visited.size());
+            for (int n = 0; n < 50; n++) assertFalse(visited.contains(item(n)));
+            s.checkpoint();
+        }
+        try (VaultStore s = new VaultStore(folder(), id, false)) {
+            assertEquals(
+                32,
+                s.nextOutputBatch(32)
+                    .size());
+            assertEquals(50, s.types());
+        }
+    }
+
+    @Test
     public void itemFluidShareExactFractionalBudget() throws Exception {
         try (VaultStore s = create(1)) {
             assertEquals(1, s.insert(item(1), 1, false));

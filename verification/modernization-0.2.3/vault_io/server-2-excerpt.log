@@ -1,0 +1,2 @@
+[20:46:39] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:693]: VAULT_IO_TEST fresh_process_restores_output_controller_stock_and_capacity true 
+[20:46:39] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:693]: VAULT_IO_TEST fresh_process_restores_mixed_filters_cards_and_AE_connection true 

@@ -82,11 +82,12 @@ public class TileController extends TileEntity {
     /** Every AE access validates the 27 cells: broken/unloaded structures cannot use stale mounted storage. */
     private boolean checkShape() {
         if (worldObj == null || checking) return false;
-        VaultStructure.Shape shape = VaultStructure.inspect(this);
+        VaultStructure.Shape shape = VaultStructure.inspectExclusive(this);
         if (shape == null) return false;
         IInventory foundBus = shape.bus;
         TileAccess foundAccess = shape.access;
-        if (foundAccess.bound != null && foundAccess.bound != this && !foundAccess.bound.isInvalid()) return false;
+        // Exclusive inspection rejects every other complete shape, so any remaining binding is stale.
+        if (foundAccess.bound != null && foundAccess.bound != this) foundAccess.unbind(foundAccess.bound);
         bus = foundBus;
         if (access != foundAccess && !checking) {
             if (access != null) access.unbind(this);
@@ -110,7 +111,7 @@ public class TileController extends TileEntity {
             bus = null;
         }
         if (store != null && !status.startsWith("LOCKED:"))
-            status = formed ? "Online" : "Need 1 input bus, 1 access, 23 LuV casings; hollow center";
+            status = formed ? "Online" : "Need face-center controller, 23 LuV casings, exclusive bus/access";
         if (changed && access != null) access.refresh();
     }
 
@@ -269,7 +270,7 @@ public class TileController extends TileEntity {
         types = tag.getInteger("Types");
         formed = tag.getBoolean("Formed");
         status = tag.getString("Status");
-        worldObj.markBlockRangeForRenderUpdate(xCoord - 2, yCoord - 1, zCoord - 2, xCoord + 2, yCoord + 1, zCoord + 2);
+        worldObj.markBlockRangeForRenderUpdate(xCoord - 2, yCoord - 2, zCoord - 2, xCoord + 2, yCoord + 2, zCoord + 2);
     }
 
     private static final class Import {

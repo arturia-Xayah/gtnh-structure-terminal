@@ -1,12 +1,11 @@
 package dev.aestoragevault.ui;
 
-import java.util.Locale;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 
+import dev.aestoragevault.core.ByteFormat;
 import dev.aestoragevault.world.TileController;
 
 public class VaultScreen extends GuiContainer {
@@ -48,14 +47,7 @@ public class VaultScreen extends GuiContainer {
     }
 
     private static String bytes(long bytes) {
-        String[] units = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
-        double value = bytes;
-        int i = 0;
-        while (value >= 1024 && i < units.length - 1) {
-            value /= 1024;
-            i++;
-        }
-        return String.format(Locale.ROOT, "%.3g %s", value, units[i]);
+        return ByteFormat.format(bytes);
     }
 
     @Override

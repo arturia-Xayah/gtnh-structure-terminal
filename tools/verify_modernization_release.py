@@ -19,7 +19,7 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--version',default='0.2.1-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
+    ap.add_argument('--version',default='0.2.3-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
     ap.add_argument('--runs',type=Path,nargs='+',required=True);ap.add_argument('--output',type=Path,required=True)
     a=ap.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);checks=[]
     def check(name,value):
@@ -45,6 +45,21 @@ def main():
             for name in ['controller','access']:
                 image=z.read('assets/aestoragevault/textures/blocks/'+name+'_overlay.png')
                 check(name+'_64px_alpha_texture',image[:8]==b'\x89PNG\r\n\x1a\n' and int.from_bytes(image[16:20],'big')==64 and int.from_bytes(image[20:24],'big')==64 and image[25]==6)
+        if a.version not in ('0.2.0-alpha', '0.2.1-alpha'):
+            check('continuous_skin_and_exclusive_components',all(n in names for n in [
+                'dev/aestoragevault/world/VaultSkin.class','dev/aestoragevault/world/NativeBusOwners.class',
+                'dev/aestoragevault/core/VaultGeometry.class','dev/aestoragevault/mixin/NativeBusOwnershipMixin.class',
+                'dev/aestoragevault/mixin/client/VaultCasingRenderMixin.class']))
+            for tile in range(9):
+                name='assets/aestoragevault/textures/blocks/formed_shell_'+str(tile)+'.png'
+                data=z.read(name)
+                check('connected_tile_'+str(tile),data==(ROOT/'src/main/resources'/name).read_bytes()
+                      and int.from_bytes(data[16:20],'big')==64 and int.from_bytes(data[20:24],'big')==64)
+        if a.version == '0.2.3-alpha':
+            check('native_priority_output_and_byte_formatter',all(n in names for n in [
+                'dev/aestoragevault/world/TileOutput.class','dev/aestoragevault/ui/OutputContainer.class',
+                'dev/aestoragevault/ui/OutputScreen.class','dev/aestoragevault/core/ByteFormat.class']))
+            check('renamed_storage_controller','ME元件聚合存储器' in z.read('assets/aestoragevault/lang/zh_CN.lang').decode('utf-8'))
         for language in ['zh_CN','en_US']:
             for namespace in ['structureterminal','aeorderoptimizer','plasmaforgepower','aestoragevault']:
                 check('language_'+namespace+'_'+language,'assets/'+namespace+'/lang/'+language+'.lang' in names)
@@ -75,10 +90,11 @@ def main():
             shutil.copy2(module_file,out/suite/'modernization-modules.json')
             excerpt=[]
             for line in (folder/suite/f"server-{row['stage']}.log").read_text(errors='replace').splitlines():
-                if any(label in line for label in ['VAULT_TEST','FORGE_POWER_TEST','FUSION_POWER_TEST','AE_OPTIMIZER_TEST','PACK_TEST']): excerpt.append(line)
+                if any(label in line for label in ['VAULT_TEST','VAULT_IO_TEST','FORGE_POWER_TEST','FUSION_POWER_TEST','AE_OPTIMIZER_TEST','PACK_TEST']): excerpt.append(line)
             (out/suite/f"server-{row['stage']}-excerpt.log").write_text('\n'.join(excerpt)+'\n')
             runs.append(row)
-    check('every_feature_suite_exercised',{r['suite'] for r in runs}=={'vault','forge','fusion','ae','structures'})
+    check('every_feature_suite_exercised',{r['suite'] for r in runs}=={'vault','vault_io','forge','fusion','ae','structures'})
+    check('output_cross_process_restart',any(r['suite']=='vault_io' and r['stage']==2 for r in runs))
     check('vault_cross_process_restart',any(r['suite']=='vault' and r['stage']==2 for r in runs))
     doc_errors=[]
     for target in [ROOT/'README.md',ROOT/'README.en.md',ROOT/'docs/development',ROOT/'docs/features']:
@@ -86,7 +102,8 @@ def main():
             for link in re.findall(r'\]\(([^\s)]+)\)',p.read_text()):
                 if '://' in link or link.startswith(('#','mailto:')):continue
                 path=link.split('#')[0]
-                if path and not (p.parent/path).exists():doc_errors.append((str(p.relative_to(ROOT)),link))
+                if path and not (p.parent/path).exists() and (p.parent/path).resolve()!=out/'manifest.json':
+                    doc_errors.append((str(p.relative_to(ROOT)),link))
     check('player_and_developer_document_links',not doc_errors)
     manifest=dict(passed=True,checks=checks,version=a.version,target='GTNH 2.9.0-RC-2',client_launched=False,
                   artifact=a.jar.name,sha256=sha(a.jar),classes=len(class_hashes),class_sha256=class_hashes,

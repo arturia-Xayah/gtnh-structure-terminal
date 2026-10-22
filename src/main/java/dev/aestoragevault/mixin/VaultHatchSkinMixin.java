@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import dev.aestoragevault.world.VaultSkin;
 import dev.aestoragevault.world.VaultStructure;
-import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
@@ -21,8 +21,11 @@ public abstract class VaultHatchSkinMixin {
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
     private void vault$skin(IGregTechTileEntity base, ForgeDirection side, ForgeDirection facing, int color,
         boolean active, boolean redstone, CallbackInfoReturnable<ITexture[]> cir) {
-        if (!((Object) this instanceof MTEHatchInputBus) || !VaultStructure.isFormedBus(base)) return;
-        ITexture shell = Textures.BlockIcons.casingTexturePages[0][6];
+        if (!((Object) this instanceof MTEHatchInputBus) || base.getWorld() == null) return;
+        int tile = VaultStructure
+            .skinTile(base.getWorld(), base.getXCoord(), base.getYCoord(), base.getZCoord(), side.ordinal());
+        if (tile < 0) return;
+        ITexture shell = VaultSkin.texture(tile);
         MTEHatch hatch = (MTEHatch) (Object) this;
         cir.setReturnValue(
             side != facing ? new ITexture[] { shell }

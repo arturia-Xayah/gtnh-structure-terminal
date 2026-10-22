@@ -50,7 +50,7 @@ public final class BundleChecks {
         }
         check(GameRegistry.findItem("structureterminal", "structure_terminal") != null, "terminal registry lost");
         check(GameRegistry.findBlock("aeorderoptimizer", "core") != null, "optimizer registry lost");
-        for (String name : new String[] { "controller", "access", "casing" })
+        for (String name : new String[] { "controller", "access", "output", "casing" })
             check(GameRegistry.findBlock("aestoragevault", name) != null, "vault registry lost " + name);
         report.put("passed", true);
         report.put("modules", modules);

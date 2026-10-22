@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import appeng.api.config.AccessRestriction;
@@ -24,6 +25,7 @@ import appeng.api.storage.data.IAEFluidStack;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.api.storage.data.IAEStack;
 import appeng.api.storage.data.IAEStackType;
+import appeng.helpers.IPriorityHost;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
 import appeng.tile.TileEvent;
@@ -34,9 +36,10 @@ import dev.aestoragevault.ae.ResourceCodec;
 import dev.aestoragevault.ae.VaultInventory;
 import dev.aestoragevault.core.Resource;
 
-public class TileAccess extends AENetworkTile implements ICellContainer {
+public class TileAccess extends AENetworkTile implements ICellContainer, IPriorityHost {
 
     public TileController bound;
+    private int priority;
     private final VaultInventory<IAEItemStack> items = new VaultInventory<>(
         this,
         appeng.util.item.AEItemStackType.ITEM_STACK_TYPE,
@@ -83,7 +86,25 @@ public class TileAccess extends AENetworkTile implements ICellContainer {
 
     @Override
     public int getPriority() {
-        return 0;
+        return priority;
+    }
+
+    @Override
+    public void setPriority(int value) {
+        if (priority == value) return;
+        priority = value;
+        markDirty();
+        refresh();
+    }
+
+    @TileEvent(TileEventType.WORLD_NBT_READ)
+    public void readPriority(NBTTagCompound tag) {
+        priority = tag.getInteger("VaultPriority");
+    }
+
+    @TileEvent(TileEventType.WORLD_NBT_WRITE)
+    public void writePriority(NBTTagCompound tag) {
+        tag.setInteger("VaultPriority", priority);
     }
 
     @Override

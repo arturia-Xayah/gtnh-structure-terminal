@@ -17,6 +17,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+        if (id == 1 && world.getTileEntity(x, y, z) instanceof dev.aestoragevault.world.TileOutput)
+            return new OutputScreen(player, (dev.aestoragevault.world.TileOutput) world.getTileEntity(x, y, z));
         return world.getTileEntity(x, y, z) instanceof TileController
             ? new VaultScreen(player, (TileController) world.getTileEntity(x, y, z))
             : null;

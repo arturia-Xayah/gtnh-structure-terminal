@@ -2,7 +2,7 @@
 
 ## 名称与模块
 
-产品显示名：**GTNH现代化升级**。英文文档名：**GTNH Modernization Upgrade**。发行文件前缀 `gtnh-modernization-upgrade`，本次版本 `0.2.1-alpha`，目标 GTNH `2.9.0-RC-2`。
+产品显示名：**GTNH现代化升级**。英文文档名：**GTNH Modernization Upgrade**。发行文件前缀 `gtnh-modernization-upgrade`，本次版本 `0.2.3-alpha`，目标 GTNH `2.9.0-RC-2`。
 
 一个 JAR 包含四个 FML 注册模块。主模块显示统一产品名称，其他模块通过元数据 `parent=structureterminal` 归于主模块并沿用终端图标。保留模块 ID 是为了兼容已有世界、物品注册和 GUI 路由，并非要求玩家安装四个 Mod。
 
@@ -11,7 +11,7 @@
 | `structureterminal` | 结构终端、原料＋标记 | 终端物品、网络通道、`structureterminal.cfg` |
 | `aeorderoptimizer` | ME 下单优化元件 | `core` 方块与 TileEntity、元件设置 |
 | `plasmaforgepower` | 锻炉、普通和压缩聚变功率控制 | `plasmaforgepower:limits` 等现有 NBT、旧电压索引 |
-| `aestoragevault` | 外部文件容量仓库 | `controller/access/casing`、TileEntity ID、UUID 与文件目录 |
+| `aestoragevault` | 外部文件容量仓库 | `controller/access/casing`（保留），新增 `output`、TileEntity ID、UUID 与文件目录 |
 
 所有模块共享 `dev.structureterminal.Tags.VERSION`。客户端和服务器使用同一整合版本。原独立版 JAR 必须移除，否则发生重复 Mod ID。主依赖包含 GT、AE2、StructureLib、ModularUI2 与 UniMixins；外部依赖不打包进 JAR。
 
@@ -36,3 +36,7 @@
 ## English
 
 The product is renamed while four internal FML namespaces are retained for existing saves. All ship in one JAR with one shared version, the Structure Terminal icon and parent metadata. Remove former standalone JARs. Existing registration names, configuration paths, power NBT keys, voltage IDs, vault UUIDs and external-file locations remain unchanged. AE and power LateMixinLoaders coexist with the terminal core plugin. Dedicated-server checks exercise all modules together; client rendering remains a separate acceptance step.
+
+## 0.2.3 存储端口
+
+原 access 注册 ID 不变，增加 IPriorityHost 原生优先级界面与持久化；新增 output 方块和 TileOutput。输出不挂载私有库存，通过 AE 原生 poweredInsert 向目标网络批量注入。两种端口互斥，库存文件格式不变。细节见 [VAULT_IO.md](VAULT_IO.md)。

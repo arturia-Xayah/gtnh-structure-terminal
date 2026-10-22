@@ -303,6 +303,135 @@ public final class VaultSuite {
         }
     }
 
+    private void flexibleShellTests() throws Exception {
+        final int cx = 24, cy = 110, cz = 24;
+        for (int face = 0; face < 6; face++) {
+            final int facing = face;
+            run("all_shell_positions_six_faces_" + face, () -> {
+                List<int[]> positions = new ArrayList<>();
+                for (int dx = -1; dx <= 1; dx++) for (int dy = -1; dy <= 1; dy++)
+                    for (int dz = -1; dz <= 1; dz++) if (dev.aestoragevault.core.VaultGeometry.shell(dx, dy, dz)
+                        && !(dx == dev.aestoragevault.core.VaultGeometry.normal(facing, 0)
+                            && dy == dev.aestoragevault.core.VaultGeometry.normal(facing, 1)
+                            && dz == dev.aestoragevault.core.VaultGeometry.normal(facing, 2)))
+                        positions.add(new int[] { cx + dx, cy + dy, cz + dz });
+                check(positions.size() == 25, "shell count");
+                for (int i = 0; i < positions.size(); i++) for (int swap = 0; swap < 2; swap++) {
+                    fillCube(cx, cy, cz);
+                    int[] a = positions.get(i), b = positions.get((i + 1) % positions.size());
+                    int px = cx + dev.aestoragevault.core.VaultGeometry.normal(facing, 0);
+                    int py = cy + dev.aestoragevault.core.VaultGeometry.normal(facing, 1);
+                    int pz = cz + dev.aestoragevault.core.VaultGeometry.normal(facing, 2);
+                    world.setBlock(px, py, pz, VaultMod.CONTROLLER, facing, 2);
+                    placeTestBus(swap == 0 ? a : b);
+                    int[] port = swap == 0 ? b : a;
+                    world.setBlock(port[0], port[1], port[2], VaultMod.ACCESS, 0, 2);
+                    TileController sample = (TileController) world.getTileEntity(px, py, pz);
+                    sample.checkStructure();
+                    check(sample.formed, "rejected face=" + facing + " position=" + i + " role=" + swap);
+                    check(
+                        dev.aestoragevault.world.VaultStructure.skinTile(world, port[0], port[1], port[2], facing) >= 0,
+                        "port not skinned");
+                }
+                clearCube(cx, cy, cz);
+            });
+        }
+        run("controller_off_center_and_inward_facing_rejected", () -> {
+            fillCube(cx, cy, cz);
+            world.setBlock(cx - 1, cy - 1, cz - 1, VaultMod.CONTROLLER, 2, 2);
+            placeTestBus(new int[] { cx + 1, cy, cz });
+            world.setBlock(cx - 1, cy, cz, VaultMod.ACCESS, 0, 2);
+            TileController sample = (TileController) world.getTileEntity(cx - 1, cy - 1, cz - 1);
+            sample.checkStructure();
+            check(!sample.formed, "corner controller accepted");
+            clearCube(cx, cy, cz);
+        });
+        for (int shared = 0; shared < 2; shared++) {
+            final boolean sharedBus = shared == 0;
+            run(sharedBus ? "shared_bus_rejects_both_and_recovers" : "shared_access_rejects_both_and_recovers", () -> {
+                fillCube(cx, cy, cz);
+                fillCube(cx + 2, cy, cz);
+                world.setBlock(cx - 1, cy, cz, VaultMod.CONTROLLER, 4, 2);
+                world.setBlock(cx + 3, cy, cz, VaultMod.CONTROLLER, 5, 2);
+                if (sharedBus) {
+                    placeTestBus(new int[] { cx + 1, cy, cz });
+                    world.setBlock(cx - 1, cy + 1, cz, VaultMod.ACCESS, 0, 2);
+                    world.setBlock(cx + 3, cy + 1, cz, VaultMod.ACCESS, 0, 2);
+                } else {
+                    world.setBlock(cx + 1, cy, cz, VaultMod.ACCESS, 0, 2);
+                    placeTestBus(new int[] { cx - 1, cy + 1, cz });
+                    placeTestBus(new int[] { cx + 3, cy + 1, cz });
+                }
+                TileController a = (TileController) world.getTileEntity(cx - 1, cy, cz);
+                TileController b = (TileController) world.getTileEntity(cx + 3, cy, cz);
+                check(
+                    dev.aestoragevault.world.VaultStructure.inspect(a) != null
+                        && dev.aestoragevault.world.VaultStructure.inspect(b) != null,
+                    "invalid overlap fixture");
+                a.checkStructure();
+                b.checkStructure();
+                check(!a.formed && !b.formed, "shared component accepted");
+                b.checkStructure();
+                a.checkStructure();
+                check(!a.formed && !b.formed, "order-dependent ownership");
+                world.setBlock(cx + 3, cy, cz, GregTechAPI.sBlockCasings1, 6, 2);
+                a.checkStructure();
+                check(a.formed, "ownership did not recover");
+                clearCube(cx, cy, cz);
+                clearCube(cx + 2, cy, cz);
+            });
+        }
+        run("native_machine_bus_reservation_and_release", () -> {
+            fillCube(cx, cy, cz);
+            world.setBlock(cx, cy, cz - 1, VaultMod.CONTROLLER, 2, 2);
+            placeTestBus(new int[] { cx + 1, cy, cz });
+            world.setBlock(cx - 1, cy, cz, VaultMod.ACCESS, 0, 2);
+            TileController sample = (TileController) world.getTileEntity(cx, cy, cz - 1);
+            sample.checkStructure();
+            check(sample.formed, "native test baseline");
+            int[] nativePos = { cx + 5, cy, cz };
+            world.setBlockToAir(nativePos[0], nativePos[1], nativePos[2]);
+            check(
+                GregTechAPI.METATILEENTITIES[141].getStackForm(1)
+                    .tryPlaceItemIntoWorld(player, world, nativePos[0], nativePos[1], nativePos[2], 1, .5f, .5f, .5f),
+                "native controller placement");
+            gregtech.api.metatileentity.implementations.MTEMultiBlockBase machine = (gregtech.api.metatileentity.implementations.MTEMultiBlockBase) ((IGregTechTileEntity) world
+                .getTileEntity(nativePos[0], nativePos[1], nativePos[2])).getMetaTileEntity();
+            MTEHatchInputBus sampleBus = (MTEHatchInputBus) ((IGregTechTileEntity) world.getTileEntity(cx + 1, cy, cz))
+                .getMetaTileEntity();
+            machine.mMachine = true;
+            machine.mInputBusses.add(sampleBus);
+            dev.aestoragevault.world.NativeBusOwners.checked(machine);
+            sample.checkStructure();
+            check(!sample.formed, "native bus sharing accepted");
+            machine.mInputBusses.clear();
+            sample.checkStructure();
+            check(sample.formed, "native bus release not detected");
+            world.setBlockToAir(nativePos[0], nativePos[1], nativePos[2]);
+            clearCube(cx, cy, cz);
+        });
+    }
+
+    private void fillCube(int x, int y, int z) {
+        for (int dx = -1; dx <= 1; dx++) for (int dy = -1; dy <= 1; dy++)
+            for (int dz = -1; dz <= 1; dz++) world.setBlock(x + dx, y + dy, z + dz, GregTechAPI.sBlockCasings1, 6, 2);
+        world.setBlockToAir(x, y, z);
+    }
+
+    private void clearCube(int x, int y, int z) {
+        for (int dx = -1; dx <= 1; dx++) for (int dy = -1; dy <= 1; dy++)
+            for (int dz = -1; dz <= 1; dz++) world.setBlockToAir(x + dx, y + dy, z + dz);
+    }
+
+    private void placeTestBus(int[] pos) {
+        world.setBlockToAir(pos[0], pos[1], pos[2]);
+        check(
+            GregTechAPI.METATILEENTITIES[bus.getBaseMetaTileEntity()
+                .getMetaTileID()].getStackForm(1)
+                    .tryPlaceItemIntoWorld(player, world, pos[0], pos[1], pos[2], 1, .5f, .5f, .5f),
+            "sample bus placement");
+    }
+
     private void initialTests() throws Exception {
         run("native_3x3x3_structure_and_AE_channel", () -> {
             check(controller.formed, "not formed: " + controller.status);
@@ -388,12 +517,13 @@ public final class VaultSuite {
     }
 
     private void afterImportTests() throws Exception {
+        flexibleShellTests();
         run("controller_and_access_require_LuV_assembler_recipes", () -> {
             int count = 0;
             for (gregtech.api.util.GTRecipe recipe : gregtech.api.recipe.RecipeMaps.assemblerRecipes.getAllRecipes()) {
                 if (recipe.mOutputs.length != 1) continue;
                 Block output = Block.getBlockFromItem(recipe.mOutputs[0].getItem());
-                if (output != VaultMod.CONTROLLER && output != VaultMod.ACCESS) continue;
+                if (output != VaultMod.CONTROLLER && output != VaultMod.ACCESS && output != VaultMod.OUTPUT) continue;
                 check(recipe.mEUt == gregtech.api.enums.TierEU.RECIPE_LuV, "wrong recipe voltage " + recipe.mEUt);
                 check(recipe.mEUt > gregtech.api.enums.GTValues.V[5], "IV can supply recipe");
                 check(
@@ -401,7 +531,7 @@ public final class VaultSuite {
                     "missing LuV assembly ingredients");
                 count++;
             }
-            check(count == 2, "expected two assembler recipes, found " + count);
+            check(count == 3, "expected three assembler recipes, found " + count);
             for (Object entry : net.minecraft.item.crafting.CraftingManager.getInstance()
                 .getRecipeList()) {
                 ItemStack result = ((net.minecraft.item.crafting.IRecipe) entry).getRecipeOutput();
@@ -415,7 +545,9 @@ public final class VaultSuite {
             IGregTechTileEntity base = bus.getBaseMetaTileEntity();
             NBTTagCompound before = new NBTTagCompound();
             bus.saveNBTData(before);
-            gregtech.api.interfaces.ITexture expected = gregtech.api.enums.Textures.BlockIcons.casingTexturePages[0][6];
+            gregtech.api.interfaces.ITexture expected = dev.aestoragevault.world.VaultSkin.texture(
+                dev.aestoragevault.world.VaultStructure
+                    .skinTile(world, base.getXCoord(), base.getYCoord(), base.getZCoord(), 1));
             gregtech.api.interfaces.ITexture[] skin = bus.getTexture(
                 base,
                 net.minecraftforge.common.util.ForgeDirection.UP,
@@ -423,7 +555,7 @@ public final class VaultSuite {
                 -1,
                 false,
                 false);
-            check(expected != null && skin[0] == expected, "formed input bus not LuV");
+            check(expected != null && skin[0] == expected, "formed input bus not continuous shell");
             NBTTagCompound after = new NBTTagCompound();
             bus.saveNBTData(after);
             check(

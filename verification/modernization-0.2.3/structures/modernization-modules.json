@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "modules": {
+    "structureterminal": "0.2.3-alpha",
+    "aeorderoptimizer": "0.2.3-alpha",
+    "plasmaforgepower": "0.2.3-alpha",
+    "aestoragevault": "0.2.3-alpha"
+  },
+  "client_launched": false
+}

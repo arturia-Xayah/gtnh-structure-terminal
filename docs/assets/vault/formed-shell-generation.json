@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-22",
+  "prompt": "Use case: stylized-concept. Asset type: one FLAT SQUARE Minecraft sci-fi multiblock casing surface texture covering one complete 3-by-3-block machine face. Produce an ORIGINAL smooth blue-white-purple futuristic ceramic-metal panel. This is a single coherent 192x192 logical pixel-art texture that will be cut into nine 64x64 block textures and reassembled seamlessly. NO internal 3x3 grid, NO repeated squares, NO bolts on each block, NO cracks, NO noisy metal, NO screen, NO ports, NO icons, NO text, NO perspective or cube. Center two-thirds is mostly clean pale blue-white satin ceramic with broad subtle cool shading; a restrained navy-blue and violet beveled outer frame along the perimeter, with thin cyan and lilac illuminated lines running near the OUTER boundary, clipped corners and simple elegant large geometry. Keep borders flat and edges aligned; the full square canvas is covered by texture, no margin, fully opaque. Low visual noise, smooth large uninterrupted panels, elegant futuristic GTNH storage-machine skin. Violet and icy blue secondary accents, white dominant; enough contrast to show the overall face outline while the individual Minecraft block boundaries disappear. Crisp production game texture, orthographic front view, one tile only, no background scene or mockup. Exactly square.",
+  "master": "docs/assets/vault/formed-shell-master.png",
+  "face": "docs/assets/vault/formed-shell-face.png",
+  "runtime": "src/main/resources/assets/aestoragevault/textures/blocks/formed_shell_0.png through formed_shell_8.png",
+  "preparation": "Java ImageIO nearest-neighbor 192x192 RGBA conversion and lossless nine 64x64 tile extraction."
+}

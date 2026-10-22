@@ -118,7 +118,7 @@ public final class VaultInventory<T extends IAEStack<T>> implements IMEInventory
 
     @Override
     public int getPriority() {
-        return 0;
+        return access.getPriority();
     }
 
     @Override

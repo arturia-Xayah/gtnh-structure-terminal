@@ -12,7 +12,11 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import dev.aestoragevault.core.VaultGeometry;
+import dev.aestoragevault.world.TileController;
 import dev.aestoragevault.world.VaultBlock;
+import dev.aestoragevault.world.VaultSkin;
+import dev.aestoragevault.world.VaultStructure;
 
 /** Native LuV shell plus a transparent original front overlay; no baked vanilla textures. */
 @SideOnly(Side.CLIENT)
@@ -31,7 +35,8 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int model,
         RenderBlocks renderer) {
-        renderer.renderStandardBlock(block, x, y, z);
+        if (VaultStructure.formedOwner(world, x, y, z) != null) renderShell(world, x, y, z, block, renderer);
+        else renderer.renderStandardBlock(block, x, y, z);
         VaultBlock vault = (VaultBlock) block;
         int metadata = world.getBlockMetadata(x, y, z);
         for (int side = 0; side < 6; side++) {
@@ -79,7 +84,37 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
         GL11.glPopMatrix();
     }
 
-    private void face(RenderBlocks r, Block b, int side, double x, double y, double z, IIcon icon) {
+    public static void renderShell(IBlockAccess world, int x, int y, int z, Block block, RenderBlocks renderer) {
+        TileController owner = VaultStructure.formedOwner(world, x, y, z);
+        if (owner == null) return;
+        int front = world.getBlockMetadata(owner.xCoord, owner.yCoord, owner.zCoord);
+        boolean oldAO = renderer.enableAO;
+        renderer.enableAO = false;
+        renderer.setRenderBounds(0, 0, 0, 1, 1, 1);
+        try {
+            for (int side = 0; side < 6; side++) {
+                ForgeDirection normal = ForgeDirection.getOrientation(side);
+                if (!block
+                    .shouldSideBeRendered(world, x + normal.offsetX, y + normal.offsetY, z + normal.offsetZ, side))
+                    continue;
+                int tile = VaultGeometry.tile(
+                    x - owner.xCoord + VaultGeometry.normal(front, 0),
+                    y - owner.yCoord + VaultGeometry.normal(front, 1),
+                    z - owner.zCoord + VaultGeometry.normal(front, 2),
+                    side);
+                Tessellator.instance.setBrightness(
+                    block
+                        .getMixedBrightnessForBlock(world, x + normal.offsetX, y + normal.offsetY, z + normal.offsetZ));
+                float light = side == 0 ? .5f : side == 1 ? 1f : side < 4 ? .8f : .6f;
+                Tessellator.instance.setColorOpaque_F(light, light, light);
+                face(renderer, block, side, x, y, z, VaultSkin.icons[tile]);
+            }
+        } finally {
+            renderer.enableAO = oldAO;
+        }
+    }
+
+    private static void face(RenderBlocks r, Block b, int side, double x, double y, double z, IIcon icon) {
         switch (side) {
             case 0:
                 r.renderFaceYNeg(b, x, y, z, icon);

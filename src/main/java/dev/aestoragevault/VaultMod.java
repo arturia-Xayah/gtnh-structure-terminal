@@ -24,6 +24,7 @@ import dev.aestoragevault.storage.Repositories;
 import dev.aestoragevault.ui.CommonProxy;
 import dev.aestoragevault.world.TileAccess;
 import dev.aestoragevault.world.TileController;
+import dev.aestoragevault.world.TileOutput;
 import dev.aestoragevault.world.VaultBlock;
 import dev.structureterminal.Tags;
 
@@ -37,7 +38,7 @@ public final class VaultMod {
 
     public static final String ID = "aestoragevault";
     public static final Logger LOG = LogManager.getLogger(ID);
-    public static Block CASING, CONTROLLER, ACCESS;
+    public static Block CASING, CONTROLLER, ACCESS, OUTPUT;
     @Mod.Instance(ID)
     public static VaultMod INSTANCE;
     @SidedProxy(clientSide = "dev.aestoragevault.ui.ClientProxy", serverSide = "dev.aestoragevault.ui.CommonProxy")
@@ -48,11 +49,14 @@ public final class VaultMod {
         CASING = new VaultBlock(0);
         CONTROLLER = new VaultBlock(1);
         ACCESS = new VaultBlock(2);
+        OUTPUT = new VaultBlock(3);
         GameRegistry.registerBlock(CASING, "casing");
         GameRegistry.registerBlock(CONTROLLER, "controller");
         GameRegistry.registerBlock(ACCESS, "access");
+        GameRegistry.registerBlock(OUTPUT, "output");
         GameRegistry.registerTileEntity(TileController.class, ID + ":controller");
         GameRegistry.registerTileEntity(TileAccess.class, ID + ":access");
+        GameRegistry.registerTileEntity(TileOutput.class, ID + ":output");
         FMLCommonHandler.instance()
             .bus()
             .register(Repositories.INSTANCE);
@@ -92,6 +96,25 @@ public final class VaultMod {
             .duration(400)
             .eut(gregtech.api.enums.TierEU.RECIPE_LuV)
             .addTo(gregtech.api.recipe.RecipeMaps.assemblerRecipes);
+        gregtech.api.enums.GTValues.RA.stdBuilder()
+            .itemInputs(
+                gregtech.api.enums.ItemList.Hull_LuV.get(1),
+                new Object[] { gregtech.api.enums.OrePrefixes.circuit.get(gregtech.api.enums.Materials.LuV), 2 },
+                gregtech.api.enums.ItemList.Emitter_LuV.get(2),
+                AEApi.instance()
+                    .definitions()
+                    .parts()
+                    .exportBus()
+                    .maybeStack(1)
+                    .get())
+            .fluidInputs(gregtech.api.enums.Materials.SolderingAlloy.getMolten(288))
+            .itemOutputs(new ItemStack(OUTPUT))
+            .duration(400)
+            .eut(gregtech.api.enums.TierEU.RECIPE_LuV)
+            .addTo(gregtech.api.recipe.RecipeMaps.assemblerRecipes);
+        appeng.api.config.Upgrades.FUZZY.registerItem(new ItemStack(OUTPUT), 1);
+        appeng.api.config.Upgrades.INVERTER.registerItem(new ItemStack(OUTPUT), 1);
+        appeng.api.config.Upgrades.ORE_FILTER.registerItem(new ItemStack(OUTPUT), 1);
     }
 
     public static boolean isLuVCasing(net.minecraft.world.IBlockAccess world, int x, int y, int z) {

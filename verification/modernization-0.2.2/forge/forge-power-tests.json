@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "native_full_structure_formed",
+      "passed": true,
+      "detail": "supply\u003d137438953472, casings\u003d1273"
+    },
+    {
+      "name": "target_only_and_native_controller",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_ui_panel_constructs_on_server",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "nbt_roundtrip_all_groups_and_large_values",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "clipboard_rejects_foreign_payload_atomically",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "world_nbt_keeps_configuration_without_formation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "matter_manipulator_actual_analyze_and_apply",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "matter_manipulator_numeric_width_and_long_precision",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_data_orb_copy_paste",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "red_group_low_power_recipe",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "green_group_uses_own_larger_power",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "over_budget_recipe_keeps_ingredients_and_checks_next_group",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "different_colors_never_merge_ingredients",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unpainted_auto_matches_native_processing_power",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unpainted_manual_cap_cannot_escape_via_empty_painted_bus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "complete_painted_recipe_can_run_without_taking_unpainted_items",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "input_separation_and_shared_items_keep_native_semantics",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "colored_fluid_only_recipe_uses_hatch_color",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unpainted_shared_fluid_does_not_remove_red_limit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "settings_change_does_not_recalculate_current_recipe",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "convergence_catalyst_and_overclock_use_color_budget",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_running_tick_draws_actual_eut",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "partial_structure_preserves_configuration_until_success",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "larger_replacement_does_not_restore_old_limit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "clamp_at_paste_into_smaller_formed_forge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "native_tick_recipe_completed",
+      "passed": true,
+      "detail": "ticks\u003d501, recipe_duration\u003d400"
+    }
+  ],
+  "low_eut": 8388608,
+  "green_eut": 2147483648,
+  "client_launched": false
+}

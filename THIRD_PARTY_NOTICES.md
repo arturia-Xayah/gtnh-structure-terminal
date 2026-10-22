@@ -21,3 +21,5 @@ The original MIT starter notice is retained verbatim in `LICENSES/ExampleMod-MIT
 * Power controls and AE Storage Vault are integrated from the project’s previously separate LGPL-3.0-or-later implementations. Their original `plasmaforgepower` and `aestoragevault` namespaces, NBT keys and external world-save folder are retained. No GTO/GTOLib protected storage implementation is included.
 
 * `assets/aestoragevault/textures/blocks/controller_overlay.png` and `access_overlay.png` are original GTO-inspired sprites generated with the built-in image generator. Masters and prompts are retained in `docs/assets/vault/`. Native LuV casing textures are referenced from the installed GTNH pack; no GT casing raster is embedded in the mod.
+
+* `assets/aestoragevault/textures/blocks/formed_shell_0.png` through `formed_shell_8.png` are nine losslessly extracted pieces of an original blue/white/violet surface generated with the built-in image generator. The master, 192×192 face and full prompt are retained in `docs/assets/vault/formed-shell-generation.json`.

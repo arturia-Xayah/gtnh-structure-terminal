@@ -10,6 +10,8 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.3-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.3-alpha-GTNH-2.9.0-RC-2.jar)
+
 Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 </div>
@@ -21,13 +23,13 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 - [AE order optimization](#ae-order-optimization): opt-in planning checks and bulk dispatch
 - [Craftable input badges](#craftable-input-badges): see which ingredients already have patterns
 - [Forge and fusion power controls](#forge-and-fusion-power-controls): limit processing power by input color
-- [ME Storage Vault](#me-storage-vault): consume cells for capacity with external inventory files
+- [ME Cell Aggregation Storage](#me-cell-aggregation-storage): consume cells for capacity with external inventory files
 - [Compatibility and saves](#compatibility-and-saves)
 - [Developer documentation](#developer-documentation)
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.2.1-alpha-GTNH-2.9.0-RC-2.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+1. Install `gtnh-modernization-upgrade-0.2.3-alpha-GTNH-2.9.0-RC-2.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
 2. Remove older Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
 3. Back up the complete world before upgrading. Keep `data/aestoragevault`: existing terminal/vault items, blocks, inventory IDs and power settings retain their registration namespaces and save locations. Existing vaults must replace the 23 legacy casings with native LuV machine casings before reforming.
 
@@ -76,16 +78,17 @@ Edits apply to the next recipe without interrupting the running reaction. Succes
 
 Matter Manipulator and Data Orb configuration copying are supported. [Detailed usage and fusion notes](docs/features/POWER.md)
 
-## ME Storage Vault
+## ME Cell Aggregation Storage
 
-Build a **3×3×3 hollow cube**: controller at the front center, **23 native LuV machine casings, exactly one ordinary GT input bus and one ME access interface**, with air in the center. No storage cores. The controller and ME interface require **LuV assembler recipes**.
+Build a **3×3×3 hollow cube**: outward-facing controller at the center of any of the six faces, **23 native LuV machine casings, exactly one ordinary GT input bus and exactly one ME Storage Link Hatch or Export Bus (mutually exclusive)**, with air in the center. No storage cores. All three custom blocks require **LuV assembler recipes**.
 
-- Connect the interface to powered AE: **one channel, 2 AE/t**.
+- Connect the Storage Link Hatch to powered AE: **one channel, 2 AE/t**. Right-click for the native AE2 priority GUI; native storage access and Reshuffle are supported.
+- Alternatively install the **ME Cell Aggregation Storage Export Bus**. It actively exports into its connected AE network, using 36 item/fluid phantom filters with NEI drag-and-drop and fuzzy, inverter and ore-filter cards. Empty filters export everything.
 - Insert components, empty cells or filled cells. Contents and installed upgrade cards are migrated before consuming the source and adding its full nominal capacity. The housing is consumed too.
-- No artificial type limit or type overhead. Shared capacity: **8 items or 2048 mB of fluid per byte**.
+- No artificial type limit or type overhead. Capacity and individual resource counts use signed `long`; maximum total capacity is approximately **8 EiB**. Shared capacity: **8 items or 2048 mB of fluid per byte**.
 - Right-click the controller for usage, status and automatic-absorption controls. Unsupported, creative, void and spatial cells remain in the bus.
 
-GTO-inspired blue/white control and network-port overlays share the native LuV shell. A formed vault also renders its bus with that shell while preserving input indicators.
+Once formed, the entire structure shares a smooth blue/white/violet sci-fi surface connected across each complete face, with functional panels preserved. The bus and interface can occupy any remaining shell position, including top, bottom, edges and corners. Sharing either component between vaults prevents both from forming; buses reserved by a registered native GT multiblock are also rejected. Releasing the conflict allows formation again.
 
 Inventory lives in external world-save files. Normal harvesting preserves the controller UUID; replacing and reforming reconnects it. Back up the whole world. Importing new cells forces a save and may briefly pause the server.
 
