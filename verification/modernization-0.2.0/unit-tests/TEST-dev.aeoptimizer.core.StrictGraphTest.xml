@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aeoptimizer.core.StrictGraphTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-22T05:18:40.077Z" hostname="D9CH4WN6T3" time="0.026">
+  <properties/>
+  <testcase name="deepGraphDoesNotOverflowJavaStack" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.017"/>
+  <testcase name="rejectsSelfLoopWithClosedPath" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.001"/>
+  <testcase name="exactIntegerCeilingForHugeOrders" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.0"/>
+  <testcase name="unrelatedRecipesAreNeverVisited" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.001"/>
+  <testcase name="sharedDependencyComesAfterAllConsumers" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.001"/>
+  <testcase name="rejectsSelectedMultiOutput" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.001"/>
+  <testcase name="rejectsProductiveTwoRecipeCycleToo" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.0"/>
+  <testcase name="batchesHaveCorrectRemainderAndDoNotLoopPerCraft" classname="dev.aeoptimizer.core.StrictGraphTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,11 @@
+tile.aestoragevault.casing.name=旧式容量仓库外壳（已停用）
+tile.aestoragevault.controller.name=ME 仓储主机
+tile.aestoragevault.access.name=ME 仓储访问接口
+vault.title=ME 外置仓储
+vault.capacity=最大容量
+vault.used=已用容量
+vault.types=物品/流体类型
+vault.formed=已成型
+vault.incomplete=未成型
+vault.auto=切换自动吸收
+vault.check=检测结构

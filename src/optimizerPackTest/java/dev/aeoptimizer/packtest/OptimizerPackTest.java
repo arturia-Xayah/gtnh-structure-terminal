@@ -141,6 +141,7 @@ public final class OptimizerPackTest {
         try {
             if (phase == 0) {
                 setup();
+                CraftableInputsPackChecks.run(this);
                 phase = 1;
                 waitUntil = ticks + 160;
                 return;

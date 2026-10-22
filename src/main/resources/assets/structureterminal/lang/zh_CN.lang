@@ -47,3 +47,4 @@ structureterminal.error=终端：%s
 structureterminal.demolished=拆除结束，已拆除 / 已跳过：%s
 structureterminal.unsupported=此控制器没有提供可读取的 StructureLib 结构。
 structureterminal.render_limit=已达到预览绘制上限，可切换到单层查看其余部分。
+structureterminal.ae.craftable_input=网络中已有合成样板

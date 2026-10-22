@@ -1,0 +1,11 @@
+tile.aestoragevault.casing.name=Legacy Vault Casing (Retired)
+tile.aestoragevault.controller.name=ME Storage Vault
+tile.aestoragevault.access.name=ME Vault Access Port
+vault.title=ME Storage Vault
+vault.capacity=Capacity
+vault.used=Used
+vault.types=Types
+vault.formed=Formed
+vault.incomplete=Incomplete
+vault.auto=Toggle absorption
+vault.check=Check structure

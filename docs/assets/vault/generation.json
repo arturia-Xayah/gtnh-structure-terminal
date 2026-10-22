@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-22",
+  "logical_texture_size": [
+    64,
+    64
+  ],
+  "preparation": "Nearest-neighbor size conversion with Java ImageIO; original generated masters preserved.",
+  "controller": "Use case: stylized-concept. Asset type: a single Minecraft/GregTech block FRONT OVERLAY texture. Create an ORIGINAL GTO-inspired ME storage controller face for GTNH, matching the reference native LuV machine casing. Reference image 1 is the pale silver LuV body color, reference image 2 is GTO's modular storage visual vocabulary, not an edit target. Flat orthographic square, centered, exactly one front tile, edge-to-edge aligned, no perspective, no cube, no labels/text/logos/watermark. Minimal high-clarity pixel-art with a 64x64 logical pixel grid: a recessed dark navy rectangular terminal in the middle, a simple cyan-white storage cube glyph, two small horizontal status lights and short clean panel seams. Pale silver/white metal framing with very restrained blue accents, graphite recesses. Large readable simple shapes, crisp hard pixel edges, no gradients, no noise, no 3D rendering, no intricate decorative circuits. Keep the outermost 4 logical pixels transparent so the native LuV casing underneath forms the shared border. Everything outside the small central terminal/frame is TRUE TRANSPARENT. A clean production-ready sprite, not a mockup. This is the inactive/neutral front; cyan is a restrained accent, no bloom.",
+  "access": "Use case: stylized-concept. Asset type: one Minecraft/GregTech ME ACCESS INTERFACE front overlay sprite, companion to reference image 1 (the newly generated controller face). Reference image 2 is the native LuV machine casing color. Create a NEW matching simplified interface face, same centered square silhouette, pale silver/white panel frame and graphite recess, restrained cyan/ice-blue and white lights. Replace the controller cube/screen with a clearly readable ME NETWORK SOCKET symbol: one central square port, two small opposing connector brackets, and only two short branching cyan traces, suggesting a network link. Less busy and less screen area than the controller. Flat orthographic front texture, not a cube or rendered block. Production game pixel art with a 64x64 logical grid and hard pixel edges. Transparent outermost four logical pixel margin; areas outside the compact central frame are TRUE TRANSPARENT, to overlay on a LuV casing. Exactly one tile, no labels, no text, no logo, no perspective, no tiled montage, no noise, no fine circuitry, no excessive glows or gradients. Match the controller's geometry and border thickness.",
+  "references": [
+    "GTNH GT5 5.09.54.205 MACHINE_LuV_SIDE",
+    "GTOCore local snapshot me_storage_core/t1"
+  ],
+  "files": [
+    "src/main/resources/assets/aestoragevault/textures/blocks/controller_overlay.png",
+    "src/main/resources/assets/aestoragevault/textures/blocks/access_overlay.png"
+  ],
+  "access_revision": "access-socket-revision.json",
+  "access_original_master": "access-panel-v1-master.png"
+}

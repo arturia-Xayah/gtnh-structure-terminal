@@ -47,3 +47,4 @@ structureterminal.error=Terminal: %s
 structureterminal.demolished=Demolition finished. Removed / skipped: %s
 structureterminal.unsupported=This controller does not expose a supported StructureLib definition.
 structureterminal.render_limit=Preview draw cap reached; select a layer to see the rest.
+structureterminal.ae.craftable_input=Crafting pattern available in this network

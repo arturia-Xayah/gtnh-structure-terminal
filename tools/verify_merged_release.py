@@ -72,7 +72,7 @@ def main():
                 check(label+'_actual_fixture_hash_recorded',fixtures[label] in log.read_text())
     check('distribution_sha256_recorded',sha(runtime) in (ROOT/'dist/SHA256SUMS').read_text())
     (OUT/'verification.json').touch(exist_ok=True)
-    docs=['README.md','README.en.md','VERIFICATION.md','docs/AE_ORDER_OPTIMIZER.md','docs/AE_BENCHMARK.md','docs/BUILDING.md','verification/merged-0.1.4/README.md']
+    docs=['README.md','README.en.md','docs/development/STRUCTURE_VERIFICATION.md','docs/development/AE_ORDER_INTERNALS.md','docs/development/AE_BENCHMARK.md','docs/development/BUILDING.md','verification/merged-0.1.4/README.md']
     for filename in docs:
         doc=ROOT/filename
         check(filename+':relative_links_exist',all('://' in link or (doc.parent/link.split('#')[0]).exists() for link in re.findall(r'\]\(([^)]+)\)',doc.read_text())))

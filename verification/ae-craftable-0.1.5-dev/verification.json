@@ -1,0 +1,67 @@
+{
+  "version": "0.1.5-alpha",
+  "target": "GTNH-2.9.0-RC-2",
+  "jar_sha256": "0158e53c45267fb27751d86b1a87a72a1a21ca8004f2138f167d15dcfd605dcf",
+  "fixture_sha256": "c4d4fb40e385e82d5e685cd27095b71c436cb5592eeb16ab8127287ebf0d4ad1",
+  "production_classes": 81,
+  "unit_tests": 33,
+  "headless_cases": 51,
+  "badge_cases": 18,
+  "client_launched": false,
+  "client_mixin_execution_tested": false,
+  "visual_validation": false,
+  "checks": [
+    {
+      "check": "no_test_fixture_in_distribution",
+      "passed": true
+    },
+    {
+      "check": "java_8_bytecode",
+      "passed": true
+    },
+    {
+      "check": "all_production_classes_match_tested_fixture",
+      "passed": true
+    },
+    {
+      "check": "badge_classes_packaged",
+      "passed": true
+    },
+    {
+      "check": "tooltip_translation_zh_CN",
+      "passed": true
+    },
+    {
+      "check": "tooltip_translation_en_US",
+      "passed": true
+    },
+    {
+      "check": "client_font_call_remapped",
+      "passed": true
+    },
+    {
+      "check": "mod_ids_and_versions",
+      "passed": true
+    },
+    {
+      "check": "headless_suite_completed",
+      "passed": true
+    },
+    {
+      "check": "all_headless_cases_passed",
+      "passed": true
+    },
+    {
+      "check": "18_native_badge_cases_passed",
+      "passed": true
+    },
+    {
+      "check": "unit_tests_passed",
+      "passed": true
+    },
+    {
+      "check": "4_client_hook_checks_passed",
+      "passed": true
+    }
+  ]
+}

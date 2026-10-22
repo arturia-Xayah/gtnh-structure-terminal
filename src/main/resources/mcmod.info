@@ -2,43 +2,59 @@
   "modListVersion": 2,
   "modList": [
     {
-      "modid": "${modId}",
-      "name": "${modName}",
-      "description": "GTNH structure preview, part selection and building, bundled with opt-in AE order planning and bulk dispatch.",
+      "modid": "structureterminal",
+      "name": "GTNH现代化升级",
+      "description": "结构终端、AE下单优化、原料合成标记、锻炉与聚变功率控制、ME容量仓库。",
       "version": "${modVersion}",
       "mcversion": "${minecraftVersion}",
-      "url": "",
-      "updateUrl": "",
       "authorList": [
-        "Structure Terminal contributors"
+        "GPT-6 (Codex)"
       ],
-      "credits": "GTO/GregTech-Modern and Low-Drag-MC/LDLib2: Ore UI design and atlas; GTNH: StructureLib API",
-      "logoFile": "",
-      "screenshots": [],
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
       "parent": "",
-      "requiredMods": [],
-      "dependencies": [],
-      "dependants": [],
+      "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
       "useDependencyInformation": false
     },
     {
       "modid": "aeorderoptimizer",
-      "name": "AE Order Optimizer",
-      "description": "Bundled Structure Terminal module: network opt-in, selected-route checks, diagnostics and bulk dispatch.",
+      "name": "GTNH现代化升级 · AE下单优化",
+      "description": "按网络启用下单计算与批量发配。",
       "version": "${modVersion}",
       "mcversion": "${minecraftVersion}",
-      "url": "",
-      "updateUrl": "",
       "authorList": [
-        "Structure Terminal contributors"
+        "GPT-6 (Codex)"
       ],
-      "credits": "GTNH Applied Energistics 2 Lite planner, LGPL-3.0-or-later",
-      "logoFile": "",
-      "screenshots": [],
-      "parent": "",
-      "requiredMods": [],
-      "dependencies": [],
-      "dependants": [],
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "parent": "structureterminal",
+      "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
+      "useDependencyInformation": false
+    },
+    {
+      "modid": "plasmaforgepower",
+      "name": "GTNH现代化升级 · 功率控制",
+      "description": "锻炉、普通聚变及压缩聚变的分色功率预算。",
+      "version": "${modVersion}",
+      "mcversion": "${minecraftVersion}",
+      "authorList": [
+        "GPT-6 (Codex)"
+      ],
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "parent": "structureterminal",
+      "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
+      "useDependencyInformation": false
+    },
+    {
+      "modid": "aestoragevault",
+      "name": "GTNH现代化升级 · ME容量仓库",
+      "description": "吸收存储元件扩容、迁移库存并使用外部存储文件。",
+      "version": "${modVersion}",
+      "mcversion": "${minecraftVersion}",
+      "authorList": [
+        "GPT-6 (Codex)"
+      ],
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "parent": "structureterminal",
+      "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
       "useDependencyInformation": false
     }
   ]

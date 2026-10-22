@@ -1,0 +1,376 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "check": "unique_jar_entries",
+      "passed": true
+    },
+    {
+      "check": "java_8_bytecode",
+      "passed": true
+    },
+    {
+      "check": "no_test_or_dependency_classes",
+      "passed": true
+    },
+    {
+      "check": "preserved_four_module_ids",
+      "passed": true
+    },
+    {
+      "check": "unified_name",
+      "passed": true
+    },
+    {
+      "check": "shared_version",
+      "passed": true
+    },
+    {
+      "check": "child_metadata",
+      "passed": true
+    },
+    {
+      "check": "terminal_icon_for_all_modules",
+      "passed": true
+    },
+    {
+      "check": "approved_terminal_icon_unchanged",
+      "passed": true
+    },
+    {
+      "check": "terminal_core_plugin",
+      "passed": true
+    },
+    {
+      "check": "independent_mixin_loaders",
+      "passed": true
+    },
+    {
+      "check": "vault_skin_mixin_loader",
+      "passed": true
+    },
+    {
+      "check": "controller_64px_alpha_texture",
+      "passed": true
+    },
+    {
+      "check": "access_64px_alpha_texture",
+      "passed": true
+    },
+    {
+      "check": "language_structureterminal_zh_CN",
+      "passed": true
+    },
+    {
+      "check": "language_aeorderoptimizer_zh_CN",
+      "passed": true
+    },
+    {
+      "check": "language_plasmaforgepower_zh_CN",
+      "passed": true
+    },
+    {
+      "check": "language_aestoragevault_zh_CN",
+      "passed": true
+    },
+    {
+      "check": "language_structureterminal_en_US",
+      "passed": true
+    },
+    {
+      "check": "language_aeorderoptimizer_en_US",
+      "passed": true
+    },
+    {
+      "check": "language_plasmaforgepower_en_US",
+      "passed": true
+    },
+    {
+      "check": "language_aestoragevault_en_US",
+      "passed": true
+    },
+    {
+      "check": "production_bytecode_matches_modernization-luv-fixture-2.jar",
+      "passed": true
+    },
+    {
+      "check": "all_unit_tests_pass",
+      "passed": true
+    },
+    {
+      "check": "runner_modernization-luv-full",
+      "passed": true
+    },
+    {
+      "check": "vault_exit_1",
+      "passed": true
+    },
+    {
+      "check": "vault_all_cases_1",
+      "passed": true
+    },
+    {
+      "check": "vault_live_namespaces_1",
+      "passed": true
+    },
+    {
+      "check": "vault_exit_2",
+      "passed": true
+    },
+    {
+      "check": "vault_all_cases_2",
+      "passed": true
+    },
+    {
+      "check": "vault_live_namespaces_2",
+      "passed": true
+    },
+    {
+      "check": "forge_exit_1",
+      "passed": true
+    },
+    {
+      "check": "forge_all_cases_1",
+      "passed": true
+    },
+    {
+      "check": "forge_live_namespaces_1",
+      "passed": true
+    },
+    {
+      "check": "fusion_exit_1",
+      "passed": true
+    },
+    {
+      "check": "fusion_all_cases_1",
+      "passed": true
+    },
+    {
+      "check": "fusion_live_namespaces_1",
+      "passed": true
+    },
+    {
+      "check": "ae_exit_1",
+      "passed": true
+    },
+    {
+      "check": "all_ae_cases",
+      "passed": true
+    },
+    {
+      "check": "ae_live_namespaces_1",
+      "passed": true
+    },
+    {
+      "check": "structures_exit_1",
+      "passed": true
+    },
+    {
+      "check": "structure_operations",
+      "passed": true
+    },
+    {
+      "check": "structures_live_namespaces_1",
+      "passed": true
+    },
+    {
+      "check": "every_feature_suite_exercised",
+      "passed": true
+    },
+    {
+      "check": "vault_cross_process_restart",
+      "passed": true
+    },
+    {
+      "check": "player_and_developer_document_links",
+      "passed": true
+    }
+  ],
+  "version": "0.2.1-alpha",
+  "target": "GTNH 2.9.0-RC-2",
+  "client_launched": false,
+  "artifact": "gtnh-modernization-upgrade-0.2.1-alpha-GTNH-2.9.0-RC-2.jar",
+  "sha256": "56af94e78ba3130feb6aa497225378eebe99dfa97ba6781584b72e604c416b71",
+  "classes": 124,
+  "class_sha256": {
+    "dev/aeoptimizer/LateMixins.class": "75b53cb94a3c2793a198e4fd3beeb73a6c3f9ed284c70d81884cf7b0520c3971",
+    "dev/aeoptimizer/OrderOptimizer.class": "26cf2a242ed751823ca10078d61bd3abafa686c2b6c4e0588adc64c0b0e8024d",
+    "dev/aeoptimizer/api/CpuBatchStats.class": "c4645276fbb930deb4e42b085f6e69155a6a625c59cdd2b8712062bdd54c59e8",
+    "dev/aeoptimizer/api/IBatchMedium.class": "aabdbaabfb2d2fb21f115faa2f2e979f1d21a195c71f08409642537e41373cd1",
+    "dev/aeoptimizer/api/PatternCatalog.class": "25a7d021b8539405fc242a71c2f3fde974543540b42d6b9b3927186c422e9371",
+    "dev/aeoptimizer/api/ProgressAccess.class": "f9591240c6f15df1f0c8fc53f929911035e7b0adcb6d63aa1325058343b85e6d",
+    "dev/aeoptimizer/core/BatchMath.class": "f454d3bbe5912627289028c912f4042cba0396a1820efa70cd0eab37099604b6",
+    "dev/aeoptimizer/core/StrictGraph$Frame.class": "ce4ab046fbb8dd631de8335e05c64d03e605d986865a8b663eb251053fdc9f78",
+    "dev/aeoptimizer/core/StrictGraph$InvalidPath.class": "2a463ac69f62fe088629a2c80606557fa582cf3bde44dd77274cf036f996495e",
+    "dev/aeoptimizer/core/StrictGraph$Recipe.class": "9dc0ed6e574a970bb3e8f8a092a20318b70092598e4c2ef239b2ccbdb1ce6967",
+    "dev/aeoptimizer/core/StrictGraph.class": "38af98351f7f0a3ac309cd675089298124cb1cadf43da7a5b616e2e6c707fcef",
+    "dev/aeoptimizer/dispatch/BatchContext.class": "7297f79c90b58716e7a4e9d4e7d1075863696c5b06ef88a76a11678fcabdf2ee",
+    "dev/aeoptimizer/dispatch/OrderOrigin.class": "f31d4219d74f2c4618139051d97e203ad4228741b6c2dda858dfbe08e90adf05",
+    "dev/aeoptimizer/mixin/CpuDiagnosticsMixin.class": "c02255a4e5be03233fd336464d616fa6d2bcbc200053a7e4d9dded3725e4986b",
+    "dev/aeoptimizer/mixin/CpuMixin.class": "101778010159ee149caff4dbd050474f935752c87296da04efe7f6ac193f0487",
+    "dev/aeoptimizer/mixin/CraftingGridMixin.class": "f47cad7bf9e20184adaae35de8ebc305c2cae0200847aacd973ffe62f7f78f1e",
+    "dev/aeoptimizer/mixin/DualityMixin.class": "223cbf9ea91dff54072375bcfab3f5f85585befd2c913ff00ce6f694415251e7",
+    "dev/aeoptimizer/mixin/SessionCountMixin.class": "8bf6265728e4c54056c30fe0e64285cb940ad030dbad23fe75b9e82d78da96aa",
+    "dev/aeoptimizer/mixin/TaskProgressMixin.class": "c8c6388873ff45f52ef0151d64bbd96f8762b05700ed73d7569bf394cf73d996",
+    "dev/aeoptimizer/mixin/client/ItemRepoAccessor.class": "f5607e861161e0add7a06c9f675115cff98454d0c7d7b0b70ca5392e231c0f72",
+    "dev/aeoptimizer/mixin/client/PatternInputMixin.class": "f1e5bb7a83540f8767371783898b8f45cc4d4fc41ca442c4215a867037e5e6eb",
+    "dev/aeoptimizer/mixin/client/PatternTooltipMixin.class": "684df0147dd68e89240d32f7e0fd1c8a7b06a2c20866077541d88e4ff8607e2d",
+    "dev/aeoptimizer/mixin/client/TerminalRepoAccessor.class": "1054625527c9f033aa790cbffcb6acea107d8a02e0db9484892380ba8b3eadf0",
+    "dev/aeoptimizer/network/BlockOptimizer.class": "454c652d3e0e8abf61bfb4756bdc9656104d4fe2abcf444500148d7c3c9c4581",
+    "dev/aeoptimizer/network/OptimizerNetworks.class": "73984db146fe72e919fbd2a18870f052a1ec709d298df960ae3379f47c693a31",
+    "dev/aeoptimizer/network/TileOptimizer.class": "9d6ff4c27175c4baee134d14ec4538f3012982b4e9b0b97563624411a78397eb",
+    "dev/aeoptimizer/planning/Reports.class": "3cd73d11efe4997ae92541fef4189863d278d6ba7051d2dcc3d97e3cf101cb2e",
+    "dev/aeoptimizer/planning/StrictCraftingJob.class": "e44aaef068631afddf4e16efb34d4f5b9368d5b43456bee12810b17289a755a2",
+    "dev/aeoptimizer/ui/ClientProxy.class": "4b769a537597675c25ddebbf4959719e1e6f4d49b1e239fcd2bc92d480032f7e",
+    "dev/aeoptimizer/ui/CommonProxy.class": "21efcaa338fe9ef9a6897af8cad408b4d27f9f06f37a98d887d4669a8667ac6c",
+    "dev/aeoptimizer/ui/OptimizerContainer.class": "aaa80ccbf71a5035d853d7543868f21e36ad9ab901044e6a0ab94d103947adbe",
+    "dev/aeoptimizer/ui/OptimizerScreen.class": "d3581d4dc436c3f4d7bc50cf980ad22581d072ada0c35588a7df4e70d05cb5d8",
+    "dev/aestoragevault/LateMixins.class": "81d9b6cfb8f5bd0c4215cbc17e7f72f0c706bfe2396e7f4fbcd9fd2cfae467e9",
+    "dev/aestoragevault/VaultMod.class": "63ab47571700a6f46c5b8c91e7c88a2e4028f3ec19c84a877dcd8fa614b92bf6",
+    "dev/aestoragevault/ae/CellReader.class": "c8bac80735532bc8be013e22e97ddd63d0b980c960c248f486f3ab8897658eb8",
+    "dev/aestoragevault/ae/ResourceCodec.class": "1cda12b72d07ac7ccef3b6d206eacc23d9f865a4ddd721e683b99cb2d5b52587",
+    "dev/aestoragevault/ae/VaultInventory.class": "51a2086fd8a6bbbdc6dd6b36d0877c7dc48c2d768fe1504914d627ee9a0add2e",
+    "dev/aestoragevault/client/VaultBlockRenderer.class": "652a52c095beb48b4142f0883812b67483a92e35e57e01463998f70f7c24f18b",
+    "dev/aestoragevault/core/Resource.class": "2adbc90f790e6dda717e22785f183f255a78810a3cb3eb3f734a77cc29385b04",
+    "dev/aestoragevault/core/VaultStore.class": "4c002b34a43302c1b8bb8d499d86c76aa0f191e55f459e7346da2aba7a40221a",
+    "dev/aestoragevault/mixin/VaultHatchSkinMixin.class": "14bff5e939a5c6d47b3fc20263d5c9310409b6583356d44edcaddd55ad84fe3e",
+    "dev/aestoragevault/storage/Repositories.class": "e4a0338292ca429b53a1ff881135cfe3c775423050e277df0e6e8b6d11e30765",
+    "dev/aestoragevault/ui/ClientProxy.class": "b6757469e142776d2862406e5f512119d3aab127bb6bec43fbe573ea29aaa509",
+    "dev/aestoragevault/ui/CommonProxy.class": "004d6070a8cccd1e64957b41ee83b68fcf7a3ef8c7224efe72535908e4141a3f",
+    "dev/aestoragevault/ui/VaultContainer.class": "7ade587b79c69cce1d8ee2e2a72e98ba195baf36f3b8a865b2a977028372a40e",
+    "dev/aestoragevault/ui/VaultScreen.class": "d92a30131676c0c1312703de86f6aa05685abfac4964e6ab81af67738ba9bd25",
+    "dev/aestoragevault/world/TileAccess.class": "a9bee78c04aa709632d12094f4f0f119eae808be41b1e31525b8b835f39b3f9e",
+    "dev/aestoragevault/world/TileController$Import.class": "80a0ac4e930f32c218e7d392699e1f8ce033462e9a937409dbf4ff51403bd030",
+    "dev/aestoragevault/world/TileController.class": "9daa2c4cf0822acc1cfc25c79f9d58e5795b42abd7d8fee732832abf09c7cbe4",
+    "dev/aestoragevault/world/VaultBlock.class": "1c621c6e1df87aa4915ff7c191af8aadd17b21dff5a84d3f970d586f16b4f33d",
+    "dev/aestoragevault/world/VaultStructure$Shape.class": "f07f89c505e724ce72c1c7429726bf6cc725d303f348b65a4c7e33b4af62848e",
+    "dev/aestoragevault/world/VaultStructure.class": "909c7da3320bec9d737783aff287e3fdad629386d3eb2c05bb4398e306bf5490",
+    "dev/plasmaforgepower/LateMixins.class": "bdba1ae3ff0e8460fa61152ed6f44050c849a0ff56c650649ac637e798b8f821",
+    "dev/plasmaforgepower/PlasmaForgePower.class": "9278a250053a58d73311c77c622a18de41e497cc7dd3b10b658c792247fd845c",
+    "dev/plasmaforgepower/api/ForgePowerAccess.class": "dc37ea0d98603f086edfbdf170f9a9e11979ee52eabb4aad543ff3a5b3cf879b",
+    "dev/plasmaforgepower/api/FusionPowerAccess.class": "ab9f088f513694303905e21e5168a645e7b2008735cbed8865035ff5b861dc44",
+    "dev/plasmaforgepower/core/PowerLimit.class": "ce70a4ad0157c01643779e490451d3a9a7d62946d927f14543f682dca8cfec01",
+    "dev/plasmaforgepower/core/PowerNbt.class": "1d1df6b4b9c33b79b878b94a6818ac7543ef5a5e64dd1d92370f5efb1b12a7b3",
+    "dev/plasmaforgepower/core/PowerSettings.class": "38d61a9ea1b411144244d560968459db57bd14b7606d7d43cb0dee6e9e46280e",
+    "dev/plasmaforgepower/mixin/CompactFusionRecipeMixin.class": "f46a2b9f0f393cbd540f3b899dae506701a3a2db716f3c2d78390aba1f90f3fd",
+    "dev/plasmaforgepower/mixin/DataOrbMixin.class": "21933c9d4553b9e9538482f90daf3ad94bfadc2dd584fcde5ad3cab7360b8656",
+    "dev/plasmaforgepower/mixin/FusionContextMixin.class": "3ecffaa92f37bbce2e051e8672fe20bb3a89721908d3309d56fd87ce6563e3f5",
+    "dev/plasmaforgepower/mixin/FusionGuiMixin.class": "6527e152660271acfd9cc4ba7e97e798f2039937751d6866ca411abc5002f77c",
+    "dev/plasmaforgepower/mixin/FusionPowerMixin.class": "f7b485fbff01a99edc739de2b9f94fc43477db59174b7e0c86331c05f23b6a7f",
+    "dev/plasmaforgepower/mixin/NormalFusionRecipeMixin.class": "716f1a145a971d8d1a939d1b16c3a7c937709050f0444a1047ab13acd5c05b98",
+    "dev/plasmaforgepower/mixin/PlasmaForgeMixin.class": "16fd07ed905167dbfb1c82ab740e6470d0f64563c7190e020c7a3ecae8eaf2ac",
+    "dev/plasmaforgepower/mixin/RecipePowerGateMixin.class": "ed44a573266130023aecabbcce80546fc56a09d2802d09e1b9b86eeb09cbabe1",
+    "dev/plasmaforgepower/ui/CompactFusionPowerGui.class": "05c166b9d4583edae9764e93733c24f6a9de6fbda14d3242c00686399b435573",
+    "dev/plasmaforgepower/ui/ForgePowerGui.class": "e6c41804b128fd604e1f03a6d698949e2dfe18afff855cc9bc0047bc23b3b8c1",
+    "dev/plasmaforgepower/ui/FusionPowerGui.class": "c3cb78a1ce010c5a4b5ff1c2a6da90d298e3c1d45b7d244536348744ad80ecf3",
+    "dev/plasmaforgepower/ui/PowerConfigSync.class": "0660c8a6ca83635d3f469fce9f4c0279543e32dd1a0d7eb3e9f98a01dd8faadb",
+    "dev/plasmaforgepower/ui/PowerEditor.class": "2f00e6c71c0990a0661d490e3416e519b169880dc5a729cfc6e4cf06defe8862",
+    "dev/plasmaforgepower/ui/PowerPanel$1.class": "878c334fc7e2f76aa0252622802f71e58bce9021ecb26f451d58e53c995d057a",
+    "dev/plasmaforgepower/ui/PowerPanel$PowerTierDropdown.class": "81027ec7b655f5dcca2e38a64815f1d7bac9be4d2151105dbead3cf785c5dac6",
+    "dev/plasmaforgepower/ui/PowerPanel.class": "261ae0885ef18113419031d41ed65c5bd23a90a43468abba8a02be27eed25864",
+    "dev/structureterminal/CommonProxy.class": "8b4321fa82e5be28e23d2daf4b8e816d225d497c9e079ab4623908c5501ffcc0",
+    "dev/structureterminal/StructureTerminal.class": "898db0206b62c331552d325646924a079a3c801f78ea3d1a82441dc05c7ec0f6",
+    "dev/structureterminal/TerminalConfig.class": "909768c42a78c5c897dcecff5d6077cabe47a4681aa38066d3b0bf465c5fdaf5",
+    "dev/structureterminal/TerminalItem.class": "a637d27da0a88d18826288b976857b1b389a8f01996cfec95bd7c492d590bc5c",
+    "dev/structureterminal/TerminalSettings.class": "5a4204535b379af1c3d513bdddc177e99c77dff40aa6cfb432c897d33e48f0da",
+    "dev/structureterminal/ae/CraftableInputs.class": "c15582814b62fbef6417b27828cf72682d022ea32181a0bac134445940ccd987",
+    "dev/structureterminal/bridge/CandidateDiscovery$Result.class": "667fb7f97e5d505992d836e0fa2e4d5eef0f02f8d84e5e3ee00a98c214578dda",
+    "dev/structureterminal/bridge/CandidateDiscovery.class": "1df2d1bf593909731284ac709589883913c13c0b68afc691806660e3042cab3b",
+    "dev/structureterminal/bridge/GregTechCatalog.class": "a312440d9a001a171928fdbc9f795ca5e3a6ba96203c539eb1cd969281737eaf",
+    "dev/structureterminal/bridge/ItemKeys.class": "fdd468f89faa4be9250ad047497539b0111f0d372fe40d1cc4b9f58292e3cad4",
+    "dev/structureterminal/bridge/NativeBridge.class": "f9bb78587631cecfe2e77ea684f29282c131a87011fbb5cfc8baccdcfd7adddc",
+    "dev/structureterminal/bridge/StructureScanner$1.class": "56d0e4db82aa4ead2c8fcdce6dd72bb055af75f68c1937c9076264fde4171bbb",
+    "dev/structureterminal/bridge/StructureScanner$2.class": "0f5e958f8db9375028baff1a24a5141f37a1782016f1dabfc6e118fdf53922ab",
+    "dev/structureterminal/bridge/StructureScanner$Cell.class": "5d43f140ebceb35fdc06217e117ad3c1b866873c3396cd6c0ce5c4c55f7198f1",
+    "dev/structureterminal/bridge/StructureScanner$Collector.class": "b38c0e7a71e04288032a922bf3c0c72d431952179a68cfd408514ceafcac815e",
+    "dev/structureterminal/bridge/StructureScanner$Scan.class": "9ca0a3d8c42eb8ed8b387723c2b74f74de4553703a49d0ced46659eeee5975c1",
+    "dev/structureterminal/bridge/StructureScanner$ScanLimit.class": "46be81dc2c2e04259bef416ef41c1f0570808c35229d220c59373682d41baf1f",
+    "dev/structureterminal/bridge/StructureScanner.class": "53a9da65f525866d23c0f1aae8fbcefb714a61791518ca4604bba4a22324884a",
+    "dev/structureterminal/client/ClientProxy.class": "df2c0fc89e5145620c5f942ee94ee488c22cfbaebec4b25caf389f63d0f92e8b",
+    "dev/structureterminal/client/OreTheme$Button.class": "16c6dd5344270cd2590a852a86889aa9492b915029453ec3b6bead8df5eb53cc",
+    "dev/structureterminal/client/OreTheme.class": "cc0a57ae3feafe475de3070d35a67e87ad111bd6d6eabbe3fb6316fcec5889f5",
+    "dev/structureterminal/client/StructureScene$1.class": "ce6f5e7684aa9c008cd4656f0f6206882e9d24dcc9967db79d5b40be5a77ff99",
+    "dev/structureterminal/client/StructureScene$Face.class": "3f1d5087f66cdf0fcaa746a9bb46272fb8609255e117972263c3546953438308",
+    "dev/structureterminal/client/StructureScene.class": "e692aea75c9d4d771756d726a38229c643a0e9676c74c6e4284ec64e71816f5c",
+    "dev/structureterminal/client/TerminalScreen.class": "fe4ccead369808d9e7ef0f5561219cab577c6d00308c517df2374793ac200481",
+    "dev/structureterminal/client/ae/CraftablePatternSlot.class": "cecd1174cf040aa9c378f3b80e361d51c6e34646c7b781ea832940f89c0cb5ef",
+    "dev/structureterminal/core/BuildProgress$State.class": "14c754f5658a4cdc004680dea3b3a0fd15a5d830899436c5c8416be5e2ced932",
+    "dev/structureterminal/core/BuildProgress.class": "34a3909b44e62106caa601e94f538acc3e434061872e2bd13d74c17dd6477f12",
+    "dev/structureterminal/core/Fingerprints.class": "4a763bc4f00fcf4fd498f7ac4611cb7e1a16444424e572313174e9087097961a",
+    "dev/structureterminal/core/Limits.class": "56a80f71631ed932c53da4cdc3d7879332f6e07e3e6f8d6c475c989870c764a0",
+    "dev/structureterminal/coremod/HintTransformer.class": "76f2e0ea9b7adf74d29bc4992b464e722ad6938bee57bad519620d498b29ec37",
+    "dev/structureterminal/coremod/TerminalLoadingPlugin.class": "308737f5c71d6f01b37aa55d394d61d8067fdcb8490f74ca6e3019e7766ca2c0",
+    "dev/structureterminal/net/TerminalNetwork$Reply.class": "3e356c673342986b61934607e1e42ba4d82dd3c2f2a5673d86a53313e6fcaf0f",
+    "dev/structureterminal/net/TerminalNetwork$ReplyHandler.class": "b104ebcf754164c9fe6c672d22668db693eed2f847bd446a3364d9649936b383",
+    "dev/structureterminal/net/TerminalNetwork$Request.class": "afbad9e3a84fd94b1f0943b96fd3fca34dc32fba867418845cf83814ea0b0a4c",
+    "dev/structureterminal/net/TerminalNetwork$RequestHandler.class": "f413d0c8922c909b63e6bdba4d01cdb7d9612af07c9221f4f470644a5f8b15e4",
+    "dev/structureterminal/net/TerminalNetwork.class": "a409691d62a2422a97e0b62bc5a713c501d3234e38f6523a5a95bc3ff3d138fd",
+    "dev/structureterminal/server/AeSupply.class": "3ed287870f5e936c9390160a3dc8dad1cb1de4c82ff8184502f28efd75913e62",
+    "dev/structureterminal/server/AuditCommand.class": "c2ca4f73c1c62c00404ba3deda0c57c9cd583c72a6cef1dc19deb5a794c6c92a",
+    "dev/structureterminal/server/BlockMaterials.class": "dfa01fcc3f8286373e7f768445e1c30a68afb280925cb9d0ed47497ef0ed8e83",
+    "dev/structureterminal/server/BuildService$1.class": "57df735cff5fdbbf98ae018e1594de3d612d8a8f1bfc63a9c582d994922acc24",
+    "dev/structureterminal/server/BuildService$Job.class": "774ce953d4329baae186a88a22364604d317392cc509501a0a557f09dafd6947",
+    "dev/structureterminal/server/BuildService.class": "3124aa3d3d836fb2f7ddd83ea72dd7a66749b9cdd9bb84565ab78b9523448959",
+    "dev/structureterminal/server/Replacement$1.class": "948369928e22d5ba7fc9c97eb7621cfb66447db253107264179020d8c1b9ccab",
+    "dev/structureterminal/server/Replacement$Result.class": "88f405df59fcab8ebf3fffa1bf809b5b98174d05d705efa01eeac26c4c4bdf2a",
+    "dev/structureterminal/server/Replacement.class": "9e3ca61f5b517c401a056adf8ea2130d8a14c01bbff3d1e10f5cc80e026ecccf",
+    "dev/structureterminal/server/SelectedSource.class": "6862bda484dd04f970998ed76e46ec0e3c4e41170224ed17a02b559a82419a7f",
+    "dev/structureterminal/server/TerminalResultEvent.class": "40f22dc3bef54005936995644c7ce3ba03f0ff1f094fa91505e3a9b9fef1846f",
+    "dev/structureterminal/Tags.class": "a0322acb7ba1918dfd82dc7ce9692f268ca94176f8393cbab34ae12c4cd2f1a7"
+  },
+  "unit_tests": 72,
+  "runs": [
+    {
+      "suite": "vault",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 26,
+      "report": "vault/vault-tests.json"
+    },
+    {
+      "suite": "vault",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 4,
+      "report": "vault/vault-tests-restart.json"
+    },
+    {
+      "suite": "forge",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 26,
+      "report": "forge/forge-power-tests.json"
+    },
+    {
+      "suite": "fusion",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 126,
+      "report": "fusion/fusion-power-tests.json"
+    },
+    {
+      "suite": "ae",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 51,
+      "report": "ae/ae-order-report.json"
+    },
+    {
+      "suite": "structures",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 3,
+      "report": "structures/machine-validation/report.json",
+      "phases": 10
+    }
+  ],
+  "fixtures": {
+    "modernization-luv-fixture-2.jar": "9e1614a3cba3ffec77b468f14f74ef63c045de1dbe342bd662640f329c29c9ab"
+  }
+}

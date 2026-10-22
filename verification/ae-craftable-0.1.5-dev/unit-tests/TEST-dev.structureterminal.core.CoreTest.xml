@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.structureterminal.core.CoreTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-21T08:22:41.390Z" hostname="D9CH4WN6T3" time="0.013">
+  <properties/>
+  <testcase name="positiveButEndlessNativeJobsAreBounded" classname="dev.structureterminal.core.CoreTest" time="0.001"/>
+  <testcase name="controllerReachHandlesNegativeAndLargeCoordinates" classname="dev.structureterminal.core.CoreTest" time="0.0"/>
+  <testcase name="completionDoesNotReducePlacedTotal" classname="dev.structureterminal.core.CoreTest" time="0.0"/>
+  <testcase name="unsupportedNativeApiStops" classname="dev.structureterminal.core.CoreTest" time="0.0"/>
+  <testcase name="networkChannelsRejectBadNamesAndUnboundedNumbers" classname="dev.structureterminal.core.CoreTest" time="0.001"/>
+  <testcase name="accountingSurvivesManyRandomBatches" classname="dev.structureterminal.core.CoreTest" time="0.009"/>
+  <testcase name="missingMaterialsStopOnFirstZero" classname="dev.structureterminal.core.CoreTest" time="0.0"/>
+  <testcase name="candidateGroupsAreOrderIndependentButKeepMetadata" classname="dev.structureterminal.core.CoreTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-22",
+  "logical_texture_size": [
+    64,
+    64
+  ],
+  "prompt": "Use case: precise-object-edit. Asset type: Minecraft/GregTech ME access hatch front overlay sprite. Edit target image 1 is the existing blue-white access panel. Supporting image 2 is matching controller for palette only; supporting image 3 is a native GT input-bus opening for functional silhouette. Replace the entire screen/network-logo area with an unmistakable PHYSICAL RECESSED CONNECTOR PORT, like the front of an item input bus: one large dark hollow square socket, a thick stepped silver rim with visible depth, a small row of four chunky contact teeth along its inner bottom edge, and only two tiny ice-blue indicator lights at the bottom corners. A small downward/inward cyan arrow on the upper rim may indicate input. NO monitor, NO screen, NO network diagram, NO central square logo or glowing symbol. Center opening should occupy about half the width of the whole tile and visibly look open, dark almost-black depth. Keep restrained pale silver and blue-white LuV style and original centered outer frame footprint. One flat front-facing orthographic tile, crisp 64x64 logical pixel-art grid, hard pixel edges, simple large shapes, no bloom, no fine noise, no text. Square canvas, equal empty margins on all four sides (4 logical pixels each), centered occupied tile about 56x56 pixels. Outside the compact metal frame must be genuinely transparent; preserve alpha, no black/white background. This should read as a machine hatch/plug socket even at 32px, not an electronic display. Produce just the single sprite, no comparison, no cube, no perspective.",
+  "references": [
+    "access-panel-v1-master.png (edit target)",
+    "controller_overlay.png (palette)",
+    "native GT OVERLAY_PIPE_IN (functional reference)"
+  ],
+  "master": "docs/assets/vault/access-master.png",
+  "runtime": "src/main/resources/assets/aestoragevault/textures/blocks/access_overlay.png",
+  "preparation": "Nearest-neighbor size conversion with Java ImageIO. No machine logic changes."
+}

@@ -1,0 +1,56 @@
+{
+  "version": "0.1.1-alpha",
+  "target_gtnh": "2.9.0-RC-2",
+  "change": "Supply header shows equivalent amperage/voltage; >=1e9 EU/t uses three significant figures in scientific notation, with exact EU/t in a dynamic tooltip.",
+  "artifact": "dist/0.1.1-alpha-GTNH-2.9.0-RC-2/plasmaforgepower-0.1.1-alpha-GTNH-2.9.0-RC-2.jar",
+  "runtime_sha256": "91b1b14f4a5c88d2f3c15d5096b4db93ce9e79fbe552590e9d0fb463a574ae3c",
+  "runtime_bytes": 41088,
+  "runtime_classes": 15,
+  "java_class_major_versions": [
+    52
+  ],
+  "unit_test_count": 15,
+  "unit_tests": [
+    {
+      "name": "dev.plasmaforgepower.core.PowerEditorTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0"
+    },
+    {
+      "name": "dev.plasmaforgepower.core.PowerSettingsTest",
+      "tests": "10",
+      "failures": "0",
+      "errors": "0"
+    }
+  ],
+  "client_launched": false,
+  "integration_tests_rerun": false,
+  "baseline_integration_report": "forge-power-tests.json",
+  "baseline_version": "0.1.0-alpha",
+  "backend_classes_match_tested_baseline": true,
+  "changed_classes_vs_baseline": [
+    "dev/plasmaforgepower/PlasmaForgePower.class",
+    "dev/plasmaforgepower/ui/ForgePowerGui$PowerTierDropdown.class",
+    "dev/plasmaforgepower/ui/ForgePowerGui.class",
+    "dev/plasmaforgepower/Tags.class"
+  ],
+  "runtime_class_sha256": {
+    "dev/plasmaforgepower/LateMixins.class": "8f346ad5ab776b568cdc56ded7b46697b35a6acb414e8ee52e60a2923ae8cdff",
+    "dev/plasmaforgepower/PlasmaForgePower.class": "6d612199ad1d21e970650be49595d25c43c27087372bf2f687fc528fff1c4638",
+    "dev/plasmaforgepower/api/ForgePowerAccess.class": "dc37ea0d98603f086edfbdf170f9a9e11979ee52eabb4aad543ff3a5b3cf879b",
+    "dev/plasmaforgepower/core/PowerLimit.class": "25598f72316df830859a11d6e01a75524ff72d5f37c48ed10e0a1e54d7d2aae0",
+    "dev/plasmaforgepower/core/PowerNbt.class": "fbee3311c72ea56a360415b8821b50529aca893cdaccc0350f8ebbb489763169",
+    "dev/plasmaforgepower/core/PowerSettings.class": "38d61a9ea1b411144244d560968459db57bd14b7606d7d43cb0dee6e9e46280e",
+    "dev/plasmaforgepower/mixin/DataOrbMixin.class": "21933c9d4553b9e9538482f90daf3ad94bfadc2dd584fcde5ad3cab7360b8656",
+    "dev/plasmaforgepower/mixin/PlasmaForgeMixin.class": "16fd07ed905167dbfb1c82ab740e6470d0f64563c7190e020c7a3ecae8eaf2ac",
+    "dev/plasmaforgepower/mixin/RecipePowerGateMixin.class": "ed44a573266130023aecabbcce80546fc56a09d2802d09e1b9b86eeb09cbabe1",
+    "dev/plasmaforgepower/ui/ForgePowerGui$1.class": "169e7fb9d8c82fa65d067de0710f41f56be61f0e38f10208b676bb93098b6ef8",
+    "dev/plasmaforgepower/ui/ForgePowerGui$PowerTierDropdown.class": "30d5ede1566e759d5ecbbfd28001117f6f053cc94214b09f467422d2b97209bf",
+    "dev/plasmaforgepower/ui/ForgePowerGui.class": "f870370556f143f10f5e645c954b210185905ec71e39e115ca9650246f079175",
+    "dev/plasmaforgepower/ui/PowerConfigSync.class": "ffe4ccfd6d7f50e416b2fd256c6e2fb8ea171dbe45080c3647b90c39a3bafd2e",
+    "dev/plasmaforgepower/ui/PowerEditor.class": "2f00e6c71c0990a0661d490e3416e519b169880dc5a729cfc6e4cf06defe8862",
+    "dev/plasmaforgepower/Tags.class": "72537d5e72083c17c2020b8020a9d108713cfcf35dc1295eb02a30c4d6ffef7d"
+  },
+  "mcmod_info_version": "0.1.1-alpha"
+}

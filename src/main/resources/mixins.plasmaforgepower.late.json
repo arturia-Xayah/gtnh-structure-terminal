@@ -1,0 +1,8 @@
+{
+  "required": true,
+  "minVersion": "0.8.7",
+  "package": "dev.plasmaforgepower.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "injectors": { "defaultRequire": 1 }
+}

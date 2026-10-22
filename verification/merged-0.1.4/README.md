@@ -19,7 +19,7 @@
 
 [AE运行记录](ae-runner.log) · [结构运行记录](structures-runner.log) · [AE日志摘录](ae-excerpt.log) · [结构日志摘录](structures-excerpt.log) · [实际加载Mod列表](loaded-mods.txt) · [构建日志](release-build.log)
 
-[完整构建及后台复测方法](../../docs/BUILDING.md#合并版后台验证--merged-integration-suites) · [AE使用说明](../../docs/AE_ORDER_OPTIMIZER.md) · [合并前星门速度测量](../../docs/AE_BENCHMARK.md)
+[完整构建及后台复测方法](../../docs/development/BUILDING.md#合并版后台验证--merged-integration-suites) · [AE使用说明](../../docs/development/AE_ORDER_INTERNALS.md) · [合并前星门速度测量](../../docs/development/AE_BENCHMARK.md)
 
 离线检查不会启动游戏：
 

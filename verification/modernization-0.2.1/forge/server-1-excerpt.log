@@ -1,0 +1,26 @@
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST native_full_structure_formed true supply=137438953472, casings=1273
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST target_only_and_native_controller true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST native_ui_panel_constructs_on_server true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST nbt_roundtrip_all_groups_and_large_values true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST clipboard_rejects_foreign_payload_atomically true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST world_nbt_keeps_configuration_without_formation true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST matter_manipulator_actual_analyze_and_apply true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST matter_manipulator_numeric_width_and_long_precision true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST native_data_orb_copy_paste true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST red_group_low_power_recipe true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST green_group_uses_own_larger_power true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST over_budget_recipe_keeps_ingredients_and_checks_next_group true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST different_colors_never_merge_ingredients true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST unpainted_auto_matches_native_processing_power true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST unpainted_manual_cap_cannot_escape_via_empty_painted_bus true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST complete_painted_recipe_can_run_without_taking_unpainted_items true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST input_separation_and_shared_items_keep_native_semantics true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST colored_fluid_only_recipe_uses_hatch_color true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST unpainted_shared_fluid_does_not_remove_red_limit true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST settings_change_does_not_recalculate_current_recipe true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST convergence_catalyst_and_overclock_use_color_budget true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST native_running_tick_draws_actual_eut true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST partial_structure_preserves_configuration_until_success true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST larger_replacement_does_not_restore_old_limit true 
+[14:58:40] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST clamp_at_paste_into_smaller_formed_forge true 
+[14:59:04] [Server thread/INFO] [STDOUT]: [dev.plasmaforgepower.packtest.ForgePowerSuite:record:707]: FORGE_POWER_TEST native_tick_recipe_completed true ticks=501, recipe_duration=400

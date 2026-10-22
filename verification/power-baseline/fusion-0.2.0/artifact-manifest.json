@@ -1,0 +1,190 @@
+{
+  "version": "0.2.0-alpha",
+  "target": "GTNH 2.9.0-RC-2 / GT 5.09.54.205",
+  "date": "2026-10-21",
+  "jar": "plasmaforgepower-0.2.0-alpha-GTNH-2.9.0-RC-2.jar",
+  "sha256": "55ef3fd554b04e17277ba94eb555e94a8862ae4b5e95ba84f5b92bbf07310295",
+  "size_bytes": 54229,
+  "runtime_class_count": 24,
+  "all_runtime_classes_identical_to_server_fixture": true,
+  "test_code_in_production": false,
+  "server_java": "25.0.4.1",
+  "client_launched": false,
+  "client_gui_tested": false,
+  "backend": {
+    "fusion": {
+      "passed": true,
+      "cases": 126
+    },
+    "forge": {
+      "passed": true,
+      "cases": 26
+    }
+  },
+  "unit_tests": [
+    {
+      "suite": "dev.plasmaforgepower.core.FusionSelectorsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "suite": "dev.plasmaforgepower.core.PowerEditorTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "suite": "dev.plasmaforgepower.core.PowerSettingsTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "classes": [
+    {
+      "name": "dev/plasmaforgepower/LateMixins.class",
+      "java_class_major": 52,
+      "sha256": "bdba1ae3ff0e8460fa61152ed6f44050c849a0ff56c650649ac637e798b8f821",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/PlasmaForgePower.class",
+      "java_class_major": 52,
+      "sha256": "52506d598bf60600f738eb33f754e71f518b40354b61fed88520bad0c8782347",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/api/ForgePowerAccess.class",
+      "java_class_major": 52,
+      "sha256": "dc37ea0d98603f086edfbdf170f9a9e11979ee52eabb4aad543ff3a5b3cf879b",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/api/FusionPowerAccess.class",
+      "java_class_major": 52,
+      "sha256": "ab9f088f513694303905e21e5168a645e7b2008735cbed8865035ff5b861dc44",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/core/PowerLimit.class",
+      "java_class_major": 52,
+      "sha256": "ce70a4ad0157c01643779e490451d3a9a7d62946d927f14543f682dca8cfec01",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/core/PowerNbt.class",
+      "java_class_major": 52,
+      "sha256": "1d1df6b4b9c33b79b878b94a6818ac7543ef5a5e64dd1d92370f5efb1b12a7b3",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/core/PowerSettings.class",
+      "java_class_major": 52,
+      "sha256": "38d61a9ea1b411144244d560968459db57bd14b7606d7d43cb0dee6e9e46280e",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/CompactFusionRecipeMixin.class",
+      "java_class_major": 52,
+      "sha256": "f46a2b9f0f393cbd540f3b899dae506701a3a2db716f3c2d78390aba1f90f3fd",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/DataOrbMixin.class",
+      "java_class_major": 52,
+      "sha256": "21933c9d4553b9e9538482f90daf3ad94bfadc2dd584fcde5ad3cab7360b8656",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/FusionContextMixin.class",
+      "java_class_major": 52,
+      "sha256": "3ecffaa92f37bbce2e051e8672fe20bb3a89721908d3309d56fd87ce6563e3f5",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/FusionGuiMixin.class",
+      "java_class_major": 52,
+      "sha256": "6527e152660271acfd9cc4ba7e97e798f2039937751d6866ca411abc5002f77c",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/FusionPowerMixin.class",
+      "java_class_major": 52,
+      "sha256": "f7b485fbff01a99edc739de2b9f94fc43477db59174b7e0c86331c05f23b6a7f",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/NormalFusionRecipeMixin.class",
+      "java_class_major": 52,
+      "sha256": "716f1a145a971d8d1a939d1b16c3a7c937709050f0444a1047ab13acd5c05b98",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/PlasmaForgeMixin.class",
+      "java_class_major": 52,
+      "sha256": "16fd07ed905167dbfb1c82ab740e6470d0f64563c7190e020c7a3ecae8eaf2ac",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/mixin/RecipePowerGateMixin.class",
+      "java_class_major": 52,
+      "sha256": "ed44a573266130023aecabbcce80546fc56a09d2802d09e1b9b86eeb09cbabe1",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/CompactFusionPowerGui.class",
+      "java_class_major": 52,
+      "sha256": "05c166b9d4583edae9764e93733c24f6a9de6fbda14d3242c00686399b435573",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/ForgePowerGui.class",
+      "java_class_major": 52,
+      "sha256": "e6c41804b128fd604e1f03a6d698949e2dfe18afff855cc9bc0047bc23b3b8c1",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/FusionPowerGui.class",
+      "java_class_major": 52,
+      "sha256": "c3cb78a1ce010c5a4b5ff1c2a6da90d298e3c1d45b7d244536348744ad80ecf3",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/PowerConfigSync.class",
+      "java_class_major": 52,
+      "sha256": "0660c8a6ca83635d3f469fce9f4c0279543e32dd1a0d7eb3e9f98a01dd8faadb",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/PowerEditor.class",
+      "java_class_major": 52,
+      "sha256": "2f00e6c71c0990a0661d490e3416e519b169880dc5a729cfc6e4cf06defe8862",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/PowerPanel$1.class",
+      "java_class_major": 52,
+      "sha256": "878c334fc7e2f76aa0252622802f71e58bce9021ecb26f451d58e53c995d057a",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/PowerPanel$PowerTierDropdown.class",
+      "java_class_major": 52,
+      "sha256": "81027ec7b655f5dcca2e38a64815f1d7bac9be4d2151105dbead3cf785c5dac6",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/ui/PowerPanel.class",
+      "java_class_major": 52,
+      "sha256": "261ae0885ef18113419031d41ed65c5bd23a90a43468abba8a02be27eed25864",
+      "same_as_server_fixture": true
+    },
+    {
+      "name": "dev/plasmaforgepower/Tags.class",
+      "java_class_major": 52,
+      "sha256": "541b912d5f246ef110c2d46255e585b4794330c90e04b8a6208dd2349ecf6268",
+      "same_as_server_fixture": true
+    }
+  ]
+}

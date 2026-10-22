@@ -1,0 +1,11 @@
+{
+  "change": "Replace screen-like ME access face with recessed input-bus-like physical socket",
+  "logic_changed": false,
+  "previous_sha256": "248214a16a0d8c8b11ed049fdf0deeab9dafbe9d17bb3ac9749ed2a4f6b391c7",
+  "sha256": "56af94e78ba3130feb6aa497225378eebe99dfa97ba6781584b72e604c416b71",
+  "changed_jar_entries": [
+    "assets/aestoragevault/textures/blocks/access_overlay.png"
+  ],
+  "asset": "src/main/resources/assets/aestoragevault/textures/blocks/access_overlay.png",
+  "prompt_record": "docs/assets/vault/access-socket-revision.json"
+}

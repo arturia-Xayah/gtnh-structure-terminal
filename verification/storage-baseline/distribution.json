@@ -1,0 +1,30 @@
+{
+  "artifact": "aestoragevault-0.1.0-alpha-GTNH-2.9.0-RC-2.jar",
+  "sha256": "d8ca4040563387a7d76e0411c7bb37ade5c9a82423aea6fc3e1245eea4498015",
+  "bytes": 46809,
+  "target_pack": "GTNH 2.9.0-RC-2",
+  "java_backend": "25.0.4.1",
+  "class_major_version": 52,
+  "unit_tests_passed": 21,
+  "backend_tests_passed": 26,
+  "production_classes_identical_to_tested_fixture": true,
+  "client_launched": false,
+  "production_class_sha256": {
+    "dev/aestoragevault/VaultMod.class": "a9527d1144a9fa89e5436cd213b3b10440e07e28c1db4cdda17e77be42129f78",
+    "dev/aestoragevault/ae/CellReader.class": "c8bac80735532bc8be013e22e97ddd63d0b980c960c248f486f3ab8897658eb8",
+    "dev/aestoragevault/ae/ResourceCodec.class": "1cda12b72d07ac7ccef3b6d206eacc23d9f865a4ddd721e683b99cb2d5b52587",
+    "dev/aestoragevault/ae/VaultInventory.class": "51a2086fd8a6bbbdc6dd6b36d0877c7dc48c2d768fe1504914d627ee9a0add2e",
+    "dev/aestoragevault/core/Resource.class": "2adbc90f790e6dda717e22785f183f255a78810a3cb3eb3f734a77cc29385b04",
+    "dev/aestoragevault/core/VaultStore.class": "4c002b34a43302c1b8bb8d499d86c76aa0f191e55f459e7346da2aba7a40221a",
+    "dev/aestoragevault/storage/Repositories.class": "e4a0338292ca429b53a1ff881135cfe3c775423050e277df0e6e8b6d11e30765",
+    "dev/aestoragevault/ui/ClientProxy.class": "6d2fe8850e7888b95512ef4e8cd9f62699dafc913ed855459c50679ab6a83381",
+    "dev/aestoragevault/ui/CommonProxy.class": "79a8d06a0a3a6f94642b2b8803bd3f730f51595541390b797a511f8b2c791ae8",
+    "dev/aestoragevault/ui/VaultContainer.class": "7ade587b79c69cce1d8ee2e2a72e98ba195baf36f3b8a865b2a977028372a40e",
+    "dev/aestoragevault/ui/VaultScreen.class": "d92a30131676c0c1312703de86f6aa05685abfac4964e6ab81af67738ba9bd25",
+    "dev/aestoragevault/world/TileAccess.class": "a9bee78c04aa709632d12094f4f0f119eae808be41b1e31525b8b835f39b3f9e",
+    "dev/aestoragevault/world/TileController$Import.class": "9b0ffdd62aced44fdd58cc0c38ca1a0cc95ce758facc8557ff1172778091ed98",
+    "dev/aestoragevault/world/TileController.class": "21abfbed67f3912d8a36e6d54f2f8b493e8846f1e5e7507b53619495afae6599",
+    "dev/aestoragevault/world/VaultBlock.class": "fab0d4f6e48b853880064b393e13df0107b3bdf7a8b692b3a606d9221c22c944",
+    "dev/aestoragevault/Tags.class": "03389933d8353cf1e8e3d44e3bfda1979d3f63b89d375e3447ddc7962825e8e6"
+  }
+}

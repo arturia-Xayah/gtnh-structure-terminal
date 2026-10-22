@@ -1,106 +1,106 @@
-> This mod was ported and developed by **GPT-6 (Codex)**.
+> Ported, developed and integrated by **GPT-6 (Codex)**.
 
 <div align="center">
 
-<img src="docs/assets/readme-banner.png" alt="Structure Terminal for GT New Horizons" width="100%">
+<img src="docs/assets/terminal-blue-white.png" alt="GTNH Modernization Upgrade — blue-and-white terminal icon" width="128">
 
-[简体中文](README.md) · **English**
+# GTNH Modernization Upgrade
 
-Bring the GTO structure terminal workflow to GTNH.<br>Preview multiblocks, configure parts, and build, replace or dismantle structures from one interface.
+**Structure building · AE conveniences · Color-based power limits · ME storage vault**
 
-[**Download**](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.4-alpha-GTNH-2.9.0-RC-2) · [Quick start](#quick-start) · [Compatibility](#compatibility) · [Build & develop](docs/BUILDING.md#english)
+[简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
+
+Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 </div>
 
----
+## Contents
 
-## Features
+- [Installation and upgrading](#installation-and-upgrading)
+- [Structure Terminal](#structure-terminal): preview, configure, build, replace and dismantle
+- [AE order optimization](#ae-order-optimization): opt-in planning checks and bulk dispatch
+- [Craftable input badges](#craftable-input-badges): see which ingredients already have patterns
+- [Forge and fusion power controls](#forge-and-fusion-power-controls): limit processing power by input color
+- [ME Storage Vault](#me-storage-vault): consume cells for capacity with external inventory files
+- [Compatibility and saves](#compatibility-and-saves)
+- [Developer documentation](#developer-documentation)
 
-| | What you can do |
-|---|---|
-| **Structure preview** | Rotate, pan, zoom and view individual layers; click a block to choose its part |
-| **Part configuration** | Adjust exposed size, mode, coil and glass channels; choose casings by group and hatches by position |
-| **Survival building** | Supply materials from your inventory and use the machine's native placement rules; keep matching blocks, stop when materials run out and resume after restocking |
-| **Replacement & recovery** | Replace ordinary structural materials and fill gaps, or dismantle and recover them; matching blocks are not charged twice |
-| **AE order component** | Opt into route checks, detailed choice reports and unit-pattern bulk dispatch on a network; retain native behavior without it |
-| **AE inventory** | Optionally extract existing materials through a linked wireless terminal, without requesting autocrafting; live network extraction remains to be validated |
+## Installation and upgrading
 
-## Installation
+1. Install `gtnh-modernization-upgrade-0.2.1-alpha-GTNH-2.9.0-RC-2.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+2. Remove older Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
+3. Back up the complete world before upgrading. Keep `data/aestoragevault`: existing terminal/vault items, blocks, inventory IDs and power settings retain their registration namespaces and save locations. Existing vaults must replace the 23 legacy casings with native LuV machine casings before reforming.
 
-| Component | Target version |
-|---|---|
-| GTNH | **2.9.0-RC-2** |
-| Minecraft / Forge | 1.7.10 / 10.13.4.1614 |
-| StructureLib / GTNHLib | 1.4.45 / 0.11.52 |
-| AE2 / UniMixins | rv3-beta-1080-GTNH / bundled with GTNH |
-| Structure Terminal | 0.1.4-alpha |
+Dependencies are supplied by the target pack: GregTech, StructureLib, GTNHLib, AE2, ModularUI2 and UniMixins. The former standalone mods are not required.
 
-1. Download `structureterminal-0.1.4-alpha-GTNH-2.9.0-RC-2.jar` from [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/tag/v0.1.4-alpha-GTNH-2.9.0-RC-2).
-2. Place it in the instance's `mods` directory on both the client and server. For single-player, install it on the client.
-3. Remove the old Structure Terminal and any standalone `aeorderoptimizer` JAR before starting. Both features are bundled, with their registration IDs preserved.
+## Structure Terminal
 
-Players only need the JAR. Source code and build scripts are available in this repository.
+Find **Structure Terminal** in NEI. Craft it shapelessly from a **Multiblock Structure Hologram Projector + Ender Pearl + Book**.
 
-## Quick start
+1. Hold it and right-click a placed multiblock controller.
+2. Preview the structure and configure exposed dimensions, modes, coils, glass and other parts. Click individual positions to choose hatches.
+3. Supply materials in your inventory and choose **Build / Replace & fill / Dismantle**. Replacement and dismantling require confirmation in the UI; **Stop** cancels the task.
 
-**Get the terminal**: Find **Structure Terminal** in the creative Tools tab. Look for the blue-and-white terminal with a cyan cube on its screen. Registry ID: `structureterminal:structure_terminal`.
+Left-drag rotates, right/middle-drag pans, the wheel zooms, `F` fits the view and the layer selector shows individual layers. Matching blocks are kept. Hatches, containers and other inventory-bearing blocks are skipped by default during dismantling.
 
-**Current recipe**: Multiblock Structure Hologram Projector + Ender Pearl + Book, shapeless crafting.
+Machines must expose a readable StructureLib definition; survival building follows their native rules. Previewing does not actively stop a running machine. Actual replacement, dismantling or structural changes may stop it. A linked, powered wireless terminal within range can provide an AE inventory supply entry point.
 
-1. **Open**: Hold the terminal and right-click a placed multiblock controller.
-2. **Configure**: Adjust size, mode and channels in the right panel, then select coils, glass or casings. Choose hatches by clicking individual positions in the preview, so an entire group is not assigned the same hatch.
-3. **Supply**: Put materials in your inventory. For AE inventory supply, carry a linked, powered wireless terminal within range and have extraction permission on its network.
-4. **Run**: Project the structure into the world or select **Build / Replace & fill / Dismantle**. Replacement and dismantling require a second confirmation. Use **Stop** to cancel the active task.
+## AE order optimization
 
-### View controls
+Connect an **ME Order Optimizer** to the submitting network. Right-click for detailed reporting. Only one per network; **1 AE/t**, no channel required.
 
-| Input | Action |
-|---|---|
-| Left-drag | Rotate |
-| Right- or middle-drag | Pan |
-| Mouse wheel | Zoom; scroll a long list when pointing at the right panel |
-| Click a block | Choose the part at that position |
-| `F` button | Fit the structure to the view |
-| Layer selector | Switch between the full structure and a single layer |
+- An active component enables the modified Lite planner and bulk dispatch on supported receivers. Without it, native behavior remains.
+- Only the selected route is checked. Cycles and multi-output patterns stop planning with a report. Detail mode also lists alternative patterns and the selected route.
+- Keep patterns at their original unit quantities. Bulk insertion does not add machine parallelism; unsupported receivers retain unit dispatch.
+- When borrowing patterns across grids, the submitting network controls whether optimization is enabled.
 
-## AE order optimization (new)
+[Recipe, usage and limits](docs/features/AE_ORDERING.md)
 
-The merged JAR includes the **ME Order Optimizer** (`aeorderoptimizer:core`), a separate block connected to an AE grid. Right-click it for the detailed-report toggle; it has its own UI alongside the structure-preview UI.
+## Craftable input badges
 
-- One active component per grid, 1 AE/t, no channel. Grid merges disconnect excess components and show the conflict.
-- The submitting grid controls opt-in. Without an active component, native standard/Lite choice and dispatch remain in use.
-- Native Lite route selection is retained. Cycles and multiple outputs in the selected graph stop planning and print the problem; detail mode reports alternatives and selection.
-- Native ME interfaces support bulk insertion within stock and receiver limits. When 4096-craft batches are allowed, 10,000 unit-pattern crafts dispatch as 4096 + 4096 + 1808, costing three operations. Workbench recipes and unsupported media retain unit dispatch.
+Pattern-terminal ingredients show a top-right **+** when the current network has a crafting pattern for them. Hover for an explanation. Covers item/fluid inputs and extended/wireless terminals sharing the native GUI.
 
-[Usage, recipe and limits](docs/AE_ORDER_OPTIMIZER.md) · [Stargate timing comparison](docs/AE_BENCHMARK.md). A simplified Stargate benchmark measured 9.36 ms for native Lite and 10.00 ms for this module; it does not establish a planning speedup over Lite. Validation currently expands the chosen graph before applying inventory, so it may inspect upstream recipes for already-stocked ingredients.
+No optimizer component is needed. A badge indicates that a pattern exists; it does not guarantee enough materials for the full crafting chain.
 
-## Compatibility
+## Forge and fusion power controls
 
-- **Machine interfaces**: Preview requires a readable StructureLib definition; survival construction requires the machine's native survival builder. Hatch counts, orientation, voltage tiers and special materials still follow the machine's own rules.
-- **Existing structures**: Filling gaps preserves matching blocks. Replacement and default dismantling skip TileEntities, including hatches and containers, and operate on recognized structural materials.
-- **Running machines**: Normal preview and Shift-right-click open the preview without actively forcing a native structure check or changing the actual orientation. Replacement, dismantling or orientation changes affect the real structure and may stop a machine.
-- **UI & models**: The current preview uses block-icon cubes. Complex models, structure trees, mounted-machine navigation and AE pattern encoding are not currently provided.
-- **Validation scope**: Headless structure operations have been tested. Real running recipes, the client GUI and live AE extraction remain to be validated. See the per-controller results for special machines and recorded failures.
+Supports the **Dimensionally Transcendent Plasma Forge, ordinary Fusion Mk-I–V and Compact Fusion Mk-I–V**, using their existing controllers.
 
-[**Detailed compatibility**](COMPATIBILITY.md) · [**Per-controller results**](verification/machine-coverage.csv) · [Validation record](VERIFICATION.md)
+1. Open the machine GUI and click the blue **P** button.
+2. Choose the color of the input hatch, bus or input assembly. Unpainted inputs use their own group.
+3. Enter maximum amperage, select a voltage unit and save. **0 / -1 means automatic**.
 
-## Configuration
+For example: red `1A UEV`, green `16A UMV`, unpainted automatic. All groups still share the original machine supply; the settings cap their processing budgets.
 
-File: `config/structureterminal.cfg`. Restart the instance after editing it.
+Edits apply to the next recipe without interrupting the running reaction. Successfully reforming after energy-hatch changes clamps excessive manual limits. Fusion keeps native recipe order, startup energy and continuous-operation behavior; no order-priority scheduler is added.
 
-| Setting | Default | Purpose |
-|---|---:|---|
-| `limits.maxPreviewCells` | 100000 | Maximum scanned positions |
-| `limits.maxScanMillis` | 500 | Scan time budget in milliseconds |
-| `limits.placementBudget` | 25 | Requested native placement budget per round |
-| `limits.controllerReach` | 8 | Maximum player distance from the controller |
-| `features.allowDemolition` | true | Enable confirmed dismantling |
-| `features.allowTileEntityDemolition` | false | Keep disabled to skip all TileEntities during dismantling |
+Matter Manipulator and Data Orb configuration copying are supported. [Detailed usage and fusion notes](docs/features/POWER.md)
 
-One construction round runs every 6 server ticks, with up to 4 active tasks. If a large structure reaches a scan limit, adjust the budget for your server. Further settings and testing instructions are in the [developer guide](docs/BUILDING.md#english).
+## ME Storage Vault
 
-## Project resources
+Build a **3×3×3 hollow cube**: controller at the front center, **23 native LuV machine casings, exactly one ordinary GT input bus and one ME access interface**, with air in the center. No storage cores. The controller and ME interface require **LuV assembler recipes**.
 
-[Build & develop](docs/BUILDING.md#english) · [Headless test procedure](verification/PACK_TESTING.md) · [Running state & structure checks](STATE_CHECKS.md)
+- Connect the interface to powered AE: **one channel, 2 AE/t**.
+- Insert components, empty cells or filled cells. Contents and installed upgrade cards are migrated before consuming the source and adding its full nominal capacity. The housing is consumed too.
+- No artificial type limit or type overhead. Shared capacity: **8 items or 2048 mB of fluid per byte**.
+- Right-click the controller for usage, status and automatic-absorption controls. Unsupported, creative, void and spatial cells remain in the bus.
 
-The interface is based on the GTO structure terminal, and the in-game icon and header use a blue-and-white design inspired by the GTO terminal silhouette. Code and artwork licenses, sources and upstream credits are recorded in [LICENSE](LICENSE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [LICENSES](LICENSES).
+GTO-inspired blue/white control and network-port overlays share the native LuV shell. A formed vault also renders its bus with that shell while preserving input indicators.
+
+Inventory lives in external world-save files. Normal harvesting preserves the controller UUID; replacing and reforming reconnects it. Back up the whole world. Importing new cells forces a save and may briefly pause the server.
+
+[Structure diagram, supported cells and backup guide](docs/features/STORAGE.md)
+
+## Compatibility and saves
+
+- Target: **GTNH 2.9.0-RC-2**. Use an adapted build for other pack versions.
+- The approved blue-and-white terminal icon is retained. Legacy internal module IDs preserve existing saves; all features ship in one JAR.
+- Terminal settings remain in `config/structureterminal.cfg`; restart after editing. Vault files remain in `<world>/data/aestoragevault/`.
+- The vault currently requires manual construction; Structure Terminal building and NEI multiblock previews are not integrated for it.
+- Back up, migrate and restore the complete stopped world. Do not roll back only inventory files or controller NBT. Removing this mod makes its added blocks and inventories unavailable.
+
+## Developer documentation
+
+[Build, architecture, test reports, validation scope and roadmap](docs/development/README.md)
+
+[License](LICENSE) · [Upstream and artwork credits](THIRD_PARTY_NOTICES.md)

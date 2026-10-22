@@ -18,10 +18,10 @@ import dev.structureterminal.server.BuildService;
 
 @Mod(
     modid = StructureTerminal.ID,
-    name = "Structure Terminal",
+    name = "GTNH现代化升级",
     version = Tags.VERSION,
     acceptedMinecraftVersions = "[1.7.10]",
-    dependencies = "required-after:structurelib@[1.4.45,);required-after:appliedenergistics2;required-after:unimixins;after:gregtech")
+    dependencies = "required-after:structurelib@[1.4.45,);required-after:appliedenergistics2;required-after:unimixins;required-after:gregtech;required-after:modularui2")
 public final class StructureTerminal {
 
     public static final String ID = "structureterminal";

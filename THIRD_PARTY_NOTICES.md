@@ -1,6 +1,6 @@
 # Third-party notices
 
-Structure Terminal is a Minecraft 1.7.10 / GTNH backport of the GTO structure terminal workflow. Upstream code, artwork and build resources are credited below.
+GTNH现代化升级 bundles the Structure Terminal backport, AE conveniences, power controls and external-file storage for Minecraft 1.7.10 / GTNH. Upstream code, artwork and build resources are credited below.
 
 * The reference UI is GregTech-Odyssey/GregTech-Modern, branch `gto`, observed commit `16abc4041714b0098324b86e10d119a2c84fa720` on 2026-10-15. Reference classes: `StructurePreviewScreen`, `StructureBuildFlow`, `TerminalModes`, `PatternBuilderPanel`, `OreSprites`, `UITheme`, `UISizes`. The Minecraft 1.20 rendering and layout engine is not included; `client/` implements a 1.7.10 adapter. Upstream license: LGPL-3.0. https://github.com/GregTech-Odyssey/GregTech-Modern
 * `assets/structureterminal/textures/gui/ore_styles.png` is the upstream Ore UI atlas, fetched unchanged from `assets/gtceu/textures/gui/uipro/ore_styles.png`. GTO's `OreSprites` identifies the original as Low-Drag-MC/LDLib2 (`textures/gui/ore_styles.png`), LGPL-3.0. The original atlas coordinates and visual constants are used in `OreTheme`. https://github.com/Low-Drag-MC/LDLib2
@@ -15,3 +15,9 @@ The original MIT starter notice is retained verbatim in `LICENSES/ExampleMod-MIT
 * `assets/structureterminal/textures/items/structure_terminal.png` and `docs/assets/terminal-blue-white.png` use the blue-and-white concept approved by the project owner. It was generated with the built-in image generation tool using the GTO terminal as a reference, then resized to a 128×128 transparent item sprite. The README banner combines this sprite with the project’s layout.
 
 * The bundled AE Order Optimizer retains the `aeorderoptimizer` registration namespace for save compatibility. `dev/aeoptimizer/planning/StrictCraftingJob.java` adapts the GTNH AE2 `CraftingJobFast` implementation at `rv3-beta-1080-GTNH`, licensed under LGPL-3.0-or-later. Original AE2 copyright terms are preserved in that source and the runtime `NOTICE-AE-OPTIMIZER`; the full corresponding source is included in this repository. AE2, UniMixins and fastutil remain external pack dependencies. Source: https://github.com/GTNewHorizons/Applied-Energistics-2-Unofficial/blob/rv3-beta-1080-GTNH/src/main/java/appeng/crafting/fast/CraftingJobFast.java
+
+* The craftable-input `+` badge follows the UI behavior observed in GTO AE2's `PatternEncodingTermScreen`. The 1.7.10 implementation uses native GTNH synchronized typed inventories and does not embed the upstream rendering code. Reference: https://github.com/GregTech-Odyssey/Applied-Energistics-2-gto/blob/gto/src/main/java/appeng/client/gui/me/items/PatternEncodingTermScreen.java
+
+* Power controls and AE Storage Vault are integrated from the project’s previously separate LGPL-3.0-or-later implementations. Their original `plasmaforgepower` and `aestoragevault` namespaces, NBT keys and external world-save folder are retained. No GTO/GTOLib protected storage implementation is included.
+
+* `assets/aestoragevault/textures/blocks/controller_overlay.png` and `access_overlay.png` are original GTO-inspired sprites generated with the built-in image generator. Masters and prompts are retained in `docs/assets/vault/`. Native LuV casing textures are referenced from the installed GTNH pack; no GT casing raster is embedded in the mod.

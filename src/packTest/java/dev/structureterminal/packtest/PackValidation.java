@@ -93,7 +93,8 @@ public final class PackValidation {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        if (!Boolean.getBoolean("structureterminal.packTests") || !FMLCommonHandler.instance()
+        if (!Boolean.getBoolean("structureterminal.packTests")) return;
+        if (!FMLCommonHandler.instance()
             .getSide()
             .isServer()) throw new IllegalStateException("Pack validation requires an explicit dedicated test server");
         ForgeChunkManager.setForcedChunkLoadingCallback(
