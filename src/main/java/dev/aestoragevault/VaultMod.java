@@ -63,6 +63,7 @@ public final class VaultMod {
             .register(Repositories.INSTANCE);
         MinecraftForge.EVENT_BUS.register(Repositories.INSTANCE);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        proxy.configure(new java.io.File(event.getModConfigurationDirectory(), "gtnh-modernization-client.cfg"));
         proxy.init();
     }
 

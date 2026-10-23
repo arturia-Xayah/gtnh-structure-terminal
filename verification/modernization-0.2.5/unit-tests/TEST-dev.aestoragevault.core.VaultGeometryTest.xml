@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.VaultGeometryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-23T03:02:17.388Z" hostname="D9CH4WN6T3" time="0.001">
+  <properties/>
+  <testcase name="sixFacesUseAllNineConnectedTilesExactlyOnce" classname="dev.aestoragevault.core.VaultGeometryTest" time="0.001"/>
+  <testcase name="allSixFaceCentersAndTwentyFiveRemainingShellCells" classname="dev.aestoragevault.core.VaultGeometryTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

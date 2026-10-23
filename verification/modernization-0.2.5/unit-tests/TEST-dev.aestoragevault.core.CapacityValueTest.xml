@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.CapacityValueTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-23T03:02:17.385Z" hostname="D9CH4WN6T3" time="0.002">
+  <properties/>
+  <testcase name="positiveValuesKeepTheirSignAcrossLongAndUnitBoundaries" classname="dev.aestoragevault.core.CapacityValueTest" time="0.0"/>
+  <testcase name="corruptNegativeEmptyAndOversizedEncodingsAreRejectedBeforeAllocation" classname="dev.aestoragevault.core.CapacityValueTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

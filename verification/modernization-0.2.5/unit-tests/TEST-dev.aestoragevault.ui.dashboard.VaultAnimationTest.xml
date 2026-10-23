@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.ui.dashboard.VaultAnimationTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-23T03:02:17.902Z" hostname="D9CH4WN6T3" time="0.001">
+  <properties/>
+  <testcase name="emptyAndInconsistentSnapshotsAreClampedForPresentation" classname="dev.aestoragevault.ui.dashboard.VaultAnimationTest" time="0.001"/>
+  <testcase name="openingShowsCurrentValuesWithoutPretendingToFillFromZero" classname="dev.aestoragevault.ui.dashboard.VaultAnimationTest" time="0.0"/>
+  <testcase name="hugeCapacitiesNeverGoThroughOverflowingDoubleDivision" classname="dev.aestoragevault.ui.dashboard.VaultAnimationTest" time="0.0"/>
+  <testcase name="reducedMotionAndInvalidStructureSnapValuesAndStopDecorativeMotion" classname="dev.aestoragevault.ui.dashboard.VaultAnimationTest" time="0.0"/>
+  <testcase name="interpolationRetargetsFromCurrentPresentationAndSettlesExactly" classname="dev.aestoragevault.ui.dashboard.VaultAnimationTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

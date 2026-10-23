@@ -766,6 +766,12 @@ public final class VaultSuite {
         run("server_GUI_controls_require_distance_and_toggle_absorption", () -> {
             VaultContainer gui = new VaultContainer(player, controller);
             boolean before = controller.automatic;
+            check(gui.inventorySlots.size() == 36, "dashboard changed physical slot count");
+            for (int i = 0; i < 36; i++) {
+                net.minecraft.inventory.Slot slot = (net.minecraft.inventory.Slot) gui.inventorySlots.get(i);
+                check(slot.getSlotIndex() == (i < 27 ? i + 9 : i - 27), "dashboard changed slot identity");
+            }
+            check(!gui.enchantItem(player, 2) && controller.automatic == before, "client animation affected server");
             check(gui.enchantItem(player, 0), "toggle failed");
             check(controller.automatic != before, "toggle unchanged");
             gui.enchantItem(player, 0);

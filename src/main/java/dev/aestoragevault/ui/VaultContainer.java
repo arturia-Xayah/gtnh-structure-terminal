@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 
+import dev.aestoragevault.ui.dashboard.VaultLayout;
 import dev.aestoragevault.world.TileController;
 
 public class VaultContainer extends Container {
@@ -12,9 +13,9 @@ public class VaultContainer extends Container {
 
     public VaultContainer(EntityPlayer player, TileController tile) {
         this.tile = tile;
-        for (int row = 0; row < 3; row++) for (int col = 0; col < 9; col++)
-            addSlotToContainer(new Slot(player.inventory, col + row * 9 + 9, 8 + col * 18, 132 + row * 18));
-        for (int col = 0; col < 9; col++) addSlotToContainer(new Slot(player.inventory, col, 8 + col * 18, 190));
+        VaultLayout layout = VaultLayout.full();
+        for (int i = 0; i < 36; i++)
+            addSlotToContainer(new Slot(player.inventory, i < 27 ? i + 9 : i - 27, layout.slotX(i), layout.slotY(i)));
     }
 
     @Override

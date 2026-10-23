@@ -45,6 +45,14 @@ ME 访问接口：LuV 机器机壳（Hull） ×1、LuV 电路 ×2、LuV 发射�
 
 右键主机查看状态，可关闭自动吸收后集中放入元件，再开启扩容。每批新元件吸收时会同步保存维度并等待区块写盘，大存档可能出现一次停顿。
 
+## 主机动画界面
+
+右键主机显示环形容量仪表、最大/已用/剩余字节、类型数量与吸收状态。客户端逐帧绘制扫描线、旋转流光与状态呼吸灯；容量和类型变化在约半秒内平滑过渡。较小的 GUI 尺寸会切换到紧凑布局。
+
+点击 **动画开/关** 可即时切换。本地设置保存在 `config/gtnh-modernization-client.cfg` 的 `client.storageAnimations`，不影响其他玩家、服务器状态或库存同步频率。关闭后数值立即跳到实际值，并停止循环特效。外部编辑配置后重启客户端生效。
+
+悬停容量区查看当前实际值，不经过动画插值；极长数字用六位有效数字的指数形式概括。结构失效或库存锁定时停止装饰动画。检测结构与自动吸收按钮沿用原操作。
+
 ## 存储链接仓：优先级与原生 AE 操作
 
 右键链接仓直接打开 **AE2 原生优先级界面**，支持原版的加减按钮、输入和表达式。高优先级先存入，低优先级先取出；同级的已有类型、黏性等规则仍由 AE2 决定。优先级保存在链接仓上，普通采掘和重新放置会保留。
@@ -102,7 +110,7 @@ ME 访问接口：LuV 机器机壳（Hull） ×1、LuV 电路 ×2、LuV 发射�
 
 ## English
 
-The controller is named **ME Cell Aggregation Storage**. Use exactly one Storage Link Hatch **or** Export Bus in the port position. Right-click the link for the native AE2 priority GUI; native item/fluid routing and Storage Reshuffle are supported. Larger priorities insert first, smaller priorities extract first, following AE2's other ordering rules.
+The controller is named **ME Cell Aggregation Storage**. Its blue-white dashboard animates the ring, sweep, highlights and number changes, with a compact layout for smaller GUI sizes. The animation toggle is client-local (`config/gtnh-modernization-client.cfg`, `client.storageAnimations`), adds no server packets, and snaps to current values when disabled. Hover metrics for non-interpolated current values (very long numbers are summarized). Invalid/locked structures stop decorative motion. Use exactly one Storage Link Hatch **or** Export Bus in the port position. Right-click the link for the native AE2 priority GUI; native item/fluid routing and Storage Reshuffle are supported. Larger priorities insert first, smaller priorities extract first, following AE2's other ordering rules.
 
 The Export Bus instead actively injects into its connected, powered AE grid and never exposes the source stock as network storage. Its 4×9 native phantom slots accept item/fluid NEI markers. Empty filters export all. Supported upgrades: one fuzzy, inverter and ore-filter card each. Non-empty ore expressions override slot markers; an empty expression restores slot filtering. Empty markers plus an empty expression export all, including with an inverter. Transfers use native AE power and security, bounded type batches and fair scanning. Full/offline destinations retain stock. The absorption toggle controls cell imports only. Normal harvesting preserves filters, real upgrade cards and settings.
 

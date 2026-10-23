@@ -19,7 +19,7 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--version',default='0.2.4-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
+    ap.add_argument('--version',default='0.2.5-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
     ap.add_argument('--runs',type=Path,nargs='+',required=True);ap.add_argument('--output',type=Path,required=True)
     ap.add_argument('--upgrades',type=Path,nargs='*',default=[])
     a=ap.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);checks=[]
@@ -56,13 +56,28 @@ def main():
                 data=z.read(name)
                 check('connected_tile_'+str(tile),data==(ROOT/'src/main/resources'/name).read_bytes()
                       and int.from_bytes(data[16:20],'big')==64 and int.from_bytes(data[20:24],'big')==64)
-        if a.version == '0.2.4-alpha':
+        if a.version == '0.2.5-alpha':
             check('native_priority_output_and_byte_formatter',all(n in names for n in [
                 'dev/aestoragevault/world/TileOutput.class','dev/aestoragevault/ui/OutputContainer.class',
                 'dev/aestoragevault/ui/OutputScreen.class','dev/aestoragevault/core/ByteFormat.class','dev/aestoragevault/core/CapacityValue.class','dev/aestoragevault/world/VaultItemBlock.class']))
             for language in ['zh_CN','en_US']:
                 translations=dict(line.split('=',1) for line in z.read('assets/aestoragevault/lang/'+language+'.lang').decode('utf-8').splitlines() if '=' in line)
                 check('operating_tooltips_'+language,all(translations.get('vault.tooltip.'+part+'.'+str(i)) for part,count in [('controller',7),('access',5),('output',8)] for i in range(1,count+1)))
+            check('native_animated_dashboard',all(n in names for n in [
+                'dev/aestoragevault/ui/dashboard/VaultLayout.class','dev/aestoragevault/ui/dashboard/VaultAnimation.class',
+                'dev/aestoragevault/ui/dashboard/VaultMesh.class','dev/aestoragevault/client/VaultClientPreferences.class',
+                'dev/aestoragevault/client/VaultButton.class']))
+            for language in ['zh_CN','en_US']:
+                translations=dict(line.split('=',1) for line in z.read('assets/aestoragevault/lang/'+language+'.lang').decode('utf-8').splitlines() if '=' in line)
+                check('dashboard_labels_'+language,all(translations.get('vault.dashboard.'+key) for key in [
+                    'free','utilization','types','typeCount','state','automatic','paused','idle','locked',
+                    'checkShort','absorptionOn','absorptionOff','motionOn','motionOff','motionHint','actual',
+                    'formedShort','incompleteShort','lockedShort','typeHint']))
+            with zipfile.ZipFile(ROOT/'dist/0.2.4-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar') as previous:
+                check('storage_logic_and_sync_unchanged_since_024',all(z.read('dev/aestoragevault/'+name+'.class')==previous.read('dev/aestoragevault/'+name+'.class') for name in [
+                    'world/TileController','world/TileOutput','world/TileAccess','core/VaultStore',
+                    'core/CapacityValue','ae/VaultInventory','storage/Repositories']))
+            check('dashboard_math_has_no_game_or_GL_dependency',all(not any(prefix in z.read('dev/aestoragevault/ui/dashboard/'+name+'.class') for prefix in [b'net/minecraft',b'org/lwjgl',b'java/awt']) for name in ['VaultLayout','VaultAnimation','VaultAnimation$Frame','VaultMesh']))
             check('custom_tooltip_registration',b'dev/aestoragevault/world/VaultItemBlock' in z.read('dev/aestoragevault/VaultMod.class'))
             check('renamed_storage_controller','ME元件聚合存储器' in z.read('assets/aestoragevault/lang/zh_CN.lang').decode('utf-8'))
         for language in ['zh_CN','en_US']:

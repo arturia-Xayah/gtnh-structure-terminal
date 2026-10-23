@@ -19,6 +19,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: success()
         with:
-          name: gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2
-          path: build/libs/gtnh-modernization-upgrade-0.2.4-alpha.jar
+          name: gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2
+          path: build/libs/gtnh-modernization-upgrade-0.2.5-alpha.jar
           if-no-files-found: error

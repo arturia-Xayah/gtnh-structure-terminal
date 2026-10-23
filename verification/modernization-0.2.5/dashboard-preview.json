@@ -1,0 +1,13 @@
+{
+  "client_launched": false,
+  "renderer": "Java2D headless, production VaultLayout/VaultAnimation/VaultMesh, substitute fonts",
+  "files": {
+    "animation-en.gif": "620a0708b2b6ede8d5c4c800394e8e7978a80f3d77ed12288ec30582b44e32f3",
+    "animation.gif": "3dd49b416e5913c7ef2ef3168111a66f6d490d8987e8be5c5c7139389f22acf9",
+    "compact.png": "1f486cf38129af436e3c5535190465fc18ce7579fa9464da32d7ff5e5cc20ffb",
+    "full-en.png": "5d1e8d932b43fac9d4f7f8eabe6e248197ec2bc43843bad3f4c6d27aacdf5a12",
+    "full.png": "48a2f26b4a1b7000fc4f25e85415eb3977e85b5a60b515ba5cd2e5ec96300024",
+    "huge-en.png": "59b90c472566802e73eddafb14c59328922396c12170a89a1e1d59e2518dc148",
+    "invalid.png": "6ba56664a497fb8c19c315d443115b72c9e7f90787a8013d661805ec1913bdc2"
+  }
+}

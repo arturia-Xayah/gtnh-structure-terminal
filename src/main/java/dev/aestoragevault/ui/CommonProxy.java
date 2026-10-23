@@ -8,6 +8,8 @@ import dev.aestoragevault.world.TileController;
 
 public class CommonProxy implements IGuiHandler {
 
+    public void configure(java.io.File file) {}
+
     public void init() {}
 
     @Override

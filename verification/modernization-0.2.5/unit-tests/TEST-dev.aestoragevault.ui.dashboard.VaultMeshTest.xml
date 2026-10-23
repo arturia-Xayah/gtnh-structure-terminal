@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.ui.dashboard.VaultMeshTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-23T03:02:17.908Z" hostname="D9CH4WN6T3" time="0.026">
+  <properties/>
+  <testcase name="disabledMotionIsIdenticalAcrossTimeWhileEnabledDecorationsActuallyMove" classname="dev.aestoragevault.ui.dashboard.VaultMeshTest" time="0.002"/>
+  <testcase name="geometryRemainsFiniteBoundedAndInsideTheWindowAcrossStates" classname="dev.aestoragevault.ui.dashboard.VaultMeshTest" time="0.024"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

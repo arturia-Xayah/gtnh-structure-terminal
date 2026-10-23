@@ -8,6 +8,11 @@ import dev.aestoragevault.world.TileController;
 public class ClientProxy extends CommonProxy {
 
     @Override
+    public void configure(java.io.File file) {
+        dev.aestoragevault.client.VaultClientPreferences.load(file);
+    }
+
+    @Override
     public void init() {
         dev.aestoragevault.world.VaultBlock.renderId = cpw.mods.fml.client.registry.RenderingRegistry
             .getNextAvailableRenderId();

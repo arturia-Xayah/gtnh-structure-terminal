@@ -10,7 +10,7 @@
 
 **简体中文** · [English](README.en.md) · [版本下载](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.4-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.5-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
@@ -29,7 +29,7 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 ## 安装与旧版升级
 
-1. 获取 `gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
+1. 获取 `gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
 2. 移除旧版结构终端，以及独立的 **AE Order Optimizer、Plasma Forge Power、AE Storage Vault** JAR。以上功能已包含在整合版中，不能重复安装。
 3. 从独立仓库 Mod 升级前备份整个世界，保留 `data/aestoragevault`。已有终端、AE 元件、仓库主机、库存及功率设置继续使用原注册 ID 和保存位置。旧版仓库需将 23 个旧式外壳替换为 LuV 机器外壳后重新成型。
 
@@ -86,11 +86,14 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 - 可替换为 **ME元件聚合存储器输出总线**，主动向所连接的 AE 网络输出库存；36 格物品／流体标记支持 NEI 拖入、模糊卡、反相卡与矿物词典筛选卡。没有标记时输出全部。
 - 输入总线可放空元件、存储组件或非空存储元件。迁移原库存及升级卡后，元件永久消耗，标称字节数累加到仓库容量；外壳不返还。
 - 无人为物品类型上限，无类型字节开销。总容量采用 **BigInteger**，不再受 8 EiB 限制；每种库存数量保留 AE2 接口使用的 `long`。物品和流体共用容量：**8 个物品 / 2048 mB 流体占 1 字节**。
+- 主机采用蓝白全息界面，包含环形容量仪表、扫描线、流光和数值过渡；小窗口自动切换紧凑布局。动画可在界面内关闭，设置仅保存在本地客户端。
 - 主机与两个端口的物品提示提供操作说明。右键主机查看容量、类型和结构状态，也可暂停自动吸收。未知通道、创造、虚空及空间元件会留在总线中。
 
 成型后，外壳、主机、ME 接口与总线统一为平滑蓝白紫色科幻机身，按整个面连续拼接，保留功能面板和端口标识。总线与接口可放在其余任意外壳位置，包括顶面、底面、棱边与角落，但不可被多座仓库共用；总线也不可兼用于其他已登记的 GT 多方块。冲突解除后可重新成型。
 
 实际库存保存在世界目录的独立文件中。普通拆机保留主机 UUID，重新放置并成型后恢复访问。备份必须包含整个世界目录；吸收新元件时会同步存档，可能短暂停顿。
+
+![主机动画示意（后台共享几何渲染）](docs/assets/vault/dashboard/animation.gif)
 
 [建造示意、元件范围与备份指引](docs/features/STORAGE.md)
 

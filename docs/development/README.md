@@ -31,6 +31,8 @@
 
 ## 外部存储
 
+- [主机原生动画界面与后台预览](VAULT_DASHBOARD.md)
+
 - [原生优先级、Reshuffle 与主动输出](VAULT_IO.md)
 
 - [整面蓝白紫材质、六方向与独占部件](VAULT_SMOOTH.md)

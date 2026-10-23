@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.structureterminal.core.SurvivalCapabilityTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-23T03:02:19.997Z" hostname="D9CH4WN6T3" time="0.007">
+  <properties/>
+  <testcase name="modernAndLegacyImplementationsAreBothAccepted" classname="dev.structureterminal.core.SurvivalCapabilityTest" time="0.007"/>
+  <testcase name="markerWithRecursiveDefaultsIsRejectedWithoutInvokingIt" classname="dev.structureterminal.core.SurvivalCapabilityTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
