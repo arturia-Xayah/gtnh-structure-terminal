@@ -27,4 +27,12 @@ public class ByteFormatTest {
                     .multiply(BigInteger.valueOf(5))));
         assertEquals("1020 RiB", ByteFormat.format(BigInteger.ONE.shiftLeft(100)));
     }
+
+    @Test
+    public void valuesBeyondNamedUnitsStayCompact() {
+        String formatted = ByteFormat.format(BigInteger.ONE.shiftLeft(10000));
+        assertTrue(formatted.contains("×10^"));
+        assertTrue(formatted.endsWith(" RiB"));
+        assertTrue(formatted.length() < 25);
+    }
 }

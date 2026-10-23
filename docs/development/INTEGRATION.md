@@ -2,7 +2,7 @@
 
 ## 名称与模块
 
-产品显示名：**GTNH现代化升级**。英文文档名：**GTNH Modernization Upgrade**。发行文件前缀 `gtnh-modernization-upgrade`，本次版本 `0.2.3-alpha`，目标 GTNH `2.9.0-RC-2`。
+产品显示名：**GTNH现代化升级**。英文文档名：**GTNH Modernization Upgrade**。发行文件前缀 `gtnh-modernization-upgrade`，本次版本 `0.2.4-alpha`，目标 GTNH `2.9.0-RC-2`。
 
 一个 JAR 包含四个 FML 注册模块。主模块显示统一产品名称，其他模块通过元数据 `parent=structureterminal` 归于主模块并沿用终端图标。保留模块 ID 是为了兼容已有世界、物品注册和 GUI 路由，并非要求玩家安装四个 Mod。
 
@@ -23,7 +23,7 @@
 
 终端原有 ASM 提示隔离核心插件保持不变。AE、功率控制及仓库外观使用独立 LateMixinLoader 和 JSON 配置，同时在一个 JAR 中发现。客户端 AE 标记补丁只在客户端加入；后台测试不能代替它的 OpenGL / 交互验证。
 
-仓库仍使用原来的 Mod 实例、GUI handler、服务器 tick / 世界保存回调以及停服关闭流程。物品/方块均在原命名空间注册。仓库底层格式及功率预算算法不变。0.2.1 的外壳改为原生 LuV 机器外壳，配方使用 LuV 组装机；GT 输入总线的统一外观由只读渲染补丁提供，不改写总线 NBT。
+仓库仍使用原来的 Mod 实例、GUI handler、服务器 tick / 世界保存回调以及停服关闭流程。物品/方块均在原命名空间注册。功率预算算法不变。仓库 0.2.4 将容量升级为 BigInteger 与 AVS3；读取旧 AVS2 和 long NBT，库存条目数量仍为原生 long。0.2.1 的外壳改为原生 LuV 机器外壳，配方使用 LuV 组装机；GT 输入总线的统一外观由只读渲染补丁提供，不改写总线 NBT。
 
 ## 存档
 
@@ -31,7 +31,7 @@
 
 功率设置仍放在原 GT 主机字段中，物质操纵者和数据宝珠的配置复制类型不变。输入颜色、原机成型、启动 EU、热切换和候选遍历规则不变。
 
-此次验证同时加载所有模块，并重新执行各套服务器测试。历史独立版的格式/算法文件未被改为新的不兼容格式；完整验证边界见 [VALIDATION.md](VALIDATION.md)。
+此次验证同时加载所有模块，并重新执行各套服务器测试。库存格式升级后不能降级给旧版本读取；完整验证边界见 [VALIDATION.md](VALIDATION.md)。
 
 ## English
 
@@ -39,4 +39,4 @@ The product is renamed while four internal FML namespaces are retained for exist
 
 ## 0.2.3 存储端口
 
-原 access 注册 ID 不变，增加 IPriorityHost 原生优先级界面与持久化；新增 output 方块和 TileOutput。输出不挂载私有库存，通过 AE 原生 poweredInsert 向目标网络批量注入。两种端口互斥，库存文件格式不变。细节见 [VAULT_IO.md](VAULT_IO.md)。
+原 access 注册 ID 不变，增加 IPriorityHost 原生优先级界面与持久化；新增 output 方块和 TileOutput。输出不挂载私有库存，通过 AE 原生 poweredInsert 向目标网络批量注入。两种端口互斥；0.2.4 容量升级格式详见 [STORAGE_FORMAT.md](STORAGE_FORMAT.md)。细节见 [VAULT_IO.md](VAULT_IO.md)。

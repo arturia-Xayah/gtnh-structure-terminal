@@ -1,0 +1,4 @@
+[10:02:29] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1004]: VAULT_TEST fresh_server_process_restores_controller_UUID true 
+[10:02:29] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1004]: VAULT_TEST fresh_server_process_restores_capacity_and_all_1000_types true 
+[10:02:29] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1004]: VAULT_TEST fresh_server_process_restores_items_and_fluids true 
+[10:02:29] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1004]: VAULT_TEST fresh_server_process_reconnects_real_AE_network true 

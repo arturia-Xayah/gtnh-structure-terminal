@@ -35,7 +35,8 @@ import java.util.zip.CheckedOutputStream;
 /** Server-owned ledger. Unlimited logical types, exact fractional-byte accounting, durable import receipts. */
 public final class VaultStore implements Closeable {
 
-    private static final int MAGIC = 0x41565332;
+    private static final int LEGACY_MAGIC = 0x41565332;
+    private static final int MAGIC = 0x41565333;
     private static final int MAX_RECORD = 64 * 1024 * 1024;
     private static final BigInteger UNITS = BigInteger.valueOf(2048);
     private final Path snapshot;
@@ -48,7 +49,8 @@ public final class VaultStore implements Closeable {
     private FileLock lock;
     private boolean needsFlush;
     private BigInteger used = BigInteger.ZERO;
-    private long capacity;
+    private BigInteger capacity = BigInteger.ZERO;
+    private BigInteger capacityUnits = BigInteger.ZERO;
     private long sequence;
     private boolean failed;
     private long pendingBytes;
@@ -75,7 +77,7 @@ public final class VaultStore implements Closeable {
         }
     }
 
-    public synchronized long capacity() {
+    public synchronized BigInteger capacity() {
         return capacity;
     }
 
@@ -83,10 +85,9 @@ public final class VaultStore implements Closeable {
         return used;
     }
 
-    public synchronized long usedBytesCeil() {
+    public synchronized BigInteger usedBytesCeil() {
         return used.add(UNITS.subtract(BigInteger.ONE))
-            .divide(UNITS)
-            .longValueExact();
+            .divide(UNITS);
     }
 
     public synchronized int types() {
@@ -121,9 +122,7 @@ public final class VaultStore implements Closeable {
     public synchronized long insert(Resource r, long requested, boolean simulate) throws IOException {
         healthy();
         if (requested <= 0) return 0;
-        BigInteger free = BigInteger.valueOf(capacity)
-            .multiply(UNITS)
-            .subtract(used);
+        BigInteger free = capacityUnits.subtract(used);
         long fit = free.signum() <= 0 ? 0
             : free.divide(BigInteger.valueOf(r.units()))
                 .min(BigInteger.valueOf(Long.MAX_VALUE))
@@ -152,10 +151,16 @@ public final class VaultStore implements Closeable {
 
     /** One journal transaction credits capacity, imported contents and every source token together. */
     public synchronized void absorb(UUID receipt, long extraBytes, Map<Resource, Long> contents) throws IOException {
+        absorb(receipt, BigInteger.valueOf(extraBytes), contents);
+    }
+
+    public synchronized void absorb(UUID receipt, BigInteger extraBytes, Map<Resource, Long> contents)
+        throws IOException {
         healthy();
         if (receipts.contains(receipt)) return;
-        if (extraBytes <= 0) throw new IllegalArgumentException("Non-positive cell capacity");
-        long nextCapacity = Math.addExact(capacity, extraBytes);
+        if (extraBytes.signum() <= 0) throw new IllegalArgumentException("Non-positive cell capacity");
+        BigInteger nextCapacity = capacity.add(extraBytes);
+        CapacityValue.encode(nextCapacity);
         BigInteger nextUsed = used;
         for (Map.Entry<Resource, Long> e : contents.entrySet()) {
             if (e.getValue() <= 0) throw new IllegalArgumentException("Invalid imported amount");
@@ -167,22 +172,20 @@ public final class VaultStore implements Closeable {
                             e.getKey()
                                 .units())));
         }
-        if (nextUsed.compareTo(
-            BigInteger.valueOf(nextCapacity)
-                .multiply(UNITS))
-            > 0) throw new IllegalArgumentException("Cell contents exceed new logical capacity");
+        if (nextUsed.compareTo(nextCapacity.multiply(UNITS)) > 0)
+            throw new IllegalArgumentException("Cell contents exceed new logical capacity");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(bytes);
-        out.writeByte(2);
+        out.writeByte(3);
         writeUuid(out, receipt);
-        out.writeLong(extraBytes);
+        CapacityValue.write(out, extraBytes);
         out.writeInt(contents.size());
         for (Map.Entry<Resource, Long> e : contents.entrySet()) {
             writeResource(out, e.getKey());
             out.writeLong(e.getValue());
         }
         append(bytes.toByteArray(), true);
-        capacity = nextCapacity;
+        setCapacity(nextCapacity);
         receipts.add(receipt);
         for (Map.Entry<Resource, Long> e : contents.entrySet()) apply(e.getKey(), e.getValue());
     }
@@ -253,10 +256,8 @@ public final class VaultStore implements Closeable {
             }
             offset += size + 16L;
         }
-        if (used.signum() < 0 || used.compareTo(
-            BigInteger.valueOf(capacity)
-                .multiply(UNITS))
-            > 0) throw new IOException("Inventory capacity invariant failed");
+        if (used.signum() < 0 || used.compareTo(capacityUnits) > 0)
+            throw new IOException("Inventory capacity invariant failed");
     }
 
     private void applyRecord(byte[] data) throws IOException {
@@ -265,12 +266,12 @@ public final class VaultStore implements Closeable {
         if (op == 1) {
             Resource r = readResource(in);
             apply(r, in.readLong());
-        } else if (op == 2) {
+        } else if (op == 2 || op == 3) {
             UUID receipt = readUuid(in);
             if (!receipts.add(receipt)) throw new IOException("Duplicate journal receipt");
-            long extra = in.readLong();
-            if (extra <= 0) throw new IOException("Invalid imported capacity");
-            capacity = Math.addExact(capacity, extra);
+            BigInteger extra = op == 2 ? BigInteger.valueOf(in.readLong()) : CapacityValue.read(in);
+            if (extra.signum() <= 0) throw new IOException("Invalid imported capacity");
+            setCapacity(capacity.add(extra));
             int count = checkedCount(in.readInt());
             for (int i = 0; i < count; i++) {
                 Resource r = readResource(in);
@@ -318,7 +319,7 @@ public final class VaultStore implements Closeable {
             out.writeInt(MAGIC);
             writeUuid(out, id);
             out.writeLong(sequence);
-            out.writeLong(capacity);
+            CapacityValue.write(out, capacity);
             out.writeInt(receipts.size());
             for (UUID receipt : receipts) writeUuid(out, receipt);
             out.writeInt(stock.size());
@@ -348,11 +349,13 @@ public final class VaultStore implements Closeable {
         CRC32 crc = new CRC32();
         try (DataInputStream in = new DataInputStream(
             new CheckedInputStream(new BufferedInputStream(Files.newInputStream(snapshot)), crc))) {
-            if (in.readInt() != MAGIC || !id.equals(readUuid(in)))
+            int magic = in.readInt();
+            if ((magic != MAGIC && magic != LEGACY_MAGIC) || !id.equals(readUuid(in)))
                 throw new IOException("Inventory snapshot identity mismatch");
             sequence = in.readLong();
-            capacity = in.readLong();
-            if (sequence < 0 || capacity < 0) throw new IOException("Invalid inventory header");
+            BigInteger bytes = magic == LEGACY_MAGIC ? BigInteger.valueOf(in.readLong()) : CapacityValue.read(in);
+            if (sequence < 0 || bytes.signum() < 0) throw new IOException("Invalid inventory header");
+            setCapacity(bytes);
             int count = checkedCount(in.readInt());
             for (int i = 0; i < count; i++)
                 if (!receipts.add(readUuid(in))) throw new IOException("Duplicate import token");
@@ -372,6 +375,12 @@ public final class VaultStore implements Closeable {
 
     public synchronized long journalBytesSinceCheckpoint() {
         return pendingBytes;
+    }
+
+    private void setCapacity(BigInteger bytes) {
+        CapacityValue.encode(bytes);
+        capacity = bytes;
+        capacityUnits = bytes.multiply(UNITS);
     }
 
     private void healthy() throws IOException {

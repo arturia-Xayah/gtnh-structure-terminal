@@ -1,0 +1,17 @@
+{
+  "source": {
+    "05d27ce2-31d6-4155-863c-5e501ce68bef.snapshot": {
+      "magic": "AVS2",
+      "sha256": "899660894a35b0c6848a46d6a1be0af98259dc883f54facb4df3bc85ea14f708"
+    }
+  },
+  "upgraded": {
+    "05d27ce2-31d6-4155-863c-5e501ce68bef.snapshot": {
+      "magic": "AVS3",
+      "sha256": "1e3879f894fef724966ff64a8890e2d8c89bde8b8b66dadfc3fd57197f9f3308"
+    }
+  },
+  "AVS2_to_AVS3": [
+    "05d27ce2-31d6-4155-863c-5e501ce68bef.snapshot"
+  ]
+}

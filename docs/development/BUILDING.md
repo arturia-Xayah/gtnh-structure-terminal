@@ -15,7 +15,7 @@ chmod +x build.sh
 
 缓存仅放在 `.tools/` 或 `GRADLE_USER_HOME`，不会修改系统默认 Java。旧域名不可用时可使用 `./build.sh --mirror spotlessApply build`，镜像下载带固定哈希校验。Windows 可手动配置上述工具链后使用 `gradlew.bat build`。
 
-正式安装包为 `build/libs/gtnh-modernization-upgrade-0.2.3-alpha.jar`。交付副本的文件名和目录额外标注 GTNH 版本。`-dev.jar`、`-sources.jar` 及测试夹具不作为玩家安装包。
+正式安装包为 `build/libs/gtnh-modernization-upgrade-0.2.4-alpha.jar`。交付副本的文件名和目录额外标注 GTNH 版本。`-dev.jar`、`-sources.jar` 及测试夹具不作为玩家安装包。
 
 `build` / `check` 运行格式、静态检查、单元测试和发行检查，**不会启动游戏**。发行检查验证 Java 8 字节码、运行时映射、四个兼容模块的版本/图标、Mixin 配置及无测试类。
 
@@ -23,7 +23,7 @@ chmod +x build.sh
 
 ```sh
 ./build.sh -PmodernizationPackTests=true spotlessApply build
-cp build/libs/gtnh-modernization-upgrade-0.2.3-alpha.jar /tmp/modernization-fixture.jar
+cp build/libs/gtnh-modernization-upgrade-0.2.4-alpha.jar /tmp/modernization-fixture.jar
 python3 tools/run_modernization_backend.py \
   --pack /path/to/GTNH-server --java /path/to/java25/bin/java \
   --fixture /tmp/modernization-fixture.jar --run-dir /new/disposable/validation
@@ -50,6 +50,10 @@ python3 tools/run_modernization_backend.py \
 
 ## English
 
-Run `./build.sh spotlessApply build`. The launcher installs local Java 25/17/8 toolchains or reuses the `STRUCTURE_TERMINAL_JAVA*` overrides. Artifacts target Java 8; build/check never launch Minecraft. The installable file is `build/libs/gtnh-modernization-upgrade-0.2.3-alpha.jar`.
+Run `./build.sh spotlessApply build`. The launcher installs local Java 25/17/8 toolchains or reuses the `STRUCTURE_TERMINAL_JAVA*` overrides. Artifacts target Java 8; build/check never launch Minecraft. The installable file is `build/libs/gtnh-modernization-upgrade-0.2.4-alpha.jar`.
 
 Explicitly opt into `-PmodernizationPackTests=true` for all dedicated-server fixtures, preserve that JAR outside the build output, run `tools/run_modernization_backend.py` with the command above, then rebuild production without the flag. It creates separate disposable server worlds, including a second process for vault persistence, with no client entry point. Legacy module namespaces remain stable; details are in [INTEGRATION.md](INTEGRATION.md).
+
+## 旧库存升级与容量基准
+
+`tools/run_vault_upgrade.py` 接受 `--pack`、`--java`、`--fixture`、`--old-run` 和新的 `--run-dir`，复制此前 vault 套件的测试世界与重启标记到新目录，执行升级和第二次重启，不修改旧目录。容量微基准不启动游戏，见 [CAPACITY.md](CAPACITY.md)。

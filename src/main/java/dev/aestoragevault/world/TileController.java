@@ -1,6 +1,7 @@
 package dev.aestoragevault.world;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +18,7 @@ import net.minecraft.world.storage.ThreadedFileIOBase;
 
 import dev.aestoragevault.VaultMod;
 import dev.aestoragevault.ae.CellReader;
+import dev.aestoragevault.core.CapacityValue;
 import dev.aestoragevault.core.VaultStore;
 import dev.aestoragevault.storage.Repositories;
 
@@ -24,8 +26,8 @@ public class TileController extends TileEntity {
 
     public static final String TOKEN = "aestoragevault_import";
     public UUID id;
-    public long capacity;
-    public long used;
+    public BigInteger capacity = BigInteger.ZERO;
+    public BigInteger used = BigInteger.ZERO;
     public int types;
     public boolean formed;
     public boolean automatic = true;
@@ -222,7 +224,7 @@ public class TileController extends TileEntity {
     public NBTTagCompound itemData() {
         NBTTagCompound tag = new NBTTagCompound();
         if (id != null) tag.setString("VaultId", id.toString());
-        tag.setLong("MaximumBytes", store == null ? capacity : store.capacity());
+        tag.setByteArray("MaximumBytesBig", CapacityValue.encode(store == null ? capacity : store.capacity()));
         tag.setBoolean("Automatic", automatic);
         return tag;
     }
@@ -233,10 +235,20 @@ public class TileController extends TileEntity {
         } catch (IllegalArgumentException e) {
             invalidIdentity = true;
         }
-        capacity = Math.max(0, tag.getLong("MaximumBytes"));
+        try {
+            capacity = readBytes(tag, "MaximumBytesBig", "MaximumBytes");
+        } catch (IllegalArgumentException e) {
+            invalidIdentity = true;
+            capacity = BigInteger.ZERO;
+        }
         automatic = !tag.hasKey("Automatic") || tag.getBoolean("Automatic");
-        if (capacity > 0 && id == null) invalidIdentity = true;
+        if (capacity.signum() > 0 && id == null) invalidIdentity = true;
         markDirty();
+    }
+
+    private static BigInteger readBytes(NBTTagCompound tag, String key, String legacyKey) {
+        return tag.hasKey(key) ? CapacityValue.decode(tag.getByteArray(key))
+            : BigInteger.valueOf(Math.max(0, tag.getLong(legacyKey)));
     }
 
     @Override
@@ -255,7 +267,7 @@ public class TileController extends TileEntity {
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound tag = itemData();
-        tag.setLong("Used", used);
+        tag.setByteArray("UsedBig", CapacityValue.encode(used));
         tag.setInteger("Types", types);
         tag.setBoolean("Formed", formed);
         tag.setString("Status", status);
@@ -266,7 +278,7 @@ public class TileController extends TileEntity {
     public void onDataPacket(NetworkManager network, S35PacketUpdateTileEntity packet) {
         NBTTagCompound tag = packet.func_148857_g();
         restoreItem(tag);
-        used = tag.getLong("Used");
+        used = readBytes(tag, "UsedBig", "Used");
         types = tag.getInteger("Types");
         formed = tag.getBoolean("Formed");
         status = tag.getString("Status");

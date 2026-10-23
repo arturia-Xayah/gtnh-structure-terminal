@@ -61,6 +61,8 @@ ME 访问接口：LuV 机器机壳（Hull） ×1、LuV 电路 ×2、LuV 发射�
 4. 右侧可插入模糊卡、反相卡、矿物词典筛选卡各一张。模糊按钮使用原生匹配模式；反相卡排除匹配类型。无标记且无词典表达式时，即使有反相卡也输出全部。
 5. 安装词典筛选卡后，可打开原生词典筛选页面。非空表达式优先于标记区，并可叠加反相卡；清空表达式恢复标记筛选。
 
+即使未设置标记而目标网络只接受某一种物品，也会轮流尝试并输出接受的类型；被拒收的类型不会堵死后续类型。类型很多时，扫描预算和退避会增加等待。若目的明确，建议设置精确白名单，直接查找目标类型（无模糊/反相模式及非空矿词表达式）。
+
 输出按类型批量处理，并轮流扫描类型；网络装不下、未供电或没有频道时保留库存。主机的自动吸收开关只控制吞入元件；需要暂停输出时，断开网络或取下输出总线。
 
 输出模式下，仓库库存不会直接挂载为网络存储；终端和 Reshuffle 只能访问已经输出到网络的部分。避免同时把同一仓库作为输出来源和输出目的地。普通采掘输出总线会保留筛选、升级卡和模式。
@@ -77,11 +79,13 @@ ME 访问接口：LuV 机器机壳（Hull） ×1、LuV 电路 ×2、LuV 发射�
 
 结构损坏、区块未加载或接口无频道/供电时暂停 AE 访问。修复后重新成型可恢复库存。
 
-容量与每种库存数量均用有符号 64 位整数保存，最大值为 **9,223,372,036,854,775,807**；总容量单位是字节，流体数量单位为 mB。扩容会溢出时拒绝吸收并保留来源元件。类型计数使用 `int`，仍受 Java 容器和内存限制。
+总容量和已用字节采用 **BigInteger**，不再受 8 EiB 限制。单种物品数量或流体 mB 数仍采用 AE2 原生的有符号 `long`，每种最多 **9,223,372,036,854,775,807**；超过时拒收该类型，迁移元件时若会超限则保留来源元件。类型计数使用 `int`，仍受 Java 容器和内存限制。
 
-界面按 1024 进位，支持 `B / KiB / MiB / GiB / TiB / PiB / EiB / ZiB / YiB / RiB`。当前实际容量最多约 8 EiB，后面三个单位为显示扩展，并未提高容量数据类型的上限。
+界面按 1024 进位，支持 `B / KiB / MiB / GiB / TiB / PiB / EiB / ZiB / YiB / RiB`。超过 RiB 命名范围时使用带指数的紧凑形式，例如 `1.3 ×10^33 RiB`，避免长数字挤出界面。
 
 ## 搬迁、备份与恢复
+
+旧版库存文件与主机 NBT 会自动升级为新格式。升级前停服备份完整世界；升级后的外部库存不能交给旧版本读取。
 
 普通采掘主机得到的物品保留库存 UUID 和容量；重新放置并成型后访问同一库存。复制主机物品不会复制库存，同一 UUID 不允许两个主机同时挂载。创造模式无掉落拆除不提供主机物品，请保留备份。
 
@@ -102,7 +106,9 @@ The controller is named **ME Cell Aggregation Storage**. Use exactly one Storage
 
 The Export Bus instead actively injects into its connected, powered AE grid and never exposes the source stock as network storage. Its 4×9 native phantom slots accept item/fluid NEI markers. Empty filters export all. Supported upgrades: one fuzzy, inverter and ore-filter card each. Non-empty ore expressions override slot markers; an empty expression restores slot filtering. Empty markers plus an empty expression export all, including with an inverter. Transfers use native AE power and security, bounded type batches and fair scanning. Full/offline destinations retain stock. The absorption toggle controls cell imports only. Normal harvesting preserves filters, real upgrade cards and settings.
 
-Capacity in bytes and individual resource counts are signed 64-bit values, capped at 9,223,372,036,854,775,807. Over-capacity imports are rejected without consuming cells. Display units extend to ZiB/YiB/RiB, but actual capacity remains below 8 EiB. Type counts use `int` and practical size depends on memory and Java collections.
+Total and used bytes use BigInteger, removing the 8 EiB ceiling. Individual resource counts remain AE2-native signed longs, capped at 9,223,372,036,854,775,807 each; overflowing imports retain their source cells. Display units extend to ZiB/YiB/RiB, with compact scientific notation beyond the named range. Type counts use `int` and practical size depends on memory and Java collections.
+
+Unfiltered output eventually reaches destination-accepted types despite other rejected types. Many types and backoff can delay discovery; use a precise whitelist for direct lookup. Old inventory files and controller NBT upgrade automatically; back up before upgrading and do not load upgraded inventory with an older mod.
 
 Build the hollow 3×3×3 shell shown above: outward-facing controller at the center of any face, 23 native LuV machine casings, one ordinary GT input bus and one Storage Link Hatch or Export Bus, air in the center. The bus and interface may occupy any remaining shell cell, including top/bottom, edges and corners. Neither may be shared between vaults; conflicts prevent both structures from forming and recover after separation. Buses reserved by a registered native GT multiblock are rejected too. No cores. All three custom blocks use LuV assembler recipes (30,720 EU/t), with LuV hulls/circuits and components; there is no workbench fallback. Connect the interface to powered AE: one channel, 2 AE/t. ME virtual buses are excluded. Manual construction is required for this machine.
 

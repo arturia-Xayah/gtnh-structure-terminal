@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.structureterminal.ae.PatternInputHookTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-10-23T01:59:53.377Z" hostname="D9CH4WN6T3" time="0.009">
+  <properties/>
+  <testcase name="tooltipHookMatchesNativeTooltipAndHoverSignatures" classname="dev.structureterminal.ae.PatternInputHookTest" time="0.003"/>
+  <testcase name="extendedTerminalUsesTheSameInputFactory" classname="dev.structureterminal.ae.PatternInputHookTest" time="0.002"/>
+  <testcase name="repoAccessorsMatchPinnedPrivateFields" classname="dev.structureterminal.ae.PatternInputHookTest" time="0.003"/>
+  <testcase name="firstAllocationIsInputAndSecondIsOutput" classname="dev.structureterminal.ae.PatternInputHookTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

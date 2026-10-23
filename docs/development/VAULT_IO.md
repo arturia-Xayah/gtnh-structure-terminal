@@ -21,14 +21,14 @@
 ## 调度边界
 
 - 精确白名单编译为至多 36 个账本键，直接查找并轮询，不扫描无关库存。
-- 其他筛选使用 `VaultStore` 的有序轮转索引，不每 tick 复制/排序全库存；文件格式不变，加载时重建索引。
+- 其他筛选使用 `VaultStore` 的有序轮转索引，不每 tick 复制/排序全库存；索引不单独存盘，加载时从库存条目重建。
 - 每次至多检查 32 类型，每类型至多 2^30 个物品或 mB。软时间预算 0.5 ms，至少尝试一个类型；单次 AE 调用可能超过预算，因此不是严格 tick 时间保证。
 - 成功后下一 tick 继续；可输出类型被拒收时从 2 tick 指数退避至 20 tick。无供电/频道时等待 20 tick。新元件导入或筛选修改会唤醒。
 - 解码 LRU 缓存上限 256 个类型。没有整库异步扫描线程。
 
 ## 容量与格式
 
-容量和每资源数量保持 signed long；已用分数计量使用 BigInteger。类型计数为 int，受 Java 集合与内存约束。ByteFormat 使用 1024 进位、三位有效数字，扩展至 ZiB/YiB/RiB 不改变 long 上限。容量溢出拒绝吸收来源元件。
+总容量、已用字节及分数计量使用 BigInteger，容量对应的 1/2048 字节单位预算在扩容/加载时缓存。每资源数量仍是 AE2 原生 signed long；类型计数为 int。ByteFormat 使用 1024 进位、三位有效数字，超过命名单位范围后使用指数形式。外部快照升级为 AVS3，支持读取 AVS2、旧 op=2 和混合日志；细节见 [格式说明](STORAGE_FORMAT.md)。数值编码最多 4096 字节用于损坏数据的分配保护，不再以 long 限制总容量。
 
 ## 验证边界
 
@@ -36,4 +36,8 @@
 
 ## English
 
-The link uses native AE2 priority and reshuffle contracts. The exclusive output port never mounts private stock; it injects with native poweredInsert and bounded, fair batches. Precise whitelists directly address ledger keys; broad filters rotate a live-key index. Full/offline networks back off. Native phantom slots and fuzzy/inverter/ore cards retain server-side validation. Byte limits and on-disk formats are unchanged. Dedicated-server evidence does not replace client drag/drop or visual acceptance.
+The link uses native AE2 priority and reshuffle contracts. The exclusive output port never mounts private stock; it injects with native poweredInsert and bounded, fair batches. Precise whitelists directly address ledger keys; broad filters rotate a live-key index. Full/offline networks back off. Native phantom slots and fuzzy/inverter/ore cards retain server-side validation. Total capacity is now BigInteger with cached accounting units. Native per-type counts remain long. AVS2/legacy NBT migrate into AVS3; upgraded files are not backward compatible. Dedicated-server evidence does not replace client drag/drop or visual acceptance.
+
+## 目标网络选择性接受
+
+拒收不会重置轮转游标，有限且稳定的库存会继续扫描到接受的类型；并非一次拒收就停在同一项。广泛筛选最多 32 类型/调用，且受 0.5 ms 软预算及 2～20 tick 退避影响，发现稀有可接受类型可能较慢。精确白名单直接查键。专项测试使用原生分区元件，只允许绿宝石，在另外 1000 个被拒收的 NBT 类型后找到目标；测试推进调度用世界总 tick 以覆盖退避，不将其报告为实时延迟测试。

@@ -10,7 +10,7 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.3-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.3-alpha-GTNH-2.9.0-RC-2.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.4-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
@@ -29,7 +29,7 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.2.3-alpha-GTNH-2.9.0-RC-2.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+1. Install `gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
 2. Remove older Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
 3. Back up the complete world before upgrading. Keep `data/aestoragevault`: existing terminal/vault items, blocks, inventory IDs and power settings retain their registration namespaces and save locations. Existing vaults must replace the 23 legacy casings with native LuV machine casings before reforming.
 
@@ -85,8 +85,8 @@ Build a **3×3×3 hollow cube**: outward-facing controller at the center of any 
 - Connect the Storage Link Hatch to powered AE: **one channel, 2 AE/t**. Right-click for the native AE2 priority GUI; native storage access and Reshuffle are supported.
 - Alternatively install the **ME Cell Aggregation Storage Export Bus**. It actively exports into its connected AE network, using 36 item/fluid phantom filters with NEI drag-and-drop and fuzzy, inverter and ore-filter cards. Empty filters export everything.
 - Insert components, empty cells or filled cells. Contents and installed upgrade cards are migrated before consuming the source and adding its full nominal capacity. The housing is consumed too.
-- No artificial type limit or type overhead. Capacity and individual resource counts use signed `long`; maximum total capacity is approximately **8 EiB**. Shared capacity: **8 items or 2048 mB of fluid per byte**.
-- Right-click the controller for usage, status and automatic-absorption controls. Unsupported, creative, void and spatial cells remain in the bus.
+- No artificial type limit or type overhead. Total capacity uses **BigInteger**, removing the 8 EiB ceiling; per-resource counts retain AE2's signed `long` interface. Shared capacity: **8 items or 2048 mB of fluid per byte**.
+- Controller and port tooltips include operating instructions. Right-click the controller for usage, status and automatic-absorption controls. Unsupported, creative, void and spatial cells remain in the bus.
 
 Once formed, the entire structure shares a smooth blue/white/violet sci-fi surface connected across each complete face, with functional panels preserved. The bus and interface can occupy any remaining shell position, including top, bottom, edges and corners. Sharing either component between vaults prevents both from forming; buses reserved by a registered native GT multiblock are also rejected. Releasing the conflict allows formation again.
 

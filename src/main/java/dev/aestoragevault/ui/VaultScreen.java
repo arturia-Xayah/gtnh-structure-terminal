@@ -1,5 +1,7 @@
 package dev.aestoragevault.ui;
 
+import java.math.BigInteger;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -46,7 +48,7 @@ public class VaultScreen extends GuiContainer {
         fontRendererObj.drawSplitString(tile.status, 8, 77, 160, 0xd5e4ee);
     }
 
-    private static String bytes(long bytes) {
+    private static String bytes(BigInteger bytes) {
         return ByteFormat.format(bytes);
     }
 

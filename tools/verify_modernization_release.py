@@ -19,8 +19,9 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--version',default='0.2.3-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
+    ap.add_argument('--version',default='0.2.4-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
     ap.add_argument('--runs',type=Path,nargs='+',required=True);ap.add_argument('--output',type=Path,required=True)
+    ap.add_argument('--upgrades',type=Path,nargs='*',default=[])
     a=ap.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);checks=[]
     def check(name,value):
         checks.append(dict(check=name,passed=bool(value)))
@@ -55,10 +56,14 @@ def main():
                 data=z.read(name)
                 check('connected_tile_'+str(tile),data==(ROOT/'src/main/resources'/name).read_bytes()
                       and int.from_bytes(data[16:20],'big')==64 and int.from_bytes(data[20:24],'big')==64)
-        if a.version == '0.2.3-alpha':
+        if a.version == '0.2.4-alpha':
             check('native_priority_output_and_byte_formatter',all(n in names for n in [
                 'dev/aestoragevault/world/TileOutput.class','dev/aestoragevault/ui/OutputContainer.class',
-                'dev/aestoragevault/ui/OutputScreen.class','dev/aestoragevault/core/ByteFormat.class']))
+                'dev/aestoragevault/ui/OutputScreen.class','dev/aestoragevault/core/ByteFormat.class','dev/aestoragevault/core/CapacityValue.class','dev/aestoragevault/world/VaultItemBlock.class']))
+            for language in ['zh_CN','en_US']:
+                translations=dict(line.split('=',1) for line in z.read('assets/aestoragevault/lang/'+language+'.lang').decode('utf-8').splitlines() if '=' in line)
+                check('operating_tooltips_'+language,all(translations.get('vault.tooltip.'+part+'.'+str(i)) for part,count in [('controller',7),('access',5),('output',8)] for i in range(1,count+1)))
+            check('custom_tooltip_registration',b'dev/aestoragevault/world/VaultItemBlock' in z.read('dev/aestoragevault/VaultMod.class'))
             check('renamed_storage_controller','ME元件聚合存储器' in z.read('assets/aestoragevault/lang/zh_CN.lang').decode('utf-8'))
         for language in ['zh_CN','en_US']:
             for namespace in ['structureterminal','aeorderoptimizer','plasmaforgepower','aestoragevault']:
@@ -96,6 +101,18 @@ def main():
     check('every_feature_suite_exercised',{r['suite'] for r in runs}=={'vault','vault_io','forge','fusion','ae','structures'})
     check('output_cross_process_restart',any(r['suite']=='vault_io' and r['stage']==2 for r in runs))
     check('vault_cross_process_restart',any(r['suite']=='vault' and r['stage']==2 for r in runs))
+    upgrades=[]
+    for folder in a.upgrades:
+        summary=json.loads((folder/'upgrade-summary.json').read_text())
+        check('legacy_world_upgrade_'+folder.name,summary['passed'] and not summary['client_launched'] and len(summary['runs'])==2)
+        check('upgrade_fixture_was_compared',summary['fixture_sha256'] in {sha(p) for p in a.fixtures})
+        target=out/'upgrade';target.mkdir(exist_ok=True)
+        shutil.copy2(folder/'upgrade-summary.json',target/'summary.json')
+        for row in summary['runs']:
+            data=json.loads((folder/row['report']).read_text())
+            check('upgraded_world_restart_'+str(row['stage']),row['passed'] and row['exit']==0 and data['passed'] and all(x['passed'] for x in data['tests']))
+            shutil.copy2(folder/row['report'],target/row['report'])
+        upgrades.append(summary)
     doc_errors=[]
     for target in [ROOT/'README.md',ROOT/'README.en.md',ROOT/'docs/development',ROOT/'docs/features']:
         for p in ([target] if target.is_file() else target.rglob('*.md')):
@@ -107,7 +124,7 @@ def main():
     check('player_and_developer_document_links',not doc_errors)
     manifest=dict(passed=True,checks=checks,version=a.version,target='GTNH 2.9.0-RC-2',client_launched=False,
                   artifact=a.jar.name,sha256=sha(a.jar),classes=len(class_hashes),class_sha256=class_hashes,
-                  unit_tests=sum(int(t['tests']) for t in tests),runs=runs,fixtures={p.name:sha(p) for p in a.fixtures})
+                  unit_tests=sum(int(t['tests']) for t in tests),runs=runs,upgrades=upgrades,fixtures={p.name:sha(p) for p in a.fixtures})
     (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:v for k,v in manifest.items() if k not in ['checks','class_sha256']},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

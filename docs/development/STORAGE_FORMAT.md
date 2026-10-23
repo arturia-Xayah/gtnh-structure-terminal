@@ -1,14 +1,14 @@
 # External inventory format · 外部库存格式
 
-Version 1 of the mod uses the **AVS2** binary snapshot format. All integer fields are big-endian Java `DataInput`/`DataOutput` values. File names use the controller UUID, stored in the overworld's save directory even when the machine is in another dimension.
+Version 0.2.4 writes **AVS3** binary snapshots and reads both AVS2 and AVS3. All integer fields are big-endian Java `DataInput`/`DataOutput` values. File names use the controller UUID, stored in the overworld's save directory even when the machine is in another dimension.
 
 ## Snapshot
 
 `UUID.snapshot` contains:
 
-1. Magic `0x41565332` (`AVS2`).
+1. Magic `0x41565333` (`AVS3`); legacy snapshots use `0x41565332` (`AVS2`).
 2. UUID: most/least significant `long`.
-3. Last applied sequence (`long`), capacity in bytes (`long`, nonnegative).
+3. Last applied sequence (`long`), capacity in bytes (AVS3: signed BigInteger encoding, nonnegative; AVS2: nonnegative `long`).
 4. Receipt count (`int`), followed by receipt UUIDs.
 5. Resource count (`int`), followed by resource/quantity pairs.
 6. Footer `0x454e445641554c54`.
@@ -17,6 +17,8 @@ Version 1 of the mod uses the **AVS2** binary snapshot format. All integer field
 A resource is: channel (`writeUTF`), items per byte (`int`), canonical-key length/data, payload length/data. Keys and payloads are individually limited to 4 MiB. Quantity is a positive signed `long`. Item prototypes use stable item registry names, damage and complete nested NBT. Fluid prototypes use registered fluid names and tags. Prototype counts are one; live counts are stored separately.
 
 Compound key order is sorted. Lists are serialized in reverse traversal order from a copy for O(n) traversal with the 1.7.10 API; this preserves list identity and ordering without mutating the original. Payloads are native, uncompressed NBT bytes. Item per-byte rate is 8; fluid rate is 2048 mB. Usage is summed with `BigInteger` in 1/2048-byte units to avoid overflow or fractional rounding.
+
+BigInteger encoding is a positive-length `int` followed by Java two's-complement `toByteArray()` bytes. Negative, empty and encodings exceeding 4096 bytes are rejected before allocation (maximum positive bit length 32767). This parser bound is far beyond signed-long capacities; per-resource quantities and sequences remain long, type counts remain int. Capacity units are cached on load/import. Used byte summaries are BigInteger too; packets use `UsedBig`. AVS3 files cannot be opened with older mod versions; retain a complete pre-upgrade backup for rollback.
 
 ## Journal
 
@@ -27,13 +29,13 @@ Compound key order is sorted. Lists are serialized in reverse traversal order fr
 - Body.
 - CRC32 (`int`) of sequence bytes followed by body.
 
-Operation 1: byte `1`, resource, signed quantity delta. Operation 2: byte `2`, receipt UUID, positive capacity increment, imported entry count, resource/positive-quantity pairs. A receipt credits capacity and all imported items together exactly once within this external ledger. Each import record is forced to stable storage before removing its source.
+Operation 1: byte `1`, resource, signed quantity delta. Legacy operation 2: byte `2`, receipt UUID, positive `long` capacity increment, imported entry count, resource/positive-quantity pairs. New operation 3 replaces only the capacity increment with BigInteger encoding. Both operations remain readable in mixed journals. A receipt credits capacity and all imported items together exactly once within this external ledger. Each import record is forced to stable storage before removing its source.
 
 The loader validates checksums and sequence continuity. An incomplete final record is truncated; a complete record with invalid checksum stops loading. Records already represented by the snapshot sequence are verified then skipped. Checkpoint writes a temporary snapshot, syncs it, atomically replaces the old snapshot, attempts directory sync, then truncates and syncs the journal. There is no non-atomic rename fallback. Normal AE updates flush at end of tick only when dirty.
 
 ## Ownership and recovery
 
-The controller's NBT mirrors `MaximumBytes` and stores `VaultId` and `Automatic`; stock never appears in controller, item-drop or description-packet NBT. On load, validated external state is authoritative. If it contains less capacity than the NBT mirror, loading is rejected. An active controller lease prevents concurrent mounting; an OS file lock prevents simultaneous processes from opening the same journal. Unloading/breaking the controller checkpoints, closes and releases its in-memory repository.
+The controller's NBT mirrors `MaximumBytesBig` (byte array) and reads legacy `MaximumBytes` (long), and stores `VaultId` and `Automatic`; stock never appears in controller, item-drop or description-packet NBT. On load, validated external state is authoritative. If it contains less capacity than the NBT mirror, loading is rejected. An active controller lease prevents concurrent mounting; an OS file lock prevents simultaneous processes from opening the same journal. Unloading/breaking the controller checkpoints, closes and releases its in-memory repository.
 
 The source cell's root NBT receives `aestoragevault_import`. Before an import commit, the dimension is synchronously saved and pending chunk IO completed. A source restored by world rollback is consumed without re-crediting if its token appears in the ledger. Importing modifies a copy while inspecting contents; unsupported sources remain intact.
 

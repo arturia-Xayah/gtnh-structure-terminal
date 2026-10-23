@@ -1,0 +1,34 @@
+{
+  "baseline_ref": "bf87456570ffc208be29386b5a7fab4ff7a07024",
+  "scope": "isolated ledger, median samples; not a TPS guarantee",
+  "results": [
+    {
+      "variant": "baseline",
+      "capacity_bits": 63,
+      "simulate_ns_per_op": 14.50625,
+      "journal_ns_per_op": 5456.1709,
+      "sink": 10000
+    },
+    {
+      "variant": "current",
+      "capacity_bits": 63,
+      "simulate_ns_per_op": 11.266875,
+      "journal_ns_per_op": 5549.5916,
+      "sink": 10000
+    },
+    {
+      "variant": "current",
+      "capacity_bits": 201,
+      "simulate_ns_per_op": 11.0109375,
+      "journal_ns_per_op": 5279.9916,
+      "sink": 10000
+    },
+    {
+      "variant": "current",
+      "capacity_bits": 1025,
+      "simulate_ns_per_op": 37.3266675,
+      "journal_ns_per_op": 5599.0625,
+      "sink": 10000
+    }
+  ]
+}

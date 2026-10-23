@@ -1,0 +1,14 @@
+[10:00:25] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST priority_uses_native_container_and_persists_signed_int true 
+[10:00:25] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST 36_mixed_filters_native_fuzzy_inverter_and_ore_cards true 
+[10:00:26] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST native_high_priority_insertion true 
+[10:00:26] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST native_low_priority_insertion true 
+[10:00:26] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST native_Reshuffle_moves_items_and_fluids_by_priority_without_loss true 
+[10:00:26] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST link_and_output_are_exclusive_and_output_has_native_channel true 
+[10:00:28] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST native_output_batches_one_million_items_and_fluid_without_exposing_private_stock true 
+[10:00:32] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST unfiltered_output_finds_only_network_accepted_type_among_1000_rejections true 
+[10:00:32] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST precise_whitelist_addresses_one_type_among_1000_others true 
+[10:00:34] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST full_network_preserves_all_stock_and_backs_off true 
+[10:00:36] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST unpowered_network_preserves_stock true 
+[10:00:38] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST output_GUI_native_phantom_packets_validate_indices_and_distance true 
+[10:00:38] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST output_break_structure_blocks_export_and_retains_inventory true 
+[10:00:38] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultIOSuite:record:758]: VAULT_IO_TEST output_drop_preserves_real_cards_and_phantom_filters true 

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 
-/** Binary capacity labels; formatting does not expand the ledger's signed-long capacity. */
+/** Binary capacity labels; values beyond the named unit range use compact scientific notation. */
 public final class ByteFormat {
 
     private static final String[] UNITS = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB", "RiB" };
@@ -20,6 +20,15 @@ public final class ByteFormat {
         int index = Math.min(Math.max(0, (bytes.bitLength() - 1) / 10), UNITS.length - 1);
         BigDecimal value = new BigDecimal(bytes)
             .divide(new BigDecimal(BigInteger.ONE.shiftLeft(index * 10)), new MathContext(3));
+        if (value.compareTo(BigDecimal.valueOf(1024)) >= 0 && index == UNITS.length - 1) {
+            int exponent = value.precision() - value.scale() - 1;
+            return value.movePointLeft(exponent)
+                .stripTrailingZeros()
+                .toPlainString() + " ×10^"
+                + exponent
+                + " "
+                + UNITS[index];
+        }
         return value.stripTrailingZeros()
             .toPlainString() + " "
             + UNITS[index];

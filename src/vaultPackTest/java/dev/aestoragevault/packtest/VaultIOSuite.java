@@ -37,6 +37,7 @@ import appeng.api.config.Upgrades;
 import appeng.api.definitions.IBlockDefinition;
 import appeng.api.networking.security.MachineSource;
 import appeng.api.networking.security.ReshuffleActionSource;
+import appeng.api.storage.ICellWorkbenchItem;
 import appeng.api.storage.IMEInventory;
 import appeng.api.storage.IMEInventoryHandler;
 import appeng.api.storage.StorageName;
@@ -60,6 +61,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import dev.aestoragevault.VaultMod;
 import dev.aestoragevault.ae.ResourceCodec;
+import dev.aestoragevault.core.CapacityValue;
 import dev.aestoragevault.core.Resource;
 import dev.aestoragevault.ui.OutputContainer;
 import dev.aestoragevault.world.TileAccess;
@@ -229,6 +231,7 @@ public final class VaultIOSuite {
                         .types() == 1000,
                     "unmatched type changed");
                 check(output.lastScanned <= 1, "precise whitelist scanned other stored types");
+                selectiveDestinationTest();
                 for (int i = 0; i < drive.getInternalInventory()
                     .getSizeInventory(); i++)
                     drive.getInternalInventory()
@@ -385,6 +388,66 @@ public final class VaultIOSuite {
             .get(null);
         drive.getInternalInventory()
             .setInventorySlotContents(1, new ItemStack((Item) fluid));
+    }
+
+    private void selectiveDestinationTest() throws Exception {
+        run("unfiltered_output_finds_only_network_accepted_type_among_1000_rejections", () -> {
+            ItemStack cell = AEApi.instance()
+                .definitions()
+                .items()
+                .cell16384k()
+                .maybeStack(1)
+                .get();
+            ((ICellWorkbenchItem) cell.getItem()).getConfigAEInventory(cell)
+                .putAEStackInSlot(0, AEItemStack.create(new ItemStack(Items.emerald)));
+            for (int slot = 0; slot < drive.getInternalInventory()
+                .getSizeInventory(); slot++)
+                drive.getInternalInventory()
+                    .setInventorySlotContents(slot, slot == 0 ? cell : null);
+            for (int slot = 0; slot < 36; slot++) output.filters.putAEStackInSlot(slot, null);
+            check(output.matches(AEItemStack.create(new ItemStack(Items.paper))), "source is not unfiltered");
+            check(
+                output.getProxy()
+                    .getStorage()
+                    .getItemInventory()
+                    .injectItems(
+                        AEItemStack.create(new ItemStack(Items.iron_ingot)),
+                        Actionable.SIMULATE,
+                        new MachineSource(output))
+                    != null,
+                "destination did not reject other types");
+            Resource wanted = item(Items.emerald);
+            controller.store()
+                .insert(wanted, 12345, false);
+            long before = stockCount();
+            long time = world.getTotalWorldTime();
+            int attempts = 0;
+            try {
+                // Exercise real export calls and backoff without waiting thousands of wall-clock ticks.
+                while (controller.store()
+                    .amount(wanted) > 0 && attempts < 1002) {
+                    world.getWorldInfo()
+                        .incrementTotalWorldTime(time + 20L * ++attempts);
+                    output.exportTick();
+                    check(output.lastScanned <= TileOutput.TYPES_PER_TICK, "unbounded selective scan");
+                }
+            } finally {
+                world.getWorldInfo()
+                    .incrementTotalWorldTime(time);
+                output.setFilter("");
+            }
+            check(
+                controller.store()
+                    .amount(wanted) == 0,
+                "rare type remains=" + controller.store()
+                    .amount(wanted) + ", network=" + networkAmount(AEItemStack.create(new ItemStack(Items.emerald))));
+            check(networkAmount(AEItemStack.create(new ItemStack(Items.emerald))) == 12345, "target lost");
+            check(
+                stockCount() == before - 12345 && controller.store()
+                    .types() == 1000,
+                "rejected stock changed");
+            check(attempts > 1, "test did not traverse rejected types");
+        });
     }
 
     private void priorityAndFilterTests() throws Exception {
@@ -576,10 +639,11 @@ public final class VaultIOSuite {
     private void saveRestart() throws Exception {
         NBTTagCompound tag = new NBTTagCompound();
         tag.setString("Id", controller.id.toString());
-        tag.setLong(
+        tag.setByteArray(
             "Capacity",
-            controller.store()
-                .capacity());
+            CapacityValue.encode(
+                controller.store()
+                    .capacity()));
         tag.setLong("Stock", stockCount());
         tag.setInteger(
             "Types",
@@ -599,7 +663,8 @@ public final class VaultIOSuite {
                 "identity");
             check(
                 controller.store()
-                    .capacity() == tag.getLong("Capacity") && stockCount() == tag.getLong("Stock")
+                    .capacity()
+                    .equals(CapacityValue.decode(tag.getByteArray("Capacity"))) && stockCount() == tag.getLong("Stock")
                     && controller.store()
                         .types() == tag.getInteger("Types"),
                 "ledger changed");

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "fresh_process_restores_output_controller_stock_and_capacity",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fresh_process_restores_mixed_filters_cards_and_AE_connection",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "client_launched": false,
+  "java": "25.0.4.1",
+  "export_batches": 0,
+  "exported_units": 0
+}

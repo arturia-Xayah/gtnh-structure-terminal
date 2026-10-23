@@ -26,6 +26,7 @@ import dev.aestoragevault.world.TileAccess;
 import dev.aestoragevault.world.TileController;
 import dev.aestoragevault.world.TileOutput;
 import dev.aestoragevault.world.VaultBlock;
+import dev.aestoragevault.world.VaultItemBlock;
 import dev.structureterminal.Tags;
 
 @Mod(
@@ -51,9 +52,9 @@ public final class VaultMod {
         ACCESS = new VaultBlock(2);
         OUTPUT = new VaultBlock(3);
         GameRegistry.registerBlock(CASING, "casing");
-        GameRegistry.registerBlock(CONTROLLER, "controller");
-        GameRegistry.registerBlock(ACCESS, "access");
-        GameRegistry.registerBlock(OUTPUT, "output");
+        GameRegistry.registerBlock(CONTROLLER, VaultItemBlock.class, "controller");
+        GameRegistry.registerBlock(ACCESS, VaultItemBlock.class, "access");
+        GameRegistry.registerBlock(OUTPUT, VaultItemBlock.class, "output");
         GameRegistry.registerTileEntity(TileController.class, ID + ":controller");
         GameRegistry.registerTileEntity(TileAccess.class, ID + ":access");
         GameRegistry.registerTileEntity(TileOutput.class, ID + ":output");

@@ -38,6 +38,7 @@
 - [LuV 材质、配方和升级说明](VAULT_LUV.md)
 - [贴图母图与生成提示词](../assets/vault/generation.json)
 
+- [BigInteger 容量与性能测量](CAPACITY.md)
 - [存储格式、日志与恢复边界](STORAGE_FORMAT.md)
 - [独立版验证历史](STORAGE_VALIDATION.md)
 - [独立版原始报告](../../verification/storage-baseline/vault-tests.json)

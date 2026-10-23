@@ -1,5 +1,6 @@
 package dev.aestoragevault.packtest;
 
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +23,8 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
@@ -58,6 +61,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import dev.aestoragevault.VaultMod;
 import dev.aestoragevault.ae.CellReader;
 import dev.aestoragevault.ae.ResourceCodec;
+import dev.aestoragevault.core.CapacityValue;
 import dev.aestoragevault.core.Resource;
 import dev.aestoragevault.core.VaultStore;
 import dev.aestoragevault.ui.VaultContainer;
@@ -66,6 +70,7 @@ import dev.aestoragevault.world.TileController;
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
 
 /** Real pack-only fixture. Never included in the installable mod. */
@@ -87,7 +92,7 @@ public final class VaultSuite {
     private int age;
     private boolean done, restart;
     private ItemStack restoredSource;
-    private long expectedCapacity;
+    private BigInteger expectedCapacity;
     private Path marker;
 
     @Mod.EventHandler
@@ -138,7 +143,8 @@ public final class VaultSuite {
                     check(!hasItem(restoredSource), "restored source remains");
                     check(
                         controller.store()
-                            .capacity() == expectedCapacity,
+                            .capacity()
+                            .equals(expectedCapacity),
                         "capacity credited twice");
                 });
                 afterImportTests();
@@ -146,10 +152,11 @@ public final class VaultSuite {
                 controller.markDirty();
                 NBTTagCompound saved = new NBTTagCompound();
                 saved.setString("Vault", controller.id.toString());
-                saved.setLong(
+                saved.setByteArray(
                     "Bytes",
-                    controller.store()
-                        .capacity());
+                    CapacityValue.encode(
+                        controller.store()
+                            .capacity()));
                 saved.setLong(
                     "Iron",
                     controller.store()
@@ -444,7 +451,8 @@ public final class VaultSuite {
             check(controller.store() != null, controller.status);
             check(
                 controller.store()
-                    .capacity() == 7168,
+                    .capacity()
+                    .equals(BigInteger.valueOf(7168)),
                 "capacity=" + controller.store()
                     .capacity() + " status=" + controller.status);
             check(
@@ -740,8 +748,9 @@ public final class VaultSuite {
             TileController copy = new TileController();
             copy.restoreItem(drop.getTagCompound());
             check(
-                copy.id.equals(controller.id) && copy.capacity == controller.store()
-                    .capacity(),
+                copy.id.equals(controller.id) && copy.capacity.equals(
+                    controller.store()
+                        .capacity()),
                 "drop state lost");
             check(VaultMod.CONTROLLER.removedByPlayer(world, player, X, Y, Z, true), "harvest denied");
             check(world.getTileEntity(X, Y, Z) == controller, "tile removed before drops");
@@ -797,7 +806,7 @@ public final class VaultSuite {
         run("controller_unload_closes_repository_and_replacement_restores_inventory", () -> {
             Map<Resource, Long> before = controller.store()
                 .entries();
-            long bytes = controller.store()
+            BigInteger bytes = controller.store()
                 .capacity();
             VaultStore old = controller.store();
             controller.onChunkUnload();
@@ -807,7 +816,7 @@ public final class VaultSuite {
             TileController fresh = (TileController) world.getTileEntity(X, Y, Z);
             NBTTagCompound tag = new NBTTagCompound();
             tag.setString("VaultId", controller.id.toString());
-            tag.setLong("MaximumBytes", bytes);
+            tag.setByteArray("MaximumBytesBig", CapacityValue.encode(bytes));
             fresh.restoreItem(tag);
             fresh.updateEntity();
             fresh.checkStructure();
@@ -820,10 +829,78 @@ public final class VaultSuite {
             controller = fresh;
             check(access.available(), "reopened access inactive");
         });
+        run("BigInteger_capacity_legacy_NBT_and_large_summary_packet", () -> {
+            TileController legacy = new TileController();
+            NBTTagCompound old = new NBTTagCompound();
+            old.setString(
+                "VaultId",
+                UUID.randomUUID()
+                    .toString());
+            old.setLong("MaximumBytes", Long.MAX_VALUE);
+            legacy.restoreItem(old);
+            check(legacy.capacity.equals(BigInteger.valueOf(Long.MAX_VALUE)), "legacy controller capacity lost");
+            BigInteger extra = BigInteger.ONE.shiftLeft(160);
+            BigInteger prior = controller.store()
+                .capacity();
+            controller.store()
+                .absorb(UUID.randomUUID(), extra, Collections.emptyMap());
+            check(
+                controller.store()
+                    .capacity()
+                    .equals(prior.add(extra)),
+                "large capacity truncated");
+            TileController source = new TileController();
+            source.restoreItem(controller.itemData());
+            source.used = BigInteger.ONE.shiftLeft(100);
+            source.types = 123;
+            PacketBuffer wire = new PacketBuffer(Unpooled.buffer());
+            try {
+                source.getDescriptionPacket()
+                    .writePacketData(wire);
+                S35PacketUpdateTileEntity decoded = new S35PacketUpdateTileEntity();
+                decoded.readPacketData(wire);
+                NBTTagCompound payload = null;
+                for (java.lang.reflect.Field field : S35PacketUpdateTileEntity.class.getDeclaredFields()) {
+                    if (field.getType() == NBTTagCompound.class) {
+                        field.setAccessible(true);
+                        payload = (NBTTagCompound) field.get(decoded);
+                        break;
+                    }
+                }
+                check(payload != null && !wire.isReadable(), "description packet roundtrip incomplete");
+                check(
+                    CapacityValue.decode(payload.getByteArray("MaximumBytesBig"))
+                        .equals(prior.add(extra)),
+                    "packet capacity truncated");
+                check(
+                    CapacityValue.decode(payload.getByteArray("UsedBig"))
+                        .equals(source.used),
+                    "packet usage truncated");
+                check(payload.getInteger("Types") == 123, "summary type count lost");
+            } finally {
+                wire.release();
+            }
+        });
+        run("malformed_BigInteger_controller_NBT_locks_instead_of_resetting_capacity", () -> {
+            world.setBlock(X + 5, Y, Z, VaultMod.CONTROLLER, 2, 3);
+            TileController target = (TileController) world.getTileEntity(X + 5, Y, Z);
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setString(
+                "VaultId",
+                UUID.randomUUID()
+                    .toString());
+            tag.setByteArray("MaximumBytesBig", new byte[] { -1 });
+            target.restoreItem(tag);
+            target.updateEntity();
+            check(target.store() == null && target.status.startsWith("LOCKED:"), "invalid capacity accepted");
+            world.setBlockToAir(X + 5, Y, Z);
+        });
     }
 
     private void restartTests() throws Exception {
         NBTTagCompound saved = CompressedStreamTools.readCompressed(Files.newInputStream(marker));
+        BigInteger savedBytes = saved.hasKey("Bytes", 7) ? CapacityValue.decode(saved.getByteArray("Bytes"))
+            : BigInteger.valueOf(saved.getLong("Bytes"));
         run(
             "fresh_server_process_restores_controller_UUID",
             () -> check(
@@ -834,7 +911,8 @@ public final class VaultSuite {
             check(controller.store() != null, controller.status);
             check(
                 controller.store()
-                    .capacity() == saved.getLong("Bytes"),
+                    .capacity()
+                    .equals(savedBytes),
                 "capacity lost");
             check(
                 controller.store()
