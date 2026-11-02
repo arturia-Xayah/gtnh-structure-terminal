@@ -25,7 +25,7 @@ public final class VaultItemBlock extends ItemBlock {
         super.addInformation(stack, player, lines, advanced);
         String part = field_150939_a == VaultMod.CONTROLLER ? "controller"
             : field_150939_a == VaultMod.ACCESS ? "access" : "output";
-        int count = part.equals("controller") ? 7 : part.equals("access") ? 5 : 8;
+        int count = part.equals("controller") ? 9 : part.equals("access") ? 5 : 8;
         for (int i = 1; i <= count; i++) lines.add(StatCollector.translateToLocal("vault.tooltip." + part + "." + i));
     }
 }

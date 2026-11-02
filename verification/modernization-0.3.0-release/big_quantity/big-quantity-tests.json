@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "client_launched": false,
+  "tests": [
+    {
+      "name": "two_real_vaults_import_huge_mixed_stock",
+      "passed": true
+    },
+    {
+      "name": "native_appeng.util.item.AEItemStackType@4559c3e3_huge_window_and_exact_transactions",
+      "passed": true
+    },
+    {
+      "name": "native_appeng.util.item.AEFluidStackType@2777f21e_huge_window_and_exact_transactions",
+      "passed": true
+    },
+    {
+      "name": "native_positive_item_addition_saturates",
+      "passed": true
+    },
+    {
+      "name": "native_positive_fluid_addition_saturates",
+      "passed": true
+    },
+    {
+      "name": "on_demand_chat_reports_full_BigInteger_quantity",
+      "passed": true
+    }
+  ],
+  "java": "25.0.4.1"
+}

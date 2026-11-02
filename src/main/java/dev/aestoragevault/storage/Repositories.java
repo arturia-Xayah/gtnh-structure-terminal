@@ -52,7 +52,8 @@ public final class Repositories {
                 for (dev.aestoragevault.core.Resource r : store.entries()
                     .keySet()) dev.aestoragevault.ae.ResourceCodec.decode(r);
                 if (store.capacity()
-                    .compareTo(owner.capacity) < 0)
+                    .add(store.returnedBytes())
+                    .compareTo(owner.capacity) < 0 || owner.ledgerSequence > store.sequence())
                     throw new IOException("External capacity is older than controller data");
             } catch (IOException | RuntimeException e) {
                 store.close();

@@ -1,0 +1,40 @@
+{
+  "pack_version": "2.9.0",
+  "passed": true,
+  "client_launched": false,
+  "fixture_sha256": "57d566aeccf50121d0ea6e6f058f5f21e212183be3af8f6d1a606f87fd4f72ac",
+  "runs": [
+    {
+      "suite": "vault",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 47,
+      "report": "vault/vault-tests.json"
+    },
+    {
+      "suite": "vault",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 5,
+      "report": "vault/vault-tests-restart.json"
+    },
+    {
+      "suite": "vault_io",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 14,
+      "report": "vault_io/vault-io-tests.json"
+    },
+    {
+      "suite": "vault_io",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 2,
+      "report": "vault_io/vault-io-tests-restart.json"
+    }
+  ]
+}

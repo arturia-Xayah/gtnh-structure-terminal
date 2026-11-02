@@ -10,7 +10,7 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.6--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.6-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.2.6-alpha-GTNH-2.9.0.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.0--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.0-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.0-alpha-GTNH-2.9.0.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0**
 
@@ -24,14 +24,16 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 - [Craftable input badges](#craftable-input-badges): see which ingredients already have patterns
 - [Forge and fusion power controls](#forge-and-fusion-power-controls): limit processing power by input color
 - [ME Cell Aggregation Storage](#me-cell-aggregation-storage): consume cells for capacity with external inventory files
+- [Storage cache configuration](docs/features/CACHE_CONFIGURATION.md): LRU entries and shared byte budgets
 - [Compatibility and saves](#compatibility-and-saves)
+- [Changelog](CHANGELOG.md)
 - [Developer documentation](#developer-documentation)
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.2.6-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+1. Install `gtnh-modernization-upgrade-0.3.0-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
 2. Remove older GTNH Modernization Upgrade / Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
-3. Back up the complete world before upgrading. Keep `data/aestoragevault`: existing terminal/vault items, blocks, inventory IDs and power settings retain their registration namespaces and save locations. Vaults still using legacy casings must replace those 23 blocks with native LuV machine casings before reforming.
+3. Back up the complete world first. Terminal, AE component and power-setting registration IDs are retained. **0.3.0 changes the vault inventory format and cannot directly open 0.2.x vault files**. Export existing stock using the old version, then create a new vault and supply capacity sources after upgrading. Do not delete old files to clear a lock.
 
 Dependencies are supplied by the target pack: GregTech, StructureLib, GTNHLib, AE2, ModularUI2 and UniMixins. The former standalone mods are not required.
 
@@ -80,18 +82,19 @@ Matter Manipulator and Data Orb configuration copying are supported. [Detailed u
 
 ## ME Cell Aggregation Storage
 
-Build a **3×3×3 hollow cube**: outward-facing controller at the center of any of the six faces, **23 native LuV machine casings, exactly one ordinary GT input bus and exactly one ME Storage Link Hatch or Export Bus (mutually exclusive)**, with air in the center. No storage cores. All three custom blocks require **LuV assembler recipes**.
+Build a **3×3×3 hollow cube**: outward-facing controller at the center of any of the six faces, **23 native LuV machine casings, exactly one ordinary GT input bus and exactly one ME Storage Link Hatch or Export Bus (mutually exclusive)**, with air in the center. Optionally replace one casing with **one ordinary GT item output bus** for returning cells, leaving 22 casings. No storage cores. All three custom blocks require **LuV assembler recipes**.
 
 - Connect the Storage Link Hatch to powered AE: **one channel, 2 AE/t**. Right-click for the native AE2 priority GUI; native storage access and Reshuffle are supported.
 - Alternatively install the **ME Cell Aggregation Storage Export Bus**. It actively exports into its connected AE network, using 36 item/fluid phantom filters with NEI drag-and-drop and fuzzy, inverter and ore-filter cards. Empty filters export everything.
-- Insert components, empty cells or filled cells. Contents and installed upgrade cards are migrated before consuming the source and adding its full nominal capacity. The housing is consumed too.
-- No artificial type limit or type overhead. Total capacity uses **BigInteger**, removing the 8 EiB ceiling; per-resource counts retain AE2's signed `long` interface. Shared capacity: **8 items or 2048 mB of fluid per byte**.
+- Insert components, empty cells or ordinary filled cells. Ordinary cells migrate stock and upgrade cards, then contribute nominal bytes. Singularity and Universe cells require empty stock: Singularity credits `(nominal bytes + 1) / 32768`, Universe credits full nominal bytes. Empty Avaritia Addons Infinity Chests are supported.
+- No artificial type limit or type overhead. The vault uses **BigInteger** for total capacity and exact stock, removing the 8 EiB ceiling; AE-visible quantities and individual requests retain AE2's signed `long` interface. Shared capacity: **8 items or 2048 mB of fluid per byte**.
+- **Cell details** shows paged icons, remaining absorbed counts, credited bytes and capacity shares. With the optional ordinary GT output bus installed, click a row and enter a return quantity. **All** fills its remaining count; free capacity and bus space may limit the actual return. Returned cells are empty; stored stock stays in the vault.
 - The blue-white dashboard adds a capacity ring, scanning sweep, moving highlights and number transitions, with a compact layout for smaller screens. Disable animations locally from the GUI.
 - Controller and port tooltips include operating instructions. Right-click the controller for usage, status and automatic-absorption controls. Unsupported, creative, void and spatial cells remain in the bus.
 
 Once formed, the entire structure shares a smooth blue/white/violet sci-fi surface connected across each complete face, with functional panels preserved. The bus and interface can occupy any remaining shell position, including top, bottom, edges and corners. Sharing either component between vaults prevents both from forming; buses reserved by a registered native GT multiblock are also rejected. Releasing the conflict allows formation again.
 
-Inventory lives in external world-save files. Normal harvesting preserves the controller UUID; replacing and reforming reconnects it. Back up the whole world. Importing new cells forces a save and may briefly pause the server.
+Inventory lives in external world-save files. Normal harvesting preserves the controller UUID; replacing and reforming reconnects it. Back up the whole world. Importing or returning cells forces a save and may briefly pause the server.
 
 ![Dashboard animation illustration (headless shared-geometry render)](docs/assets/vault/dashboard/animation-en.gif)
 

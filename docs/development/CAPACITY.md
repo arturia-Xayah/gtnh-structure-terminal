@@ -1,4 +1,6 @@
-# BigInteger 容量与性能 / Capacity and performance
+# BigInteger 容量与历史性能 / Capacity and performance
+
+本页记录 0.2.4 的容量改造。0.3.0 已将每种库存数量也改为 BigInteger，当前数量与性能边界见 [数量预评估](QUANTITY_PREFLIGHT.md)。
 
 0.2.4 将总容量、已用字节摘要、主机 NBT、掉落与网络摘要中的容量值改为 BigInteger。分数用量原本已经使用 BigInteger；本次同时将总容量对应的 1/2048 字节预算缓存，只有加载或扩容才重新乘算。
 

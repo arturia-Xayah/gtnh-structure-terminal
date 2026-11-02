@@ -524,11 +524,15 @@ public final class VaultIOSuite {
     }
 
     private void setupOutput() throws Exception {
-        for (Map.Entry<Resource, Long> e : controller.store()
+        for (Map.Entry<Resource, java.math.BigInteger> e : controller.store()
             .entries()
             .entrySet())
             controller.store()
-                .extract(e.getKey(), e.getValue(), false);
+                .extract(
+                    e.getKey(),
+                    e.getValue()
+                        .longValueExact(),
+                    false);
         resetCells();
         world.setBlock(7, 80, 9, VaultMod.OUTPUT, 0, 3);
         output = (TileOutput) world.getTileEntity(7, 80, 9);
@@ -685,9 +689,9 @@ public final class VaultIOSuite {
 
     private long stockCount() {
         long count = 0;
-        for (long n : controller.store()
+        for (java.math.BigInteger n : controller.store()
             .entries()
-            .values()) count += n;
+            .values()) count = Math.addExact(count, n.longValueExact());
         return count;
     }
 

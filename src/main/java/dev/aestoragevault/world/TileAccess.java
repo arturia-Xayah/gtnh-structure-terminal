@@ -66,6 +66,8 @@ public class TileAccess extends AENetworkTile implements ICellContainer, IPriori
     public void unbind(TileController owner) {
         if (bound == owner) {
             bound = null;
+            items.clearCaches();
+            fluids.clearCaches();
             refresh();
         }
     }

@@ -25,7 +25,7 @@ def main():
             source = folder / CORE
             source.mkdir(parents=True)
             names = ['Resource.java', 'VaultStore.java']
-            if variant == 'current': names.append('CapacityValue.java')
+            if variant == 'current': names.extend(['CapacityValue.java', 'NativeInventoryView.java'])
             for name in names:
                 path = CORE / name
                 data = subprocess.check_output(['git', 'show', f'{args.baseline_ref}:{path}'], cwd=ROOT) if variant == 'baseline' else (ROOT / path).read_bytes()

@@ -42,3 +42,11 @@
 *.[pP][sS]1             text eol=crlf
 
 *[aA][uU][tT][oO][gG][eE][nN][eE][rR][aA][tT][eE][dD]* binary
+
+# Frozen verification inputs/results retain their exact bytes and original log spacing.
+verification/*0.3.0*/** -text -whitespace
+verification/vault-cache-config/** -text -whitespace
+verification/vault-cell-contributions/** -text -whitespace
+verification/vault-read-audit/** -text -whitespace
+verification/vault-read-optimization/** -text -whitespace
+verification/vault-universe-full-capacity/** -text -whitespace

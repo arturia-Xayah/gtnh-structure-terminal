@@ -18,7 +18,13 @@ public final class LateMixins implements ILateMixinLoader {
 
     @Override
     public List<String> getMixins(Set<String> mods) {
-        List<String> mixins = new ArrayList<>(Arrays.asList("VaultHatchSkinMixin", "NativeBusOwnershipMixin"));
+        List<String> mixins = new ArrayList<>(
+            Arrays.asList(
+                "VaultHatchSkinMixin",
+                "NativeBusOwnershipMixin",
+                "VisibleAmountMixin",
+                "ReturnBusMixin",
+                "ReturnInventoryGuardMixin"));
         if (cpw.mods.fml.relauncher.FMLLaunchHandler.side()
             .isClient()) mixins.add("client.VaultCasingRenderMixin");
         return mixins;

@@ -1,0 +1,636 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "1193_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d16"
+    },
+    {
+      "name": "1193_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1193_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1193_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1193_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1193_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d64, output\u003d100"
+    },
+    {
+      "name": "1193_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1193_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "1193_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dfalse"
+    },
+    {
+      "name": "1193_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1193_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1193_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1194_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d16"
+    },
+    {
+      "name": "1194_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1194_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1194_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1194_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d128"
+    },
+    {
+      "name": "1194_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d128, output\u003d100"
+    },
+    {
+      "name": "1194_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1194_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "1194_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "1194_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1194_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1194_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1195_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d16"
+    },
+    {
+      "name": "1195_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1195_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1195_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1195_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d256"
+    },
+    {
+      "name": "1195_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d256, output\u003d100"
+    },
+    {
+      "name": "1195_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "1195_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "1195_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "1195_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1195_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1195_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "965_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d16"
+    },
+    {
+      "name": "965_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "965_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "965_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "965_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d4096"
+    },
+    {
+      "name": "965_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d4096, output\u003d100"
+    },
+    {
+      "name": "965_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "965_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "965_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "965_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "965_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "965_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "975_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d16"
+    },
+    {
+      "name": "975_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "975_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "975_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "975_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d16384"
+    },
+    {
+      "name": "975_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d16384, output\u003d400"
+    },
+    {
+      "name": "975_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "975_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "975_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "975_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "975_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "975_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32019_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d32"
+    },
+    {
+      "name": "32019_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32019_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32019_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32019_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32019_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d4096, output\u003d6400"
+    },
+    {
+      "name": "32019_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32019_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "32019_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dfalse"
+    },
+    {
+      "name": "32019_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32019_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32019_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32020_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d32"
+    },
+    {
+      "name": "32020_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32020_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32020_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32020_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d128"
+    },
+    {
+      "name": "32020_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d8192, output\u003d6400"
+    },
+    {
+      "name": "32020_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32020_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "32020_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "32020_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32020_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32020_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32021_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d32"
+    },
+    {
+      "name": "32021_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32021_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32021_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32021_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d256"
+    },
+    {
+      "name": "32021_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d16384, output\u003d6400"
+    },
+    {
+      "name": "32021_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32021_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "32021_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "32021_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32021_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32021_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32022_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d32"
+    },
+    {
+      "name": "32022_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32022_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32022_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32022_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d4096"
+    },
+    {
+      "name": "32022_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d262144, output\u003d6400"
+    },
+    {
+      "name": "32022_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32022_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "32022_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "32022_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32022_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32022_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32023_native_structure",
+      "passed": true,
+      "detail": "energy_hatches\u003d32"
+    },
+    {
+      "name": "32023_low_budget",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32023_edit_preserves_inflight",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32023_save_load",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32023_full_matches_auto",
+      "passed": true,
+      "detail": "eut\u003d16384"
+    },
+    {
+      "name": "32023_native_parallel_at_full_budget",
+      "passed": true,
+      "detail": "eut\u003d1048576, output\u003d6400"
+    },
+    {
+      "name": "32023_low_budget_parallel_control",
+      "passed": true,
+      "detail": "eut\u003d64"
+    },
+    {
+      "name": "32023_native_recipe_order",
+      "passed": true,
+      "detail": "pfp_idle_output"
+    },
+    {
+      "name": "32023_startup_capability",
+      "passed": true,
+      "detail": "can_run_200M\u003dtrue"
+    },
+    {
+      "name": "32023_reject_without_consumption",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32023_panel_constructed",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "32023_configuration_copy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "1194_native_cold_tax",
+      "passed": true,
+      "detail": "delta\u003d999936"
+    },
+    {
+      "name": "32020_native_cold_tax",
+      "passed": true,
+      "detail": "delta\u003d999936"
+    },
+    {
+      "name": "1194_mk1_to_mk2_hot_switch",
+      "passed": true,
+      "detail": "delta\u003d64, stored_below_200M\u003dtrue"
+    },
+    {
+      "name": "32020_mk1_to_mk2_hot_switch",
+      "passed": true,
+      "detail": "delta\u003d64, stored_below_200M\u003dtrue"
+    },
+    {
+      "name": "1194_mk2_to_low_idle_hot_switch",
+      "passed": true,
+      "detail": "delta\u003d4096"
+    },
+    {
+      "name": "32020_mk2_to_low_idle_hot_switch",
+      "passed": true,
+      "detail": "delta\u003d4096"
+    }
+  ],
+  "client_launched": false
+}

@@ -46,3 +46,6 @@ layout.json
 # Python verification helpers
 __pycache__/
 *.pyc
+
+# Release JARs are attached to GitHub Releases, not committed
+/dist/0.3.0-alpha-GTNH-2.9.0/

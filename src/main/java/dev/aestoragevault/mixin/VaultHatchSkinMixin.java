@@ -13,6 +13,7 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 
 /** Render-only override. No hatch tier, saved texture, inventory, facing or dye is changed. */
 @Mixin(value = MTEHatch.class, remap = false)
@@ -21,7 +22,8 @@ public abstract class VaultHatchSkinMixin {
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
     private void vault$skin(IGregTechTileEntity base, ForgeDirection side, ForgeDirection facing, int color,
         boolean active, boolean redstone, CallbackInfoReturnable<ITexture[]> cir) {
-        if (!((Object) this instanceof MTEHatchInputBus) || base.getWorld() == null) return;
+        if (!((Object) this instanceof MTEHatchInputBus || (Object) this instanceof MTEHatchOutputBus)
+            || base.getWorld() == null) return;
         int tile = VaultStructure
             .skinTile(base.getWorld(), base.getXCoord(), base.getYCoord(), base.getZCoord(), side.ordinal());
         if (tile < 0) return;

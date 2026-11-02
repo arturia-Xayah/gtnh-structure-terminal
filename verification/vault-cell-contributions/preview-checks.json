@@ -1,0 +1,1 @@
+{"passed":true,"checks":["JS syntax and all DOM selectors","exact adjusted capacity","six-row pagination and boundaries","row selection","overview/detail navigation","state persistence"],"scope":"Static DOM harness; no browser or game client launched"}

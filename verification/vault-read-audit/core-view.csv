@@ -1,0 +1,10 @@
+types,mode,ns_per_snapshot,allocated_bytes_per_snapshot
+1000,unchanged,430.83,176.0
+1000,quantity_changes,21713.335,9968.56
+1000,membership_churn,22668.545,13992.0
+10000,unchanged,34.79,176.0
+10000,quantity_changes,19202.5,81944.0
+10000,membership_churn,35145.83,121968.0
+100000,unchanged,46.46,176.0
+100000,quantity_changes,233521.04,801944.0
+100000,membership_churn,215377.92,1201968.0

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.VaultStoreTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:30:30.089Z" hostname="D9CH4WN6T3" time="0.457">
+  <properties/>
+  <testcase name="invalidRatesAndEmptyKeysAreRejected" classname="dev.aestoragevault.core.VaultStoreTest" time="0.011"/>
+  <testcase name="importBeyondLongCreditsCapacityAndKeepsExactCount" classname="dev.aestoragevault.core.VaultStoreTest" time="0.005"/>
+  <testcase name="failedWritePermanentlyStopsFurtherMutation" classname="dev.aestoragevault.core.VaultStoreTest" time="0.006"/>
+  <testcase name="simulationNeverMutatesOrWrites" classname="dev.aestoragevault.core.VaultStoreTest" time="0.006"/>
+  <testcase name="truncatedSnapshotLocks" classname="dev.aestoragevault.core.VaultStoreTest" time="0.012"/>
+  <testcase name="moreThan63TypesAndNoTypeTax" classname="dev.aestoragevault.core.VaultStoreTest" time="0.112"/>
+  <testcase name="filledCellCreditsCapacityAndItemsTogether" classname="dev.aestoragevault.core.VaultStoreTest" time="0.006"/>
+  <testcase name="randomizedLedgerMatchesIndependentReferenceAcrossReopens" classname="dev.aestoragevault.core.VaultStoreTest" time="0.126"/>
+  <testcase name="concurrentOperationsCannotOversubscribeBudget" classname="dev.aestoragevault.core.VaultStoreTest" time="0.025"/>
+  <testcase name="itemFluidShareExactFractionalBudget" classname="dev.aestoragevault.core.VaultStoreTest" time="0.007"/>
+  <testcase name="outputTraversalIsBoundedFairAndTracksRemovalsAcrossRestart" classname="dev.aestoragevault.core.VaultStoreTest" time="0.014"/>
+  <testcase name="bigCapacityAndQuantityCrossLongWhileNativeWindowStaysBounded" classname="dev.aestoragevault.core.VaultStoreTest" time="0.01"/>
+  <testcase name="aggregateUsedBytesBeyondLongStillEnforcesExactItemFluidBudget" classname="dev.aestoragevault.core.VaultStoreTest" time="0.021"/>
+  <testcase name="extractionRemovesTypeAndPartialInsertionIsBounded" classname="dev.aestoragevault.core.VaultStoreTest" time="0.005"/>
+  <testcase name="corruptSnapshotLocksEvenWhenValuesStillLookValid" classname="dev.aestoragevault.core.VaultStoreTest" time="0.009"/>
+  <testcase name="missingJournalIsNeverTreatedAsEmpty" classname="dev.aestoragevault.core.VaultStoreTest" time="0.01"/>
+  <testcase name="sourceDataIsImmutable" classname="dev.aestoragevault.core.VaultStoreTest" time="0.006"/>
+  <testcase name="invalidImportCannotPartiallyCredit" classname="dev.aestoragevault.core.VaultStoreTest" time="0.007"/>
+  <testcase name="hugeCapacityAndReceiptsSurviveJournalAndSnapshot" classname="dev.aestoragevault.core.VaultStoreTest" time="0.009"/>
+  <testcase name="obsoleteSnapshotsAreRejectedWithoutConversion" classname="dev.aestoragevault.core.VaultStoreTest" time="0.001"/>
+  <testcase name="corruptCompleteRecordLocksRatherThanDropsIt" classname="dev.aestoragevault.core.VaultStoreTest" time="0.005"/>
+  <testcase name="unfinishedLastRecordIsDiscarded" classname="dev.aestoragevault.core.VaultStoreTest" time="0.009"/>
+  <testcase name="missingInventoryIsNeverRecreated" classname="dev.aestoragevault.core.VaultStoreTest" time="0.008"/>
+  <testcase name="checkpointCrashWindowDoesNotReplayTwice" classname="dev.aestoragevault.core.VaultStoreTest" time="0.018"/>
+  <testcase name="secondFileHandleCannotMountSameInventory" classname="dev.aestoragevault.core.VaultStoreTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

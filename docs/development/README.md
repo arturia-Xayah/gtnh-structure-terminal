@@ -8,7 +8,7 @@
 
 - [构建与后台测试](BUILDING.md)：默认不启动游戏，整合夹具和可重复步骤。
 - [模块与兼容迁移](INTEGRATION.md)：注册 ID、内部模块、库存文件、功率 NBT 和图标。
-- [当前整合验证](VALIDATION.md)：GTNH 2.9.0 正式版的依赖、后台测试、升级和验证边界。
+- [当前整合验证](VALIDATION.md)：0.3.0 / GTNH 2.9.0 的依赖、退回、后台测试和验证边界。
 - [0.2.5 / RC-2 验证历史](VALIDATION_0.2.5.md)：此前动画界面的原始验证记录。
 - [开发计划与调研](TODO.md)：已实现与待讨论功能分开记录。
 
@@ -41,7 +41,12 @@
 - [LuV 材质、配方和升级说明](VAULT_LUV.md)
 - [贴图母图与生成提示词](../assets/vault/generation.json)
 
-- [BigInteger 容量与性能测量](CAPACITY.md)
+- [单聚合器查询与枚举优化](VAULT_READ_OPTIMIZATION.md)
+- [读取边界审查与多聚合器设计](VAULT_READ_AUDIT.md)
+- [读取缓存配置：用户指南](../features/CACHE_CONFIGURATION.md)
+- [配置功能验证](VALIDATION.md)：小预算、关闭缓存与进程重启
+- [BigInteger 库存数量预评估与性能](QUANTITY_PREFLIGHT.md)
+- [BigInteger 容量与历史性能测量](CAPACITY.md)
 - [存储格式、日志与恢复边界](STORAGE_FORMAT.md)
 - [独立版验证历史](STORAGE_VALIDATION.md)
 - [独立版原始报告](../../verification/storage-baseline/vault-tests.json)
@@ -51,3 +56,5 @@
 ## English
 
 This directory contains developer-facing build steps, internals, experiments, compatibility details and test evidence. Player-facing instructions remain in the READMEs and feature guides. Use the current [integration validation](VALIDATION.md) for the merged artifact; historical standalone reports retain their original scope. No game client has been launched for visual acceptance.
+
+- [元件容量规则与贡献统计：当前验证](VALIDATION.md)（123 单元测试、302 后台检查、3 台结构样本；部分退回与重启恢复、AVS6）

@@ -1,0 +1,104 @@
+{
+  "pack_version": "2.9.0",
+  "passed": true,
+  "client_launched": false,
+  "fixture_sha256": "549fee1d73bc0a1efa7370866e7bf35983d5a5e3402007f999ceb79c460f5a45",
+  "runs": [
+    {
+      "suite": "vault",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 55,
+      "report": "vault/vault-tests.json"
+    },
+    {
+      "suite": "vault",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 7,
+      "report": "vault/vault-tests-restart.json"
+    },
+    {
+      "suite": "vault_io",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 14,
+      "report": "vault_io/vault-io-tests.json"
+    },
+    {
+      "suite": "vault_io",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 2,
+      "report": "vault_io/vault-io-tests-restart.json"
+    },
+    {
+      "suite": "cache_config",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 7,
+      "report": "cache_config/cache-config-tests.json"
+    },
+    {
+      "suite": "cache_config",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 6,
+      "report": "cache_config/cache-config-tests-restart.json"
+    },
+    {
+      "suite": "big_quantity",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 6,
+      "report": "big_quantity/big-quantity-tests.json"
+    },
+    {
+      "suite": "big_quantity",
+      "stage": 2,
+      "exit": 0,
+      "passed": true,
+      "cases": 2,
+      "report": "big_quantity/big-quantity-tests-restart.json"
+    },
+    {
+      "suite": "forge",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 26,
+      "report": "forge/forge-power-tests.json"
+    },
+    {
+      "suite": "fusion",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 126,
+      "report": "fusion/fusion-power-tests.json"
+    },
+    {
+      "suite": "ae",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 51,
+      "report": "ae/ae-order-report.json"
+    },
+    {
+      "suite": "structures",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 3,
+      "report": "structures/machine-validation/report.json"
+    }
+  ]
+}

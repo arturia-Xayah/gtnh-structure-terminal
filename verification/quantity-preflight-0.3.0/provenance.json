@@ -1,0 +1,12 @@
+{
+  "baseline_ref": "31aec05fc4b0256683d876e16f9f578643e1ca9d",
+  "fixture_sha256": "a8dba640d131c93bdf79c4b89fadf828e8bb18eacd8bcb681a84483528601ea9",
+  "server_exit": 0,
+  "client_launched": false,
+  "timing": "test-only MinecraftServer.tick HEAD/RETURN ASM probe; every sample asserts tick elapsed >= benchmark workload; inter-tick sleep excluded",
+  "invalid_trials_excluded": [
+    "Forge END workload outside native tickTimeArray",
+    "fluid-NBT aliases not treated as distinct native fluids",
+    "command-line coremod unavailable before jar discovery"
+  ]
+}

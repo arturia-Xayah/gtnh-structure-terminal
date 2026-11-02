@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "client_launched": false,
+  "tests": [
+    {
+      "name": "two_real_vaults_seed_huge_stock_and_large_NBT",
+      "passed": true
+    },
+    {
+      "name": "startup_loads_small_limits_and_normalizes_invalid_value",
+      "passed": true
+    },
+    {
+      "name": "per_channel_count_bytes_single_entry_and_global_caps_hold",
+      "passed": true
+    },
+    {
+      "name": "rejected_or_disabled_key_probe_retains_no_NBT",
+      "passed": true
+    },
+    {
+      "name": "output_cache_limits_and_global_accounting",
+      "passed": true
+    },
+    {
+      "name": "native_AE_simulate_extract_insert_conservation_with_limits",
+      "passed": true
+    },
+    {
+      "name": "file_edit_requires_process_restart",
+      "passed": true
+    }
+  ],
+  "java": "25.0.4.1"
+}

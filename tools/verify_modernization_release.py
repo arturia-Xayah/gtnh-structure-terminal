@@ -19,16 +19,22 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--version',default='0.2.6-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
+    ap.add_argument('--version',default='0.3.0-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
     ap.add_argument('--runs',type=Path,nargs='+',required=True);ap.add_argument('--output',type=Path,required=True)
     ap.add_argument('--target',default='GTNH 2.9.0')
     ap.add_argument('--upgrades',type=Path,nargs='*',default=[])
-    a=ap.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);checks=[]
+    ap.add_argument('--client-only-differences',nargs='*',default=[],
+                    choices=['dev/aestoragevault/ui/ContributionScreen.class'],
+                    help='Explicitly record a client-only GUI rebuild after dedicated-server execution')
+    a=ap.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);checks=[];fixture_differences={}
     def check(name,value):
         checks.append(dict(check=name,passed=bool(value)))
         if not value:raise SystemExit('Failed: '+name)
     with zipfile.ZipFile(a.jar) as z:
         names=z.namelist();classes=[n for n in names if n.endswith('.class')]
+        cache_configured='dev/aestoragevault/core/CachePool.class' in names
+        if cache_configured:
+            check('storage_cache_configuration','dev/aestoragevault/config/VaultCacheConfig.class' in names)
         check('unique_jar_entries',len(names)==len(set(names)))
         check('java_8_bytecode',bool(classes) and all(int.from_bytes(z.read(n)[6:8],'big')==52 for n in classes))
         check('no_test_or_dependency_classes',not any('/packtest/' in n or '/servertest/' in n or '/qa/' in n or n.startswith(('appeng/','gregtech/','org/spongepowered/','it/unimi/')) for n in classes))
@@ -57,13 +63,13 @@ def main():
                 data=z.read(name)
                 check('connected_tile_'+str(tile),data==(ROOT/'src/main/resources'/name).read_bytes()
                       and int.from_bytes(data[16:20],'big')==64 and int.from_bytes(data[20:24],'big')==64)
-        if a.version in ('0.2.5-alpha','0.2.6-alpha'):
+        if a.version in ('0.2.5-alpha','0.2.6-alpha','0.3.0-alpha'):
             check('native_priority_output_and_byte_formatter',all(n in names for n in [
                 'dev/aestoragevault/world/TileOutput.class','dev/aestoragevault/ui/OutputContainer.class',
                 'dev/aestoragevault/ui/OutputScreen.class','dev/aestoragevault/core/ByteFormat.class','dev/aestoragevault/core/CapacityValue.class','dev/aestoragevault/world/VaultItemBlock.class']))
             for language in ['zh_CN','en_US']:
                 translations=dict(line.split('=',1) for line in z.read('assets/aestoragevault/lang/'+language+'.lang').decode('utf-8').splitlines() if '=' in line)
-                check('operating_tooltips_'+language,all(translations.get('vault.tooltip.'+part+'.'+str(i)) for part,count in [('controller',7),('access',5),('output',8)] for i in range(1,count+1)))
+                check('operating_tooltips_'+language,all(translations.get('vault.tooltip.'+part+'.'+str(i)) for part,count in [('controller',9 if a.version=='0.3.0-alpha' else 7),('access',5),('output',8)] for i in range(1,count+1)))
             check('native_animated_dashboard',all(n in names for n in [
                 'dev/aestoragevault/ui/dashboard/VaultLayout.class','dev/aestoragevault/ui/dashboard/VaultAnimation.class',
                 'dev/aestoragevault/ui/dashboard/VaultMesh.class','dev/aestoragevault/client/VaultClientPreferences.class',
@@ -74,19 +80,42 @@ def main():
                     'free','utilization','types','typeCount','state','automatic','paused','idle','locked',
                     'checkShort','absorptionOn','absorptionOff','motionOn','motionOff','motionHint','actual',
                     'formedShort','incompleteShort','lockedShort','typeHint']))
-            with zipfile.ZipFile(ROOT/'dist/0.2.4-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar') as previous:
-                check('storage_logic_and_sync_unchanged_since_024',all(z.read('dev/aestoragevault/'+name+'.class')==previous.read('dev/aestoragevault/'+name+'.class') for name in [
-                    'world/TileController','world/TileOutput','world/TileAccess','core/VaultStore',
-                    'core/CapacityValue','ae/VaultInventory','storage/Repositories']))
+            if a.version != '0.3.0-alpha':
+                with zipfile.ZipFile(ROOT/'dist/0.2.4-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.4-alpha-GTNH-2.9.0-RC-2.jar') as previous:
+                    check('storage_logic_and_sync_unchanged_since_024',all(z.read('dev/aestoragevault/'+name+'.class')==previous.read('dev/aestoragevault/'+name+'.class') for name in [
+                        'world/TileController','world/TileOutput','world/TileAccess','core/VaultStore',
+                        'core/CapacityValue','ae/VaultInventory','storage/Repositories']))
             check('dashboard_math_has_no_game_or_GL_dependency',all(not any(prefix in z.read('dev/aestoragevault/ui/dashboard/'+name+'.class') for prefix in [b'net/minecraft',b'org/lwjgl',b'java/awt']) for name in ['VaultLayout','VaultAnimation','VaultAnimation$Frame','VaultMesh']))
             check('custom_tooltip_registration',b'dev/aestoragevault/world/VaultItemBlock' in z.read('dev/aestoragevault/VaultMod.class'))
             check('renamed_storage_controller','ME元件聚合存储器' in z.read('assets/aestoragevault/lang/zh_CN.lang').decode('utf-8'))
+        if a.version=='0.3.0-alpha':
+            check('full_precision_ledger_and_native_overflow_protection',all(n in names for n in [
+                'dev/aestoragevault/core/VisibleAmount.class','dev/aestoragevault/mixin/VisibleAmountMixin.class',
+                'dev/aestoragevault/ae/ExactStockQuery.class']))
+            check('AVS6_with_local_AVS5_reader',all(bytes.fromhex(magic) in z.read('dev/aestoragevault/core/VaultStore.class') for magic in ['41565336','41565335']))
+            check('recoverable_cell_returns',all(n in names for n in [
+                'dev/aestoragevault/core/PendingReturn.class','dev/aestoragevault/core/ReturnNumbers.class',
+                'dev/aestoragevault/world/CellReturns.class','dev/aestoragevault/world/ReturnBus.class',
+                'dev/aestoragevault/mixin/ReturnBusMixin.class','dev/aestoragevault/mixin/ReturnInventoryGuardMixin.class',
+                'dev/aestoragevault/ui/ContributionContainer.class','dev/aestoragevault/ui/ContributionScreen.class',
+                'dev/aestoragevault/ui/ReturnNetwork.class']))
+            check('full_precision_stock_entrypoint',b'exactAmount' in z.read('dev/aestoragevault/core/VaultStore.class') and b'absorbExact' in z.read('dev/aestoragevault/core/VaultStore.class'))
         for language in ['zh_CN','en_US']:
             for namespace in ['structureterminal','aeorderoptimizer','plasmaforgepower','aestoragevault']:
                 check('language_'+namespace+'_'+language,'assets/'+namespace+'/lang/'+language+'.lang' in names)
         for fixture in a.fixtures:
             with zipfile.ZipFile(fixture) as test:
-                check('production_bytecode_matches_'+fixture.name,all(n in test.namelist() and z.read(n)==test.read(n) for n in classes))
+                changed=[n for n in classes if n not in test.namelist() or z.read(n)!=test.read(n)]
+                check('production_server_bytecode_matches_'+fixture.name,set(changed)<=set(a.client_only_differences))
+                fixture_differences[fixture.name]={}
+                for n in changed:
+                    check('explicit_client_only_'+n, n in test.namelist() and all(
+                        marker in data for data in [z.read(n),test.read(n)]
+                        for marker in [b'Lcpw/mods/fml/relauncher/SideOnly;',b'CLIENT']))
+                    fixture_differences[fixture.name][n]=dict(
+                        production_sha256=hashlib.sha256(z.read(n)).hexdigest(),
+                        fixture_sha256=hashlib.sha256(test.read(n)).hexdigest(),
+                        scope='Client-only GUI compile/static check; not executed by dedicated-server suites')
         class_hashes={n:hashlib.sha256(z.read(n)).hexdigest() for n in classes}
     tests=[]
     unit_dir=out/'unit-tests';unit_dir.mkdir(exist_ok=True)
@@ -110,7 +139,7 @@ def main():
             target=out/row['report'];target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,target)
             module_file=folder/suite/'modernization-modules.json';modules=json.loads(module_file.read_text())
             check(suite+'_live_namespaces_'+str(row['stage']),modules['passed'] and set(modules['modules'])==MODULES)
-            if a.version == '0.2.6-alpha':
+            if a.version in ('0.2.6-alpha','0.3.0-alpha'):
                 expected={'gregtech':'5.09.54.265','appliedenergistics2':'rv3-beta-1095-GTNH',
                           'structurelib':'1.4.47','modularui2':'2.3.94-1.7.10','gtnhlib':'0.11.54','NotEnoughItems':'2.8.171-GTNH'}
                 check(suite+'_official_runtime_dependencies_'+str(row['stage']),modules.get('dependencies')==expected and modules.get('pack')=='2.9.0')
@@ -120,7 +149,10 @@ def main():
                 if any(label in line for label in ['VAULT_TEST','VAULT_IO_TEST','FORGE_POWER_TEST','FUSION_POWER_TEST','AE_OPTIMIZER_TEST','PACK_TEST']): excerpt.append(line)
             (out/suite/f"server-{row['stage']}-excerpt.log").write_text('\n'.join(excerpt)+'\n')
             runs.append(row)
-    check('every_feature_suite_exercised',{r['suite'] for r in runs}=={'vault','vault_io','forge','fusion','ae','structures'})
+    required_suites={'vault','vault_io','forge','fusion','ae','structures'}
+    if a.version=='0.3.0-alpha': required_suites.add('big_quantity')
+    if cache_configured: required_suites.add('cache_config')
+    check('every_feature_suite_exercised',{r['suite'] for r in runs}==required_suites)
     check('output_cross_process_restart',any(r['suite']=='vault_io' and r['stage']==2 for r in runs))
     check('vault_cross_process_restart',any(r['suite']=='vault' and r['stage']==2 for r in runs))
     upgrades=[]
@@ -146,7 +178,8 @@ def main():
     check('player_and_developer_document_links',not doc_errors)
     manifest=dict(passed=True,checks=checks,version=a.version,target=a.target,client_launched=False,
                   artifact=a.jar.name,sha256=sha(a.jar),classes=len(class_hashes),class_sha256=class_hashes,
-                  unit_tests=sum(int(t['tests']) for t in tests),runs=runs,upgrades=upgrades,fixtures={p.name:sha(p) for p in a.fixtures})
+                  unit_tests=sum(int(t['tests']) for t in tests),runs=runs,upgrades=upgrades,fixtures={p.name:sha(p) for p in a.fixtures},
+                  fixture_differences=fixture_differences)
     (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:v for k,v in manifest.items() if k not in ['checks','class_sha256']},ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

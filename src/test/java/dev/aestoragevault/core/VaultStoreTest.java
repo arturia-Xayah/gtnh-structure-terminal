@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.zip.CRC32;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -169,22 +168,26 @@ public class VaultStoreTest {
     }
 
     @Test
-    public void bigCapacityCrossesLongBoundaryWhileNativePerTypeCountsStayBounded() throws Exception {
+    public void bigCapacityAndQuantityCrossLongWhileNativeWindowStaysBounded() throws Exception {
         try (VaultStore s = create(Long.MAX_VALUE)) {
             assertEquals(Long.MAX_VALUE, s.insert(item(1), Long.MAX_VALUE, false));
-            assertEquals(0, s.insert(item(1), 1, false));
+            assertEquals(1, s.insert(item(1), 1, false));
             assertEquals(Long.MAX_VALUE, s.insert(item(2), Long.MAX_VALUE, false));
             BigInteger before = s.capacity();
             s.absorb(UUID.randomUUID(), 1, Collections.emptyMap());
             assertEquals(before.add(BigInteger.ONE), s.capacity());
-            expectFailure(() -> s.absorb(UUID.randomUUID(), 1, Collections.singletonMap(item(1), 1L)));
+            s.absorb(UUID.randomUUID(), 1, Collections.singletonMap(item(1), 1L));
+            assertEquals(
+                BigInteger.valueOf(Long.MAX_VALUE)
+                    .add(BigInteger.valueOf(2)),
+                s.exactAmount(item(1)));
             assertEquals(Long.MAX_VALUE, s.amount(item(1)));
             s.checkpoint();
         }
         try (VaultStore s = new VaultStore(folder(), id, false)) {
             assertEquals(
                 BigInteger.valueOf(Long.MAX_VALUE)
-                    .add(BigInteger.ONE),
+                    .add(BigInteger.valueOf(2)),
                 s.capacity());
             assertEquals(Long.MAX_VALUE, s.amount(item(2)));
         }
@@ -255,71 +258,15 @@ public class VaultStoreTest {
     }
 
     @Test
-    public void legacyV2SnapshotAndWalMigrateWithoutLosingContentsOrReceipts() throws Exception {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataOutputStream snapshot = new DataOutputStream(bytes);
-        snapshot.writeInt(0x41565332);
-        snapshot.writeLong(id.getMostSignificantBits());
-        snapshot.writeLong(id.getLeastSignificantBits());
-        snapshot.writeLong(0);
-        snapshot.writeLong(64);
-        snapshot.writeInt(0);
-        snapshot.writeInt(1);
-        legacyResource(snapshot, item(1));
-        snapshot.writeLong(8);
-        snapshot.writeLong(0x454e445641554c54L);
-        CRC32 crc = new CRC32();
-        crc.update(bytes.toByteArray());
-        snapshot.writeInt((int) crc.getValue());
-        Files.write(folder().resolve(id + ".snapshot"), bytes.toByteArray());
-        UUID receipt = UUID.randomUUID();
-        bytes.reset();
-        DataOutputStream body = new DataOutputStream(bytes);
-        body.writeByte(2);
-        body.writeLong(receipt.getMostSignificantBits());
-        body.writeLong(receipt.getLeastSignificantBits());
-        body.writeLong(16);
-        body.writeInt(1);
-        legacyResource(body, fluid(1));
-        body.writeLong(2048);
-        byte[] data = bytes.toByteArray();
-        bytes.reset();
-        DataOutputStream wal = new DataOutputStream(bytes);
-        wal.writeInt(data.length);
-        wal.writeLong(1);
-        wal.write(data);
-        crc.reset();
-        crc.update(new byte[] { 0, 0, 0, 0, 0, 0, 0, 1 });
-        crc.update(data);
-        wal.writeInt((int) crc.getValue());
-        Files.write(folder().resolve(id + ".wal"), bytes.toByteArray());
-        BigInteger upgraded = BigInteger.ONE.shiftLeft(90)
-            .add(BigInteger.valueOf(80));
-        try (VaultStore s = new VaultStore(folder(), id, false)) {
-            assertEquals(BigInteger.valueOf(80), s.capacity());
-            assertTrue(s.hasReceipt(receipt));
-            s.absorb(UUID.randomUUID(), BigInteger.ONE.shiftLeft(90), Collections.emptyMap());
+    public void obsoleteSnapshotsAreRejectedWithoutConversion() throws Exception {
+        for (int magic : new int[] { 0x41565332, 0x41565333 }) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            DataOutputStream snapshot = new DataOutputStream(bytes);
+            snapshot.writeInt(magic);
+            snapshot.close();
+            Files.write(folder().resolve(id + ".snapshot"), bytes.toByteArray());
+            expectFailure(() -> new VaultStore(folder(), id, false));
         }
-        try (VaultStore s = new VaultStore(folder(), id, false)) {
-            assertEquals(upgraded, s.capacity());
-            assertEquals(8, s.amount(item(1)));
-            assertEquals(2048, s.amount(fluid(1)));
-            assertTrue(s.hasReceipt(receipt));
-            s.checkpoint();
-        }
-        try (VaultStore s = new VaultStore(folder(), id, false)) {
-            assertEquals(upgraded, s.capacity());
-            assertEquals(2048, s.amount(fluid(1)));
-        }
-    }
-
-    private void legacyResource(DataOutputStream out, Resource r) throws IOException {
-        out.writeUTF(r.channel);
-        out.writeInt(r.perByte);
-        out.writeInt(r.key().length);
-        out.write(r.key());
-        out.writeInt(r.payload().length);
-        out.write(r.payload());
     }
 
     @Test
@@ -473,7 +420,7 @@ public class VaultStoreTest {
                 s.entries()
                     .values()
                     .stream()
-                    .mapToLong(Long::longValue)
+                    .mapToLong(BigInteger::longValueExact)
                     .sum());
         }
     }
@@ -505,7 +452,10 @@ public class VaultStoreTest {
                     else reference.put(r, next);
                     used = used.add(BigInteger.valueOf(delta * r.units()));
                 }
-                assertEquals(reference, s.entries());
+                Map<Resource, BigInteger> exact = new HashMap<>();
+                for (Map.Entry<Resource, Long> entry : reference.entrySet())
+                    exact.put(entry.getKey(), BigInteger.valueOf(entry.getValue()));
+                assertEquals(exact, s.entries());
                 assertEquals(used, s.usedUnits());
                 if (i % 200 == 0) {
                     if (i % 400 == 0) s.checkpoint();
@@ -519,14 +469,18 @@ public class VaultStoreTest {
     }
 
     @Test
-    public void importedPerKeyCountOverflowCannotCreditCapacity() throws Exception {
+    public void importBeyondLongCreditsCapacityAndKeepsExactCount() throws Exception {
         try (VaultStore s = create(Long.MAX_VALUE - 1)) {
             s.insert(item(1), Long.MAX_VALUE, false);
             UUID receipt = UUID.randomUUID();
-            expectFailure(() -> s.absorb(receipt, 1, Collections.singletonMap(item(1), 1L)));
-            assertEquals(BigInteger.valueOf(Long.MAX_VALUE - 1), s.capacity());
+            s.absorb(receipt, 1, Collections.singletonMap(item(1), 1L));
+            assertEquals(BigInteger.valueOf(Long.MAX_VALUE), s.capacity());
+            assertEquals(
+                BigInteger.valueOf(Long.MAX_VALUE)
+                    .add(BigInteger.ONE),
+                s.exactAmount(item(1)));
             assertEquals(Long.MAX_VALUE, s.amount(item(1)));
-            assertFalse(s.hasReceipt(receipt));
+            assertTrue(s.hasReceipt(receipt));
         }
     }
 

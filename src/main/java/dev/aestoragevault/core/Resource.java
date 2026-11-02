@@ -31,6 +31,11 @@ public final class Resource {
         return payload.clone();
     }
 
+    /** No cloned arrays are allocated merely to account for cache admission. */
+    public long encodedBytes() {
+        return (long) key.length + payload.length;
+    }
+
     public int units() {
         return 2048 / perByte;
     }

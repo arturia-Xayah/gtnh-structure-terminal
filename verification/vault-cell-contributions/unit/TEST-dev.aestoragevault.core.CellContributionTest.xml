@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.CellContributionTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:30:29.974Z" hostname="D9CH4WN6T3" time="0.02">
+  <properties/>
+  <testcase name="rejectedImportLeavesHistoryAndCapacityUntouched" classname="dev.aestoragevault.core.CellContributionTest" time="0.009"/>
+  <testcase name="receiptsAtomicallyDeduplicateCountsAndBytesAcrossWalAndCheckpoint" classname="dev.aestoragevault.core.CellContributionTest" time="0.009"/>
+  <testcase name="bigCountsAndTinyPercentagesStayExact" classname="dev.aestoragevault.core.CellContributionTest" time="0.002"/>
+  <testcase name="correctedHighEndFormulaAndOverflowBoundary" classname="dev.aestoragevault.core.CellContributionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

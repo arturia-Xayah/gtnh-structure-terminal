@@ -15,7 +15,7 @@ chmod +x build.sh
 
 缓存仅放在 `.tools/` 或 `GRADLE_USER_HOME`，不会修改系统默认 Java。旧域名不可用时可使用 `./build.sh --mirror spotlessApply build`，镜像下载带固定哈希校验。Windows 可手动配置上述工具链后使用 `gradlew.bat build`。
 
-正式安装包为 `build/libs/gtnh-modernization-upgrade-0.2.6-alpha.jar`。交付副本的文件名和目录额外标注 GTNH 版本。`-dev.jar`、`-sources.jar` 及测试夹具不作为玩家安装包。
+正式安装包为 `build/libs/gtnh-modernization-upgrade-0.3.0-alpha.jar`。交付副本的文件名和目录额外标注 GTNH 版本。`-dev.jar`、`-sources.jar` 及测试夹具不作为玩家安装包。
 
 `build` / `check` 运行格式、静态检查、单元测试和发行检查，**不会启动游戏**。发行检查验证 Java 8 字节码、运行时映射、四个兼容模块的版本/图标、Mixin 配置及无测试类。
 
@@ -23,7 +23,7 @@ chmod +x build.sh
 
 ```sh
 ./build.sh -PmodernizationPackTests=true spotlessApply build
-cp build/libs/gtnh-modernization-upgrade-0.2.6-alpha.jar /tmp/modernization-fixture.jar
+cp build/libs/gtnh-modernization-upgrade-0.3.0-alpha.jar /tmp/modernization-fixture.jar
 python3 tools/run_modernization_backend.py \
   --pack /path/to/GTNH-server --java /path/to/java25/bin/java \
   --fixture /tmp/modernization-fixture.jar --run-dir /new/disposable/validation
@@ -32,9 +32,9 @@ python3 tools/run_modernization_backend.py \
 
 夹具来自 `src/packTest`、`src/optimizerPackTest`、`src/powerPackTest`、`src/vaultPackTest`、`src/modernizationPackTest`。仅显式测试构建加入；各入口依赖独立服务器参数。统一检查实际四个模块同时加载、版本/父模块/终端图标一致，旧注册物品和方块存在。
 
-测试顺序：存储端口/输出与跨进程重启、仓库存取与跨进程重启、锻炉、普通/压缩聚变、AE 网络、三个结构操作样本。各套创建独立世界；仓库测试第二次使用其同一世界。支持 `--suites vault_io vault forge fusion ae structures` 选择范围。每个服务器只绑定本机随机端口，以 `nogui` / `java.awt.headless=true` 运行，单阶段 20 分钟超时。不会复用源服务器的世界，不启动客户端。
+测试顺序：超 long 数量/多仓库及进程重启、存储端口/输出与跨进程重启、仓库存取与跨进程重启、锻炉、普通/压缩聚变、AE 网络、三个结构操作样本。各套创建独立世界；仓库测试第二次使用其同一世界。支持 `--suites vault vault_io cache_config big_quantity forge fusion ae structures` 选择范围。每个服务器只绑定本机随机端口，以 `nogui` / `java.awt.headless=true` 运行，单阶段 20 分钟超时。不会复用源服务器的世界，不启动客户端。
 
-原有 `terminalPackTests`、`optimizerPackTests` 选项保留，用于各自历史夹具；统一整合测试优先使用 `modernizationPackTests`。后台报告由统一运行器保存。正式包与测试包的生产 class 逐字节比对，结果见 [整合验证](VALIDATION.md)。
+原有 `terminalPackTests`、`optimizerPackTests` 选项保留，用于各自历史夹具；统一整合测试优先使用 `modernizationPackTests`。后台报告由统一运行器保存。正式包与测试包的生产 class 逐字节比对。仅客户端的后续显示调整需显式记录差异和类哈希，不将该差异称为后台执行过的代码。结果见 [整合验证](VALIDATION.md)。
 
 ## 实现入口
 
@@ -50,10 +50,12 @@ python3 tools/run_modernization_backend.py \
 
 ## English
 
-Run `./build.sh spotlessApply build`. The launcher installs local Java 25/17/8 toolchains or reuses the `STRUCTURE_TERMINAL_JAVA*` overrides. Artifacts target Java 8; build/check never launch Minecraft. The installable file is `build/libs/gtnh-modernization-upgrade-0.2.6-alpha.jar`.
+Run `./build.sh spotlessApply build`. The launcher installs local Java 25/17/8 toolchains or reuses the `STRUCTURE_TERMINAL_JAVA*` overrides. Artifacts target Java 8; build/check never launch Minecraft. The installable file is `build/libs/gtnh-modernization-upgrade-0.3.0-alpha.jar`.
 
 Explicitly opt into `-PmodernizationPackTests=true` for all dedicated-server fixtures, preserve that JAR outside the build output, run `tools/run_modernization_backend.py` with the command above, then rebuild production without the flag. It creates separate disposable server worlds, including a second process for vault persistence, with no client entry point. Legacy module namespaces remain stable; details are in [INTEGRATION.md](INTEGRATION.md).
 
 ## 旧库存升级与容量基准
 
-`tools/run_vault_upgrade.py` 接受 `--pack`、`--java`、`--fixture`、`--old-run` 和新的 `--run-dir`，复制此前 vault 套件的测试世界与重启标记到新目录，执行升级和第二次重启，不修改旧目录。容量微基准不启动游戏，见 [CAPACITY.md](CAPACITY.md)。
+历史 `tools/run_vault_upgrade.py` 接受 `--pack`、`--java`、`--fixture`、`--old-run` 和新的 `--run-dir`，复制此前 vault 套件的测试世界与重启标记到新目录，执行升级和第二次重启，不修改旧目录。容量微基准不启动游戏，见 [CAPACITY.md](CAPACITY.md)。
+
+0.3.0 与 0.2.x 的仓库文件不兼容，不应使用旧升级工具宣称能自动迁移。AVS5→AVS6 的本地开发格式读取由单元测试覆盖；完整安装包的生产类必须与已执行的冻结夹具逐字节一致。

@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "tests": [
+    {
+      "name": "fresh_server_process_restores_controller_UUID",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fresh_server_process_restores_capacity_and_all_1000_types",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fresh_server_process_restores_items_and_fluids",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "fresh_server_process_reconnects_real_AE_network",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "client_launched": false,
+  "java": "25.0.4.1",
+  "restart": true
+}

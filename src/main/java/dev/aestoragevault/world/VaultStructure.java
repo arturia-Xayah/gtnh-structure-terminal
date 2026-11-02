@@ -9,6 +9,7 @@ import dev.aestoragevault.VaultMod;
 import dev.aestoragevault.core.VaultGeometry;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 
 /** Read-only shape and exclusive-component checks. Never loads chunks. */
 public final class VaultStructure {
@@ -20,6 +21,8 @@ public final class VaultStructure {
         public IInventory bus;
         public IGregTechTileEntity busBase;
         public TileAccess access;
+        public MTEHatchOutputBus output;
+        public IGregTechTileEntity outputBase;
         public int centerX, centerY, centerZ;
     }
 
@@ -31,7 +34,7 @@ public final class VaultStructure {
         result.centerX = controller.xCoord - VaultGeometry.normal(side, 0);
         result.centerY = controller.yCoord - VaultGeometry.normal(side, 1);
         result.centerZ = controller.zCoord - VaultGeometry.normal(side, 2);
-        int buses = 0, interfaces = 0;
+        int buses = 0, interfaces = 0, outputs = 0;
         for (int x = -1; x <= 1; x++) for (int y = -1; y <= 1; y++) for (int z = -1; z <= 1; z++) {
             int wx = result.centerX + x, wy = result.centerY + y, wz = result.centerZ + z;
             if (!world.blockExists(wx, wy, wz)) return null;
@@ -50,21 +53,34 @@ public final class VaultStructure {
                 interfaces++;
             } else if (tile instanceof IGregTechTileEntity) {
                 IGregTechTileEntity base = (IGregTechTileEntity) tile;
-                if (base.getMetaTileEntity() == null || base.getMetaTileEntity()
-                    .getClass() != MTEHatchInputBus.class) return null;
-                result.bus = (IInventory) base.getMetaTileEntity();
-                result.busBase = base;
-                buses++;
+                if (base.getMetaTileEntity() != null && base.getMetaTileEntity()
+                    .getClass() == MTEHatchOutputBus.class) {
+                    result.output = (MTEHatchOutputBus) base.getMetaTileEntity();
+                    result.outputBase = base;
+                    outputs++;
+                } else if (base.getMetaTileEntity() != null && base.getMetaTileEntity()
+                    .getClass() == MTEHatchInputBus.class) {
+                        result.bus = (IInventory) base.getMetaTileEntity();
+                        result.busBase = base;
+                        buses++;
+                    } else return null;
             } else return null;
         }
-        return buses == 1 && interfaces == 1 ? result : null;
+        return buses == 1 && interfaces == 1 && outputs <= 1 ? result : null;
     }
 
     public static Shape inspectExclusive(TileController controller) {
         Shape shape = inspect(controller);
-        if (shape == null || NativeBusOwners.inUse((MTEHatchInputBus) shape.bus)) return null;
+        if (shape == null || NativeBusOwners.inUse((MTEHatchInputBus) shape.bus)
+            || shape.output != null && NativeBusOwners.inUse(shape.output)) return null;
         if (shared(controller, shape, shape.busBase.getXCoord(), shape.busBase.getYCoord(), shape.busBase.getZCoord())
             || shared(controller, shape, shape.access.xCoord, shape.access.yCoord, shape.access.zCoord)) return null;
+        if (shape.outputBase != null && shared(
+            controller,
+            shape,
+            shape.outputBase.getXCoord(),
+            shape.outputBase.getYCoord(),
+            shape.outputBase.getZCoord())) return null;
         return shape;
     }
 
@@ -75,7 +91,8 @@ public final class VaultStructure {
             TileEntity tile = world.getTileEntity(x + dx, y + dy, z + dz);
             if (!(tile instanceof TileController) || tile == owner) continue;
             Shape other = inspect((TileController) tile);
-            if (other != null && (other.busBase == shape.busBase || other.access == shape.access)) return true;
+            if (other != null && (other.busBase == shape.busBase || other.access == shape.access
+                || shape.outputBase != null && other.outputBase == shape.outputBase)) return true;
         }
         return false;
     }

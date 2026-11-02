@@ -1,0 +1,8 @@
+{
+  "client_launched": false,
+  "production_changed": false,
+  "scope": "isolated current core classes; 100 warmups + 200 measured iterations per size/mode, includes two journal writes in mutation modes, excludes native AE lists/prototype-map rebuilding; allocation findings are stronger than single-process timing estimates",
+  "java": "25.0.4.1",
+  "jar_sha256": "02fac37418481e45fea578916b1c70599859c0e68f81b1ce9826e7fb7bd74f22",
+  "source_sha256": "25960521f54e65fce36a76cc71dd29d8cc1a271d0b33db7d01c4ecb883b621d8"
+}

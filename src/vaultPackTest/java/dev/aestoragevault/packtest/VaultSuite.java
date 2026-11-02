@@ -133,8 +133,33 @@ public final class VaultSuite {
                 restoredSource.setTagCompound(tag);
                 controller.store()
                     .absorb(receipt, 1024, Collections.emptyMap());
+                ItemStack singularity = AEApi.instance()
+                    .definitions()
+                    .items()
+                    .cellSingularity()
+                    .maybeStack(1)
+                    .get();
+                ItemStack chest = cpw.mods.fml.common.registry.GameRegistry
+                    .findItemStack("avaritiaddons", "InfinityChest", 2);
+                bus.setInventorySlotContents(6, singularity);
+                bus.setInventorySlotContents(7, chest);
+                bus.setInventorySlotContents(
+                    8,
+                    AEApi.instance()
+                        .definitions()
+                        .items()
+                        .cellUniverse()
+                        .maybeStack(1)
+                        .get());
+                bus.setInventorySlotContents(
+                    9,
+                    cpw.mods.fml.common.registry.GameRegistry.findItemStack("ae2fc", "fluid_storage.Universe", 1));
                 expectedCapacity = controller.store()
-                    .capacity();
+                    .capacity()
+                    .add(BigInteger.valueOf(1L << 44))
+                    .add(BigInteger.valueOf(2L * 2147483646L))
+                    .add(BigInteger.valueOf(Long.MAX_VALUE / 16))
+                    .add(BigInteger.valueOf(Long.MAX_VALUE / 2048));
                 bus.setInventorySlotContents(5, restoredSource.copy());
                 bus.markDirty();
             }
@@ -147,7 +172,40 @@ public final class VaultSuite {
                             .equals(expectedCapacity),
                         "capacity credited twice");
                 });
+                run("singularity_universe_and_chest_actual_bus_absorption", () -> {
+                    check(
+                        bus.getStackInSlot(6) == null && bus.getStackInSlot(7) == null
+                            && bus.getStackInSlot(8) == null
+                            && bus.getStackInSlot(9) == null,
+                        "capacity sources not consumed");
+                    check(
+                        controller.contributions()
+                            .size() == 7,
+                        "new sources missing from history");
+                    dev.aestoragevault.core.CellContribution chest = controller.contributions()
+                        .stream()
+                        .filter(c -> c.item.equals("avaritiaddons:InfinityChest"))
+                        .findFirst()
+                        .get();
+                    check(chest.count.equals(BigInteger.valueOf(2)), "chest count lost");
+                    check(chest.bytes.equals(BigInteger.valueOf(2L * 2147483646L)), "chest contribution lost");
+                    checkUniverseHistory();
+                    List<NBTTagCompound> page = dev.aestoragevault.ui.ContributionContainer.pageData(
+                        42,
+                        1,
+                        controller.contributions(),
+                        controller.store()
+                            .capacity());
+                    check(
+                        page.get(0)
+                            .getInteger("Pages") == 2
+                            && page.get(0)
+                                .getTagList("Cells", 10)
+                                .tagCount() == 1,
+                        "actual second history page wrong");
+                });
                 afterImportTests();
+                returnTests();
                 controller.automatic = false;
                 controller.markDirty();
                 NBTTagCompound saved = new NBTTagCompound();
@@ -440,6 +498,7 @@ public final class VaultSuite {
     }
 
     private void initialTests() throws Exception {
+        contributionTests();
         run("native_3x3x3_structure_and_AE_channel", () -> {
             check(controller.formed, "not formed: " + controller.status);
             check(
@@ -657,21 +716,48 @@ public final class VaultSuite {
         });
         run("full_store_rejects_without_voiding_and_canAccept_false", () -> {
             Resource lava = ResourceCodec.encode(AEFluidStack.create(new FluidStack(FluidRegistry.LAVA, 1)));
-            long n = controller.store()
-                .insert(lava, Long.MAX_VALUE, false);
-            check(n > 0, "no free space");
-            IMEInventoryHandler<IAEItemStack> handler = (IMEInventoryHandler<IAEItemStack>) access
-                .getCellArray(AEItemStackType.ITEM_STACK_TYPE)
-                .get(0);
-            check(!handler.canAccept(AEItemStack.create(new ItemStack(Items.diamond))), "canAccept true while full");
-            check(
-                handler.injectItems(
-                    AEItemStack.create(new ItemStack(Items.diamond)),
-                    Actionable.MODULATE,
-                    new MachineSource(access)) != null,
-                "overflow voided");
-            controller.store()
-                .extract(lava, n, false);
+            BigInteger inserted = BigInteger.ZERO;
+            try {
+                for (int batch = 0; batch < 256; batch++) {
+                    long n = controller.store()
+                        .insert(lava, Long.MAX_VALUE, false);
+                    if (n == 0) break;
+                    inserted = inserted.add(BigInteger.valueOf(n));
+                }
+                check(
+                    inserted.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0,
+                    "large-capacity fill did not exceed long");
+                check(
+                    controller.store()
+                        .usedUnits()
+                        .equals(
+                            controller.store()
+                                .capacity()
+                                .multiply(BigInteger.valueOf(2048))),
+                    "test failed to fill the exact byte budget");
+                IMEInventoryHandler<IAEItemStack> handler = (IMEInventoryHandler<IAEItemStack>) access
+                    .getCellArray(AEItemStackType.ITEM_STACK_TYPE)
+                    .get(0);
+                check(
+                    !handler.canAccept(AEItemStack.create(new ItemStack(Items.diamond))),
+                    "canAccept true while full");
+                check(
+                    handler.injectItems(
+                        AEItemStack.create(new ItemStack(Items.diamond)),
+                        Actionable.MODULATE,
+                        new MachineSource(access)) != null,
+                    "overflow voided");
+            } finally {
+                while (inserted.signum() > 0) {
+                    long take = inserted.min(BigInteger.valueOf(Long.MAX_VALUE))
+                        .longValue();
+                    check(
+                        controller.store()
+                            .extract(lava, take, false) == take,
+                        "large fill cleanup lost fluid");
+                    inserted = inserted.subtract(BigInteger.valueOf(take));
+                }
+            }
         });
         run("broken_casing_disables_AE_immediately", () -> {
             world.setBlockToAir(X + 1, Y + 1, Z + 2);
@@ -731,9 +817,14 @@ public final class VaultSuite {
         run("controller_NBT_excludes_inventory", () -> {
             NBTTagCompound tag = new NBTTagCompound();
             controller.writeToNBT(tag);
+            check(
+                tag.getTagList("AbsorbedCells", 10)
+                    .tagCount() == 7,
+                "controller history mirror missing");
+            tag.removeTag("AbsorbedCells"); // Source statistics are intentional; stored resource types remain external.
             java.io.ByteArrayOutputStream data = new java.io.ByteArrayOutputStream();
             CompressedStreamTools.write(tag, new java.io.DataOutputStream(data));
-            check(data.size() < 512, "large controller NBT " + data.size());
+            check(data.size() < 512, "inventory leaked into controller NBT " + data.size());
             check(!tag.hasKey("Items") && !tag.hasKey("Stock"), "items leaked to controller");
         });
         run("harvested_controller_preserves_UUID_and_capacity", () -> {
@@ -810,7 +901,7 @@ public final class VaultSuite {
             world.setBlockToAir(X + 5, Y, Z);
         });
         run("controller_unload_closes_repository_and_replacement_restores_inventory", () -> {
-            Map<Resource, Long> before = controller.store()
+            Map<Resource, BigInteger> before = controller.store()
                 .entries();
             BigInteger bytes = controller.store()
                 .capacity();
@@ -903,8 +994,467 @@ public final class VaultSuite {
         });
     }
 
+    private void contributionTests() throws Exception {
+        String[] names = { "appliedenergistics2:item.ItemExtremeStorageCell.Singularity",
+            "appliedenergistics2:item.ItemExtremeStorageCell.Universe", "ae2fc:fluid_storage.singularity",
+            "ae2fc:fluid_storage.Universe" };
+        long[] expected = { 1L << 44, Long.MAX_VALUE / 16, 1L << 36, Long.MAX_VALUE / 2048 };
+        for (int n = 0; n < names.length; n++) {
+            final int index = n;
+            run("high_end_capacity_and_filled_rejection_" + n, () -> {
+                String[] parts = names[index].split(":", 2);
+                ItemStack stack = cpw.mods.fml.common.registry.GameRegistry.findItemStack(parts[0], parts[1], 1);
+                check(stack != null, "missing registry item " + names[index]);
+                NBTTagCompound original = new NBTTagCompound();
+                stack.writeToNBT(original);
+                check(CellReader.read(stack).bytes == expected[index], "incorrect adjusted capacity");
+                IAEStackType type = ((appeng.api.implementations.items.IStorageCell) stack.getItem()).getStackType();
+                IMEInventoryHandler handler = cell(stack, type);
+                IAEStack value = index < 2 ? AEItemStack.create(new ItemStack(Items.iron_ingot))
+                    : AEFluidStack.create(new FluidStack(FluidRegistry.WATER, 1000));
+                check(handler.injectItems(value, Actionable.MODULATE, new MachineSource(access)) == null, "seed cell");
+                NBTTagCompound filled = new NBTTagCompound();
+                stack.writeToNBT(filled);
+                try {
+                    CellReader.read(stack);
+                    throw new AssertionError("nonempty high-end cell accepted");
+                } catch (java.io.IOException expectedFailure) {}
+                NBTTagCompound after = new NBTTagCompound();
+                stack.writeToNBT(after);
+                check(after.equals(filled), "rejected cell was mutated");
+            });
+        }
+        run("empty_infinity_chest_contribution_and_nbt_rejection", () -> {
+            ItemStack chest = cpw.mods.fml.common.registry.GameRegistry
+                .findItemStack("avaritiaddons", "InfinityChest", 3);
+            check(chest != null, "InfinityChest missing");
+            check(CellReader.read(chest).bytes == 3L * 2147483646L, "chest stack capacity");
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setString("Items", "retained inventory");
+            chest.setTagCompound(tag);
+            try {
+                CellReader.read(chest);
+                throw new AssertionError("NBT-bearing chest accepted");
+            } catch (java.io.IOException expectedFailure) {}
+            check(
+                chest.stackSize == 3 && chest.getTagCompound()
+                    .equals(tag),
+                "rejected chest changed");
+        });
+        run("controller_contribution_nbt_and_summary_isolation", () -> {
+            java.util.List<dev.aestoragevault.core.CellContribution> history = controller.contributions();
+            check(history.size() == 3, "expected part, item cell, fluid cell records " + history.size());
+            BigInteger total = BigInteger.ZERO, count = BigInteger.ZERO;
+            for (dev.aestoragevault.core.CellContribution c : history) {
+                total = total.add(c.bytes);
+                count = count.add(c.count);
+            }
+            check(
+                total.equals(
+                    controller.store()
+                        .capacity()),
+                "history contribution sum");
+            check(count.equals(BigInteger.valueOf(4)), "stacked parts counted incorrectly");
+            NBTTagCompound nbt = controller.itemData();
+            check(
+                nbt.getTagList("AbsorbedCells", 10)
+                    .tagCount() == 3,
+                "controller history missing");
+            TileController restored = new TileController();
+            restored.restoreItem(nbt);
+            check(
+                restored.contributions()
+                    .size() == 3,
+                "item NBT history lost");
+            NBTTagCompound packet = null;
+            for (java.lang.reflect.Field field : S35PacketUpdateTileEntity.class.getDeclaredFields()) {
+                if (field.getType() == NBTTagCompound.class) {
+                    field.setAccessible(true);
+                    packet = (NBTTagCompound) field.get(controller.getDescriptionPacket());
+                    break;
+                }
+            }
+            check(packet != null, "missing description NBT");
+            check(!packet.hasKey("AbsorbedCells"), "history broadcast in periodic summary");
+        });
+        run("paged_history_packets_bound_big_integer_fields", () -> {
+            List<dev.aestoragevault.core.CellContribution> entries = new ArrayList<>();
+            BigInteger total = BigInteger.ZERO;
+            java.util.Random random = new java.util.Random(738);
+            for (int i = 0; i < 8; i++) {
+                BigInteger count = new BigInteger(30000, random).setBit(29999);
+                BigInteger bytes = new BigInteger(30000, random).setBit(29999);
+                entries.add(new dev.aestoragevault.core.CellContribution("test:cell" + i, i, count, bytes));
+                total = total.add(bytes);
+            }
+            List<NBTTagCompound> parts = dev.aestoragevault.ui.ContributionContainer.pageData(42, 0, entries, total);
+            check(parts.size() == 2, "full page not split");
+            int seen = 0;
+            for (NBTTagCompound data : parts) {
+                check(data.getInteger("Pages") == 2 && data.getInteger("CellTypes") == 8, "page totals wrong");
+                NBTTagList cells = data.getTagList("Cells", 10);
+                check(cells.tagCount() <= 3, "part too large");
+                for (int i = 0; i < cells.tagCount(); i++) {
+                    check(
+                        CapacityValue.decode(
+                            cells.getCompoundTagAt(i)
+                                .getByteArray("Count"))
+                            .equals(entries.get(seen++).count),
+                        "large count truncated");
+                }
+                PacketBuffer wire = new PacketBuffer(Unpooled.buffer());
+                try {
+                    new S35PacketUpdateTileEntity(X, Y, Z, 0, data).writePacketData(wire);
+                    check(wire.readableBytes() < 32767, "vanilla packet budget exceeded");
+                    new S35PacketUpdateTileEntity().readPacketData(wire);
+                    check(!wire.isReadable(), "history packet roundtrip incomplete");
+                } finally {
+                    wire.release();
+                }
+            }
+            check(seen == 6, "full page lost rows");
+            parts = dev.aestoragevault.ui.ContributionContainer.pageData(42, 99, entries, total);
+            check(
+                parts.size() == 1 && parts.get(0)
+                    .getInteger("Page") == 1
+                    && parts.get(0)
+                        .getTagList("Cells", 10)
+                        .tagCount() == 2,
+                "last page clamp wrong");
+        });
+        run("contribution_gui_slot_free_page_and_distance_checks", () -> {
+            dev.aestoragevault.ui.ContributionContainer gui = new dev.aestoragevault.ui.ContributionContainer(
+                controller);
+            check(gui.inventorySlots.isEmpty(), "detail page contains real slots");
+            check(gui.enchantItem(player, 2) && gui.enchantItem(player, 1), "page navigation failed");
+            check(!gui.enchantItem(player, 99), "unknown action accepted");
+            player.setPosition(200, Y, 200);
+            check(!gui.enchantItem(player, 2), "remote page request accepted");
+            player.setPosition(X + .5, Y, Z - 1.5);
+        });
+    }
+
+    private static final class ReturnTarget {
+
+        TileController tile;
+        MTEHatchInputBus input;
+        gregtech.api.metatileentity.implementations.MTEHatchOutputBus output;
+    }
+
+    private ItemStack returnPart(int count) {
+        return AEApi.instance()
+            .definitions()
+            .materials()
+            .cell1kPart()
+            .maybeStack(count)
+            .get();
+    }
+
+    private String returnKey() {
+        ItemStack part = returnPart(1);
+        return Item.itemRegistry.getNameForObject(part.getItem()) + "@" + part.getItemDamage();
+    }
+
+    private int nativeOutputId() {
+        for (int n = 0; n < GregTechAPI.METATILEENTITIES.length; n++) if (GregTechAPI.METATILEENTITIES[n] != null
+            && GregTechAPI.METATILEENTITIES[n].getClass()
+                == gregtech.api.metatileentity.implementations.MTEHatchOutputBus.class
+            && ((gregtech.api.metatileentity.implementations.MTEHatchOutputBus) GregTechAPI.METATILEENTITIES[n]).mTier
+                == 4)
+            return n;
+        throw new AssertionError("native output bus missing");
+    }
+
+    private void placeReturnOutput(ReturnTarget t) {
+        int x = t.tile.xCoord, z = t.tile.zCoord + 1;
+        world.setBlockToAir(x, Y + 1, z);
+        check(
+            GregTechAPI.METATILEENTITIES[nativeOutputId()].getStackForm(1)
+                .tryPlaceItemIntoWorld(player, world, x, Y + 1, z, 1, .5f, .5f, .5f),
+            "output bus placement");
+        t.output = (gregtech.api.metatileentity.implementations.MTEHatchOutputBus) ((IGregTechTileEntity) world
+            .getTileEntity(x, Y + 1, z)).getMetaTileEntity();
+        t.tile.checkStructure();
+    }
+
+    private ReturnTarget returnTarget(int x, boolean withOutput) throws Exception {
+        fillCube(x, Y, Z + 1);
+        world.setBlockToAir(x, Y, Z + 1);
+        world.setBlock(x, Y, Z, VaultMod.CONTROLLER, 2, 3);
+        world.setBlock(x - 1, Y, Z + 1, VaultMod.ACCESS, 0, 3);
+        placeTestBus(new int[] { x + 1, Y, Z });
+        ReturnTarget t = new ReturnTarget();
+        t.tile = (TileController) world.getTileEntity(x, Y, Z);
+        t.input = (MTEHatchInputBus) ((IGregTechTileEntity) world.getTileEntity(x + 1, Y, Z)).getMetaTileEntity();
+        if (withOutput) placeReturnOutput(t);
+        t.tile.updateEntity();
+        t.tile.checkStructure();
+        check(t.tile.available(), t.tile.status);
+        return t;
+    }
+
+    private void seedReturnParts(ReturnTarget t, int count) throws Exception {
+        t.input.setInventorySlotContents(0, returnPart(count));
+        java.lang.reflect.Method absorb = TileController.class.getDeclaredMethod("absorb");
+        absorb.setAccessible(true);
+        absorb.invoke(t.tile);
+        check(t.input.getStackInSlot(0) == null, "real source bus not consumed");
+        t.tile.automatic = false;
+    }
+
+    private void clearReturnOutput(ReturnTarget t) {
+        java.util.Arrays.fill(t.output.mInventory, null);
+        t.output.markDirty();
+    }
+
+    private int returnedParts(ReturnTarget t) {
+        int count = 0;
+        for (ItemStack stack : t.output.mInventory)
+            if (stack != null && stack.isItemEqual(returnPart(1))) count += stack.stackSize;
+        return count;
+    }
+
+    private void returnTests() throws Exception {
+        ReturnTarget a = returnTarget(X + 32, false);
+        seedReturnParts(a, 10);
+        run("return_requires_optional_native_output_bus", () -> {
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.TEN) == 0,
+                "return without physical output bus");
+            check(
+                a.tile.store()
+                    .contribution(returnKey()).count.equals(BigInteger.TEN),
+                "source count changed");
+        });
+        placeReturnOutput(a);
+        run("return_partially_merges_only_fitting_output_space", () -> {
+            for (int i = 0; i < a.output.mInventory.length; i++)
+                a.output.mInventory[i] = new ItemStack(Blocks.cobblestone, 64);
+            a.output.mInventory[0] = returnPart(63);
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.TEN) == 1,
+                "space partial wrong");
+            check(a.output.mInventory[0].stackSize == 64, "merge output wrong");
+            check(
+                a.tile.store()
+                    .capacity()
+                    .equals(BigInteger.valueOf(9 * 1024)),
+                "capacity debit wrong");
+            clearReturnOutput(a);
+        });
+        Resource iron = ResourceCodec.encode(AEItemStack.create(new ItemStack(Items.iron_ingot)));
+        Resource water = ResourceCodec.encode(AEFluidStack.create(new FluidStack(FluidRegistry.WATER, 1)));
+        run("return_capacity_partial_preserves_stock_and_fractional_usage", () -> {
+            a.tile.store()
+                .insert(iron, 6 * 1024 * 8, false);
+            a.tile.store()
+                .insert(water, 1, false);
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.TEN) == 2,
+                "capacity partial wrong");
+            check(
+                a.tile.store()
+                    .amount(iron) == 6 * 1024 * 8
+                    && a.tile.store()
+                        .amount(water) == 1,
+                "stored stock changed");
+            check(
+                returnedParts(a) == 2 && a.tile.store()
+                    .capacity()
+                    .equals(BigInteger.valueOf(7 * 1024)),
+                "partial debit wrong");
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.ONE) == 0,
+                "rounded free byte accepted");
+            a.tile.store()
+                .extract(iron, Long.MAX_VALUE, false);
+            a.tile.store()
+                .extract(water, 1, false);
+            clearReturnOutput(a);
+        });
+        run("return_full_or_filtered_bus_retains_source_and_capacity", () -> {
+            for (int i = 0; i < a.output.mInventory.length; i++)
+                a.output.mInventory[i] = new ItemStack(Blocks.cobblestone, 64);
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.TEN) == 0,
+                "full bus accepted");
+            clearReturnOutput(a);
+            a.output.setLockedItem(new ItemStack(Items.diamond));
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.TEN) == 0,
+                "output filter ignored");
+            check(
+                a.tile.store()
+                    .contribution(returnKey()).count.equals(BigInteger.valueOf(7)),
+                "failed return debited");
+            a.output.clearLock();
+        });
+        run("return_all_clamps_to_source_and_can_reabsorb_empty_results", () -> {
+            check(
+                dev.aestoragevault.world.CellReturns.eject(a.tile, returnKey(), BigInteger.ONE.shiftLeft(255)) == 7,
+                "source bound wrong");
+            check(
+                a.tile.store()
+                    .capacity()
+                    .signum() == 0 && a.tile.store()
+                        .contributions()
+                        .isEmpty(),
+                "last source not removed");
+            check(returnedParts(a) == 7, "output amount wrong");
+            clearReturnOutput(a);
+            seedReturnParts(a, 7);
+            check(
+                a.tile.store()
+                    .capacity()
+                    .equals(BigInteger.valueOf(7168)),
+                "reabsorption wrong");
+        });
+        run("return_rejects_second_native_output_bus", () -> {
+            int x = a.tile.xCoord + 1, z = Z + 1;
+            world.setBlockToAir(x, Y + 1, z);
+            GregTechAPI.METATILEENTITIES[nativeOutputId()].getStackForm(1)
+                .tryPlaceItemIntoWorld(player, world, x, Y + 1, z, 1, .5f, .5f, .5f);
+            a.tile.checkStructure();
+            check(!a.tile.formed, "second output accepted");
+            world.setBlock(x, Y + 1, z, GregTechAPI.sBlockCasings1, 6, 3);
+            a.tile.checkStructure();
+            check(a.tile.formed, "output removal did not recover");
+        });
+        run("native_machine_owns_return_bus_exclusively", () -> {
+            int x = a.tile.xCoord + 5;
+            world.setBlockToAir(x, Y, Z);
+            GregTechAPI.METATILEENTITIES[141].getStackForm(1)
+                .tryPlaceItemIntoWorld(player, world, x, Y, Z, 1, .5f, .5f, .5f);
+            gregtech.api.metatileentity.implementations.MTEMultiBlockBase machine = (gregtech.api.metatileentity.implementations.MTEMultiBlockBase) ((IGregTechTileEntity) world
+                .getTileEntity(x, Y, Z)).getMetaTileEntity();
+            machine.mMachine = true;
+            machine.mOutputBusses.add(a.output);
+            dev.aestoragevault.world.NativeBusOwners.checked(machine);
+            a.tile.checkStructure();
+            check(!a.tile.formed, "shared native output accepted");
+            machine.mOutputBusses.clear();
+            machine.mMachine = false;
+            a.tile.checkStructure();
+            check(a.tile.formed, "native output release failed");
+            world.setBlockToAir(x, Y, Z);
+        });
+        ReturnTarget b = returnTarget(X + 64, true);
+        seedReturnParts(b, 10);
+        // Reproduce both crash boundaries: debit without physical delivery, and saved delivery before acknowledgement.
+        run("prepare_return_crash_windows_and_native_extraction_guard", () -> {
+            byte[] da = dev.aestoragevault.world.CellReturns
+                .destination(a.tile, dev.aestoragevault.world.VaultStructure.inspectExclusive(a.tile));
+            byte[] db = dev.aestoragevault.world.CellReturns
+                .destination(b.tile, dev.aestoragevault.world.VaultStructure.inspectExclusive(b.tile));
+            a.output.markDirty();
+            b.output.markDirty();
+            world.saveAllChunks(true, null);
+            ThreadedFileIOBase.threadedIOInstance.waitForFinish();
+            a.tile.store()
+                .beginReturn(UUID.randomUUID(), returnKey(), 2, da);
+            dev.aestoragevault.core.PendingReturn pending = b.tile.store()
+                .beginReturn(UUID.randomUUID(), returnKey(), 2, db);
+            ((dev.aestoragevault.world.ReturnBus) b.output).vaultDeliveries()
+                .put(pending.id, b.tile.id);
+            b.output.mInventory[0] = returnPart(2);
+            b.output.markDirty();
+            check(b.output.getStackInSlot(0) == null, "pending native extraction was visible");
+            check(
+                !b.output.allowPullStack(
+                    b.output.getBaseMetaTileEntity(),
+                    0,
+                    b.output.getBaseMetaTileEntity()
+                        .getFrontFacing(),
+                    returnPart(1)),
+                "pending pull allowed");
+            NBTTagCompound nbt = new NBTTagCompound();
+            ((TileEntity) b.output.getBaseMetaTileEntity()).writeToNBT(nbt);
+            check(
+                nbt.getTagList("Inventory", 10)
+                    .tagCount() == 1
+                    && nbt.getTagList("VaultReturnDeliveries", 10)
+                        .tagCount() == 1,
+                "guard hid physical items from native saving");
+            a.tile.returnChanged();
+            b.tile.returnChanged();
+        });
+    }
+
+    private void returnRestartTests() throws Exception {
+        for (int offset : new int[] { 32, 64 }) {
+            final int distance = offset;
+            run("return_fresh_process_exactly_once_recovery_" + offset, () -> {
+                int x = X + distance;
+                world.getChunkFromBlockCoords(x, Z);
+                ReturnTarget t = new ReturnTarget();
+                t.tile = (TileController) world.getTileEntity(x, Y, Z);
+                check(t.tile != null, "return controller missing");
+                t.tile.updateEntity();
+                t.tile.checkStructure();
+                // Native access ticks detach during held IO. The controller must restore the same hatch.
+                TileAccess hatch = dev.aestoragevault.world.VaultStructure.inspect(t.tile).access;
+                hatch.unbind(t.tile);
+                check(hatch.bound == null, "access detach setup failed");
+                t.tile.checkStructure();
+                check(hatch.bound == t.tile, "access did not rebind after held IO");
+                t.output = (gregtech.api.metatileentity.implementations.MTEHatchOutputBus) ((IGregTechTileEntity) world
+                    .getTileEntity(x, Y + 1, Z + 1)).getMetaTileEntity();
+                dev.aestoragevault.world.CellReturns.recover(t.tile);
+                check(
+                    !t.tile.store()
+                        .hasPendingReturn(),
+                    "return remained pending");
+                check(returnedParts(t) == 2, "missing or duplicated physical cells");
+                check(
+                    t.tile.store()
+                        .contribution(returnKey()).count.equals(BigInteger.valueOf(distance == 32 ? 5 : 8)),
+                    "wrong source count");
+                BigInteger capacity = t.tile.store()
+                    .capacity();
+                dev.aestoragevault.world.CellReturns.recover(t.tile);
+                check(
+                    returnedParts(t) == 2 && t.tile.store()
+                        .capacity()
+                        .equals(capacity),
+                    "replayed return twice");
+                check(
+                    ((dev.aestoragevault.world.ReturnBus) t.output).vaultDeliveries()
+                        .isEmpty(),
+                    "native guard not released");
+            });
+        }
+    }
+
+    private void checkUniverseHistory() {
+        for (String item : new String[] { "appliedenergistics2:item.ItemExtremeStorageCell.Universe",
+            "ae2fc:fluid_storage.Universe" }) {
+            dev.aestoragevault.core.CellContribution c = controller.contributions()
+                .stream()
+                .filter(entry -> entry.item.equals(item))
+                .findFirst()
+                .get();
+            long bytes = item.startsWith("ae2fc:") ? Long.MAX_VALUE / 2048 : Long.MAX_VALUE / 16;
+            check(
+                c.count.equals(BigInteger.ONE) && c.bytes.equals(BigInteger.valueOf(bytes)),
+                "Universe full capacity lost");
+        }
+    }
+
     private void restartTests() throws Exception {
+        returnRestartTests();
         NBTTagCompound saved = CompressedStreamTools.readCompressed(Files.newInputStream(marker));
+        run("fresh_server_process_restores_contribution_ledger", () -> {
+            check(
+                controller.contributions()
+                    .size() == 7,
+                "history lost on restart");
+            check(
+                controller.itemData()
+                    .getTagList("AbsorbedCells", 10)
+                    .tagCount() == 7,
+                "NBT mirror missing");
+            checkUniverseHistory();
+        });
         BigInteger savedBytes = saved.hasKey("Bytes", 7) ? CapacityValue.decode(saved.getByteArray("Bytes"))
             : BigInteger.valueOf(saved.getLong("Bytes"));
         run(

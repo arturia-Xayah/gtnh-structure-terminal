@@ -20,6 +20,7 @@ import cpw.mods.fml.common.network.NetworkCheckHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import dev.aestoragevault.config.VaultCacheConfig;
 import dev.aestoragevault.storage.Repositories;
 import dev.aestoragevault.ui.CommonProxy;
 import dev.aestoragevault.world.TileAccess;
@@ -47,6 +48,7 @@ public final class VaultMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        VaultCacheConfig.load(new java.io.File(event.getModConfigurationDirectory(), "gtnh-modernization.cfg"));
         CASING = new VaultBlock(0);
         CONTROLLER = new VaultBlock(1);
         ACCESS = new VaultBlock(2);
@@ -65,6 +67,7 @@ public final class VaultMod {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         proxy.configure(new java.io.File(event.getModConfigurationDirectory(), "gtnh-modernization-client.cfg"));
         proxy.init();
+        dev.aestoragevault.ui.ReturnNetwork.init();
     }
 
     @Mod.EventHandler
@@ -127,6 +130,8 @@ public final class VaultMod {
     @Mod.EventHandler
     public void stop(FMLServerStoppedEvent event) {
         Repositories.INSTANCE.closeAll();
+        VaultCacheConfig.clear();
+        dev.aestoragevault.ui.ReturnNetwork.clear();
     }
 
     @NetworkCheckHandler

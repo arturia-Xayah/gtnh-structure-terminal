@@ -17,7 +17,9 @@ import appeng.api.storage.data.IAEStack;
 import appeng.api.storage.data.IAEStackType;
 import appeng.api.storage.data.IItemList;
 import appeng.util.item.AEItemStack;
+import dev.aestoragevault.core.CellPolicy;
 import dev.aestoragevault.core.Resource;
+import dev.aestoragevault.world.TileController;
 
 /** Reads a COPY. No extraction from or mutation of the original cell is needed before durable commit. */
 public final class CellReader {
@@ -33,6 +35,15 @@ public final class CellReader {
     public static CellReader read(ItemStack original) throws IOException {
         if (original == null || original.stackSize < 1) throw new IOException("Empty slot");
         ItemStack copy = original.copy();
+        String identity = String.valueOf(net.minecraft.item.Item.itemRegistry.getNameForObject(copy.getItem()));
+        if (CellPolicy.CHEST.equals(identity)) {
+            // A chest is not an AE cell. Fail closed for any retained block/inventory NBT.
+            if (copy.hasTagCompound()) for (Object key : copy.getTagCompound()
+                .func_150296_c())
+                if (!TileController.TOKEN.equals(key))
+                    throw new IOException("Only plain empty Infinity Chests can be absorbed; source retained");
+            return new CellReader(Math.multiplyExact(CellPolicy.CHEST_BYTES, copy.stackSize));
+        }
         long part = componentBytes(copy);
         if (part > 0) return new CellReader(Math.multiplyExact(part, copy.stackSize));
         if (!(copy.getItem() instanceof IStorageCell)) throw new IOException("Not a supported storage cell/component");
@@ -53,11 +64,13 @@ public final class CellReader {
             throw new IOException("Cell contents cannot be inspected safely");
         ICellInventory inv = ((ICellInventoryHandler) handler).getCellInv();
         if (inv == null || inv.getTotalBytes() != bytes) throw new IOException("Cell capacity mismatch");
-        CellReader result = new CellReader(bytes);
+        CellReader result = new CellReader(CellPolicy.contribution(identity, bytes));
         IItemList list = type.createPrimitiveList();
         handler.getAvailableItems(list);
         for (Object o : list) {
             IAEStack stack = (IAEStack) o;
+            if (CellPolicy.requiresEmpty(identity) && stack.getStackSize() != 0)
+                throw new IOException("Singularity/Universe cells must be empty; source retained");
             if (stack.getStackSize() > 0) result.add(ResourceCodec.encode(stack), stack.getStackSize());
         }
         // Cards are real items too; migrate them instead of silently deleting them with the housing.

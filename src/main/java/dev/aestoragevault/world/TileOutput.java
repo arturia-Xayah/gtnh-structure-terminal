@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +43,8 @@ import appeng.util.item.IAEStackList;
 import appeng.util.prioitylist.OreFilteredList;
 import dev.aestoragevault.VaultMod;
 import dev.aestoragevault.ae.ResourceCodec;
+import dev.aestoragevault.config.VaultCacheConfig;
+import dev.aestoragevault.core.CachePool;
 import dev.aestoragevault.core.Resource;
 import dev.aestoragevault.core.VaultStore;
 
@@ -64,13 +65,7 @@ public class TileOutput extends TileAccess
         }
     };
     private final ConfigManager config = new ConfigManager(this);
-    private final Map<Resource, IAEStack<?>> decoded = new LinkedHashMap<Resource, IAEStack<?>>(256, .75f, true) {
-
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<Resource, IAEStack<?>> e) {
-            return size() > 256;
-        }
-    };
+    private final CachePool.Cache<Resource, IAEStack<?>> decoded = VaultCacheConfig.outputCache();
     private IAEStackList partition;
     private OreFilteredList orePartition;
     private String oreFilter = "";
@@ -118,6 +113,12 @@ public class TileOutput extends TileAccess
         nextTick = 0;
     }
 
+    @Override
+    public void unbind(TileController owner) {
+        if (bound == owner) decoded.clear();
+        super.unbind(owner);
+    }
+
     @TileEvent(TileEventType.TICK)
     public void exportTick() {
         if (worldObj == null || worldObj.isRemote || worldObj.getTotalWorldTime() < nextTick) return;
@@ -152,7 +153,7 @@ public class TileOutput extends TileAccess
                 IAEStack<?> stack = decoded.get(resource);
                 if (stack == null) {
                     stack = ResourceCodec.decode(resource);
-                    decoded.put(resource, stack);
+                    decoded.put(resource, stack, resource.encodedBytes() * 2 + 512);
                 }
                 if (!matches(stack)) continue;
                 eligible++;
@@ -197,7 +198,7 @@ public class TileOutput extends TileAccess
             if (filter == null) continue;
             Resource resource = ResourceCodec.encode(filter);
             if (!result.contains(resource)) result.add(resource);
-            decoded.put(resource, ResourceCodec.decode(resource));
+            decoded.put(resource, ResourceCodec.decode(resource), resource.encodedBytes() * 2 + 512);
         }
         precise = result.isEmpty() ? null : result;
         return precise;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.CachePoolTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:30:29.933Z" hostname="D9CH4WN6T3" time="0.038">
+  <properties/>
+  <testcase name="eachZeroSettingDisablesRetentionAndRejectsNegativeLimits" classname="dev.aestoragevault.core.CachePoolTest" time="0.001"/>
+  <testcase name="resourceByteWeightDoesNotExposeOrCopyMutableArrays" classname="dev.aestoragevault.core.CachePoolTest" time="0.0"/>
+  <testcase name="countLimitUsesAccessOrderAndReplacementCreditsOldWeight" classname="dev.aestoragevault.core.CachePoolTest" time="0.001"/>
+  <testcase name="fullScanAdmissionNeverChurnsTheWarmSet" classname="dev.aestoragevault.core.CachePoolTest" time="0.003"/>
+  <testcase name="randomMixedCachesKeepExactAccountingThroughRemoveAndClear" classname="dev.aestoragevault.core.CachePoolTest" time="0.011"/>
+  <testcase name="concurrentBookkeepingHasNoCrossCacheLockInversion" classname="dev.aestoragevault.core.CachePoolTest" time="0.021"/>
+  <testcase name="globalBudgetEvictsAcrossCacheTypesAndHonorsGlobalAccessOrder" classname="dev.aestoragevault.core.CachePoolTest" time="0.001"/>
+  <testcase name="longBudgetArithmeticCannotWrap" classname="dev.aestoragevault.core.CachePoolTest" time="0.0"/>
+  <testcase name="localByteBudgetEvictsBeforeOverflowAndOversizeDoesNotFlushHotEntries" classname="dev.aestoragevault.core.CachePoolTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

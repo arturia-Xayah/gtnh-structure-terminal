@@ -9,6 +9,7 @@ import java.util.UUID;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
@@ -19,6 +20,7 @@ import net.minecraft.world.storage.ThreadedFileIOBase;
 import dev.aestoragevault.VaultMod;
 import dev.aestoragevault.ae.CellReader;
 import dev.aestoragevault.core.CapacityValue;
+import dev.aestoragevault.core.CellContribution;
 import dev.aestoragevault.core.VaultStore;
 import dev.aestoragevault.storage.Repositories;
 
@@ -26,6 +28,7 @@ public class TileController extends TileEntity {
 
     public static final String TOKEN = "aestoragevault_import";
     public UUID id;
+    public long ledgerSequence = -1;
     public BigInteger capacity = BigInteger.ZERO;
     public BigInteger used = BigInteger.ZERO;
     public int types;
@@ -35,9 +38,53 @@ public class TileController extends TileEntity {
     private boolean invalidIdentity;
     private VaultStore store;
     private IInventory bus;
+    private ReturnBus returnBus;
     private TileAccess access;
     private boolean loaded;
     private boolean checking;
+    private List<CellContribution> savedContributions = new ArrayList<>();
+    public List<CellContribution> historyPage = new ArrayList<>();
+    private int pendingWindow = -1, pendingPage, pendingPart;
+    private List<CellContribution> pendingHistory = new ArrayList<>();
+    public boolean historyReturnBus;
+    public int returnReplyVersion, returnReplyWindow = -1, returnedCount;
+    public String returnMessage = "";
+    public int historyWindow = -1, historyIndex, historyPages = 1, historyTypes;
+    public BigInteger historyCapacity = BigInteger.ZERO;
+
+    public List<CellContribution> contributions() {
+        return store == null ? new ArrayList<>(savedContributions) : store.contributions();
+    }
+
+    public static NBTTagList historyNbt(List<CellContribution> entries) {
+        NBTTagList list = new NBTTagList();
+        for (CellContribution c : entries) {
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setString("Item", c.item);
+            tag.setInteger("Damage", c.damage);
+            tag.setByteArray("Count", CapacityValue.encode(c.count));
+            tag.setByteArray("Bytes", CapacityValue.encode(c.bytes));
+            list.appendTag(tag);
+        }
+        return list;
+    }
+
+    private static List<CellContribution> readHistory(NBTTagList list, int max) {
+        if (list.tagCount() > max) throw new IllegalArgumentException("Too many cell definitions");
+        List<CellContribution> result = new ArrayList<>();
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        for (int i = 0; i < list.tagCount(); i++) {
+            NBTTagCompound t = list.getCompoundTagAt(i);
+            CellContribution c = new CellContribution(
+                t.getString("Item"),
+                t.getInteger("Damage"),
+                CapacityValue.decode(t.getByteArray("Count")),
+                CapacityValue.decode(t.getByteArray("Bytes")));
+            if (!seen.add(c.key())) throw new IllegalArgumentException("Duplicate cell definition");
+            result.add(c);
+        }
+        return result;
+    }
 
     public VaultStore store() {
         return store;
@@ -67,6 +114,14 @@ public class TileController extends TileEntity {
         }
         if (worldObj.getTotalWorldTime() % 20 == 0) {
             checkStructure();
+            try {
+                if (formed && store != null
+                    && (store.hasPendingReturn() || returnBus != null && !returnBus.vaultDeliveries()
+                        .isEmpty()))
+                    CellReturns.recover(this);
+            } catch (Exception e) {
+                ioFailure(e);
+            }
             if (formed && automatic && available()) absorb();
             updateSummary();
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -75,6 +130,7 @@ public class TileController extends TileEntity {
 
     public boolean available() {
         return store != null && store.isHealthy()
+            && !store.hasPendingReturn()
             && !status.startsWith("LOCKED:")
             && !isInvalid()
             && checkShape()
@@ -91,7 +147,9 @@ public class TileController extends TileEntity {
         // Exclusive inspection rejects every other complete shape, so any remaining binding is stale.
         if (foundAccess.bound != null && foundAccess.bound != this) foundAccess.unbind(foundAccess.bound);
         bus = foundBus;
-        if (access != foundAccess && !checking) {
+        returnBus = shape.output == null ? null : (ReturnBus) shape.output;
+        // An access hatch may detach itself while a pending return holds IO; bind it again on recovery.
+        if (access != foundAccess || foundAccess.bound != this) {
             if (access != null) access.unbind(this);
             access = foundAccess;
             access.bind(this);
@@ -111,9 +169,10 @@ public class TileController extends TileEntity {
                 checking = false;
             }
             bus = null;
+            returnBus = null;
         }
         if (store != null && !status.startsWith("LOCKED:"))
-            status = formed ? "Online" : "Need face-center controller, 23 LuV casings, exclusive bus/access";
+            status = formed ? "Online" : "Need face-center controller, LuV casings, exclusive buses/access";
         if (changed && access != null) access.refresh();
     }
 
@@ -156,7 +215,13 @@ public class TileController extends TileEntity {
                     status = "Input changed during save; source retained";
                     continue;
                 }
-                store.absorb(plan.token, plan.cell.bytes, plan.cell.contents);
+                store.absorbCell(
+                    plan.token,
+                    plan.cell.bytes,
+                    plan.cell.contents,
+                    String.valueOf(net.minecraft.item.Item.itemRegistry.getNameForObject(plan.source.getItem())),
+                    plan.source.getItemDamage(),
+                    plan.source.stackSize);
                 capacity = store.capacity();
                 markDirty();
                 bus.setInventorySlotContents(plan.slot, null);
@@ -193,6 +258,13 @@ public class TileController extends TileEntity {
         markDirty();
     }
 
+    public void returnChanged() {
+        updateSummary();
+        if (store != null) ledgerSequence = store.sequence();
+        if (access != null) access.refresh();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
     public void ioFailure(Exception error) {
         status = "LOCKED: " + error.getMessage();
         automatic = false;
@@ -213,23 +285,35 @@ public class TileController extends TileEntity {
     }
 
     private void detach() {
+        if (store != null) {
+            savedContributions = store.contributions();
+            ledgerSequence = store.sequence();
+        }
         formed = false;
         if (access != null) access.unbind(this);
         access = null;
+        returnBus = null;
         Repositories.INSTANCE.release(this);
         store = null;
         loaded = false;
     }
 
     public NBTTagCompound itemData() {
+        return descriptionData(true);
+    }
+
+    private NBTTagCompound descriptionData(boolean includeHistory) {
         NBTTagCompound tag = new NBTTagCompound();
         if (id != null) tag.setString("VaultId", id.toString());
         tag.setByteArray("MaximumBytesBig", CapacityValue.encode(store == null ? capacity : store.capacity()));
         tag.setBoolean("Automatic", automatic);
+        tag.setLong("LedgerSequence", store == null ? ledgerSequence : store.sequence());
+        if (includeHistory) tag.setTag("AbsorbedCells", historyNbt(contributions()));
         return tag;
     }
 
     public void restoreItem(NBTTagCompound tag) {
+        ledgerSequence = tag.hasKey("LedgerSequence") ? tag.getLong("LedgerSequence") : -1;
         try {
             if (tag.hasKey("VaultId")) id = UUID.fromString(tag.getString("VaultId"));
         } catch (IllegalArgumentException e) {
@@ -237,6 +321,8 @@ public class TileController extends TileEntity {
         }
         try {
             capacity = readBytes(tag, "MaximumBytesBig", "MaximumBytes");
+            if (tag.hasKey("AbsorbedCells"))
+                savedContributions = readHistory(tag.getTagList("AbsorbedCells", 10), 1024);
         } catch (IllegalArgumentException e) {
             invalidIdentity = true;
             capacity = BigInteger.ZERO;
@@ -266,7 +352,7 @@ public class TileController extends TileEntity {
 
     @Override
     public Packet getDescriptionPacket() {
-        NBTTagCompound tag = itemData();
+        NBTTagCompound tag = descriptionData(false); // Only detail viewers receive contribution records.
         tag.setByteArray("UsedBig", CapacityValue.encode(used));
         tag.setInteger("Types", types);
         tag.setBoolean("Formed", formed);
@@ -277,6 +363,44 @@ public class TileController extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager network, S35PacketUpdateTileEntity packet) {
         NBTTagCompound tag = packet.func_148857_g();
+        if (tag.hasKey("ReturnWindow")) {
+            returnReplyWindow = tag.getInteger("ReturnWindow");
+            returnedCount = tag.getInteger("Returned");
+            returnMessage = tag.getString("ReturnMessage");
+            returnReplyVersion++;
+            return;
+        }
+        if (tag.hasKey("HistoryWindow")) {
+            try {
+                int window = tag.getInteger("HistoryWindow"), page = tag.getInteger("Page");
+                int part = tag.getInteger("Part"), parts = tag.getInteger("Parts");
+                if (parts < 1 || parts > 2 || part < 0 || part >= parts)
+                    throw new IllegalArgumentException("Invalid history packet parts");
+                if (part == 0) {
+                    pendingHistory = new ArrayList<>();
+                    pendingWindow = window;
+                    pendingPage = page;
+                    pendingPart = 0;
+                    historyWindow = -1;
+                }
+                if (pendingWindow != window || pendingPage != page || pendingPart != part)
+                    throw new IllegalArgumentException("Out-of-order history page");
+                pendingHistory.addAll(readHistory(tag.getTagList("Cells", 10), 3));
+                pendingPart++;
+                if (part + 1 < parts) return;
+                historyPage = pendingHistory;
+                historyWindow = window;
+                historyIndex = tag.getInteger("Page");
+                historyPages = tag.getInteger("Pages");
+                historyTypes = tag.getInteger("CellTypes");
+                historyReturnBus = tag.getBoolean("ReturnBus");
+                historyCapacity = CapacityValue.decode(tag.getByteArray("Capacity"));
+            } catch (IllegalArgumentException e) {
+                historyWindow = -1;
+                historyPage.clear();
+            }
+            return;
+        }
         restoreItem(tag);
         used = readBytes(tag, "UsedBig", "Used");
         types = tag.getInteger("Types");

@@ -12,6 +12,8 @@ from summarize_pack_validation import classify
 
 EXCLUDED = ('structureterminal','aeorderoptimizer','aeoptimizer','aeorderbench','plasmaforgepower','aestoragevault','gtnh-modernization')
 SUITES = {
+    'cache_config': ('cache-config-validation', ['-Daestoragevault.cacheConfigTests=true'], ['cache-config-tests.json','cache-config-tests-restart.json']),
+    'big_quantity': ('big-quantity-validation', ['-Daestoragevault.bigQuantityTests=true'], ['big-quantity-tests.json','big-quantity-tests-restart.json']),
     'vault_io': ('vault-io-validation', ['-Daestoragevault.ioTests=true'], ['vault-io-tests.json','vault-io-tests-restart.json']),
     'vault': ('vault-validation', ['-Daestoragevault.tests=true'], ['vault-tests.json','vault-tests-restart.json']),
     'forge': ('forge-power-validation', ['-Dplasmaforgepower.tests=true'], ['forge-power-tests.json']),
@@ -48,6 +50,8 @@ def main():
     target.mkdir(parents=True); rows=[]
     for suite in a.suites:
         world,flags,reports=SUITES[suite];folder=target/suite;prepare(pack,folder,fixture,world)
+        if suite == 'cache_config':
+            (folder/'config/gtnh-modernization.cfg').write_text("storagecache {\n S:keyMaxEntries=2\n S:keyMaxBytes=1024\n S:prototypeMaxEntries=2\n S:prototypeMaxBytes=4096\n S:outputMaxEntries=1\n S:outputMaxBytes=2048\n S:maxEntryBytes=-1\n S:globalMaxBytes=8192\n}\n")
         for stage,name in enumerate(reports,1):
             cmd=[str(java),'-Xms1G','-Xmx6G','-XX:+UseG1GC','-Dmodernization.tests=true','-Dmodernization.packVersion='+a.pack_version,*flags,'-Djava.awt.headless=true','-Duser.language=en','-Dfml.readTimeout=180','@java9args.txt','-jar','lwjgl3ify-forgePatches.jar','nogui']
             with (folder/f'server-{stage}.log').open('w') as log:

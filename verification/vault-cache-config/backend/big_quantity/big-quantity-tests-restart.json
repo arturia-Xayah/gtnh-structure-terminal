@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "client_launched": false,
+  "tests": [
+    {
+      "name": "fresh_process_restores_huge_item_fluid_and_UUIDs",
+      "passed": true
+    },
+    {
+      "name": "fresh_process_reconnects_multi_vault_native_AE_window",
+      "passed": true
+    }
+  ],
+  "java": "25.0.4.1"
+}

@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "java8_classes": 156,
+  "jar": "dist/0.3.0-alpha-GTNH-2.9.0/read-optimized/gtnh-modernization-upgrade-0.3.0-alpha-GTNH-2.9.0.jar",
+  "jar_sha256": "02fac37418481e45fea578916b1c70599859c0e68f81b1ce9826e7fb7bd74f22",
+  "bytes": 436047,
+  "unit_tests": 102,
+  "checks": {
+    "no_test_classes": true,
+    "java8_bytecode": true,
+    "byte_identical_enumeration": true,
+    "byte_identical_paired_and_regression": true,
+    "only_storage_classes_changed_since_quantity_build": true,
+    "all_tests_pass": true
+  },
+  "unit": [
+    {
+      "file": "TEST-dev.aestoragevault.ui.dashboard.VaultAnimationTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.core.HintTransformerTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.ui.dashboard.VaultMeshTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.core.SurvivalCapabilityTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.BigQuantityTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.ae.PatternInputHookTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.VaultGeometryTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.plasmaforgepower.core.PowerSettingsTest.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.core.CoreTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.bridge.CandidateDiscoveryTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.ByteFormatTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.NativeInventoryViewTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.ui.dashboard.VaultLayoutTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.plasmaforgepower.core.FusionSelectorsTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.plasmaforgepower.core.PowerEditorTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.core.SettingsTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.structureterminal.core.CanonicalNbtTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aeoptimizer.core.StrictGraphTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.VaultStoreTest.xml",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.VaultRenderHookTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "file": "TEST-dev.aestoragevault.core.CapacityValueTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0
+    }
+  ]
+}

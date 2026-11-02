@@ -129,6 +129,10 @@ public class VaultBlock extends BlockContainer {
                 : te instanceof TileAccess ? ((TileAccess) te).bound : null;
             if (controller != null) {
                 controller.checkStructure();
+                if (player.isSneaking() && player.getHeldItem() != null) {
+                    dev.aestoragevault.ae.ExactStockQuery.send(controller, player, player.getHeldItem());
+                    return true;
+                }
                 world.markBlockForUpdate(controller.xCoord, controller.yCoord, controller.zCoord);
                 player.openGui(VaultMod.INSTANCE, 0, world, controller.xCoord, controller.yCoord, controller.zCoord);
             }

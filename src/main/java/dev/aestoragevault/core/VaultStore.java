@@ -35,16 +35,23 @@ import java.util.zip.CheckedOutputStream;
 /** Server-owned ledger. Unlimited logical types, exact fractional-byte accounting, durable import receipts. */
 public final class VaultStore implements Closeable {
 
-    private static final int LEGACY_MAGIC = 0x41565332;
-    private static final int MAGIC = 0x41565333;
+    private static final int MAGIC = 0x41565336;
     private static final int MAX_RECORD = 64 * 1024 * 1024;
+    private static final BigInteger MAX_COUNT = BigInteger.ONE.shiftLeft(CapacityValue.MAX_ENCODED_BYTES * 8 - 1)
+        .subtract(BigInteger.ONE);
+    private static final BigInteger MAX_LONG = BigInteger.valueOf(Long.MAX_VALUE);
     private static final BigInteger UNITS = BigInteger.valueOf(2048);
     private final Path snapshot;
     private final Path journal;
     private final UUID id;
-    private final Map<Resource, Long> stock = new HashMap<>();
+    private final Map<Resource, BigInteger> stock = new HashMap<>();
+    private final Map<String, NativeInventoryView> readViews = new HashMap<>();
     private final Set<Resource> outputOrder = new LinkedHashSet<>();
     private final Set<UUID> receipts = new HashSet<>();
+    private final Map<String, CellContribution> contributions = new java.util.TreeMap<>();
+    private long contributionRevision;
+    private final Map<UUID, PendingReturn> pendingReturns = new HashMap<>();
+    private BigInteger returnedBytes = BigInteger.ZERO;
     private final RandomAccessFile wal;
     private FileLock lock;
     private boolean needsFlush;
@@ -81,6 +88,115 @@ public final class VaultStore implements Closeable {
         return capacity;
     }
 
+    public synchronized List<CellContribution> contributions() {
+        return new ArrayList<>(contributions.values());
+    }
+
+    public synchronized boolean hasPendingReturn() {
+        return !pendingReturns.isEmpty();
+    }
+
+    public synchronized long sequence() {
+        return sequence;
+    }
+
+    public synchronized BigInteger returnedBytes() {
+        return returnedBytes;
+    }
+
+    public synchronized List<PendingReturn> pendingReturns() {
+        return new ArrayList<>(pendingReturns.values());
+    }
+
+    public synchronized CellContribution contribution(String key) {
+        return contributions.get(key);
+    }
+
+    /** Exact free space, not rounded displayed bytes. Returning k sources removes ceil(B*k/N) bytes. */
+    public synchronized BigInteger maxReturn(String key) {
+        CellContribution c = contributions.get(key);
+        if (c == null || !pendingReturns.isEmpty()) return BigInteger.ZERO;
+        BigInteger freeBytes = capacityUnits.subtract(used)
+            .divide(UNITS);
+        return freeBytes.multiply(c.count)
+            .divide(c.bytes)
+            .min(c.count)
+            .max(BigInteger.ZERO);
+    }
+
+    public synchronized PendingReturn beginReturn(UUID token, String key, int requested, byte[] destination)
+        throws IOException {
+        healthy();
+        if (receipts.contains(token)) return pendingReturns.get(token);
+        if (!pendingReturns.isEmpty()) throw new IOException("A return is awaiting durable delivery");
+        CellContribution c = contributions.get(key);
+        if (c == null || requested < 1) return null;
+        if (c.bytes.compareTo(c.count) < 0) throw new IOException("Source capacity cannot be split safely");
+        BigInteger amount = maxReturn(key).min(BigInteger.valueOf(requested));
+        if (amount.signum() == 0) return null;
+        BigInteger removed = c.bytes.multiply(amount)
+            .add(c.count.subtract(BigInteger.ONE))
+            .divide(c.count);
+        PendingReturn result = new PendingReturn(
+            token,
+            new CellContribution(c.item, c.damage, amount, removed),
+            destination);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(bytes);
+        out.writeByte(4);
+        result.write(out);
+        append(bytes.toByteArray(), true);
+        applyReturn(result);
+        return result;
+    }
+
+    public synchronized void completeReturn(UUID token) throws IOException {
+        healthy();
+        if (!pendingReturns.containsKey(token)) return;
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(bytes);
+        out.writeByte(5);
+        writeUuid(out, token);
+        append(bytes.toByteArray(), true);
+        pendingReturns.remove(token);
+    }
+
+    private void applyReturn(PendingReturn pending) throws IOException {
+        CellContribution debit = pending.source, c = contributions.get(debit.key());
+        if (c == null || c.count.compareTo(debit.count) < 0
+            || c.bytes.compareTo(debit.bytes) < 0
+            || capacityUnits.subtract(debit.bytes.multiply(UNITS))
+                .compareTo(used) < 0
+            || receipts.contains(pending.id)
+            || !pendingReturns.isEmpty()) throw new IOException("Invalid return debit");
+        BigInteger n = c.count.subtract(debit.count), b = c.bytes.subtract(debit.bytes);
+        if (n.signum() == 0) {
+            if (b.signum() != 0) throw new IOException("Return source accounting mismatch");
+            contributions.remove(c.key());
+        } else contributions.put(c.key(), new CellContribution(c.item, c.damage, n, b));
+        setCapacity(capacity.subtract(debit.bytes));
+        returnedBytes = returnedBytes.add(debit.bytes);
+        pendingReturns.put(pending.id, pending);
+        receipts.add(pending.id);
+        contributionRevision++;
+    }
+
+    public synchronized long contributionRevision() {
+        return contributionRevision;
+    }
+
+    public synchronized void absorbCell(UUID receipt, long extraBytes, Map<Resource, Long> contents, String item,
+        int damage, long count) throws IOException {
+        Map<Resource, BigInteger> exact = new HashMap<>();
+        for (Map.Entry<Resource, Long> entry : contents.entrySet())
+            exact.put(entry.getKey(), BigInteger.valueOf(entry.getValue()));
+        absorbExact(
+            receipt,
+            BigInteger.valueOf(extraBytes),
+            exact,
+            new CellContribution(item, damage, BigInteger.valueOf(count), BigInteger.valueOf(extraBytes)));
+    }
+
     public synchronized BigInteger usedUnits() {
         return used;
     }
@@ -94,12 +210,30 @@ public final class VaultStore implements Closeable {
         return stock.size();
     }
 
+    /** Native AE window; the ledger retains the complete quantity. */
     public synchronized long amount(Resource r) {
-        return stock.getOrDefault(r, 0L);
+        return exactAmount(r).min(MAX_LONG)
+            .longValue();
     }
 
-    public synchronized Map<Resource, Long> entries() {
+    public synchronized BigInteger exactAmount(Resource r) {
+        return stock.getOrDefault(r, BigInteger.ZERO);
+    }
+
+    public synchronized Map<Resource, BigInteger> entries() {
         return new HashMap<>(stock);
+    }
+
+    /** Stable native quantities; built lazily per channel and incrementally invalidated by committed changes. */
+    public synchronized NativeInventoryView.Snapshot nativeSnapshot(String channel) {
+        NativeInventoryView view = readViews.get(channel);
+        if (view == null) {
+            view = new NativeInventoryView();
+            for (Map.Entry<Resource, BigInteger> entry : stock.entrySet())
+                if (entry.getKey().channel.equals(channel)) view.update(entry.getKey(), entry.getValue());
+            readViews.put(channel, view);
+        }
+        return view.snapshot();
     }
 
     /** Bounded, fair traversal. No full-inventory copy/sort on the server tick. */
@@ -121,19 +255,26 @@ public final class VaultStore implements Closeable {
 
     public synchronized long insert(Resource r, long requested, boolean simulate) throws IOException {
         healthy();
-        if (requested <= 0) return 0;
+        if (requested <= 0 || !pendingReturns.isEmpty()) return 0;
         BigInteger free = capacityUnits.subtract(used);
         long fit = free.signum() <= 0 ? 0
             : free.divide(BigInteger.valueOf(r.units()))
                 .min(BigInteger.valueOf(Long.MAX_VALUE))
                 .longValue();
-        long added = Math.min(requested, Math.min(fit, Long.MAX_VALUE - amount(r)));
+        BigInteger present = exactAmount(r);
+        // Avoid allocating a 4 KiB subtraction on ordinary IO just to check the parser's extreme limit.
+        long room = present.bitLength() < CapacityValue.MAX_ENCODED_BYTES * 8 - 1 ? Long.MAX_VALUE
+            : MAX_COUNT.subtract(present)
+                .min(MAX_LONG)
+                .longValue();
+        long added = Math.min(requested, Math.min(fit, room));
         if (added > 0 && !simulate) change(r, added);
         return added;
     }
 
     public synchronized long extract(Resource r, long requested, boolean simulate) throws IOException {
         healthy();
+        if (!pendingReturns.isEmpty()) return 0;
         long taken = Math.min(Math.max(0, requested), amount(r));
         if (taken > 0 && !simulate) change(r, -taken);
         return taken;
@@ -156,17 +297,40 @@ public final class VaultStore implements Closeable {
 
     public synchronized void absorb(UUID receipt, BigInteger extraBytes, Map<Resource, Long> contents)
         throws IOException {
+        Map<Resource, BigInteger> exact = new HashMap<>();
+        for (Map.Entry<Resource, Long> entry : contents.entrySet())
+            exact.put(entry.getKey(), BigInteger.valueOf(entry.getValue()));
+        absorbExact(receipt, extraBytes, exact);
+    }
+
+    /** Full-precision import; the durable receipt credits capacity and quantities as one transaction. */
+    public synchronized void absorbExact(UUID receipt, BigInteger extraBytes, Map<Resource, BigInteger> contents)
+        throws IOException {
+        absorbExact(receipt, extraBytes, contents, null);
+    }
+
+    private void absorbExact(UUID receipt, BigInteger extraBytes, Map<Resource, BigInteger> contents,
+        CellContribution contribution) throws IOException {
         healthy();
         if (receipts.contains(receipt)) return;
+        if (!pendingReturns.isEmpty()) throw new IOException("A return is awaiting durable delivery");
+        CellContribution combined = contribution;
+        if (contribution != null) {
+            CellContribution old = contributions.get(contribution.key());
+            if (old == null && contributions.size() >= 1024)
+                throw new IllegalArgumentException("Too many absorbed cell definitions");
+            if (old != null) combined = old.plus(contribution);
+        }
         if (extraBytes.signum() <= 0) throw new IllegalArgumentException("Non-positive cell capacity");
         BigInteger nextCapacity = capacity.add(extraBytes);
         CapacityValue.encode(nextCapacity);
         BigInteger nextUsed = used;
-        for (Map.Entry<Resource, Long> e : contents.entrySet()) {
-            if (e.getValue() <= 0) throw new IllegalArgumentException("Invalid imported amount");
-            Math.addExact(amount(e.getKey()), e.getValue());
+        for (Map.Entry<Resource, BigInteger> e : contents.entrySet()) {
+            if (e.getValue()
+                .signum() <= 0) throw new IllegalArgumentException("Invalid imported amount");
+            CapacityValue.encode(exactAmount(e.getKey()).add(e.getValue()));
             nextUsed = nextUsed.add(
-                BigInteger.valueOf(e.getValue())
+                e.getValue()
                     .multiply(
                         BigInteger.valueOf(
                             e.getKey()
@@ -176,33 +340,42 @@ public final class VaultStore implements Closeable {
             throw new IllegalArgumentException("Cell contents exceed new logical capacity");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(bytes);
-        out.writeByte(3);
+        out.writeByte(contribution == null ? 2 : 3);
         writeUuid(out, receipt);
         CapacityValue.write(out, extraBytes);
+        if (contribution != null) contribution.write(out);
         out.writeInt(contents.size());
-        for (Map.Entry<Resource, Long> e : contents.entrySet()) {
+        for (Map.Entry<Resource, BigInteger> e : contents.entrySet()) {
             writeResource(out, e.getKey());
-            out.writeLong(e.getValue());
+            CapacityValue.write(out, e.getValue());
         }
         append(bytes.toByteArray(), true);
         setCapacity(nextCapacity);
         receipts.add(receipt);
-        for (Map.Entry<Resource, Long> e : contents.entrySet()) apply(e.getKey(), e.getValue());
+        if (combined != null) {
+            contributions.put(combined.key(), combined);
+            contributionRevision++;
+        }
+        for (Map.Entry<Resource, BigInteger> e : contents.entrySet()) apply(e.getKey(), e.getValue());
     }
 
     private void apply(Resource r, long delta) {
-        long next = Math.addExact(amount(r), delta);
-        if (next < 0) throw new IllegalArgumentException("Negative stock");
-        if (next == 0) {
+        apply(r, BigInteger.valueOf(delta));
+    }
+
+    private void apply(Resource r, BigInteger delta) {
+        BigInteger next = exactAmount(r).add(delta);
+        if (next.signum() < 0) throw new IllegalArgumentException("Negative stock");
+        if (next.signum() == 0) {
             stock.remove(r);
             outputOrder.remove(r);
         } else {
             stock.put(r, next);
             outputOrder.add(r);
         }
-        used = used.add(
-            BigInteger.valueOf(delta)
-                .multiply(BigInteger.valueOf(r.units())));
+        NativeInventoryView view = readViews.get(r.channel);
+        if (view != null) view.update(r, next);
+        used = used.add(delta.multiply(BigInteger.valueOf(r.units())));
     }
 
     private void append(byte[] body, boolean durable) throws IOException {
@@ -269,16 +442,27 @@ public final class VaultStore implements Closeable {
         } else if (op == 2 || op == 3) {
             UUID receipt = readUuid(in);
             if (!receipts.add(receipt)) throw new IOException("Duplicate journal receipt");
-            BigInteger extra = op == 2 ? BigInteger.valueOf(in.readLong()) : CapacityValue.read(in);
+            BigInteger extra = CapacityValue.read(in);
             if (extra.signum() <= 0) throw new IOException("Invalid imported capacity");
             setCapacity(capacity.add(extra));
+            if (op == 3) {
+                CellContribution c = CellContribution.read(in);
+                if (!c.bytes.equals(extra)) throw new IOException("Contribution capacity mismatch");
+                CellContribution old = contributions.get(c.key());
+                if (old == null && contributions.size() >= 1024) throw new IOException("Too many cell definitions");
+                contributions.put(c.key(), old == null ? c : old.plus(c));
+                contributionRevision++;
+            }
             int count = checkedCount(in.readInt());
             for (int i = 0; i < count; i++) {
                 Resource r = readResource(in);
-                long amount = in.readLong();
-                if (amount <= 0) throw new IOException("Invalid imported amount");
+                BigInteger amount = CapacityValue.read(in);
+                if (amount.signum() <= 0) throw new IOException("Invalid imported amount");
                 apply(r, amount);
             }
+        } else if (op == 4) applyReturn(PendingReturn.read(in));
+        else if (op == 5) {
+            if (pendingReturns.remove(readUuid(in)) == null) throw new IOException("Missing return intent");
         } else throw new IOException("Unknown journal operation");
         if (in.available() != 0) throw new IOException("Trailing journal bytes");
     }
@@ -323,10 +507,15 @@ public final class VaultStore implements Closeable {
             out.writeInt(receipts.size());
             for (UUID receipt : receipts) writeUuid(out, receipt);
             out.writeInt(stock.size());
-            for (Map.Entry<Resource, Long> e : stock.entrySet()) {
+            for (Map.Entry<Resource, BigInteger> e : stock.entrySet()) {
                 writeResource(out, e.getKey());
-                out.writeLong(e.getValue());
+                CapacityValue.write(out, e.getValue());
             }
+            out.writeInt(contributions.size());
+            for (CellContribution c : contributions.values()) c.write(out);
+            CapacityValue.write(out, returnedBytes);
+            out.writeInt(pendingReturns.size());
+            for (PendingReturn pending : pendingReturns.values()) pending.write(out);
             out.writeLong(0x454e445641554c54L);
             out.flush();
             new DataOutputStream(file).writeInt((int) crc.getValue());
@@ -350,10 +539,11 @@ public final class VaultStore implements Closeable {
         try (DataInputStream in = new DataInputStream(
             new CheckedInputStream(new BufferedInputStream(Files.newInputStream(snapshot)), crc))) {
             int magic = in.readInt();
-            if ((magic != MAGIC && magic != LEGACY_MAGIC) || !id.equals(readUuid(in)))
-                throw new IOException("Inventory snapshot identity mismatch");
+            if (magic != MAGIC && magic != 0x41565335)
+                throw new IOException("Unsupported inventory snapshot version; AVS5/AVS6 required");
+            if (!id.equals(readUuid(in))) throw new IOException("Inventory snapshot identity mismatch");
             sequence = in.readLong();
-            BigInteger bytes = magic == LEGACY_MAGIC ? BigInteger.valueOf(in.readLong()) : CapacityValue.read(in);
+            BigInteger bytes = CapacityValue.read(in);
             if (sequence < 0 || bytes.signum() < 0) throw new IOException("Invalid inventory header");
             setCapacity(bytes);
             int count = checkedCount(in.readInt());
@@ -362,9 +552,29 @@ public final class VaultStore implements Closeable {
             count = checkedCount(in.readInt());
             for (int i = 0; i < count; i++) {
                 Resource r = readResource(in);
-                long amount = in.readLong();
-                if (amount <= 0 || stock.containsKey(r)) throw new IOException("Invalid inventory entry");
+                BigInteger amount = CapacityValue.read(in);
+                if (amount.signum() <= 0 || stock.containsKey(r)) throw new IOException("Invalid inventory entry");
                 apply(r, amount);
+            }
+            count = in.readInt();
+            if (count < 0 || count > 1024) throw new IOException("Invalid contribution count");
+            BigInteger contributed = BigInteger.ZERO;
+            for (int i = 0; i < count; i++) {
+                CellContribution c = CellContribution.read(in);
+                if (contributions.put(c.key(), c) != null) throw new IOException("Duplicate cell definition");
+                contributed = contributed.add(c.bytes);
+            }
+            if (contributed.compareTo(capacity) > 0) throw new IOException("Contribution capacity exceeds total");
+            if (magic == MAGIC) {
+                returnedBytes = CapacityValue.read(in);
+                count = in.readInt();
+                if (count < 0 || count > 1) throw new IOException("Invalid pending return count");
+                for (int i = 0; i < count; i++) {
+                    PendingReturn pending = PendingReturn.read(in);
+                    if (!receipts.contains(pending.id) || pending.source.bytes.compareTo(returnedBytes) > 0)
+                        throw new IOException("Invalid pending return receipt");
+                    pendingReturns.put(pending.id, pending);
+                }
             }
             if (in.readLong() != 0x454e445641554c54L) throw new IOException("Incomplete inventory snapshot");
             int actualCrc = (int) crc.getValue();

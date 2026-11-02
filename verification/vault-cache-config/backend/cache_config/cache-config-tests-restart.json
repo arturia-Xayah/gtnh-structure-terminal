@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "client_launched": false,
+  "tests": [
+    {
+      "name": "fresh_process_restores_all_types_and_BigInteger_counts",
+      "passed": true
+    },
+    {
+      "name": "startup_loads_zero_budgets",
+      "passed": true
+    },
+    {
+      "name": "disabled_caches_retain_nothing_but_return_every_type",
+      "passed": true
+    },
+    {
+      "name": "rejected_or_disabled_key_probe_retains_no_NBT",
+      "passed": true
+    },
+    {
+      "name": "output_cache_limits_and_global_accounting",
+      "passed": true
+    },
+    {
+      "name": "native_AE_simulate_extract_insert_conservation_with_limits",
+      "passed": true
+    }
+  ],
+  "java": "25.0.4.1"
+}

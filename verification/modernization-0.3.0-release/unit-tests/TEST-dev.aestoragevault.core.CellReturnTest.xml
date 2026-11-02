@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.CellReturnTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-02T13:48:36.730Z" hostname="D9CH4WN6T3" time="0.035">
+  <properties/>
+  <testcase name="previousDevelopmentSnapshotUpgradesWithoutChangingCapacityOrSources" classname="dev.aestoragevault.core.CellReturnTest" time="0.006"/>
+  <testcase name="fractionalUsedByteAndHistoricalMixedCostsRoundConservatively" classname="dev.aestoragevault.core.CellReturnTest" time="0.005"/>
+  <testcase name="partialCapacityAndPendingDeliverySurviveWalAndCheckpoint" classname="dev.aestoragevault.core.CellReturnTest" time="0.011"/>
+  <testcase name="largeCountsAndIntegerPhysicalOutputLimitStayExact" classname="dev.aestoragevault.core.CellReturnTest" time="0.006"/>
+  <testcase name="quantityInputClampsAndRejectsMalformedValues" classname="dev.aestoragevault.core.CellReturnTest" time="0.001"/>
+  <testcase name="fullOrMissingSourcesMakeNoDebit" classname="dev.aestoragevault.core.CellReturnTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.NativeInventoryViewTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-02T13:48:36.766Z" hostname="D9CH4WN6T3" time="0.052">
+  <properties/>
+  <testcase name="saturatedNativeWindowRemainsCachedUntilVisibleQuantityChanges" classname="dev.aestoragevault.core.NativeInventoryViewTest" time="0.005"/>
+  <testcase name="snapshotsAreStableAndChannelsInvalidateIndependently" classname="dev.aestoragevault.core.NativeInventoryViewTest" time="0.006"/>
+  <testcase name="randomChurnMatchesLedgerAndRestoresBothSnapshotAndJournal" classname="dev.aestoragevault.core.NativeInventoryViewTest" time="0.041"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aestoragevault.core.BigQuantityTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-02T12:30:29.861Z" hostname="D9CH4WN6T3" time="0.055">
+  <properties/>
+  <testcase name="visibleAdditionSaturatesPositiveOverflowOnly" classname="dev.aestoragevault.core.BigQuantityTest" time="0.01"/>
+  <testcase name="maximumEncodedQuantityStopsCleanlyBeforeUnserializableStock" classname="dev.aestoragevault.core.BigQuantityTest" time="0.016"/>
+  <testcase name="repeatedNativeTransactionsCrossLongAndRestoreFromJournalAndSnapshot" classname="dev.aestoragevault.core.BigQuantityTest" time="0.013"/>
+  <testcase name="fullPrecisionImportsPreserveCountsAndReceipts" classname="dev.aestoragevault.core.BigQuantityTest" time="0.011"/>
+  <testcase name="rejectedHugeImportCannotCreditCapacityOrReceipt" classname="dev.aestoragevault.core.BigQuantityTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

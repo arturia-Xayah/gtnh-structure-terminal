@@ -1,0 +1,7 @@
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST return_fresh_process_exactly_once_recovery_32 true 
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST return_fresh_process_exactly_once_recovery_64 true 
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST fresh_server_process_restores_contribution_ledger true 
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST fresh_server_process_restores_controller_UUID true 
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST fresh_server_process_restores_capacity_and_all_1000_types true 
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST fresh_server_process_restores_items_and_fluids true 
+[21:42:24] [Server thread/INFO] [STDOUT]: [dev.aestoragevault.packtest.VaultSuite:record:1560]: VAULT_TEST fresh_server_process_reconnects_real_AE_network true 

@@ -58,6 +58,8 @@ public final class VaultScreen extends GuiContainer {
         autoButton = new VaultButton(0, x, guiTop + layout.automaticY, w, "");
         animationButton = new VaultButton(2, x + w / 2 + 2, guiTop + layout.controlsY, w - w / 2 - 2, "");
         buttonList.add(autoButton);
+        buttonList
+            .add(new VaultButton(3, guiLeft + layout.width - 125, guiTop + 6, 56, I18n.format("vault.history.open")));
         buttonList.add(new VaultButton(1, x, guiTop + layout.controlsY, w / 2 - 2, tr("checkShort")));
         buttonList.add(animationButton);
         animation.setEnabled(VaultClientPreferences.animations());
@@ -68,7 +70,7 @@ public final class VaultScreen extends GuiContainer {
         if (button.id == 2) {
             VaultClientPreferences.setAnimations(!VaultClientPreferences.animations());
             animation.setEnabled(VaultClientPreferences.animations());
-        } else if (button.id == 0 || button.id == 1) {
+        } else if (button.id == 0 || button.id == 1 || button.id == 3) {
             mc.playerController.sendEnchantPacket(inventorySlots.windowId, button.id);
         }
     }

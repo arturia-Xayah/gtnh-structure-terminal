@@ -30,6 +30,8 @@ public class VaultContainer extends Container {
         if (!canInteractWith(player) || player.worldObj.isRemote) return false;
         if (action == 0) tile.automatic = !tile.automatic;
         else if (action == 1) tile.checkStructure();
+        else if (action == 3) player
+            .openGui(dev.aestoragevault.VaultMod.INSTANCE, 2, player.worldObj, tile.xCoord, tile.yCoord, tile.zCoord);
         else return false;
         tile.markDirty();
         tile.getWorldObj()

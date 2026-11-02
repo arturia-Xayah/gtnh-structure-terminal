@@ -1,0 +1,456 @@
+{
+  "passed": true,
+  "client_launched": false,
+  "scope": "server tick workload: 2000 simulations + 200 journal changes and one flush per tick, native mixed item/fluid enumeration every 20 ticks; no AE network routing or GUI clients",
+  "java": "25.0.4.1",
+  "rows": [
+    {
+      "trial": 0,
+      "variant": "baseline",
+      "types": 1000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 6.801140616666666,
+        "p50": 4.715667,
+        "p95": 15.980084,
+        "max": 98.841875
+      },
+      "whole_server_mspt": {
+        "mean": 10.221443041666666,
+        "p50": 6.095042,
+        "p95": 35.045,
+        "max": 100.128916
+      },
+      "native_enumeration_ms": {
+        "mean": 10.542777833333334,
+        "p50": 4.149291,
+        "p95": 43.638417,
+        "max": 43.638417
+      },
+      "alloc_bytes_per_tick": 591528.1333333333,
+      "seed_ms": 16.795667,
+      "checkpoint_ms": 7.620167
+    },
+    {
+      "trial": 0,
+      "variant": "bigint",
+      "types": 1000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 5.2489469,
+        "p50": 5.260542,
+        "p95": 6.7775,
+        "max": 9.355625
+      },
+      "whole_server_mspt": {
+        "mean": 6.356751333333333,
+        "p50": 6.320292,
+        "p95": 7.991833,
+        "max": 11.482583
+      },
+      "native_enumeration_ms": {
+        "mean": 2.5331596666666667,
+        "p50": 2.558875,
+        "p95": 3.25025,
+        "max": 3.25025
+      },
+      "alloc_bytes_per_tick": 623448.0,
+      "seed_ms": 32.112458,
+      "checkpoint_ms": 10.506792
+    },
+    {
+      "trial": 0,
+      "variant": "bigint",
+      "types": 1000,
+      "quantity_bits": 127,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 5.271535391666666,
+        "p50": 5.234416,
+        "p95": 9.886709,
+        "max": 19.815209
+      },
+      "whole_server_mspt": {
+        "mean": 6.288464641666667,
+        "p50": 6.173208,
+        "p95": 10.93725,
+        "max": 22.361917
+      },
+      "native_enumeration_ms": {
+        "mean": 2.9567568333333334,
+        "p50": 2.695833,
+        "p95": 5.219208,
+        "max": 5.219208
+      },
+      "alloc_bytes_per_tick": 663448.0,
+      "seed_ms": 21.762208,
+      "checkpoint_ms": 16.542708
+    },
+    {
+      "trial": 0,
+      "variant": "bigint",
+      "types": 1000,
+      "quantity_bits": 1023,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 6.634669425,
+        "p50": 6.744333,
+        "p95": 9.573958,
+        "max": 14.034291
+      },
+      "whole_server_mspt": {
+        "mean": 8.031375283333333,
+        "p50": 8.2375,
+        "p95": 11.273166,
+        "max": 16.153834
+      },
+      "native_enumeration_ms": {
+        "mean": 3.700625,
+        "p50": 4.139542,
+        "p95": 4.692459,
+        "max": 4.692459
+      },
+      "alloc_bytes_per_tick": 954648.0,
+      "seed_ms": 27.750709,
+      "checkpoint_ms": 15.215292
+    },
+    {
+      "trial": 0,
+      "variant": "baseline",
+      "types": 10000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 7.624925666666667,
+        "p50": 6.041917,
+        "p95": 20.269958,
+        "max": 38.794791
+      },
+      "whole_server_mspt": {
+        "mean": 12.358671541666666,
+        "p50": 7.198834,
+        "p95": 24.412792,
+        "max": 443.433875
+      },
+      "native_enumeration_ms": {
+        "mean": 20.147500333333333,
+        "p50": 22.160792,
+        "p95": 24.788708,
+        "max": 24.788708
+      },
+      "alloc_bytes_per_tick": 1124206.4,
+      "seed_ms": 27.103458,
+      "checkpoint_ms": 22.184459
+    },
+    {
+      "trial": 0,
+      "variant": "bigint",
+      "types": 10000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 6.781940308333334,
+        "p50": 6.053709,
+        "p95": 10.878875,
+        "max": 36.012166
+      },
+      "whole_server_mspt": {
+        "mean": 7.605384716666666,
+        "p50": 6.958458,
+        "p95": 11.777916,
+        "max": 36.70675
+      },
+      "native_enumeration_ms": {
+        "mean": 21.74670133333333,
+        "p50": 24.502875,
+        "p95": 29.060916,
+        "max": 29.060916
+      },
+      "alloc_bytes_per_tick": 1170606.4,
+      "seed_ms": 87.980833,
+      "checkpoint_ms": 27.794084
+    },
+    {
+      "trial": 0,
+      "variant": "bigint",
+      "types": 10000,
+      "quantity_bits": 127,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 7.656681591666667,
+        "p50": 6.254583,
+        "p95": 19.597417,
+        "max": 36.810209
+      },
+      "whole_server_mspt": {
+        "mean": 8.522639966666667,
+        "p50": 6.950958,
+        "p95": 20.361625,
+        "max": 37.788709
+      },
+      "native_enumeration_ms": {
+        "mean": 26.36731933333333,
+        "p50": 27.257875,
+        "p95": 28.404709,
+        "max": 28.404709
+      },
+      "alloc_bytes_per_tick": 1210606.4,
+      "seed_ms": 96.996833,
+      "checkpoint_ms": 24.031791
+    },
+    {
+      "trial": 0,
+      "variant": "bigint",
+      "types": 10000,
+      "quantity_bits": 1023,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 8.953443758333332,
+        "p50": 6.659708,
+        "p95": 35.303416,
+        "max": 50.767208
+      },
+      "whole_server_mspt": {
+        "mean": 9.681622233333332,
+        "p50": 7.464083,
+        "p95": 36.017542,
+        "max": 51.466167
+      },
+      "native_enumeration_ms": {
+        "mean": 37.05631233333334,
+        "p50": 37.794417,
+        "p95": 43.108417,
+        "max": 43.108417
+      },
+      "alloc_bytes_per_tick": 1547127.8666666667,
+      "seed_ms": 107.894,
+      "checkpoint_ms": 24.012833
+    },
+    {
+      "trial": 1,
+      "variant": "bigint",
+      "types": 10000,
+      "quantity_bits": 1023,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 9.3327924,
+        "p50": 6.370125,
+        "p95": 26.805666,
+        "max": 91.071833
+      },
+      "whole_server_mspt": {
+        "mean": 10.231850383333333,
+        "p50": 6.892625,
+        "p95": 28.36575,
+        "max": 96.225833
+      },
+      "native_enumeration_ms": {
+        "mean": 24.964271,
+        "p50": 21.827667,
+        "p95": 39.146708,
+        "max": 39.146708
+      },
+      "alloc_bytes_per_tick": 1501806.4,
+      "seed_ms": 113.909667,
+      "checkpoint_ms": 25.454125
+    },
+    {
+      "trial": 1,
+      "variant": "bigint",
+      "types": 10000,
+      "quantity_bits": 127,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 6.711264608333334,
+        "p50": 5.851666,
+        "p95": 9.328416,
+        "max": 33.50925
+      },
+      "whole_server_mspt": {
+        "mean": 7.7918937249999995,
+        "p50": 6.55025,
+        "p95": 16.219167,
+        "max": 53.6035
+      },
+      "native_enumeration_ms": {
+        "mean": 21.12440283333333,
+        "p50": 24.196,
+        "p95": 26.675334,
+        "max": 26.675334
+      },
+      "alloc_bytes_per_tick": 1210606.4,
+      "seed_ms": 88.435875,
+      "checkpoint_ms": 23.409459
+    },
+    {
+      "trial": 1,
+      "variant": "bigint",
+      "types": 10000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 7.581829225,
+        "p50": 6.327583,
+        "p95": 9.887417,
+        "max": 47.669834
+      },
+      "whole_server_mspt": {
+        "mean": 8.2763052,
+        "p50": 6.98575,
+        "p95": 10.929833,
+        "max": 48.46175
+      },
+      "native_enumeration_ms": {
+        "mean": 26.57200016666667,
+        "p50": 23.99075,
+        "p95": 41.658125,
+        "max": 41.658125
+      },
+      "alloc_bytes_per_tick": 1170606.4,
+      "seed_ms": 97.979542,
+      "checkpoint_ms": 26.580792
+    },
+    {
+      "trial": 1,
+      "variant": "baseline",
+      "types": 10000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 6.8179683833333335,
+        "p50": 5.852084,
+        "p95": 10.063708,
+        "max": 27.979125
+      },
+      "whole_server_mspt": {
+        "mean": 7.445140966666667,
+        "p50": 6.4375,
+        "p95": 10.725541,
+        "max": 28.43075
+      },
+      "native_enumeration_ms": {
+        "mean": 20.63085416666667,
+        "p50": 21.680209,
+        "p95": 21.9995,
+        "max": 21.9995
+      },
+      "alloc_bytes_per_tick": 1124206.4,
+      "seed_ms": 35.643,
+      "checkpoint_ms": 22.861833
+    },
+    {
+      "trial": 1,
+      "variant": "bigint",
+      "types": 1000,
+      "quantity_bits": 1023,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 6.032970066666667,
+        "p50": 5.919458,
+        "p95": 11.692791,
+        "max": 23.737791
+      },
+      "whole_server_mspt": {
+        "mean": 6.9309669666666665,
+        "p50": 6.870958,
+        "p95": 13.015291,
+        "max": 24.258666
+      },
+      "native_enumeration_ms": {
+        "mean": 3.0762706666666664,
+        "p50": 2.817583,
+        "p95": 6.432042,
+        "max": 6.432042
+      },
+      "alloc_bytes_per_tick": 952646.4,
+      "seed_ms": 33.999417,
+      "checkpoint_ms": 9.35975
+    },
+    {
+      "trial": 1,
+      "variant": "bigint",
+      "types": 1000,
+      "quantity_bits": 127,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 5.772022533333333,
+        "p50": 5.545458,
+        "p95": 8.439958,
+        "max": 14.523875
+      },
+      "whole_server_mspt": {
+        "mean": 6.353667008333334,
+        "p50": 6.136916,
+        "p95": 9.350917,
+        "max": 15.275334
+      },
+      "native_enumeration_ms": {
+        "mean": 2.5169653333333333,
+        "p50": 2.431167,
+        "p95": 3.14075,
+        "max": 3.14075
+      },
+      "alloc_bytes_per_tick": 661446.4,
+      "seed_ms": 27.42275,
+      "checkpoint_ms": 13.434
+    },
+    {
+      "trial": 1,
+      "variant": "bigint",
+      "types": 1000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 5.498041349999999,
+        "p50": 5.439333,
+        "p95": 8.152834,
+        "max": 20.119875
+      },
+      "whole_server_mspt": {
+        "mean": 6.753262183333334,
+        "p50": 6.100458,
+        "p95": 9.357875,
+        "max": 82.232375
+      },
+      "native_enumeration_ms": {
+        "mean": 3.1340761666666666,
+        "p50": 2.798,
+        "p95": 7.533291,
+        "max": 7.533291
+      },
+      "alloc_bytes_per_tick": 621446.4,
+      "seed_ms": 30.991875,
+      "checkpoint_ms": 9.069959
+    },
+    {
+      "trial": 1,
+      "variant": "baseline",
+      "types": 1000,
+      "quantity_bits": 40,
+      "measured_ticks": 120,
+      "work_ms": {
+        "mean": 5.940804791666667,
+        "p50": 5.922958,
+        "p95": 8.266917,
+        "max": 14.182125
+      },
+      "whole_server_mspt": {
+        "mean": 6.588366683333334,
+        "p50": 6.627291,
+        "p95": 9.080541,
+        "max": 14.768584
+      },
+      "native_enumeration_ms": {
+        "mean": 2.991875,
+        "p50": 2.826166,
+        "p95": 5.386292,
+        "max": 5.386292
+      },
+      "alloc_bytes_per_tick": 585846.4,
+      "seed_ms": 15.030375,
+      "checkpoint_ms": 8.989209
+    }
+  ]
+}
