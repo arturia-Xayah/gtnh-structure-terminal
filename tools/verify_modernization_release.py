@@ -19,8 +19,9 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--version',default='0.2.5-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
+    ap.add_argument('--version',default='0.2.6-alpha');ap.add_argument('--jar',type=Path,required=True);ap.add_argument('--fixtures',type=Path,nargs='+',required=True)
     ap.add_argument('--runs',type=Path,nargs='+',required=True);ap.add_argument('--output',type=Path,required=True)
+    ap.add_argument('--target',default='GTNH 2.9.0')
     ap.add_argument('--upgrades',type=Path,nargs='*',default=[])
     a=ap.parse_args();out=a.output.resolve();out.mkdir(parents=True,exist_ok=True);checks=[]
     def check(name,value):
@@ -56,7 +57,7 @@ def main():
                 data=z.read(name)
                 check('connected_tile_'+str(tile),data==(ROOT/'src/main/resources'/name).read_bytes()
                       and int.from_bytes(data[16:20],'big')==64 and int.from_bytes(data[20:24],'big')==64)
-        if a.version == '0.2.5-alpha':
+        if a.version in ('0.2.5-alpha','0.2.6-alpha'):
             check('native_priority_output_and_byte_formatter',all(n in names for n in [
                 'dev/aestoragevault/world/TileOutput.class','dev/aestoragevault/ui/OutputContainer.class',
                 'dev/aestoragevault/ui/OutputScreen.class','dev/aestoragevault/core/ByteFormat.class','dev/aestoragevault/core/CapacityValue.class','dev/aestoragevault/world/VaultItemBlock.class']))
@@ -96,6 +97,8 @@ def main():
     for folder in a.runs:
         summary=json.loads((folder/'summary.json').read_text())
         check('runner_'+folder.name,summary['passed'] and not summary['client_launched'])
+        check('runner_fixture_'+folder.name,summary['fixture_sha256'] in {sha(p) for p in a.fixtures})
+        check('pack_target_'+folder.name,summary.get('pack_version','2.9.0-RC-2')==a.target.removeprefix('GTNH '))
         for row in summary['runs']:
             check(row['suite']+'_exit_'+str(row['stage']),row['passed'] and row['exit']==0)
             source=folder/row['report'];data=json.loads(source.read_text());suite=row['suite']
@@ -107,6 +110,10 @@ def main():
             target=out/row['report'];target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,target)
             module_file=folder/suite/'modernization-modules.json';modules=json.loads(module_file.read_text())
             check(suite+'_live_namespaces_'+str(row['stage']),modules['passed'] and set(modules['modules'])==MODULES)
+            if a.version == '0.2.6-alpha':
+                expected={'gregtech':'5.09.54.265','appliedenergistics2':'rv3-beta-1095-GTNH',
+                          'structurelib':'1.4.47','modularui2':'2.3.94-1.7.10','gtnhlib':'0.11.54','NotEnoughItems':'2.8.171-GTNH'}
+                check(suite+'_official_runtime_dependencies_'+str(row['stage']),modules.get('dependencies')==expected and modules.get('pack')=='2.9.0')
             shutil.copy2(module_file,out/suite/'modernization-modules.json')
             excerpt=[]
             for line in (folder/suite/f"server-{row['stage']}.log").read_text(errors='replace').splitlines():
@@ -137,7 +144,7 @@ def main():
                 if path and not (p.parent/path).exists() and (p.parent/path).resolve()!=out/'manifest.json':
                     doc_errors.append((str(p.relative_to(ROOT)),link))
     check('player_and_developer_document_links',not doc_errors)
-    manifest=dict(passed=True,checks=checks,version=a.version,target='GTNH 2.9.0-RC-2',client_launched=False,
+    manifest=dict(passed=True,checks=checks,version=a.version,target=a.target,client_launched=False,
                   artifact=a.jar.name,sha256=sha(a.jar),classes=len(class_hashes),class_sha256=class_hashes,
                   unit_tests=sum(int(t['tests']) for t in tests),runs=runs,upgrades=upgrades,fixtures={p.name:sha(p) for p in a.fixtures})
     (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')

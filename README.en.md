@@ -10,9 +10,9 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.5-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.6--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.6-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.2.6-alpha-GTNH-2.9.0.jar)
 
-Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
+Minecraft **1.7.10** · GTNH **2.9.0**
 
 </div>
 
@@ -29,9 +29,9 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
-2. Remove older Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
-3. Back up the complete world before upgrading. Keep `data/aestoragevault`: existing terminal/vault items, blocks, inventory IDs and power settings retain their registration namespaces and save locations. Existing vaults must replace the 23 legacy casings with native LuV machine casings before reforming.
+1. Install `gtnh-modernization-upgrade-0.2.6-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+2. Remove older GTNH Modernization Upgrade / Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
+3. Back up the complete world before upgrading. Keep `data/aestoragevault`: existing terminal/vault items, blocks, inventory IDs and power settings retain their registration namespaces and save locations. Vaults still using legacy casings must replace those 23 blocks with native LuV machine casings before reforming.
 
 Dependencies are supplied by the target pack: GregTech, StructureLib, GTNHLib, AE2, ModularUI2 and UniMixins. The former standalone mods are not required.
 
@@ -99,7 +99,7 @@ Inventory lives in external world-save files. Normal harvesting preserves the co
 
 ## Compatibility and saves
 
-- Target: **GTNH 2.9.0-RC-2**. Use an adapted build for other pack versions.
+- Target: **GTNH 2.9.0**. Use an adapted build for other pack versions.
 - The approved blue-and-white terminal icon is retained. Legacy internal module IDs preserve existing saves; all features ship in one JAR.
 - Terminal settings remain in `config/structureterminal.cfg`; restart after editing. Vault files remain in `<world>/data/aestoragevault/`.
 - The vault currently requires manual construction; Structure Terminal building and NEI multiblock previews are not integrated for it.

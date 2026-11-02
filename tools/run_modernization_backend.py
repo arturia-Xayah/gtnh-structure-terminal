@@ -39,6 +39,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--pack',type=Path,required=True);ap.add_argument('--java',type=Path,required=True)
     ap.add_argument('--fixture',type=Path,required=True);ap.add_argument('--run-dir',type=Path,required=True)
+    ap.add_argument('--pack-version',default='2.9.0')
     ap.add_argument('--suites',nargs='+',choices=SUITES,default=list(SUITES));a=ap.parse_args()
     pack,target,fixture,java=(p.resolve() for p in (a.pack,a.run_dir,a.fixture,a.java))
     if target.exists() or pack==target or pack in target.parents: ap.error('Use a new directory outside the source pack')
@@ -48,7 +49,7 @@ def main():
     for suite in a.suites:
         world,flags,reports=SUITES[suite];folder=target/suite;prepare(pack,folder,fixture,world)
         for stage,name in enumerate(reports,1):
-            cmd=[str(java),'-Xms1G','-Xmx6G','-XX:+UseG1GC','-Dmodernization.tests=true',*flags,'-Djava.awt.headless=true','-Duser.language=en','-Dfml.readTimeout=180','@java9args.txt','-jar','lwjgl3ify-forgePatches.jar','nogui']
+            cmd=[str(java),'-Xms1G','-Xmx6G','-XX:+UseG1GC','-Dmodernization.tests=true','-Dmodernization.packVersion='+a.pack_version,*flags,'-Djava.awt.headless=true','-Duser.language=en','-Dfml.readTimeout=180','@java9args.txt','-jar','lwjgl3ify-forgePatches.jar','nogui']
             with (folder/f'server-{stage}.log').open('w') as log:
                 process=subprocess.Popen(cmd,cwd=folder,stdout=log,stderr=subprocess.STDOUT);deadline=time.monotonic()+1200
                 while process.poll() is None:
@@ -65,7 +66,7 @@ def main():
             else:passed=data.get('passed');cases=len(data.get('tests',[]))
             row=dict(suite=suite,stage=stage,exit=process.returncode,passed=bool(passed and modules.get('passed') and process.returncode==0),cases=cases,report=str(report.relative_to(target)))
             rows.append(row);print(json.dumps(row),flush=True)
-            summary=dict(passed=all(r['passed'] for r in rows),client_launched=False,fixture_sha256=hashlib.sha256(fixture.read_bytes()).hexdigest(),runs=rows)
+            summary=dict(pack_version=a.pack_version,passed=all(r['passed'] for r in rows),client_launched=False,fixture_sha256=hashlib.sha256(fixture.read_bytes()).hexdigest(),runs=rows)
             (target/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
             if not row['passed']:raise SystemExit(1)
 if __name__=='__main__':main()

@@ -52,6 +52,21 @@ public final class BundleChecks {
         check(GameRegistry.findBlock("aeorderoptimizer", "core") != null, "optimizer registry lost");
         for (String name : new String[] { "controller", "access", "output", "casing" })
             check(GameRegistry.findBlock("aestoragevault", name) != null, "vault registry lost " + name);
+        Map<String, String> dependencies = new LinkedHashMap<>();
+        for (String[] expected : new String[][] { { "gregtech", "5.09.54.265" },
+            { "appliedenergistics2", "rv3-beta-1095-GTNH" }, { "structurelib", "1.4.47" },
+            { "modularui2", "2.3.94-1.7.10" }, { "gtnhlib", "0.11.54" }, { "NotEnoughItems", "2.8.171-GTNH" } }) {
+            ModContainer dependency = Loader.instance()
+                .getIndexedModList()
+                .get(expected[0]);
+            check(dependency != null, "missing dependency " + expected[0]);
+            check(
+                expected[1].equals(dependency.getVersion()),
+                "wrong runtime dependency " + expected[0] + ": " + dependency.getVersion());
+            dependencies.put(expected[0], dependency.getVersion());
+        }
+        report.put("dependencies", dependencies);
+        report.put("pack", System.getProperty("modernization.packVersion", "2.9.0"));
         report.put("passed", true);
         report.put("modules", modules);
         report.put("client_launched", false);

@@ -10,9 +10,9 @@
 
 **简体中文** · [English](README.en.md) · [版本下载](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.5-alpha-GTNH-2.9.0-RC-2/gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.2.6--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.2.6-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.2.6-alpha-GTNH-2.9.0.jar)
 
-Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
+Minecraft **1.7.10** · GTNH **2.9.0**
 
 </div>
 
@@ -29,9 +29,9 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 ## 安装与旧版升级
 
-1. 获取 `gtnh-modernization-upgrade-0.2.5-alpha-GTNH-2.9.0-RC-2.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
-2. 移除旧版结构终端，以及独立的 **AE Order Optimizer、Plasma Forge Power、AE Storage Vault** JAR。以上功能已包含在整合版中，不能重复安装。
-3. 从独立仓库 Mod 升级前备份整个世界，保留 `data/aestoragevault`。已有终端、AE 元件、仓库主机、库存及功率设置继续使用原注册 ID 和保存位置。旧版仓库需将 23 个旧式外壳替换为 LuV 机器外壳后重新成型。
+1. 获取 `gtnh-modernization-upgrade-0.2.6-alpha-GTNH-2.9.0.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
+2. 移除旧版 **GTNH现代化升级 / 结构终端**，以及独立的 **AE Order Optimizer、Plasma Forge Power、AE Storage Vault** JAR。以上功能已包含在整合版中，不能重复安装。
+3. 从独立仓库 Mod 升级前备份整个世界，保留 `data/aestoragevault`。已有终端、AE 元件、仓库主机、库存及功率设置继续使用原注册 ID 和保存位置。仍使用旧式外壳的仓库，需将 23 个旧式外壳替换为 LuV 机器外壳后重新成型。
 
 依赖使用目标整合包自带的 GregTech、StructureLib、GTNHLib、AE2、ModularUI2 和 UniMixins。无需另外安装原来的独立 Mod。
 
@@ -99,7 +99,7 @@ Minecraft **1.7.10** · GTNH **2.9.0-RC-2**
 
 ## 兼容性与存档
 
-- 当前目标为 **GTNH 2.9.0-RC-2**；其他整合包版本请使用对应适配版。
+- 当前目标为 **GTNH 2.9.0**；其他整合包版本请使用对应适配版。
 - 沿用原来的蓝白终端图标。历史内部模块 ID 保留，用于识别旧存档；所有功能来自同一个 JAR。
 - 结构终端配置仍在 `config/structureterminal.cfg`，调整后重启。仓库仍使用 `<世界目录>/data/aestoragevault/`。
 - 容量仓库目前需手动搭建，尚未接入结构终端自动建造和 NEI 多方块预览。

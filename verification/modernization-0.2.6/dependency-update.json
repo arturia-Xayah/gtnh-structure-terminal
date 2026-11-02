@@ -1,0 +1,51 @@
+{
+  "target": "GTNH 2.9.0",
+  "source": "https://downloads.gtnewhorizons.com/ServerPacks/GT_New_Horizons_2.9.0_Server_Java_17-26.zip",
+  "server_zip_sha256": "0ab3de26e4d0de80a2df286916570d9af31c3394cb1f44aee8b9aa1f2ead9831",
+  "official_manifest_sha256": "e2c7396c7121c86668ce3f93216f2bde71984a7ecd34ed5d231f8888ce3d13fa",
+  "dependencies": [
+    {
+      "project": "GT5-Unofficial",
+      "previous": "gregtech-5.09.54.205.jar",
+      "current": "gregtech-5.09.54.265.jar",
+      "version": "5.09.54.265",
+      "sha256": "b969e11625a0298416a75b6e39703da795233edb71cb66f25fb9bbf654d75528"
+    },
+    {
+      "project": "Applied-Energistics-2-Unofficial",
+      "previous": "appliedenergistics2-rv3-beta-1080-GTNH.jar",
+      "current": "appliedenergistics2-rv3-beta-1095-GTNH.jar",
+      "version": "rv3-beta-1095-GTNH",
+      "sha256": "f66e1d5db3496a209f48e6264c566264c50b0f00f071e2a29efc93611696dbea"
+    },
+    {
+      "project": "StructureLib",
+      "previous": "structurelib-1.4.45.jar",
+      "current": "structurelib-1.4.47.jar",
+      "version": "1.4.47",
+      "sha256": "b434f3fa8be3e3f9d27bbba028a6284654bead5d4a5eb5ada88b5116187b9d90"
+    },
+    {
+      "project": "ModularUI2",
+      "previous": "modularui2-2.3.92-1.7.10.jar",
+      "current": "modularui2-2.3.94-1.7.10.jar",
+      "version": "2.3.94-1.7.10",
+      "sha256": "5fee68e74b5d20eb5b2e8a5de668c74a1975bd0f8a6f463ed2be98844803dfdc"
+    },
+    {
+      "project": "GTNHLib",
+      "previous": "gtnhlib-0.11.52.jar",
+      "current": "gtnhlib-0.11.54.jar",
+      "version": "0.11.54",
+      "sha256": "61340948f200ce52f210380ec00ec763fe867fac10c6342743e04c1688e85039"
+    },
+    {
+      "project": "NotEnoughItems",
+      "previous": "NotEnoughItems-2.8.155-GTNH.jar",
+      "current": "NotEnoughItems-2.8.171-GTNH.jar",
+      "version": "2.8.171-GTNH",
+      "sha256": "9a822134bda6cbaf4f414b825fc10dcde8e2944cc366f96df92420e54c88b5a3"
+    }
+  ],
+  "official_manifest_url": "https://github.com/GTNewHorizons/DreamAssemblerXXL/blob/1b62ef00ad679c51ab0ec67f8a8e42778a059ce6/releases/manifests/2.9.0.json"
+}

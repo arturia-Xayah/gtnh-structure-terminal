@@ -791,7 +791,7 @@ public final class PackValidation {
         if (server == null) return;
         cleanup();
         Map<String, Object> report = new LinkedHashMap<String, Object>();
-        report.put("pack", "2.9.0-RC-2");
+        report.put("pack", System.getProperty("modernization.packVersion", "2.9.0"));
         report.put("full_pack", true);
         report.put("all_requested_machines_attempted", results.size() == ids.size());
         report.put("scope", "GT registry multiblocks; default size/mode plus one exposed coil/glass variation");

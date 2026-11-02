@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "client_launched": false,
+  "fixture_sha256": "aa92a3135f22f15c8ec716adb825e9dd5b62ad0f3b3275175cdddc9f7d51217a",
+  "runs": [
+    {
+      "stage": 1,
+      "passed": true,
+      "exit": 0,
+      "cases": 4,
+      "report": "upgrade-1.json"
+    },
+    {
+      "stage": 2,
+      "passed": true,
+      "exit": 0,
+      "cases": 4,
+      "report": "upgrade-2.json"
+    }
+  ]
+}

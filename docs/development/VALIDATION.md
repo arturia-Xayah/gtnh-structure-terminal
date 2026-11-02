@@ -1,52 +1,61 @@
-# 0.2.5 原生主机动画与整合验证 / Native dashboard validation
+# 0.2.6 · GTNH 2.9.0 正式版兼容验证
 
-日期：2026-10-23，目标 GTNH 2.9.0-RC-2，Java 25.0.4.1。全部运行验证使用 nogui / java.awt.headless=true，未启动 Minecraft 客户端。
+日期：2026-11-02。目标 Minecraft 1.7.10 / GTNH 2.9.0 正式版；Java 25.0.4.1。仅运行独立服务器，使用 `nogui` 与 `java.awt.headless=true`，未启动游戏客户端。
+
+## 本次更新
+
+按 [官方 2.9.0 清单](https://github.com/GTNewHorizons/DreamAssemblerXXL/blob/1b62ef00ad679c51ab0ec67f8a8e42778a059ce6/releases/manifests/2.9.0.json) 更新编译和测试依赖，并下载官方 Java 17–26 服务器 ZIP 实测。
+
+| 依赖 | RC-2 实测运行版本 | 2.9.0 正式版 |
+|---|---|---|
+| GregTech | 5.09.54.205 | 5.09.54.265 |
+| AE2 | rv3-beta-1080-GTNH | rv3-beta-1095-GTNH |
+| StructureLib | 1.4.45 | 1.4.47 |
+| ModularUI2 | 2.3.92-1.7.10 | 2.3.94-1.7.10 |
+| GTNHLib | 0.11.52 | 0.11.54 |
+| NEI | 2.8.155-GTNH | 2.8.171-GTNH |
+
+旧编译配置中 NEI 为 2.8.110；本次与实际运行版本统一。每套后台夹具直接断言以上六个运行时依赖的版本，避免误用 RC-2 的服务器。服务器 ZIP 和依赖 JAR 哈希见 [依赖清单](../../verification/modernization-0.2.6/dependency-update.json)。
+
+上游 AE 更新包含同优先级样板保留、CPU 取消/完成状态及库存观察者修复。本项目通过原有注入点接入，没有覆盖这些上游方法；未安装优化元件的网络继续使用上游计算与发配。原料＋标记的分配点、字段和提示方法以新 AE 字节码验证；锻炉/聚变选择器与原生外壳渲染入口以新 GT 字节码验证。
+
+生产代码无需额外算法补丁。注册 ID、世界文件路径、功率设置 NBT 保持不变，仓库核心/同步类与 0.2.4 逐字节一致。保留 [0.2.5 动画界面验证](VALIDATION_0.2.5.md) 的历史边界。
+
+## 本轮执行结果
 
 | 范围 | 结果 |
 |---|---|
 | 单元测试 | **94 项通过** |
-| 优先级、Reshuffle 与输出 | **14 项通过** |
-| 输出端口独立进程重启 | **2 项通过** |
-| 仓库首次进程 / 重启 | **38 / 4 项通过** |
-| 锻炉 | **26 项通过** |
+| 优先级、Reshuffle 与输出 / 重启 | **14 / 2 项通过** |
+| 仓库存取 / 重启 | **38 / 4 项通过** |
+| 锻炉功率控制 | **26 项通过** |
 | 普通与压缩聚变 | **126 项通过** |
-| AE 下单、发配与原料标记 | **51 项通过** |
+| AE 下单、批量发配与原料标记 | **51 项通过** |
 | 结构终端 | **3 台主机、10 个操作阶段通过** |
-| 正式包 | 145 个 Java 8 生产类，与本轮运行夹具逐字节一致 |
+| 0.2.5 旧世界升级 / 再次重启 | **4 / 4 项通过** |
+| 玩家安装包 | **145 个 Java 8 生产类；与已执行夹具逐字节一致** |
 
-本轮共 261 项后台断言及 10 个结构操作阶段。没有把旧版额外世界升级的 8 项检查重复计入；历史结果见 [0.2.4](VALIDATION_0.2.4.md)。
+共 **261 项本轮模块后台检查 + 8 项旧世界升级/重启检查**，另有 10 个结构操作阶段。AE 同时验证未安装优化元件时保留原版行为，以及安装后的路径校验、路线诊断、跨网络来源、批量接收与数量守恒。所有进程正常退出；运行日志未发现 Mixin 应用失败或 NoSuchMethodError / NoSuchFieldError。
 
-## 新界面的检查
+## 存档升级
 
-9 项新增单元测试验证首次快照直接显示当前值、中途更新连续衔接、到达精确终值、int 类型计数边界、2^2000 级容量的有限比例、空/不一致快照的显示钳制、关闭动画/结构失效立即停动，以及普通/紧凑布局下的槽位隔离、几何边界与顶点预算。
+从此前 **0.2.5 / GTNH 2.9.0-RC-2** 的独立测试世界复制世界目录和重启标记，在正式版服务器上加载，再在独立进程中重启。核对 UUID、容量、1000 种库存、物品/流体数量和 AE 网络重连。仅修改测试副本，未修改原世界；这不等于所有玩家世界或其他附属 Mod 的迁移验收。升级仍应停服并备份整个世界。
 
-原有真实容器操作检查增加：36 个玩家槽位身份不变，本地动画用的 action 2 在服务端被拒绝且不修改吸收设置。构建和后台模块加载也覆盖新的 CommonProxy 配置入口，服务端无需加载客户端绘制类。
+## 范围与边界
 
-发行器逐字节比较 0.2.4 的 TileController、TileOutput、TileAccess、VaultStore、CapacityValue、VaultInventory、Repositories；它们没有变化，库存算法与同步频率保持不变。动画没有世界 tick 监听器或动画专用网络包。
+使用同一测试 JAR 的生产 class 与玩家 JAR 逐字节比对，玩家 JAR 不含测试入口或依赖类。四个旧模块 ID、共同版本和终端图标一致。后台测试验证服务器逻辑；没有启动客户端验证 GPU、资源包、字体、鼠标交互和 GUI 实际缩放。客户端关键注入点的字节码检查不代替客户端视觉验收。结构操作仍是三台主机的样本，不代表逐台验证全部 GTNH 多方块。
 
-## 共享几何预览
+## 证据与重现
 
-生产 VaultMesh 的背景、环形容量、网格、扫描线、状态光与库存槽背景进入可复用顶点缓冲，再由游戏单批绘制。普通与紧凑布局、中英文、极大容量、未成型和开关动画状态均用同一生产几何离线绘制并检查。文本与按钮的 Java2D 替代绘制用于布局核对，不是 Minecraft 字体/客户端截图。
+- [正式包、单元测试与运行清单](../../verification/modernization-0.2.6/manifest.json)
+- [官方整合包清单副本](../../verification/modernization-0.2.6/official-manifest.json) · [依赖和 ZIP 哈希](../../verification/modernization-0.2.6/dependency-update.json)
+- [存储器](../../verification/modernization-0.2.6/vault/vault-tests.json) · [输出](../../verification/modernization-0.2.6/vault_io/vault-io-tests.json)
+- [锻炉](../../verification/modernization-0.2.6/forge/forge-power-tests.json) · [聚变](../../verification/modernization-0.2.6/fusion/fusion-power-tests.json)
+- [AE](../../verification/modernization-0.2.6/ae/ae-order-report.json) · [结构操作](../../verification/modernization-0.2.6/structures/machine-validation/report.json)
+- [旧世界升级及重启](../../verification/modernization-0.2.6/upgrade/summary.json)
 
-[动画](../assets/vault/dashboard/animation.gif) · [英文动画](../assets/vault/dashboard/animation-en.gif) · [普通](../assets/vault/dashboard/full.png) · [紧凑](../assets/vault/dashboard/compact.png) · [极大容量](../assets/vault/dashboard/huge-en.png) · [未成型](../assets/vault/dashboard/invalid.png)
-
-关闭或失效状态停止循环效果并显示当前实际值；BigInteger 比例和数值只在数据/过渡步骤改变时重算，容量文本单独缓存。背景绘制具有 8192 顶点上限。字形、按钮、原生物品渲染不属于这一批次。此处没有把离线几何检查当作游戏 GPU 帧率基准。
-
-## 边界
-
-未启动客户端，未实际验收 OpenGL 驱动、Minecraft 字体与资源包、NEI 覆盖层、鼠标物品交互及实际 GUI 缩放。服务端槽身份检查不等于客户端点击验收。绘制代码局部保存/恢复 GL 状态，并显式关闭面剔除，但实际 GPU 路径仍需客户端验收。
-
-动画配置仅保存到客户端 config/gtnh-modernization-client.cfg，客户端不把此设置写入主机 NBT 或其他玩家的设置。数据仍来自原生仓库摘要。长实际值的悬停提示采用科学计数摘要；它不经过动画插值，但不保证显示所有十进制位。
-
-## 证据
-
-- [正式包与检查清单](../../verification/modernization-0.2.5/manifest.json)
-- [UI 预览文件哈希](../../verification/modernization-0.2.5/dashboard-preview.json) / [实现与重现方法](VAULT_DASHBOARD.md)
-- [仓库和容器](../../verification/modernization-0.2.5/vault/vault-tests.json) / [仓库重启](../../verification/modernization-0.2.5/vault/vault-tests-restart.json)
-- [输出](../../verification/modernization-0.2.5/vault_io/vault-io-tests.json) / [端口重启](../../verification/modernization-0.2.5/vault_io/vault-io-tests-restart.json)
-- [锻炉](../../verification/modernization-0.2.5/forge/forge-power-tests.json) / [聚变](../../verification/modernization-0.2.5/fusion/fusion-power-tests.json)
-- [AE](../../verification/modernization-0.2.5/ae/ae-order-report.json) / [结构操作](../../verification/modernization-0.2.5/structures/machine-validation/report.json)
+按 [构建与后台测试](BUILDING.md) 执行，传入官方 2.9.0 服务器目录；运行器默认 `--pack-version 2.9.0`。用 `run_vault_upgrade.py` 的 `--old-run` 指向此前 vault 测试目录。验证器接受 `--version 0.2.6-alpha --target 'GTNH 2.9.0'`，并检查运行器声明、实际依赖和夹具哈希。
 
 ## English
 
-The 0.2.5 artifact passed 94 unit tests, 261 dedicated-server checks and ten structure-operation phases. New tests cover transition continuity, exact completion, extreme BigInteger ratios, reduced motion, invalid states, responsive slot geometry and mesh bounds. The real container preserves all 36 player-slot identities and rejects animation action 2 on the server. Storage/sync classes match 0.2.4 byte for byte. Headless illustrations share production geometry but use substitute fonts; no game client, GPU, resource-pack or mouse acceptance was performed.
+Version 0.2.6-alpha pins dependencies to the official GTNH 2.9.0 stable manifest. Tests use a fresh official dedicated-server pack; every suite asserts all six dependency versions. Existing production storage/sync bytecode and save identifiers are preserved. A copy of the previous 0.2.5 / RC-2 vault world is loaded and restarted under the new pack. See the results above and linked evidence. No game client or GPU acceptance was performed, and the three structure samples do not cover all multiblocks.
