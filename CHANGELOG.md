@@ -1,6 +1,25 @@
 # 更新日志 / Changelog
 
-## 0.3.2-alpha — GTNH 2.9.0 (Unreleased)
+## 0.3.3-alpha — GTNH 2.9.0 · 2026-11-04
+
+包含此前未独立发布的 0.3.1／0.3.2 开发改动。Includes the previously unpublished 0.3.1/0.3.2 development changes.
+
+- 新增 4×9 集成样板：真实保存 36 张已编码样板，普通／二合一接口（方块与薄片）按原生配方展开；接口终端整包存取及内部输入／输出搜索，记忆卡按空容器和空白样板计费。合成为 4 空白样板、4 二合一接口、1 任意 IV 电路；普通样板风格图标增加集成标识。
+- Added a 4×9 Integrated Pattern holding 36 real encoded patterns. Native recipe expansion for normal/dual interface blocks and parts, whole-holder terminal operations and child input/output search, and cost-aware Memory Card copying. Recipe: four blanks, four Dual Interfaces and one IV circuit.
+
+- 新增 ME 打包胶带：沿用 GTO 使用的 ExtendedAE 原版胶带／包装物贴图、64 次耐久和 GTO 配方，支持单独打包薄片接口及完整接口、二合一接口、ME 驱动器；保留原生库存与配置，检查 AE／领地权限，失败不消费包装物。
+- Added ExtendedAE-style ME Packing Tape with unchanged upstream assets, 64 uses and the GTO recipe. Supports individual interface parts, normal/dual interface blocks and ME drives, retaining native contents/settings and honoring placement/security checks.
+
+- 装配线导入新增可选的改名样板自动生成：立即生成 1→1 加工样板放入背包，从终端、背包或 AE 网络消耗空白样板；检查当前网络和背包中的精确重复样板，缺料或空间不足时保留原配方，部分网络提取退回终端槽。
+- Added opt-in generation of 1:1 renaming patterns on assembly-line import, with blank-pattern costs, exact deduplication, inventory-space checks and lossless handling of partial ME extraction.
+
+- ME 下单优化元件新增默认关闭的“装配线自动重命名”：NEI 导入时保留首份原料，重复输入依次使用“重命名1、2…”；与成型机名称模具产物一致，保留数量和原有 NBT，并按终端所在网络启用。
+- Added opt-in assembly-line input renaming on NEI import, controlled by the terminal's own optimizer grid. Duplicate items receive fixed Forming Press-compatible names while preserving counts and original NBT.
+
+- 终端物品直接使用 GTO 原版贴图，保留两帧、每帧 6 tick 的动画；Mod 图标与 README 使用原图第一帧。
+- 移除废弃 `aestoragevault:casing` 的方块和物品注册、名称及创建分支；不再出现在创造物品栏与 NEI。旧实例不再保留，原生 LuV 外壳、主机和仓库库存不受影响。
+- Restored the original GTO terminal sprite with its two-frame, six-tick-per-frame animation. Mod logos and README use the unchanged first frame.
+- Removed the retired `aestoragevault:casing` block/item registration and names. Old instances are not retained; native LuV casings, controllers and vault inventory are unaffected.
 
 - 聚合器成型外壳改为整面连续的蓝白紫平滑材质；主机、ME 端口、原生输入／输出总线共用同一底纹与绘制方式，保留功能标识。相邻区域共享纹理坐标与 mipmap，四边使用一致底色。
 - Added a continuous smooth blue/white/violet formed vault skin. Casings, controller, ME ports and native buses share the same surface renderer while retaining functional overlays; shared UV boundaries/mipmaps and matching edge colors prevent texture seams.
@@ -15,22 +34,18 @@
 - Verify SHA-256, embedded compatibility metadata and duplicate installs. An independent helper waits for process exit, backs up and atomically replaces the installed JAR; restart through the original launcher.
 - Generate version-bound updater metadata and correctly named installation assets in CI.
 
-## 0.3.1-alpha · GTNH 2.9.0（待发布 / Unreleased）
-
-### 中文
+### 同时发布的结构与存储改进 / Structure and storage improvements
 
 - 终端快捷操作改为：右键主机投影、Shift＋右键主机立即搭建、Shift＋右键空气打开配置。正常搭建取消每 6 tick／25 方块的等待，在一个服务端 tick 内完成原生搭建轮次；缺料、障碍和安全上限仍会停止。
 - 对照 GTO 界面重排配置卡，采用原版 Ore UI 与工具栏图标，加入开关控件、缩略图和工具提示，保留部件与位置选择。
 - 聚合器注册 StructureLib 结构，接入原生 NEI 多方块预览及结构终端搭建，提供三种布局示例；保留已安装组件与主机方向。
-- 聚合器主机、ME 端口和成型外壳改用 GT 原生像素材质；修复客户端成型外观依赖服务端仓室数据的问题，成型状态变化立即同步。
+- 聚合器主机与 ME 端口改用 GT 原生像素材质，成型后采用上文统一平滑外观；修复客户端成型外观依赖服务端仓室数据的问题，成型状态变化立即同步。
 - 沿用 0.3.0 的 AVS6 库存格式、注册 ID 和容量记录，无需重新建立 0.3.0 聚合器。
-
-### English
 
 - Right-click controller to project; sneak-right-click controller for immediate construction; sneak-right-click air for settings. Native build rounds drain within one server tick instead of waiting six ticks per 25-block batch, stopping on shortages, obstructions or safety limits.
 - Reworked GTO-style configuration cards with original Ore UI/tool icons, switches, minimap and tooltips, retaining part/position choices.
 - Registered the vault with StructureLib for native NEI multiblock previews and terminal construction, with three example layouts and preserved existing components/controller orientation.
-- Reused native GT pixel-art controller/port/casing icons. Formed rendering now uses synchronized client state instead of server-only hatch inspection; state transitions sync immediately.
+- Reused native GT pixel-art controller/port icons, with the unified smooth formed skin described above. Formed rendering now uses synchronized client state instead of server-only hatch inspection; state transitions sync immediately.
 - Retains 0.3.0 AVS6 inventories, registration IDs and capacity ledgers.
 
 ## 0.3.0-alpha · GTNH 2.9.0

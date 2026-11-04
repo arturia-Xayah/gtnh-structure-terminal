@@ -14,6 +14,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.network.NetworkCheckHandler;
@@ -40,7 +41,7 @@ public final class VaultMod {
 
     public static final String ID = "aestoragevault";
     public static final Logger LOG = LogManager.getLogger(ID);
-    public static Block CASING, CONTROLLER, ACCESS, OUTPUT;
+    public static Block CONTROLLER, ACCESS, OUTPUT;
     @Mod.Instance(ID)
     public static VaultMod INSTANCE;
     @SidedProxy(clientSide = "dev.aestoragevault.ui.ClientProxy", serverSide = "dev.aestoragevault.ui.CommonProxy")
@@ -49,11 +50,9 @@ public final class VaultMod {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         VaultCacheConfig.load(new java.io.File(event.getModConfigurationDirectory(), "gtnh-modernization.cfg"));
-        CASING = new VaultBlock(0);
         CONTROLLER = new VaultBlock(1);
         ACCESS = new VaultBlock(2);
         OUTPUT = new VaultBlock(3);
-        GameRegistry.registerBlock(CASING, "casing");
         GameRegistry.registerBlock(CONTROLLER, VaultItemBlock.class, "controller");
         GameRegistry.registerBlock(ACCESS, VaultItemBlock.class, "access");
         GameRegistry.registerBlock(OUTPUT, VaultItemBlock.class, "output");
@@ -126,6 +125,20 @@ public final class VaultMod {
     public static boolean isLuVCasing(net.minecraft.world.IBlockAccess world, int x, int y, int z) {
         return world.getBlock(x, y, z) == gregtech.api.GregTechAPI.sBlockCasings1
             && world.getBlockMetadata(x, y, z) == 6;
+    }
+
+    /** The retired casing is intentionally removed, not silently mapped to a wrong GT metadata variant. */
+    @Mod.EventHandler
+    public void missingMappings(FMLMissingMappingsEvent event) {
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+            if ((ID + ":casing").equals(mapping.name)) {
+                mapping.ignore();
+                LOG.warn(
+                    "Removed retired vault casing mapping: {} ({}). Old instances are not retained.",
+                    mapping.name,
+                    mapping.type);
+            }
+        }
     }
 
     @Mod.EventHandler

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="docs/assets/terminal-blue-white.png" alt="GTNH Modernization Upgrade — blue-and-white terminal icon" width="128">
+<img src="docs/assets/terminal-gto-preview.png" alt="GTNH Modernization Upgrade — original GTO terminal icon" width="128">
 
 # GTNH Modernization Upgrade
 
@@ -10,7 +10,7 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.0--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.0-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.0-alpha-GTNH-2.9.0.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.3-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.3-alpha-GTNH-2.9.0.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0**
 
@@ -21,6 +21,8 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 - [Client updates](#client-updates): menu checks, exact server versions and exit-time installation
 - [Installation and upgrading](#installation-and-upgrading)
 - [Structure Terminal](#structure-terminal): preview, configure, build, replace and dismantle
+- [ME Packing Tape](#me-packing-tape)
+- [Integrated Pattern](#integrated-pattern): 36 real patterns in one interface slot
 - [AE order optimization](#ae-order-optimization): opt-in planning checks and bulk dispatch
 - [Craftable input badges](#craftable-input-badges): see which ingredients already have patterns
 - [Forge and fusion power controls](#forge-and-fusion-power-controls): limit processing power by input color
@@ -32,7 +34,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.3.0-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+1. Install `gtnh-modernization-upgrade-0.3.3-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
 2. Remove older GTNH Modernization Upgrade / Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
 3. Back up the complete world first. Terminal, AE component and power-setting registration IDs are retained. **0.3.0 changes the vault inventory format and cannot directly open 0.2.x vault files**. Export existing stock using the old version, then create a new vault and supply capacity sources after upgrading. Do not delete old files to clear a lock.
 
@@ -40,7 +42,7 @@ Dependencies are supplied by the target pack: GregTech, StructureLib, GTNHLib, A
 
 ## Client updates
 
-Starting with 0.3.2, **Modernization updates** appears near the top right of GTNH's main menu. Each launch checks once in the background. Network failures do not block play. The update screen offers download, cancellation, later and skip-version actions, plus switches for startup checks, prereleases and automatic server-version downloads.
+Starting with 0.3.3, **Modernization updates** appears near the top right of GTNH's main menu. Each launch checks once in the background. Network failures do not block play. The update screen offers download, cancellation, later and skip-version actions, plus switches for startup checks, prereleases and automatic server-version downloads.
 
 On a version-mismatch disconnect, the updater queries the server's public Forge status and looks for **that exact server version**. Disabled status queries, network failures or unavailable releases leave the ordinary connection error in place; compatibility checks are never relaxed. Server auto-download is optional, and installation still requires confirmation.
 
@@ -60,6 +62,24 @@ Left-drag rotates, right/middle-drag pans, the wheel zooms, the fit button or `F
 
 Machines must expose a readable StructureLib definition; survival building follows their native rules. Previewing does not actively stop a running machine. Actual replacement, dismantling or structural changes may stop it. A linked, powered wireless terminal within range can provide an AE inventory supply entry point.
 
+## ME Packing Tape
+
+Find **ME Packing Tape** in NEI. It uses the unchanged ExtendedAE tape and package textures used by GTO, lasts 64 uses, and follows GTO's fluix dust / duct tape / slimeball / ender pearl dust recipe.
+
+Sneak-right-click a device to drop a **Packaged Device**, then right-click with that package to restore it. Supported defaults: normal and dual ME interfaces (block and part forms), plus ME drives. Packing a part leaves the cable and its other parts intact. Native patterns, upgrades, buffered items/fluids and persistent settings are retained; drives retain their cells. Moving disconnects the device temporarily, so ongoing crafting jobs are not guaranteed to survive.
+
+Blocked or unauthorized placement keeps the package. No optimizer component is required. Both client and server need this mod. The device whitelist is `packingtape.deviceWhitelist` in `config/structureterminal.cfg`, using `modid:item@metadata` entries; additional devices require validation.
+
+## Integrated Pattern
+
+Search NEI for **Integrated Pattern**. Craft with **4 blank patterns, 4 Dual Interfaces and any IV circuit** (`circuitElite`): blanks at the corners, interfaces on the edges, circuit in the center.
+
+1. Right-click while holding it to open **4×9** slots. Each holds one encoded pattern; Shift transfer is supported.
+2. Place the holder in one pattern slot of a normal or Dual ME Interface, block or part. Every child recipe becomes available; no optimizer component is required.
+3. Remove the holder to edit its contents. The Interface Terminal moves the whole holder and searches child inputs/outputs. Take individual patterns out before multiplying, clearing or editing them.
+
+Children retain native crafting/processing, item/fluid, substitution and metadata. Nesting is disabled. Fluid recipes still require a Dual Interface and a fluid-capable receiver. Extra pattern capacity does not increase machine parallelism or dispatch speed. Memory Card copies consume an empty holder plus one blank per child; Matter Manipulator requires an existing holder with matching contents. Breaking or packing retains the whole holder. Remove its contents before uninstalling this mod.
+
 ## AE order optimization
 
 Connect an **ME Order Optimizer** to the submitting network. Right-click for detailed reporting. Only one per network; **1 AE/t**, no channel required.
@@ -68,6 +88,7 @@ Connect an **ME Order Optimizer** to the submitting network. Right-click for det
 - Only the selected route is checked. Cycles and multi-output patterns stop planning with a report. Detail mode also lists alternative patterns and the selected route.
 - Keep patterns at their original unit quantities. Bulk insertion does not add machine parallelism; unsupported receivers retain unit dispatch.
 - When borrowing patterns across grids, the submitting network controls whether optimization is enabled.
+- Optional assembly-line auto-renaming assigns duplicate NEI inputs the fixed names `重命名1`, `重命名2`, etc., matching Forming Press Name Mold outputs. A second switch generates missing renaming patterns during import, consuming blanks and skipping exact duplicates.
 
 [Recipe, usage and limits](docs/features/AE_ORDERING.md)
 
@@ -114,7 +135,7 @@ Inventory lives in external world-save files. Normal harvesting preserves the co
 ## Compatibility and saves
 
 - Target: **GTNH 2.9.0**. Use an adapted build for other pack versions.
-- The approved blue-and-white terminal icon is retained. Legacy internal module IDs preserve existing saves; all features ship in one JAR.
+- The approved original GTO terminal icon is retained. Legacy internal module IDs preserve existing saves; all features ship in one JAR.
 - Terminal settings remain in `config/structureterminal.cfg`; restart after editing. Vault files remain in `<world>/data/aestoragevault/`.
 - The vault supports Structure Terminal construction and NEI multiblock previews. Preview size 1/2/3 shows storage link, active export, or physical cell-return bus examples. Actual port positions remain flexible.
 - Back up, migrate and restore the complete stopped world. Do not roll back only inventory files or controller NBT. Removing this mod makes its added blocks and inventories unavailable.

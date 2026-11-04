@@ -1,0 +1,35 @@
+{
+  "version": "0.3.2-alpha",
+  "pack": "GTNH 2.9.0",
+  "published": false,
+  "sha256": "3f43a4352e7a9358d44d4e4676efb86090c6bdcdf6f9769cd316dbbf90149ae9",
+  "production_classes_identical_to_fixture": 190,
+  "tests": {
+    "tests": 143,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "backend": {
+    "initial_checks": 59,
+    "restart_checks": 7,
+    "passed": true,
+    "java": 25,
+    "client_launched": false
+  },
+  "retired_mapping": "aestoragevault:casing block and item are no longer registered; exact-name missing mapping ignored, old instances discarded; controller and unrelated mappings untouched.",
+  "artwork": {
+    "mode": "built-in image_gen",
+    "game_icon": "assets/structureterminal/textures/items/structure_terminal.png",
+    "size": [
+      16,
+      16
+    ],
+    "preview": "docs/assets/terminal-native.png",
+    "prompt": "docs/artwork/terminal-native-prompt.txt"
+  },
+  "notes": [
+    "Initial dedicated run stopped on an obsolete fixture assertion requiring the retired casing; the fixture was updated to assert absence and all checks rerun successfully.",
+    "No Minecraft client launched. Texture checked as exported 16px sprite, not an in-game screenshot."
+  ]
+}

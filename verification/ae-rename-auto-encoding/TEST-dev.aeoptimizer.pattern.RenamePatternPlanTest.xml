@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aeoptimizer.pattern.RenamePatternPlanTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-04T10:19:18.312Z" hostname="D9CH4WN6T3" time="0.002">
+  <properties/>
+  <testcase name="terminalThenInventoryThenNetworkWithoutChangingInputs" classname="dev.aeoptimizer.pattern.RenamePatternPlanTest" time="0.001"/>
+  <testcase name="freesBlankSlotBeforeCheckingOutputSpace" classname="dev.aeoptimizer.pattern.RenamePatternPlanTest" time="0.0"/>
+  <testcase name="networkShortfallIsExact" classname="dev.aeoptimizer.pattern.RenamePatternPlanTest" time="0.0"/>
+  <testcase name="unrelatedOrNamedItemsAreNotConsumed" classname="dev.aeoptimizer.pattern.RenamePatternPlanTest" time="0.0"/>
+  <testcase name="insufficientSpaceMakesNoPartialChanges" classname="dev.aeoptimizer.pattern.RenamePatternPlanTest" time="0.0"/>
+  <testcase name="retainsUnusedBlankQuantity" classname="dev.aeoptimizer.pattern.RenamePatternPlanTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

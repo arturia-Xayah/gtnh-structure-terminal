@@ -1,0 +1,16 @@
+{
+  "pack_version": "2.9.0",
+  "passed": true,
+  "client_launched": false,
+  "fixture_sha256": "016d6d9c157bb0ec89399a1078be03e5e6f9caa88672847c56e7fbfe89fc8376",
+  "runs": [
+    {
+      "suite": "ae",
+      "stage": 1,
+      "exit": 0,
+      "passed": true,
+      "cases": 130,
+      "report": "ae/ae-order-report.json"
+    }
+  ]
+}

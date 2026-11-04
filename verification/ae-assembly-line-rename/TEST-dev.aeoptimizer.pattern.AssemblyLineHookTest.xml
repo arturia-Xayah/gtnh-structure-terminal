@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.aeoptimizer.pattern.AssemblyLineHookTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-04T09:53:28.222Z" hostname="D9CH4WN6T3" time="0.011">
+  <properties/>
+  <testcase name="clientSelectorAndPacketFieldMatchPinnedNee" classname="dev.aeoptimizer.pattern.AssemblyLineHookTest" time="0.009"/>
+  <testcase name="serverHookRunsBeforeTheInputMatrixIsLoaded" classname="dev.aeoptimizer.pattern.AssemblyLineHookTest" time="0.001"/>
+  <testcase name="sourceMarkerSurvivesTheNativePacketTransport" classname="dev.aeoptimizer.pattern.AssemblyLineHookTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

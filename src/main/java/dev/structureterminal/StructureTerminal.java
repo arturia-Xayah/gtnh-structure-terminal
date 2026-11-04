@@ -25,7 +25,10 @@ import dev.structureterminal.server.BuildService;
 public final class StructureTerminal {
 
     public static final String ID = "structureterminal";
+    @Mod.Instance(ID)
+    public static StructureTerminal instance;
     public static Item item;
+    private java.io.File configFile;
     @SidedProxy(
         clientSide = "dev.structureterminal.client.ClientProxy",
         serverSide = "dev.structureterminal.CommonProxy")
@@ -33,7 +36,11 @@ public final class StructureTerminal {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        TerminalConfig.load(event.getSuggestedConfigurationFile());
+        configFile = event.getSuggestedConfigurationFile();
+        TerminalConfig.load(configFile);
+        dev.structureterminal.packing.PackingItems.register();
+        dev.structureterminal.pattern.IntegratedPattern.register();
+        cpw.mods.fml.common.network.NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         item = new TerminalItem();
         GameRegistry.registerItem(item, "structure_terminal");
         TerminalNetwork.init();
@@ -46,6 +53,9 @@ public final class StructureTerminal {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        dev.structureterminal.packing.PackingItems.recipe();
+        dev.structureterminal.pattern.IntegratedPattern.recipe();
+        dev.structureterminal.packing.PackingService.configure(configFile);
         Item projector = GameRegistry.findItem("structurelib", "item.structurelib.constructableTrigger");
         if (projector != null) GameRegistry
             .addShapelessRecipe(new ItemStack(item), new ItemStack(projector), Items.ender_pearl, Items.book);

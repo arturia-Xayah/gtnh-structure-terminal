@@ -37,7 +37,7 @@ ME 访问接口：LuV 机器机壳（Hull） ×1、LuV 电路 ×2、LuV 发射�
 
 未成型时使用原生 LuV 外壳及各功能面板。成型后整个结构统一采用平滑的蓝白紫外壳，每个完整面共用一张连续贴图，方块之间不再重复边框；主机保留原生屏幕、ME 链接仓保留原生 ME 输入标识、主动输出保留输出标识。支持材质包覆盖。外观不改写方块、总线等级、染色或材质 NBT；结构失效后恢复原生显示。
 
-旧式外壳保留注册以便已有世界加载，但不再是有效结构材料。0.3.0 的库存格式与 0.2.x 不兼容，升级处理见下方“搬迁、备份与恢复”。
+已移除废弃的自定义外壳注册。升级时旧式外壳方块及物品不再保留；请使用原生 LuV 机器外壳，主机与仓库库存不受此移除影响。0.3.0 的库存格式与 0.2.x 不兼容，升级处理见下方“搬迁、备份与恢复”。
 
 ## 扩容与迁移
 
@@ -157,7 +157,7 @@ Unfiltered output eventually reaches destination-accepted types despite other re
 
 Build the hollow 3×3×3 shell shown above: outward-facing controller at the center of any face, 23 native LuV machine casings, one ordinary GT input bus and one Storage Link Hatch or Export Bus, air in the center. The bus and interface may occupy any remaining shell cell, including top/bottom, edges and corners. Neither may be shared between vaults; conflicts prevent both structures from forming and recover after separation. Buses reserved by a registered native GT multiblock are rejected too. No cores. All three custom blocks use LuV assembler recipes (30,720 EU/t), with LuV hulls/circuits and components; there is no workbench fallback. Connect the interface to powered AE: one channel, 2 AE/t. ME virtual buses are excluded. Manual construction is required for this machine.
 
-Forming replaces the whole shell appearance with a smooth blue/white/violet skin. Each complete face shares one continuous texture without repeated block borders. Native screen and ME/pipe port overlays remain visible, with resource-pack support. Controller and connector/port indicators stay visible; native blocks, bus tier, dye and saved texture are never rewritten. Legacy casing blocks remain registered but cannot form the new structure. The inventory-format upgrade limitation above still applies.
+Forming replaces the whole shell appearance with a smooth blue/white/violet skin. Each complete face shares one continuous texture without repeated block borders. Native screen and ME/pipe port overlays remain visible, with resource-pack support. Controller and connector/port indicators stay visible; native blocks, bus tier, dye and saved texture are never rewritten. Retired custom casing blocks and items are no longer registered or retained on upgrade. Use native LuV machine casings; controller and stored inventory are unaffected by this removal. The inventory-format upgrade limitation above still applies.
 
 Insert supported item/fluid cells or AE2 1k–16384k components. Ordinary filled cells migrate their contents and upgrade cards first, then contribute nominal bytes; housing is consumed. Cards become stored items. Cell partitions/filters are not copied into vault rules. Unsupported, creative, void and spatial sources remain intact. Right-click the controller for status and absorption controls. Each import batch forces a dimension save and may pause the server briefly.
 

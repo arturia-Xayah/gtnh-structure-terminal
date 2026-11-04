@@ -1,0 +1,13 @@
+ME Packing Tape / Packaged Device
+
+This Minecraft 1.7.10 adaptation follows GlodBlock/ExtendedAE (LGPL-3.0),
+1.20.1-forge commit 35d6c1030ba8fa791b4b22771443a4e889fe4840:
+https://github.com/GlodBlock/ExtendedAE/tree/35d6c1030ba8fa791b4b22771443a4e889fe4840
+Reference implementations: ItemMEPackingTape.java and ItemPackedDevice.java.
+The me_packing_tape.png and package.png item textures are unchanged upstream assets.
+The crafting recipe follows GregTech-Odyssey/GTOCore's ME Packing Tape registration.
+
+Port source is included in this project's public source distribution:
+https://github.com/arturia-Xayah/gtnh-structure-terminal
+See THIRD_PARTY_NOTICES.md and LICENSES/ExtendedAE-LGPL-3.0.txt in that distribution.
+The upstream license text is also bundled as LICENSE-EXTENDEDAE-LGPL-3.0.txt.

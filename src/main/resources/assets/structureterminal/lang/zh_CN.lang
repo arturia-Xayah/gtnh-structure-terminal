@@ -97,3 +97,19 @@ modernization.update.state.ready=更新已就绪。点击“退出并安装”�
 modernization.update.state.installing=正在启动更新助手，随后退出游戏。
 modernization.update.previousSuccess=上次更新已安装：%s
 modernization.update.previousFailure=上次安装未完成，详情与备份位于：%s
+
+item.structureterminal.me_packing_tape.name=ME打包胶带
+item.structureterminal.package.name=已打包的设备
+structureterminal.packing.pack=潜行右键打包瞄准的ME设备；可单独取下薄片接口。
+structureterminal.packing.contents=保留样板、升级卡、库存与配置；不会搬走同格线缆。
+structureterminal.packing.uses=剩余使用次数：%s / 64
+structureterminal.packing.contains=包含：%s
+structureterminal.packing.unpack=右键放回设备；位置受阻时保留包装物。
+structureterminal.packing.invalid=包装数据无效或对应设备未安装。
+
+item.structureterminal.integrated_pattern.name=集成样板
+structureterminal.integrated.count=已装入 %s / %s 张样板（4×9）
+structureterminal.integrated.use=手持右键：打开内部样板槽位
+structureterminal.integrated.install=放入 ME 接口／二合一接口的样板槽，提供全部内部配方
+structureterminal.integrated.edit=取出后编辑；接口终端可整包存取，不能在其中修改内部配方
+structureterminal.integrated.nesting=只接受已编码样板；禁止嵌套，不消耗或压缩内部样板

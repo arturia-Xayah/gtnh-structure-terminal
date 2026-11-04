@@ -1,0 +1,7 @@
+{
+  "reference": "https://github.com/GTNewHorizons/Applied-Energistics-2-Unofficial/blob/rv3-beta-1095-GTNH/src/main/resources/assets/appliedenergistics2/textures/items/ItemEncodedPattern.png",
+  "tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "prompt": "Create a Minecraft 1.7.10 item texture variation of this exact AE2 encoded pattern icon. Keep its small diagonal diamond/card silhouette, white/light gray border, cyan blue inner pattern squares, crisp simple original pixel art style. Only a modest change: imply a compact stack of pattern cards with a second dark gray edge and tiny purple four-cell integrated badge in lower right. NO text, NO numerals, NO elaborate circuitry, NO glow, NO shadows outside item. Transparent background. Center the complete icon, enlarge using strictly hard nearest-neighbor pixel blocks so every logical pixel is an exact square, matching a 16x16 or 32x32 Minecraft sprite, not a high definition illustration. Preserve recognizable original appearance. Intended as Integrated Pattern, a 36-slot pattern holder.",
+  "export": "tools/artwork/PackIntegratedPatternIcon.java, nearest-neighbor 32x32"
+}

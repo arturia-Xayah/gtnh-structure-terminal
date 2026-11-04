@@ -41,7 +41,7 @@ public final class BundleChecks {
                     .startsWith("GTNH现代化升级"),
                 "old display name " + id);
             check(
-                "assets/structureterminal/textures/items/structure_terminal.png"
+                "assets/structureterminal/textures/items/structure_terminal_logo.png"
                     .equals(container.getMetadata().logoFile),
                 "logo mismatch " + id);
             if (!"structureterminal".equals(id))
@@ -50,8 +50,10 @@ public final class BundleChecks {
         }
         check(GameRegistry.findItem("structureterminal", "structure_terminal") != null, "terminal registry lost");
         check(GameRegistry.findBlock("aeorderoptimizer", "core") != null, "optimizer registry lost");
-        for (String name : new String[] { "controller", "access", "output", "casing" })
+        for (String name : new String[] { "controller", "access", "output" })
             check(GameRegistry.findBlock("aestoragevault", name) != null, "vault registry lost " + name);
+        check(GameRegistry.findBlock("aestoragevault", "casing") == null, "retired casing block still registered");
+        check(GameRegistry.findItem("aestoragevault", "casing") == null, "retired casing item still registered");
         Map<String, String> dependencies = new LinkedHashMap<>();
         for (String[] expected : new String[][] { { "gregtech", "5.09.54.265" },
             { "appliedenergistics2", "rv3-beta-1095-GTNH" }, { "structurelib", "1.4.47" },

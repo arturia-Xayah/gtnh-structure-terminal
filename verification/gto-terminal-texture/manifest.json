@@ -1,0 +1,18 @@
+{
+  "version": "0.3.2-alpha",
+  "published": false,
+  "jar_sha256": "64cb9f6ba23c965144bf34768d631df310e0ce805901449870a65f6b3c0772ff",
+  "upstream_texture_sha256": "af1d11a00d7b9c32cafca7f68a2fd90f5fc9984034a37902919f0581bb8ff530",
+  "upstream_commit": "16abc4041714b0098324b86e10d119a2c84fa720",
+  "unchanged_texture_and_animation": true,
+  "static_logo": "Lossless first 16x16 frame; README preview is nearest-neighbor 256x256.",
+  "tests": {
+    "tests": 143,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "client_launched": false,
+  "server_rerun": false,
+  "retired_casing_removal": "Retained from the previous validated revision; this revision changes artwork, logo metadata and documentation only."
+}

@@ -669,15 +669,18 @@ public final class VaultSuite {
                 "unrelated bus reskinned");
             world.setBlockToAir(x, y, z);
         });
-        run("lower_tier_and_legacy_casings_cannot_form", () -> {
+        run("wrong_tier_casings_rejected_and_legacy_casing_unregistered", () -> {
             for (int meta : new int[] { 0, 5, 7 }) {
                 world.setBlock(X + 1, Y + 1, Z + 2, GregTechAPI.sBlockCasings1, meta, 3);
                 controller.checkStructure();
                 check(!controller.formed, "wrong casing tier accepted " + meta);
             }
-            world.setBlock(X + 1, Y + 1, Z + 2, VaultMod.CASING, 0, 3);
-            controller.checkStructure();
-            check(!controller.formed, "legacy shell accepted");
+            check(
+                cpw.mods.fml.common.registry.GameRegistry.findBlock(VaultMod.ID, "casing") == null,
+                "legacy casing block still registered");
+            check(
+                cpw.mods.fml.common.registry.GameRegistry.findItem(VaultMod.ID, "casing") == null,
+                "legacy casing item still registered");
             world.setBlock(X + 1, Y + 1, Z + 2, GregTechAPI.sBlockCasings1, 6, 3);
             controller.checkStructure();
             check(access.available(), "LuV restore failed");

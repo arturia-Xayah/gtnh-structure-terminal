@@ -1,0 +1,21 @@
+{
+  "feature": "Integrated Pattern 4x9",
+  "gtnh": "2.9.0",
+  "java": "25.0.4.1",
+  "client_launched": false,
+  "unit_tests": {
+    "tests": 161,
+    "failures": 0,
+    "errors": 0
+  },
+  "backend_cases": 177,
+  "backend_passed": true,
+  "integrated_cases": 46,
+  "production_class_count": 216,
+  "production_matches_fixture": true,
+  "class_file_major": 52,
+  "production_sha256": "bdc1f5591374d0064448332a071e28ec11ae33c80c73522b5c2283d2e1e56cac",
+  "fixture_sha256": "a191898a4360170cf4f414cc97d29e96c541861895601686532eb03a8229a2fd",
+  "artifact": "dist/0.3.2-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.2-alpha-GTNH-2.9.0.jar",
+  "run_directory": "work/integrated-pattern-backend-r6"
+}

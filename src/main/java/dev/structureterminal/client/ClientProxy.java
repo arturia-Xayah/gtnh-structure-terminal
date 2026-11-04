@@ -15,6 +15,15 @@ import dev.structureterminal.CommonProxy;
 
 public final class ClientProxy extends CommonProxy {
 
+    @Override
+    public Object getClientGuiElement(int id, EntityPlayer player, net.minecraft.world.World world, int x, int y,
+        int z) {
+        return id == dev.structureterminal.pattern.IntegratedPattern.GUI
+            && dev.structureterminal.pattern.IntegratedPatternContainer.canOpen(player, x)
+                ? new IntegratedPatternScreen(player, x)
+                : null;
+    }
+
     private final ConcurrentLinkedQueue<Runnable> queue = new ConcurrentLinkedQueue<Runnable>();
 
     @Override

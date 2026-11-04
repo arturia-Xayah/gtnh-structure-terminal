@@ -142,6 +142,9 @@ public final class OptimizerPackTest {
             if (phase == 0) {
                 setup();
                 CraftableInputsPackChecks.run(this);
+                AssemblyLineRenamePackChecks.setup(this);
+                PackingPackChecks.setup(this);
+                IntegratedPatternPackChecks.setup(this);
                 phase = 1;
                 waitUntil = ticks + 160;
                 return;
@@ -149,6 +152,9 @@ public final class OptimizerPackTest {
             if (ticks < waitUntil) return;
             check(ticks < 4000, "test tick budget exceeded");
             if (phase == 1) {
+                AssemblyLineRenamePackChecks.noOptimizer(this);
+                PackingPackChecks.run(this);
+                IntegratedPatternPackChecks.run(this);
                 cache = controller.getProxy()
                     .getGrid()
                     .getCache(appeng.api.networking.crafting.ICraftingGrid.class);
@@ -223,6 +229,8 @@ public final class OptimizerPackTest {
                 check(!gui.enchantItem(player, 0) && optimizer.detailed, "out-of-range GUI write accepted");
                 player.setPosition(8, 81, 8);
                 row("gui_toggle_and_nbt", true);
+                AssemblyLineRenamePackChecks.enabled(this);
+                PackingPackChecks.settled(this);
                 planningChecks();
                 index = 0;
                 phase = 7;
@@ -637,6 +645,10 @@ public final class OptimizerPackTest {
                         .contains("CraftingJobFast"),
                     "removed component still active");
                 row("component_removal_restores_native", true);
+                phase = 50;
+            }
+            if (phase == 50) {
+                if (!IntegratedPatternPackChecks.finish(this)) return;
                 finish(null);
             }
         } catch (Throwable failure) {

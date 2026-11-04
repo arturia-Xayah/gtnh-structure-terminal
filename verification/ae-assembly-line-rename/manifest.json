@@ -1,0 +1,91 @@
+{
+  "feature": "Optional NEI assembly-line duplicate input renaming",
+  "gtnh": "2.9.0",
+  "ae2": "rv3-beta-1095-GTNH",
+  "nee": "1.7.50",
+  "java": "25.0.4.1",
+  "client_launched": false,
+  "client_hook_validation": "Pinned NEE bytecode selectors and packet serialization; no interactive GUI test",
+  "production_sha256": "4401241b8c5d349063b092e89c6c01306fa79eeb1476f298bc326c0ec8d7e392",
+  "unit": {
+    "tests": 152,
+    "failures": 0,
+    "errors": 0
+  },
+  "backend_cases": 69,
+  "rename_checks": [
+    {
+      "case": "rename_terminal_placed",
+      "passed": true
+    },
+    {
+      "case": "rename_no_optimizer_unchanged",
+      "passed": true
+    },
+    {
+      "case": "rename_default_off",
+      "passed": true
+    },
+    {
+      "case": "rename_disabled_unchanged",
+      "passed": true
+    },
+    {
+      "case": "rename_gui_toggle",
+      "passed": true
+    },
+    {
+      "case": "rename_setting_persisted",
+      "passed": true
+    },
+    {
+      "case": "rename_gui_sync",
+      "passed": true
+    },
+    {
+      "case": "rename_gui_distance_guard",
+      "passed": true
+    },
+    {
+      "case": "rename_other_recipe_unchanged",
+      "passed": true
+    },
+    {
+      "case": "rename_missing_source_unchanged",
+      "passed": true
+    },
+    {
+      "case": "rename_second_input",
+      "passed": true
+    },
+    {
+      "case": "rename_large_count",
+      "passed": true
+    },
+    {
+      "case": "rename_first_and_third",
+      "passed": true
+    },
+    {
+      "case": "rename_fluids_unchanged",
+      "passed": true
+    },
+    {
+      "case": "rename_output_unchanged",
+      "passed": true
+    },
+    {
+      "case": "rename_matches_actual_forming_press",
+      "passed": true
+    },
+    {
+      "case": "rename_nbt_matches_actual_forming_press",
+      "passed": true
+    },
+    {
+      "case": "rename_mold_not_consumed",
+      "passed": true
+    }
+  ],
+  "earlier_attempt": "Initial fixture used a full-block-only helper for a multipart host. Fixed test setup; production rename code unchanged."
+}

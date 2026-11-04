@@ -1,0 +1,107 @@
+{
+  "feature": "Generate renaming processing patterns during NEI assembly-line import",
+  "version": "0.3.2-alpha",
+  "gtnh": "2.9.0",
+  "unit": {
+    "tests": 158,
+    "failures": 0,
+    "errors": 0
+  },
+  "backend_cases": 91,
+  "encoding_cases": [
+    {
+      "case": "rename_encode_default_off",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_gui_toggle",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_nbt",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_gui_sync",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_gui_distance",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_missing_blanks_atomic",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_import_creates_two",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_preserves_unrelated_stack_identity",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_exact_unit_patterns",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_no_substitution",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_no_mold_input",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_native_processing_item",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_output_identity",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_backpack_dedup",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_full_backpack_atomic",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_wrong_route_not_deduped",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_network_dedup_without_blanks",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_terminal_blank_source",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_network_blank_stock",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_network_blank_source",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_network_shortage_no_partial",
+      "passed": true
+    },
+    {
+      "case": "rename_encode_partial_extraction_refunded",
+      "passed": true
+    }
+  ],
+  "client_launched": false,
+  "client_validation": "Pinned bytecode selectors; GUI not launched",
+  "production_sha256": "801710ebbc68179a0cfc4873d709a46c5bb32367625c901ab168d28a37b77a69",
+  "fixture_sha256": "f4041298c28f958b02d3bb6e5747cb83391b884b6cfe6ee64616c571017ee9d9",
+  "identical_production_classes": 197,
+  "first_run_failure": "Test fixture wrongly assumed an extended processing terminal could enter crafting mode; corrected to compare its actual previous mode. Production logic unchanged."
+}

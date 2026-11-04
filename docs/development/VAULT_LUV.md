@@ -1,5 +1,7 @@
 # LuV 仓库外观与配方 / LuV vault update
 
+> 0.3.2 更新：下文保留历史实现记录。废弃 `aestoragevault:casing` 注册现已删除，旧实例不再保留；当前规则见 [存储指南](../features/STORAGE.md)。
+
 版本：0.2.1-alpha，目标 GTNH 2.9.0-RC-2。
 
 ## 结构与兼容

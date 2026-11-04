@@ -75,3 +75,48 @@ The whole face is one registered sprite, not nine independently stitched/mipmapp
 The stock outer 16-pixel guard band is constant on all four edges; normal mip levels 0–4 retain this border. Resource packs replacing the skin should preserve matching edges. Directional/world lighting still affects the appearance; a cube corner is not rounded geometry or PBR. No animated texture, per-tick texture updates or server storage logic was added.
 
 Verification: 142 unit tests pass, including exact UV adjacency, atlas replacement on reload and all four guard bands. Build, Java 8 bytecode and distribution checks pass. Browser preview uses the actual packed skin and native GT overlays; rotation and optional block grid were checked. No Minecraft client or shader compatibility test was run. Full record: [smooth skin verification](../../verification/vault-smooth-skin/manifest.json).
+
+## Native-style terminal icon and retired casing removal (local 0.3.2 revision)
+
+The generated 16×16 icon described by this verification was subsequently replaced at the owner’s request with the unchanged GTO terminal texture and animation metadata. The Mod logo and README now use its first frame; obsolete generated variants remain historical artwork only. See THIRD_PARTY_NOTICES.md for provenance.
+
+The retired casing block and ItemBlock are no longer registered; the unused kind-0 path and localization entries are removed. An exact-name missing-mapping handler discards `aestoragevault:casing` references and logs this intentional removal, without remapping them to an incorrect native GT metadata variant. Old instances are not retained. Other missing mappings keep their default handling.
+
+143 unit tests pass, including a block/item removal scope test. A dedicated GTNH 2.9.0 server on Java 25 passes 59 vault checks and 7 fresh-process restart checks. Registry checks confirm both retired entries are absent; current controllers/ports and native LuV structures remain valid. All 190 production classes match the test fixture; the installable JAR excludes fixture classes and passes Java 8 bytecode validation. No client was launched. [Verification record](../../verification/terminal-native-cleanup/manifest.json).
+
+## Optional assembly-line input renaming (GTNH 2.9.0)
+
+Evidence: [AE rename checks](../../verification/ae-assembly-line-rename/manifest.json). Production build: 152 unit tests; dedicated GTNH server with Java 25: 69 AE checks, including the original planner/dispatch regressions. No game client was launched. Client GUI interaction was not exercised; pinned NEE 1.7.50 bytecode checks cover the import injection selector, packet field and tag transport.
+
+`NEEPatternTerminalHandler.packProcessRecipe` adds a recipe-source field to the packet's input envelope (never to item NBT). NEE already preserves separate assembly-line inputs. The server's `PacketNEIPatternRecipe.Handler.processRecipe` hook reads only the current terminal grid's active optimizer setting before transforming duplicate inputs. Counts remain NEE integer counts. The real server test round-trips NEE packets, writes native AE virtual input/output slots and compares the result with `FormingPressBackend.findRenamingRecipe` and AE item equality. Fluids, other recipe maps, absent/disabled optimizers and pre-existing custom names are excluded; original item metadata/NBT is preserved.
+
+The first backend attempt exposed a test fixture mistake: its full-block placement helper assumed a multipart cable host implemented `IGridProxyable`. The fixture now places the native cable host through the multipart API; the corrected full AE run passed. This did not require changing production renaming logic.
+
+## Automatic renaming-pattern encoding on import (GTNH 2.9.0)
+
+Evidence: [auto-encoding checks](../../verification/ae-rename-auto-encoding/manifest.json). 158 unit tests and 91 dedicated-server AE checks passed (22 checks specifically cover the new encoder). The final production classes are byte-for-byte identical to their counterparts in the tested fixture; the installation JAR excludes all test fixtures. No Minecraft client was launched.
+
+The server hook now runs at the head of the typed NEE `onMessage` handler, before NEE changes crafting mode or clears the old matrix. The optional second flag is persisted and synchronized separately, and depends on auto-renaming being enabled. Auxiliary patterns use AE's native generic input/output serialization and processing-pattern item, exact 1:1 quantities, and disabled substitutions. Native AE decoding, precise output identity, absence of consumed mold inputs, installed-pattern/backpack deduplication, different-input rejection, and all three blank sources were exercised on the real GTNH server.
+
+Local blank costs and output space are simulated first. ME extraction uses native powered extraction and permissions; a monitor returning only one blank after promising two was injected to verify that the extracted blank is retained in the terminal slot, no auxiliary pattern is created, and the rest of the inventory remains unchanged. Unrelated inventory stack objects are preserved for wireless-terminal compatibility. No complete network-inventory enumeration is performed: installed recipes are queried by target output, with only carried/terminal patterns inspected locally.
+
+The initial backend run failed because the fixture assumed the extended processing terminal could enter crafting mode. GTNH forces that terminal to processing mode; the corrected test compares the actual previous mode and matrix. Production logic was unchanged for the passing rerun. Client selectors were checked against pinned bytecode; interactive client GUI behavior remains untested.
+
+## ME packing tape (GTNH 2.9.0)
+
+- `spotlessCheck build prepareUpdateAsset`: passed; 159 unit tests, 0 failures.
+- Dedicated Java 25 GTNH 2.9.0 server: 130 AE checks passed, including 39 packing checks; no client launched.
+- All 201 production classes match the tested fixture byte-for-byte. Runtime test classes are excluded from the installation JAR.
+- Exercised live cable-host restoration, normal/dual interface block and part forms, fluid inventories and native fluid patterns, full NBT package serialization, stored drive cells, custom names/priority/orientation, re-advertised crafting recipes, exactly 64 uses, blocked placement, Forge break/place/drop vetoes, creative package consumption and native AE security denial on removal/placement.
+- Both item textures exactly match ExtendedAE commit `35d6c1030ba8fa791b4b22771443a4e889fe4840`.
+- Evidence: [verification/me-packing-tape](../../verification/me-packing-tape/manifest.json).
+- Only the default five devices are covered. Arbitrary extra whitelist entries, FMP combinations and visual in-client interaction were not tested. Running crafting-job continuity is not promised by a device move.
+- The integrated-pattern request remains analysis only: [feasibility and compatibility boundaries](INTEGRATED_PATTERNS_FEASIBILITY.md).
+
+## 集成样板 / Integrated Pattern — local 0.3.2 update
+
+161 项单元测试、177 项 GTNH 2.9.0 后台 AE 检查通过；Java 25.0.4.1，未启动客户端。216 个正式代码类与测试夹具逐字节一致，正式包无测试模块。覆盖 36 槽编辑、普通／二合一方块和薄片接口、记忆卡耗材、接口终端、胶带搬运，以及 Standard／Lite／Strict 原料清单。详细范围和限制见 [本次验证](../../verification/integrated-pattern/README.md)。其他功能的历史测试结果仍按对应章节解释，本次没有重新运行全部仓库／聚变套件。
+
+## 0.3.3-alpha 发布验证
+
+正式版本号重新构建后，161 项单元测试和 177 项后台 AE 检查全部通过，216 个正式代码类与测试包一致。[报告与安装包校验值](../../verification/release-0.3.3-alpha/README.md)。未启动客户端，未扩大宣称其他功能的历史测试范围。

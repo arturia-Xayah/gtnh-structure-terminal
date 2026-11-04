@@ -58,3 +58,5 @@
 This directory contains developer-facing build steps, internals, experiments, compatibility details and test evidence. Player-facing instructions remain in the READMEs and feature guides. Use the current [integration validation](VALIDATION.md) for the merged artifact; historical standalone reports retain their original scope. No game client has been launched for visual acceptance.
 
 - [元件容量规则与贡献统计：当前验证](VALIDATION.md)（123 单元测试、302 后台检查、3 台结构样本；部分退回与重启恢复、AVS6）
+
+- [集成样板实现与兼容边界](INTEGRATED_PATTERNS_FEASIBILITY.md)：36 槽容器、原生配方展开、接口终端、复制成本与后台验证。

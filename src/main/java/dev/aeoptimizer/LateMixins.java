@@ -20,18 +20,32 @@ public final class LateMixins implements ILateMixinLoader {
     public List<String> getMixins(Set<String> mods) {
         List<String> mixins = new ArrayList<>(
             Arrays.asList(
+                "PackedPartMixin",
+                "IntegratedPatternDualityMixin",
+                "IntegratedPatternSlotMixin",
+                "PatternSlotAccessor",
+                "PatternInventoryAccessor",
+                "PatternTrackerAccessor",
+                "IntegratedPatternTerminalMixin",
+                "IntegratedPatternMemoryMixin",
                 "CraftingGridMixin",
                 "CpuMixin",
                 "TaskProgressMixin",
                 "SessionCountMixin",
                 "DualityMixin",
                 "CpuDiagnosticsMixin"));
+        if (mods.contains("neenergistics")) {
+            mixins.add("NEIPatternPacketAccessor");
+            mixins.add("NEIPatternRenameMixin");
+        }
         if (FMLLaunchHandler.side()
             .isClient()) {
             mixins.add("client.TerminalRepoAccessor");
+            mixins.add("client.IntegratedPatternViewMixin");
             mixins.add("client.ItemRepoAccessor");
             mixins.add("client.PatternInputMixin");
             mixins.add("client.PatternTooltipMixin");
+            if (mods.contains("neenergistics")) mixins.add("client.AssemblyLineImportMixin");
         }
         return mixins;
     }

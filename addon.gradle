@@ -6,7 +6,7 @@ tasks.withType(JavaCompile).configureEach {
 tasks.named('compileJava', JavaCompile) { options.release = 8 }
 tasks.named('compileTestJava', JavaCompile) { options.release = 8 }
 tasks.named('compileInjectedTagsJava', JavaCompile) { options.release = 8 }
-version = '0.3.2-alpha'
+version = '0.3.3-alpha'
 
 
 ext.modVersion = version
@@ -70,11 +70,20 @@ tasks.register('verifyDistribution') {
             for (String required : ['dev/aeoptimizer/OrderOptimizer.class', 'dev/aeoptimizer/LateMixins.class', 'mixins.aeorderoptimizer.late.json', 'assets/aeorderoptimizer/textures/blocks/core.png', 'assets/aeorderoptimizer/lang/zh_CN.lang', 'assets/aeorderoptimizer/lang/en_US.lang', 'NOTICE-AE-OPTIMIZER']) {
                 if (!zip.getEntry(required)) throw new GradleException('Missing bundled AE component: ' + required)
             }
+            for (String required : ['dev/structureterminal/packing/PackingItems.class', 'dev/structureterminal/packing/PackingService.class', 'dev/structureterminal/packing/PackedPartContext.class', 'dev/aeoptimizer/mixin/PackedPartMixin.class', 'assets/structureterminal/textures/items/me_packing_tape.png', 'assets/structureterminal/textures/items/package.png']) {
+                if (!zip.getEntry(required)) throw new GradleException('Missing ME packing component: ' + required)
+            }
+            for (String required : ['dev/structureterminal/pattern/IntegratedPattern.class', 'dev/structureterminal/pattern/IntegratedPatternContainer.class', 'dev/structureterminal/client/IntegratedPatternScreen.class', 'dev/aeoptimizer/mixin/IntegratedPatternDualityMixin.class', 'assets/structureterminal/textures/items/integrated_pattern.png']) {
+                if (!zip.getEntry(required)) throw new GradleException('Missing integrated pattern component: ' + required)
+            }
             def optimizerTile = zip.getEntry('dev/aeoptimizer/network/TileOptimizer.class')
             if (!new String(zip.getInputStream(optimizerTile).bytes, java.nio.charset.StandardCharsets.ISO_8859_1).contains('func_74757_a'))
                 throw new GradleException('AE module is not remapped for runtime')
             for (String required : ['dev/structureterminal/ae/CraftableInputs.class', 'dev/structureterminal/client/ae/CraftablePatternSlot.class', 'dev/aeoptimizer/mixin/client/TerminalRepoAccessor.class', 'dev/aeoptimizer/mixin/client/ItemRepoAccessor.class', 'dev/aeoptimizer/mixin/client/PatternInputMixin.class', 'dev/aeoptimizer/mixin/client/PatternTooltipMixin.class']) {
                 if (!zip.getEntry(required)) throw new GradleException('Missing craftable-input component: ' + required)
+            }
+            for (String required : ['dev/aeoptimizer/pattern/AssemblyLineRenamer.class', 'dev/aeoptimizer/pattern/RenamePatternEncoder.class', 'dev/aeoptimizer/mixin/NEIPatternPacketAccessor.class', 'dev/aeoptimizer/mixin/NEIPatternRenameMixin.class', 'dev/aeoptimizer/mixin/client/AssemblyLineImportMixin.class']) {
+                if (!zip.getEntry(required)) throw new GradleException('Missing assembly-line rename component: ' + required)
             }
             for (String required : ['dev/plasmaforgepower/PlasmaForgePower.class', 'dev/plasmaforgepower/LateMixins.class',
                  'mixins.plasmaforgepower.late.json', 'dev/plasmaforgepower/mixin/FusionPowerMixin.class',
@@ -91,7 +100,7 @@ tasks.register('verifyDistribution') {
             def mods = new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('mcmod.info'))).modList
             if (mods.collect { it.modid }.toSet() != ['structureterminal','aeorderoptimizer','plasmaforgepower','aestoragevault'].toSet())
                 throw new GradleException('Compatibility registration namespaces changed')
-            if (!mods.every { it.version == expectedModVersion && it.logoFile == 'assets/structureterminal/textures/items/structure_terminal.png' })
+            if (!mods.every { it.version == expectedModVersion && it.logoFile == 'assets/structureterminal/textures/items/structure_terminal_logo.png' })
                 throw new GradleException('Module version or approved terminal icon mismatch')
             logger.lifecycle("Verified ${classes} Java 8 compatible classes and coremod manifest; no game launched.")
         }

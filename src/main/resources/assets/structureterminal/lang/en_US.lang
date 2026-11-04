@@ -97,3 +97,19 @@ modernization.update.state.ready=Ready. Exit and install waits for the game proc
 modernization.update.state.installing=Starting the update helper; the game will then exit.
 modernization.update.previousSuccess=Previous update installed: %s
 modernization.update.previousFailure=Previous installation did not finish. Details and backup: %s
+
+item.structureterminal.me_packing_tape.name=ME Packing Tape
+item.structureterminal.package.name=Packaged Device
+structureterminal.packing.pack=Sneak-right-click an ME device; targets individual interface parts.
+structureterminal.packing.contents=Preserves patterns, upgrades, inventory and settings; leaves the cable in place.
+structureterminal.packing.uses=Uses remaining: %s / 64
+structureterminal.packing.contains=Contains: %s
+structureterminal.packing.unpack=Right-click to restore. Blocked placement keeps the package intact.
+structureterminal.packing.invalid=Invalid package or missing device.
+
+item.structureterminal.integrated_pattern.name=Integrated Pattern
+structureterminal.integrated.count=Contains %s / %s encoded patterns (4x9)
+structureterminal.integrated.use=Right-click while holding to open the pattern slots
+structureterminal.integrated.install=Place in an ME or Dual Interface pattern slot to provide all contained recipes
+structureterminal.integrated.edit=Remove to edit; Interface Terminal moves the whole holder, not individual recipes
+structureterminal.integrated.nesting=Encoded patterns only; no nesting, consumption or compression of patterns

@@ -1,0 +1,20 @@
+{
+  "target_gtnh": "2.9.0",
+  "mod_version": "0.3.2-alpha",
+  "client_launched": false,
+  "unit_tests": 159,
+  "backend_cases": 130,
+  "packing_cases": 39,
+  "all_passed": true,
+  "production_classes_matching_fixture": 201,
+  "jar_sha256": "be7b4557e477230df1f7736f84a8c8fde2a80806007b5f1affe1abdd34c4e1b2",
+  "fixture_sha256": "016d6d9c157bb0ec89399a1078be03e5e6f9caa88672847c56e7fbfe89fc8376",
+  "upstream_commit": "35d6c1030ba8fa791b4b22771443a4e889fe4840",
+  "assets_unchanged_sha256": {
+    "me_packing_tape.png": "3a444b4c7de8e37ad56927ad2ab36d660265330e19401e096b1ed68fea76f73b",
+    "package.png": "4f32d32cf68f2d1041a989ba46b7343a354df31f29b391a30e818a0bc6d98bac"
+  },
+  "run": "work/me-packing-backend-r4",
+  "scope": "normal/dual interface parts and blocks, ME drive; Forge vetoes, AE security, NBT persistence, lifecycle, texture identity",
+  "integrated_pattern_implemented": false
+}

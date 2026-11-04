@@ -6,6 +6,8 @@ dependencies {
     implementation("com.github.GTNewHorizons:StructureLib:1.4.47:dev")
     compileOnly("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-1095-GTNH:dev") { transitive = false }
     compileOnly("com.github.GTNewHorizons:NotEnoughItems:2.8.171-GTNH:dev") { transitive = false }
+    compileOnly("com.github.GTNewHorizons:NotEnoughEnergistics:1.7.50:dev") { transitive = false }
+    testRuntimeOnly("com.github.GTNewHorizons:NotEnoughEnergistics:1.7.50:dev") { transitive = false }
     compileOnly("io.github.legacymoddingmc:unimixins:0.3.1:dev") { transitive = false }
     compileOnly("it.unimi.dsi:fastutil:8.5.15")
     compileOnly("org.jetbrains:annotations:24.1.0")

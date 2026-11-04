@@ -10,7 +10,7 @@
       "authorList": [
         "GPT-6 (Codex)"
       ],
-      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal_logo.png",
       "parent": "",
       "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
       "useDependencyInformation": false
@@ -24,7 +24,7 @@
       "authorList": [
         "GPT-6 (Codex)"
       ],
-      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal_logo.png",
       "parent": "structureterminal",
       "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
       "useDependencyInformation": false
@@ -38,7 +38,7 @@
       "authorList": [
         "GPT-6 (Codex)"
       ],
-      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal_logo.png",
       "parent": "structureterminal",
       "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
       "useDependencyInformation": false
@@ -52,7 +52,7 @@
       "authorList": [
         "GPT-6 (Codex)"
       ],
-      "logoFile": "assets/structureterminal/textures/items/structure_terminal.png",
+      "logoFile": "assets/structureterminal/textures/items/structure_terminal_logo.png",
       "parent": "structureterminal",
       "url": "https://github.com/arturia-Xayah/gtnh-structure-terminal",
       "useDependencyInformation": false

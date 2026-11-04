@@ -25,8 +25,9 @@ public class VaultBlock extends BlockContainer {
 
     public VaultBlock(int kind) {
         super(Material.iron);
+        if (kind < 1 || kind > 3) throw new IllegalArgumentException("Unknown vault block kind: " + kind);
         this.kind = kind;
-        setBlockName("aestoragevault." + new String[] { "casing", "controller", "access", "output" }[kind]);
+        setBlockName("aestoragevault." + new String[] { "controller", "access", "output" }[kind - 1]);
         setHardness(4);
         setResistance(15);
         setStepSound(soundTypeMetal);
@@ -35,12 +36,12 @@ public class VaultBlock extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        return kind == 1 ? new TileController() : kind == 2 ? new TileAccess() : kind == 3 ? new TileOutput() : null;
+        return kind == 1 ? new TileController() : kind == 2 ? new TileAccess() : new TileOutput();
     }
 
     @Override
     public boolean hasTileEntity(int meta) {
-        return kind != 0;
+        return true;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class VaultBlock extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        return kind == 0 ? 0 : renderId;
+        return renderId;
     }
 
     @Override
@@ -104,7 +105,6 @@ public class VaultBlock extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float a, float b,
         float c) {
-        if (kind == 0) return false;
         if (!world.isRemote) {
             TileEntity te = world.getTileEntity(x, y, z);
             if (te instanceof TileOutput) {
@@ -138,7 +138,7 @@ public class VaultBlock extends BlockContainer {
     public boolean removedByPlayer(World world, net.minecraft.entity.player.EntityPlayer player, int x, int y, int z,
         boolean harvest) {
         // Keep the controller tile alive until its UUID has been written into the harvested item.
-        if (kind != 0 && harvest) return true;
+        if (harvest) return true;
         return super.removedByPlayer(world, player, x, y, z, harvest);
     }
 
@@ -146,7 +146,7 @@ public class VaultBlock extends BlockContainer {
     public void harvestBlock(World world, net.minecraft.entity.player.EntityPlayer player, int x, int y, int z,
         int metadata) {
         super.harvestBlock(world, player, x, y, z, metadata);
-        if (kind != 0) world.setBlockToAir(x, y, z);
+        world.setBlockToAir(x, y, z);
     }
 
     @Override
