@@ -86,3 +86,6 @@ vault.history.result.failed=Return paused; check controller status
 
 vault.tooltip.controller.8=Optionally replace one casing with a GT item output bus; click a detail row to return empty cells.
 vault.tooltip.controller.9=Returns are limited by free capacity and bus room; partial returns keep stored stock intact.
+
+aestoragevault.structure.description=Hollow 3x3x3 shell, face-center controller. Exactly 1 input bus and 1 ME port anywhere on the shell; optional 1 physical output bus. No shared ports or buses.
+aestoragevault.structure.variants=Preview 1: ME storage; 2: ME export; 3: cell returns. Component positions are examples.

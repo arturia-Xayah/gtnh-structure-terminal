@@ -1,0 +1,21 @@
+{
+  "client_launched": false,
+  "results": [
+    {
+      "runtime": "java8",
+      "passed": true,
+      "waited_for_process_lock": true,
+      "old_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7",
+      "installed_sha256": "005011a0a6d76dc5a553f8d7d0ab563c5e46dc4c10727a370aac5f6bb3be8b4a",
+      "backup_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7"
+    },
+    {
+      "runtime": "java25",
+      "passed": true,
+      "waited_for_process_lock": true,
+      "old_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7",
+      "installed_sha256": "005011a0a6d76dc5a553f8d7d0ab563c5e46dc4c10727a370aac5f6bb3be8b4a",
+      "backup_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7"
+    }
+  ]
+}

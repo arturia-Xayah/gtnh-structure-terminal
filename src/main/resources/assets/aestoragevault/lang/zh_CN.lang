@@ -86,3 +86,6 @@ vault.history.result.failed=退回暂停，请检查主机状态
 
 vault.tooltip.controller.8=可选加装 1 个普通 GT 输出总线，明细中点击条目退回空元件。
 vault.tooltip.controller.9=退回受空闲容量和总线空间限制，可部分退回，已有库存保留。
+
+aestoragevault.structure.description=3×3×3 中空结构；主机在任意面中央。1 个普通输入总线和 1 个 ME 端口可放于任意外壳位置；可选 1 个普通输出总线。仓室不可共享。
+aestoragevault.structure.variants=预览 1：ME 链接仓；2：ME 主动输出；3：带元件退回总线。显示的位置仅为示例。

@@ -18,6 +18,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## Contents
 
+- [Client updates](#client-updates): menu checks, exact server versions and exit-time installation
 - [Installation and upgrading](#installation-and-upgrading)
 - [Structure Terminal](#structure-terminal): preview, configure, build, replace and dismantle
 - [AE order optimization](#ae-order-optimization): opt-in planning checks and bulk dispatch
@@ -37,15 +38,25 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 Dependencies are supplied by the target pack: GregTech, StructureLib, GTNHLib, AE2, ModularUI2 and UniMixins. The former standalone mods are not required.
 
+## Client updates
+
+Starting with 0.3.2, **Modernization updates** appears near the top right of GTNH's main menu. Each launch checks once in the background. Network failures do not block play. The update screen offers download, cancellation, later and skip-version actions, plus switches for startup checks, prereleases and automatic server-version downloads.
+
+On a version-mismatch disconnect, the updater queries the server's public Forge status and looks for **that exact server version**. Disabled status queries, network failures or unavailable releases leave the ordinary connection error in place; compatibility checks are never relaxed. Server auto-download is optional, and installation still requires confirmation.
+
+After verification, choose **Exit and install**. A separate helper waits for the game process to exit, backs up the old JAR and atomically replaces it. Restart using your usual launcher after installation finishes. There is no hot reload or automatic launcher restart. The installed filename is preserved; the Mods screen reports the actual version. Backups, logs and results are in `.modernization-updates/update-…/` inside the instance.
+
+Settings are in `config/gtnh-modernization-updates.cfg`. The pack version is read from GTNH's main-menu resources. If detection fails, set an exact `gtnhVersionOverride`; unknown versions are never assumed compatible. Only matching complete JARs from this project's GitHub Releases are eligible. Existing old clients must manually install an updater-enabled version once.
+
 ## Structure Terminal
 
 Find **Structure Terminal** in NEI. Craft it shapelessly from a **Multiblock Structure Hologram Projector + Ender Pearl + Book**.
 
-1. Hold it and right-click a placed multiblock controller.
-2. Preview the structure and configure exposed dimensions, modes, coils, glass and other parts. Click individual positions to choose hatches.
-3. Supply materials in your inventory and choose **Build / Replace & fill / Dismantle**. Replacement and dismantling require confirmation in the UI; **Stop** cancels the task.
+1. **Right-click a controller to project; sneak-right-click it to build immediately.**
+2. **Sneak-right-click air to open settings.** After targeting a controller, configure its dimensions, modes, coils, glass and individual hatch positions. Global subchannels remain available before targeting a controller.
+3. Supply inventory materials or enable authorized AE supply. Normal construction drains native building rounds in one server tick. Missing materials, obstructions or safety limits stop the request with a report; replenish and retry. Replacement and dismantling still need confirmation; `■` cancels those jobs.
 
-Left-drag rotates, right/middle-drag pans, the wheel zooms, `F` fits the view and the layer selector shows individual layers. Matching blocks are kept. Hatches, containers and other inventory-bearing blocks are skipped by default during dismantling.
+Left-drag rotates, right/middle-drag pans, the wheel zooms, the fit button or `F` resets the view, and the layer selector shows individual layers. Scroll the configuration card; toggle the minimap from the toolbar. Matching blocks are kept. Inventory-bearing blocks are skipped during dismantling by default.
 
 Machines must expose a readable StructureLib definition; survival building follows their native rules. Previewing does not actively stop a running machine. Actual replacement, dismantling or structural changes may stop it. A linked, powered wireless terminal within range can provide an AE inventory supply entry point.
 
@@ -105,7 +116,7 @@ Inventory lives in external world-save files. Normal harvesting preserves the co
 - Target: **GTNH 2.9.0**. Use an adapted build for other pack versions.
 - The approved blue-and-white terminal icon is retained. Legacy internal module IDs preserve existing saves; all features ship in one JAR.
 - Terminal settings remain in `config/structureterminal.cfg`; restart after editing. Vault files remain in `<world>/data/aestoragevault/`.
-- The vault currently requires manual construction; Structure Terminal building and NEI multiblock previews are not integrated for it.
+- The vault supports Structure Terminal construction and NEI multiblock previews. Preview size 1/2/3 shows storage link, active export, or physical cell-return bus examples. Actual port positions remain flexible.
 - Back up, migrate and restore the complete stopped world. Do not roll back only inventory files or controller NBT. Removing this mod makes its added blocks and inventories unavailable.
 
 ## Developer documentation

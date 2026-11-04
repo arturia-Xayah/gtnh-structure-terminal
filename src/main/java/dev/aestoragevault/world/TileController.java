@@ -174,6 +174,7 @@ public class TileController extends TileEntity {
         if (store != null && !status.startsWith("LOCKED:"))
             status = formed ? "Online" : "Need face-center controller, LuV casings, exclusive buses/access";
         if (changed && access != null) access.refresh();
+        if (changed && worldObj != null && !worldObj.isRemote) worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     private void absorb() {

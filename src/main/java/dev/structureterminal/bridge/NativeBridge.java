@@ -47,7 +47,9 @@ public final class NativeBridge {
         IConstructable c = constructable(context);
         if (c == null) c = constructable(tile);
         if (c == null && IMultiblockInfoContainer.contains(tile.getClass())) {
-            ExtendedFacing facing = alignment == null ? ExtendedFacing.of(ForgeDirection.getOrientation(side))
+            ExtendedFacing facing = alignment == null ? ExtendedFacing.of(
+                ForgeDirection.getOrientation(
+                    tile instanceof dev.aestoragevault.world.TileController ? world.getBlockMetadata(x, y, z) : side))
                 : alignment.getExtendedFacing();
             c = IMultiblockInfoContainer.<TileEntity>get(tile.getClass())
                 .toConstructable(tile, facing);

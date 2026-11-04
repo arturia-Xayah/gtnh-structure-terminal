@@ -6,7 +6,7 @@ tasks.withType(JavaCompile).configureEach {
 tasks.named('compileJava', JavaCompile) { options.release = 8 }
 tasks.named('compileTestJava', JavaCompile) { options.release = 8 }
 tasks.named('compileInjectedTagsJava', JavaCompile) { options.release = 8 }
-version = '0.3.0-alpha'
+version = '0.3.2-alpha'
 
 
 ext.modVersion = version
@@ -80,9 +80,14 @@ tasks.register('verifyDistribution') {
                  'mixins.plasmaforgepower.late.json', 'dev/plasmaforgepower/mixin/FusionPowerMixin.class',
                  'dev/plasmaforgepower/mixin/CompactFusionRecipeMixin.class', 'dev/aestoragevault/VaultMod.class',
                  'dev/aestoragevault/core/VaultStore.class', 'dev/aestoragevault/world/TileAccess.class',
-                 'assets/plasmaforgepower/lang/zh_CN.lang', 'assets/aestoragevault/lang/zh_CN.lang', 'mixins.aestoragevault.late.json', 'dev/aestoragevault/LateMixins.class', 'assets/aestoragevault/textures/blocks/controller_overlay.png', 'assets/aestoragevault/textures/blocks/access_overlay.png']) {
+                 'assets/plasmaforgepower/lang/zh_CN.lang', 'assets/aestoragevault/lang/zh_CN.lang', 'mixins.aestoragevault.late.json', 'dev/aestoragevault/LateMixins.class', 'assets/aestoragevault/textures/blocks/formed_shell_smooth.png', 'assets/aestoragevault/textures/blocks/controller_overlay.png', 'assets/aestoragevault/textures/blocks/access_overlay.png']) {
                 if (!zip.getEntry(required)) throw new GradleException('Missing modernization module: ' + required)
             }
+            def updateMetadata = new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('modernization-update.json')))
+            if (updateMetadata.schema != 1 || updateMetadata.version != expectedModVersion || updateMetadata.gtnh != '2.9.0')
+                throw new GradleException('Updater metadata does not match installation JAR')
+            if (!zip.getEntry('dev/structureterminal/update/UpdateInstaller.class'))
+                throw new GradleException('Missing standalone update helper')
             def mods = new groovy.json.JsonSlurper().parse(zip.getInputStream(zip.getEntry('mcmod.info'))).modList
             if (mods.collect { it.modid }.toSet() != ['structureterminal','aeorderoptimizer','plasmaforgepower','aestoragevault'].toSet())
                 throw new GradleException('Compatibility registration namespaces changed')
@@ -138,4 +143,28 @@ enable-rcon=false
             logger.lifecycle('Headless integration tests passed: ' + result.tests.size())
         }
     }
+}
+
+// Updater compatibility metadata is generated from the same version as mcmod.info.
+def updateMetadataDir = layout.buildDirectory.dir('generated/updateMetadata')
+tasks.register('generateUpdateMetadata') {
+    inputs.property('modVersion', version.toString())
+    outputs.dir(updateMetadataDir)
+    doLast {
+        def target = updateMetadataDir.get().file('modernization-update.json').asFile
+        target.parentFile.mkdirs()
+        target.text = groovy.json.JsonOutput.toJson([schema: 1, version: project.version.toString(), gtnh: '2.9.0']) + '\n'
+    }
+}
+tasks.named('processResources') {
+    dependsOn('generateUpdateMetadata')
+    from(updateMetadataDir)
+}
+
+// The exact same installable filename is used in CI artifacts and GitHub Releases.
+tasks.register('prepareUpdateAsset', Copy) {
+    dependsOn('verifyDistribution')
+    from(tasks.named('reobfJar').flatMap { it.archiveFile })
+    into(layout.buildDirectory.dir('release'))
+    rename { "gtnh-modernization-upgrade-${project.version}-GTNH-2.9.0.jar" }
 }

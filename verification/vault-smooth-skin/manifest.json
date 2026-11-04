@@ -1,0 +1,28 @@
+{
+  "version": "0.3.2-alpha",
+  "pack": "GTNH 2.9.0",
+  "published": false,
+  "jar": "dist/0.3.2-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.2-alpha-GTNH-2.9.0.jar",
+  "sha256": "4942d0bac8ded6166a4fe0f6ac7ab522605a7437e9211d06e56222d6eac9fb5c",
+  "clientLaunched": false,
+  "serverRerun": false,
+  "tests": {
+    "tests": 142,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "texture": {
+    "path": "src/main/resources/assets/aestoragevault/textures/blocks/formed_shell_smooth.png",
+    "size": [
+      512,
+      512
+    ],
+    "sha256": "eb54301e8701fff4890b11d612cc6dae933ed3e1af94175be38a5f32ee02432c",
+    "sharedSprite": true,
+    "regions": 9,
+    "constantEdgeGuardPixels": 16
+  },
+  "preview": "Actual skin and native overlays, browser orthographic affine composition; rotation and grid verified; not an in-game render.",
+  "scope": "New local visual revision. Prior updater/backend reports refer to the earlier jar digests preserved in their manifests. No new game client or shader compatibility validation."
+}

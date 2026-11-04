@@ -498,6 +498,12 @@ public final class VaultSuite {
     }
 
     private void initialTests() throws Exception {
+        run("structurelib_nei_examples_three_variants_six_facings", () -> TerminalVaultChecks.previews(world));
+        run("vault_complete_in_one_server_tick", () -> TerminalVaultChecks.instant(world, player, false));
+        run(
+            "vault_partial_relocated_ports_complete_in_one_server_tick",
+            () -> TerminalVaultChecks.instant(world, player, true));
+        run("formed_skin_uses_synced_client_view_no_server_hatch_state", () -> TerminalVaultChecks.clientView(world));
         contributionTests();
         run("native_3x3x3_structure_and_AE_channel", () -> {
             check(controller.formed, "not formed: " + controller.status);

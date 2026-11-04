@@ -1,0 +1,66 @@
+{
+  "version": "0.3.2-alpha",
+  "gtnh": "2.9.0",
+  "client_launched": false,
+  "installation_jar": {
+    "name": "gtnh-modernization-upgrade-0.3.2-alpha-GTNH-2.9.0.jar",
+    "sha256": "c38ef3cbe11abce04eb2ce8f807c87dc5b40bc1511b4e1d532cb34ad1a8d5b5a",
+    "bytes": 543452
+  },
+  "units": {
+    "tests": 139,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_updater_tests": 16,
+  "production_binding": {
+    "all_class_files_identical_to_tested_installation": true,
+    "classes": 188,
+    "java_bytecode_major": 52,
+    "test_fixtures_in_distribution": false,
+    "tested_jar_sha256": "005011a0a6d76dc5a553f8d7d0ab563c5e46dc4c10727a370aac5f6bb3be8b4a",
+    "final_resource_changes": [
+      "assets/structureterminal/lang/en_US.lang"
+    ]
+  },
+  "dedicated_server_status_probe": {
+    "passed": true,
+    "client_launched": false,
+    "installed_jar_sha256": "005011a0a6d76dc5a553f8d7d0ab563c5e46dc4c10727a370aac5f6bb3be8b4a",
+    "reported_version": "0.3.2-alpha",
+    "server_exit": 0,
+    "elapsed_seconds": 54.7
+  },
+  "standalone_packaged_helper": {
+    "client_launched": false,
+    "results": [
+      {
+        "runtime": "java8",
+        "passed": true,
+        "waited_for_process_lock": true,
+        "old_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7",
+        "installed_sha256": "005011a0a6d76dc5a553f8d7d0ab563c5e46dc4c10727a370aac5f6bb3be8b4a",
+        "backup_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7"
+      },
+      {
+        "runtime": "java25",
+        "passed": true,
+        "waited_for_process_lock": true,
+        "old_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7",
+        "installed_sha256": "005011a0a6d76dc5a553f8d7d0ab563c5e46dc4c10727a370aac5f6bb3be8b4a",
+        "backup_sha256": "247e459ebaa3922a0afccf3aded8b96d482a3a0e41f011486de0fbc6138aa1a7"
+      }
+    ]
+  },
+  "live_github_check": {
+    "http_status": 403,
+    "reason": "Unauthenticated GitHub API rate limit exhausted at the shared egress; treated as optional check failure."
+  },
+  "limitations": [
+    "No game client, actual menu rendering or physical connection UI tested.",
+    "No live GitHub update installed; newer updater-enabled release has not been published.",
+    "Windows installation behavior not tested on this macOS host.",
+    "Updates require a client restart through the original launcher."
+  ]
+}

@@ -85,6 +85,7 @@ public final class PackValidation {
     private Path output;
     private int index, age, stage, ticks;
     private int currentId;
+    private long requestWorldTick, resultWorldTick;
     private String outcome = "", detail = "";
     private final List<String> messages = new ArrayList<String>();
     private boolean initialized, finished, buildComplete;
@@ -111,6 +112,7 @@ public final class PackValidation {
         if (event.player == player) {
             outcome = event.key;
             detail = event.value;
+            if (event.key.startsWith("structureterminal.result.")) resultWorldTick = world.getTotalWorldTime();
         }
     }
 
@@ -382,6 +384,8 @@ public final class PackValidation {
         detail = "";
         messages.clear();
         age = 0;
+        requestWorldTick = world.getTotalWorldTime();
+        resultWorldTick = -1;
         NBTTagCompound tag = new NBTTagCompound();
         tag.setInteger("x", X);
         tag.setInteger("y", Y);
@@ -390,6 +394,11 @@ public final class PackValidation {
         tag.setInteger("action", action);
         tag.setBoolean("confirmed", confirmed);
         tag.setTag("settings", settings.write());
+        // Simulated clicks occur during startup catch-up ticks, which may be much faster
+        // than wall time. Each phase is an independent human action, not click-spam testing.
+        Field clickClock = BuildService.class.getDeclaredField("lastRequest");
+        clickClock.setAccessible(true);
+        ((Map<?, ?>) clickClock.get(BuildService.INSTANCE)).remove(player.getUniqueID());
         BuildService.INSTANCE.enqueue(player, tag);
     }
 
@@ -398,6 +407,7 @@ public final class PackValidation {
         result.put("outcome", outcome);
         result.put("detail", detail);
         result.put("ticks", age);
+        result.put("completion_world_ticks", resultWorldTick < 0 ? -1 : resultWorldTick - requestWorldTick);
         result.put("messages", new ArrayList<String>(messages));
         List<String> installed = new ArrayList<String>();
         for (Cell cell : scan.cells) {
@@ -596,6 +606,30 @@ public final class PackValidation {
                 add(injected, ItemKeys.key(type), (long) max - have);
             }
             slot++;
+        }
+        // Instant construction cannot rely on the fixture replenishing one 64-stack six
+        // ticks later. Preload extra legal stacks for casing/glass/coil demand before the click.
+        for (ItemStack type : pool.values()) {
+            Block block = Block.getBlockFromItem(type.getItem());
+            if (block == null || block.hasTileEntity(type.getItemDamage())) continue;
+            int required = 0;
+            for (Cell cell : scan.cells)
+                for (ItemStack candidate : cell.candidates) if (ItemKeys.same(type, candidate)) {
+                    required++;
+                    break;
+                }
+            int max = Math.max(1, Math.min(64, type.getMaxStackSize()));
+            for (int remaining = required - max; remaining > 0 && slot < 36; remaining -= max, slot++) {
+                ItemStack old = player.inventory.getStackInSlot(slot);
+                if (old != null && !ItemKeys.same(old, type)) continue;
+                int have = old == null ? 0 : old.stackSize;
+                if (have < max) {
+                    ItemStack copy = type.copy();
+                    copy.stackSize = max;
+                    player.inventory.setInventorySlotContents(slot, copy);
+                    add(injected, ItemKeys.key(type), (long) max - have);
+                }
+            }
         }
     }
 

@@ -24,8 +24,18 @@ public final class TerminalItem extends Item {
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
         float hx, float hy, float hz) {
         if (NativeBridge.resolve(world, x, y, z, side) == null) return false;
-        if (world.isRemote) StructureTerminal.proxy.open(player, x, y, z, side);
-        return !world.isRemote;
+        if (world.isRemote) StructureTerminal.proxy.use(player, x, y, z, side, player.isSneaking());
+        return true;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (world.isRemote && player.isSneaking()) {
+            net.minecraft.util.MovingObjectPosition hit = getMovingObjectPositionFromPlayer(world, player, false);
+            if (hit == null || hit.typeOfHit == net.minecraft.util.MovingObjectPosition.MovingObjectType.MISS)
+                StructureTerminal.proxy.settings(player);
+        }
+        return stack;
     }
 
     @Override

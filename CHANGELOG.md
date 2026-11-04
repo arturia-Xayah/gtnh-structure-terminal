@@ -1,5 +1,38 @@
 # 更新日志 / Changelog
 
+## 0.3.2-alpha — GTNH 2.9.0 (Unreleased)
+
+- 聚合器成型外壳改为整面连续的蓝白紫平滑材质；主机、ME 端口、原生输入／输出总线共用同一底纹与绘制方式，保留功能标识。相邻区域共享纹理坐标与 mipmap，四边使用一致底色。
+- Added a continuous smooth blue/white/violet formed vault skin. Casings, controller, ME ports and native buses share the same surface renderer while retaining functional overlays; shared UV boundaries/mipmaps and matching edge colors prevent texture seams.
+
+- 新增客户端异步更新器，兼容 GTNH Custom Main Menu；提供中英双语更新界面、说明滚动、下载进度、取消与跳过选项。
+- 连接较新服务器失败后查询其 Forge 状态，按服务器的确切版本查找兼容发行包；可选择自动下载，保留严格版本校验。
+- 新增 SHA-256、JAR 元数据和重复安装检查。独立助手等待游戏完全退出后备份旧包并原子替换；安装保持原文件名，原启动器负责重启。
+- CI 生成带 GTNH 版本的安装包；包内更新描述与实际 Mod 版本一起生成、校验。
+
+- Added asynchronous client updates integrated with GTNH Custom Main Menu, with bilingual notes, progress, cancellation and skip controls.
+- Resolve the exact newer server release from public Forge status after connection rejection; optional automatic download preserves strict compatibility checks.
+- Verify SHA-256, embedded compatibility metadata and duplicate installs. An independent helper waits for process exit, backs up and atomically replaces the installed JAR; restart through the original launcher.
+- Generate version-bound updater metadata and correctly named installation assets in CI.
+
+## 0.3.1-alpha · GTNH 2.9.0（待发布 / Unreleased）
+
+### 中文
+
+- 终端快捷操作改为：右键主机投影、Shift＋右键主机立即搭建、Shift＋右键空气打开配置。正常搭建取消每 6 tick／25 方块的等待，在一个服务端 tick 内完成原生搭建轮次；缺料、障碍和安全上限仍会停止。
+- 对照 GTO 界面重排配置卡，采用原版 Ore UI 与工具栏图标，加入开关控件、缩略图和工具提示，保留部件与位置选择。
+- 聚合器注册 StructureLib 结构，接入原生 NEI 多方块预览及结构终端搭建，提供三种布局示例；保留已安装组件与主机方向。
+- 聚合器主机、ME 端口和成型外壳改用 GT 原生像素材质；修复客户端成型外观依赖服务端仓室数据的问题，成型状态变化立即同步。
+- 沿用 0.3.0 的 AVS6 库存格式、注册 ID 和容量记录，无需重新建立 0.3.0 聚合器。
+
+### English
+
+- Right-click controller to project; sneak-right-click controller for immediate construction; sneak-right-click air for settings. Native build rounds drain within one server tick instead of waiting six ticks per 25-block batch, stopping on shortages, obstructions or safety limits.
+- Reworked GTO-style configuration cards with original Ore UI/tool icons, switches, minimap and tooltips, retaining part/position choices.
+- Registered the vault with StructureLib for native NEI multiblock previews and terminal construction, with three example layouts and preserved existing components/controller orientation.
+- Reused native GT pixel-art controller/port/casing icons. Formed rendering now uses synchronized client state instead of server-only hatch inspection; state transitions sync immediately.
+- Retains 0.3.0 AVS6 inventories, registration IDs and capacity ledgers.
+
 ## 0.3.0-alpha · GTNH 2.9.0
 
 ### 中文

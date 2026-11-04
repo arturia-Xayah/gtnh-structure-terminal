@@ -25,7 +25,7 @@ CCC        CCC        CCC
 C 外壳   H 主机   I 输入总线   A 访问接口   . 空气
 ```
 
-将访问接口连接到供电的 AE 网络：1 个频道，2 AE/t。当前只接受标准 GT 输入总线，不接受 ME 虚拟输入总线。该仓库尚未接入结构终端自动搭建与 NEI 多方块预览。
+将访问接口连接到供电的 AE 网络：1 个频道，2 AE/t。当前只接受标准 GT 输入总线，不接受 ME 虚拟输入总线。支持结构终端自动搭建和 NEI 多方块预览；预览尺寸 1／2／3 对应链接仓、主动输出、带退回总线三种示例。
 
 ## LuV 制作与统一外观
 
@@ -35,7 +35,7 @@ ME 访问接口：LuV 机器机壳（Hull） ×1、LuV 电路 ×2、LuV 发射�
 
 输出总线配方将上述接口配方中的 ME 驱动器换为 ME 输出总线，其余材料和加工参数相同。
 
-未成型时使用原生 LuV 外壳及各功能面板。成型后整个结构统一为平滑蓝白紫色科幻面板，九张贴图拼接为每个完整表面。外壳、主机、ME 接口及总线共享连续机身，保留主机图案、接口插口和总线端口标识。外观不改写方块、总线等级、染色或材质 NBT；结构失效后恢复原生显示。
+未成型时使用原生 LuV 外壳及各功能面板。成型后整个结构统一采用平滑的蓝白紫外壳，每个完整面共用一张连续贴图，方块之间不再重复边框；主机保留原生屏幕、ME 链接仓保留原生 ME 输入标识、主动输出保留输出标识。支持材质包覆盖。外观不改写方块、总线等级、染色或材质 NBT；结构失效后恢复原生显示。
 
 旧式外壳保留注册以便已有世界加载，但不再是有效结构材料。0.3.0 的库存格式与 0.2.x 不兼容，升级处理见下方“搬迁、备份与恢复”。
 
@@ -157,7 +157,7 @@ Unfiltered output eventually reaches destination-accepted types despite other re
 
 Build the hollow 3×3×3 shell shown above: outward-facing controller at the center of any face, 23 native LuV machine casings, one ordinary GT input bus and one Storage Link Hatch or Export Bus, air in the center. The bus and interface may occupy any remaining shell cell, including top/bottom, edges and corners. Neither may be shared between vaults; conflicts prevent both structures from forming and recover after separation. Buses reserved by a registered native GT multiblock are rejected too. No cores. All three custom blocks use LuV assembler recipes (30,720 EU/t), with LuV hulls/circuits and components; there is no workbench fallback. Connect the interface to powered AE: one channel, 2 AE/t. ME virtual buses are excluded. Manual construction is required for this machine.
 
-Forming replaces the entire structure appearance with a smooth blue/white/violet surface per face, using nine connected tiles. Controller and connector/port indicators stay visible; native blocks, bus tier, dye and saved texture are never rewritten. Legacy casing blocks remain registered but cannot form the new structure. The inventory-format upgrade limitation above still applies.
+Forming replaces the whole shell appearance with a smooth blue/white/violet skin. Each complete face shares one continuous texture without repeated block borders. Native screen and ME/pipe port overlays remain visible, with resource-pack support. Controller and connector/port indicators stay visible; native blocks, bus tier, dye and saved texture are never rewritten. Legacy casing blocks remain registered but cannot form the new structure. The inventory-format upgrade limitation above still applies.
 
 Insert supported item/fluid cells or AE2 1k–16384k components. Ordinary filled cells migrate their contents and upgrade cards first, then contribute nominal bytes; housing is consumed. Cards become stored items. Cell partitions/filters are not copied into vault rules. Unsupported, creative, void and spatial sources remain intact. Right-click the controller for status and absorption controls. Each import batch forces a dimension save and may pause the server briefly.
 

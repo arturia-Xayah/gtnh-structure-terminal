@@ -95,6 +95,12 @@ public final class BuildService {
         ItemStack held = player.getHeldItem();
         if (held == null || held.getItem() != StructureTerminal.item)
             throw new IllegalArgumentException("Hold the structure terminal");
+        if (action == 5) {
+            TerminalSettings.read(tag.getCompoundTag("settings"))
+                .save(held);
+            player.inventoryContainer.detectAndSendChanges();
+            return;
+        }
         int x = tag.getInteger("x"), y = tag.getInteger("y"), z = tag.getInteger("z"), side = tag.getInteger("side");
         if (side < 0 || side > 5
             || !Limits.inReach(player.posX, player.posY, player.posZ, x, y, z, TerminalConfig.reach)) {
@@ -163,7 +169,7 @@ public final class BuildService {
             task.run();
         }
         ticks++;
-        if (ticks % 6 != 0) return;
+
         for (Iterator<Job> it = jobs.values()
             .iterator(); it.hasNext();) {
             Job job = it.next();
@@ -211,30 +217,38 @@ public final class BuildService {
                     }
                     continue;
                 }
-                StructureLibAPI.enableInstrument(job);
-                StructureScanner.BUILD_LOOKUP.set(job.scan.byPosition);
-                int result;
-                try {
-                    SelectedSource source = new SelectedSource(job.player, job.settings, job.scan.byPosition);
-                    result = ((ISurvivalConstructable) job.bridge.constructable).survivalConstruct(
-                        job.settings.trigger(),
-                        TerminalConfig.budget,
-                        ISurvivalBuildEnvironment.create(source, job.player));
-                } finally {
-                    StructureScanner.BUILD_LOOKUP.remove();
-                    StructureScanner.BUILD_CELL.remove();
-                    StructureLibAPI.disableInstrument();
-                }
-                BuildProgress.State state = job.progress.accept(result, TerminalConfig.rounds);
-                if (state != BuildProgress.State.RUNNING) {
-                    reply(
-                        job.player,
-                        "structureterminal.result." + state.name()
-                            .toLowerCase(java.util.Locale.ROOT),
-                        Long.toString(job.progress.placed()));
-                    it.remove();
-                } else if (job.progress.rounds() % 10 == 0)
-                    reply(job.player, "structureterminal.progress", Long.toString(job.progress.placed()));
+                // Drain native construction rounds in this server tick. Some GT controllers
+                // deliberately return after one part/hatch, even with a large element budget.
+                long deadline = System.nanoTime() + TerminalConfig.buildMillis * 1000000L;
+                BuildProgress.State state;
+                do {
+                    StructureLibAPI.enableInstrument(job);
+                    StructureScanner.BUILD_LOOKUP.set(job.scan.byPosition);
+                    int result;
+                    try {
+                        SelectedSource source = new SelectedSource(job.player, job.settings, job.scan.byPosition);
+                        result = ((ISurvivalConstructable) job.bridge.constructable).survivalConstruct(
+                            job.settings.trigger(),
+                            Math.max(1, job.scan.cells.size()),
+                            ISurvivalBuildEnvironment.create(source, job.player));
+                    } finally {
+                        StructureScanner.BUILD_LOOKUP.remove();
+                        StructureScanner.BUILD_CELL.remove();
+                        StructureLibAPI.disableInstrument();
+                    }
+                    state = job.progress.accept(result, Math.min(TerminalConfig.rounds, job.scan.cells.size() + 1));
+                    if (state == BuildProgress.State.RUNNING && System.nanoTime() >= deadline) {
+                        reply(job.player, "structureterminal.result.limit", Long.toString(job.progress.placed()));
+                        break;
+                    }
+                } while (state == BuildProgress.State.RUNNING);
+                if (state != BuildProgress.State.RUNNING) reply(
+                    job.player,
+                    "structureterminal.result." + state.name()
+                        .toLowerCase(java.util.Locale.ROOT),
+                    Long.toString(job.progress.placed()));
+                it.remove();
+
             } catch (RuntimeException e) {
                 reply(
                     job.player,

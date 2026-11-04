@@ -1,5 +1,7 @@
 # 0.3.0-alpha · GTNH 2.9.0 验证 / Release validation
 
+0.3.1 本地修复与验证范围见 [终端、NEI 与材质回归记录](TERMINAL_0.3.1.md)。以下保留 0.3.0 发布记录。
+
 本次发行整合了 BigInteger 库存、读取优化与缓存配置、容量来源规则、原生元件明细，以及可选普通 GT 输出总线的空元件退回功能。
 
 ## 最终安装包
@@ -61,3 +63,15 @@ AVS6 接受此前本地开发版 AVS5，在检查点时升级；不迁移 0.2.x 
 The release passes **123 unit tests, 302 dedicated-server checks and 10 structure-operation phases across 3 machines**. Twelve server processes include four fresh-process restarts. The suites cover real cell imports, final high-end capacity rules, paged history, partial returns constrained by exact free space and native bus room, locked/full buses, exclusive ownership, durable return recovery at two interruption windows, access-hatch rebinding, native AE operations, caches, quantities beyond long, forge/fusion controls, planning/dispatch and structure operations.
 
 The installable JAR has 174 Java-8 production classes and no fixtures. All resources and 173 classes match the executed fixture. The only later change is the client-only contribution screen's input text color; its two hashes and compile/static-check scope are explicitly recorded. No game client or new performance matrix was run. AVS6 reads local-development AVS5 but does not migrate 0.2.x files. Player upgrade/backup requirements are documented in the storage guide.
+
+- [0.3.2 客户端更新器：实现边界与验证](UPDATER.md)
+
+## Smooth formed skin (local 0.3.2 revision)
+
+Artwork: built-in image generation, with the [prompt](../artwork/vault-smooth-prompt.txt) and original PNG retained under `docs/artwork`. `tools/artwork/PackVaultSkin.java` packs the source into a 512×512 texture and enforces matching edge guard bands.
+
+The whole face is one registered sprite, not nine independently stitched/mipmapped sprites. Nine IIcon views share exact UV boundaries. Native buses use the same face renderer as casings and custom blocks, bypassing GT's differing UV flips and AO treatment for the base only; their functional overlays remain native. Render state is restored after each face. Resource reload replaces all nine views.
+
+The stock outer 16-pixel guard band is constant on all four edges; normal mip levels 0–4 retain this border. Resource packs replacing the skin should preserve matching edges. Directional/world lighting still affects the appearance; a cube corner is not rounded geometry or PBR. No animated texture, per-tick texture updates or server storage logic was added.
+
+Verification: 142 unit tests pass, including exact UV adjacency, atlas replacement on reload and all four guard bands. Build, Java 8 bytecode and distribution checks pass. Browser preview uses the actual packed skin and native GT overlays; rotation and optional block grid were checked. No Minecraft client or shader compatibility test was run. Full record: [smooth skin verification](../../verification/vault-smooth-skin/manifest.json).

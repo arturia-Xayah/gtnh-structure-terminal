@@ -60,9 +60,45 @@ public final class OreTheme extends Gui {
         GL11.glColor4f(1, 1, 1, 1);
     }
 
-    public static final class Button extends GuiButton {
+    /** Unmodified GTO WidgetIconAtlas: four 16px states, 46 rows. */
+    public static void widget(int x, int y, int row) {
+        Minecraft.getMinecraft()
+            .getTextureManager()
+            .bindTexture(new ResourceLocation("structureterminal", "textures/gui/widget_icons.png"));
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glEnable(GL11.GL_BLEND);
+        double v0 = row / 46d, v1 = (row + 1) / 46d;
+        Tessellator t = Tessellator.instance;
+        t.startDrawingQuads();
+        t.addVertexWithUV(x, y + 14, 0, 0, v1);
+        t.addVertexWithUV(x + 14, y + 14, 0, .25, v1);
+        t.addVertexWithUV(x + 14, y, 0, .25, v0);
+        t.addVertexWithUV(x, y, 0, 0, v0);
+        t.draw();
+    }
+
+    public static void viewIcon(int x, int y, int index) {
+        Minecraft.getMinecraft()
+            .getTextureManager()
+            .bindTexture(new ResourceLocation("structureterminal", "textures/gui/view_icons.png"));
+        GL11.glColor4f(1, 1, 1, 1);
+        double u0 = index / 5d, u1 = (index + 1) / 5d;
+        Tessellator t = Tessellator.instance;
+        t.startDrawingQuads();
+        t.addVertexWithUV(x, y + 14, 0, u0, 1);
+        t.addVertexWithUV(x + 14, y + 14, 0, u1, 1);
+        t.addVertexWithUV(x + 14, y, 0, u1, 0);
+        t.addVertexWithUV(x, y, 0, u0, 0);
+        t.draw();
+    }
+
+    public static class Button extends GuiButton {
 
         public int variant;
+        public int iconRow = -1;
+        public int viewIcon = -1;
+        public String tooltip;
+        public Boolean switchValue;
 
         public Button(int id, int x, int y, int w, String text) {
             super(id, x, y, w, 14, text);
@@ -74,10 +110,25 @@ public final class OreTheme extends Gui {
             boolean hover = mouseX >= xPosition && mouseX < xPosition + width
                 && mouseY >= yPosition
                 && mouseY < yPosition + height;
+            if (switchValue != null) {
+                mc.fontRenderer.drawString(displayString, xPosition, yPosition + 3, enabled ? TEXT : SECONDARY);
+                int sx = xPosition + width - 26;
+                drawRect(sx, yPosition + 2, sx + 26, yPosition + 12, switchValue ? 0xff478047 : 0xff747474);
+                slice(sx + (switchValue ? 14 : 0), yPosition, 12, 14, 0, 0, 5, 7, 2, 2, 2, 4, enabled ? 1 : .6f);
+                return;
+            }
             int u = !enabled ? 10
                 : variant == 1 ? (hover ? 31 : 26) : variant == 2 ? (hover ? 41 : 36) : (hover ? 5 : 0);
             slice(xPosition, yPosition, width, height, u, 0, 5, 7, 2, 2, 2, 4, variant == 0 ? 0.75f : 1);
             int color = !enabled ? 0x666666 : variant == 0 ? 0x222222 : 0xffffff;
+            if (viewIcon >= 0) {
+                viewIcon(xPosition + (width - 14) / 2, yPosition, viewIcon);
+                return;
+            }
+            if (iconRow >= 0) {
+                widget(xPosition + (width - 14) / 2, yPosition, iconRow);
+                return;
+            }
             mc.fontRenderer.drawString(
                 displayString,
                 xPosition + (width - mc.fontRenderer.getStringWidth(displayString)) / 2,

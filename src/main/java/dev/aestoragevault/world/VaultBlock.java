@@ -22,10 +22,6 @@ public class VaultBlock extends BlockContainer {
 
     public static int renderId;
     private final int kind;
-    @SideOnly(Side.CLIENT)
-    private IIcon controllerOverlay;
-    @SideOnly(Side.CLIENT)
-    private IIcon accessOverlay;
 
     public VaultBlock(int kind) {
         super(Material.iron);
@@ -55,11 +51,7 @@ public class VaultBlock extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(net.minecraft.client.renderer.texture.IIconRegister registry) {
-        if (kind == 1) VaultSkin.icons = new IIcon[9];
-        if (kind == 1)
-            for (int i = 0; i < 9; i++) VaultSkin.icons[i] = registry.registerIcon("aestoragevault:formed_shell_" + i);
-        if (kind == 1) controllerOverlay = registry.registerIcon("aestoragevault:controller_overlay");
-        if (kind >= 2) accessOverlay = registry.registerIcon("aestoragevault:access_overlay");
+        if (kind == 1) VaultSkin.register(registry);
     }
 
     @Override
@@ -70,10 +62,12 @@ public class VaultBlock extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public IIcon overlay(int side, int metadata) {
+        // Ports retain their existing all-face connector semantics: old worlds store
+        // metadata 0 and have no port-facing setting. Never turn those connectors invisible.
         if (kind == 3) return gregtech.api.enums.Textures.BlockIcons.OVERLAY_PIPE_OUT.getIcon();
-        if (kind >= 2) return accessOverlay;
+        if (kind == 2) return gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_INPUT_HATCH.getIcon();
         int facing = metadata >= 0 && metadata <= 5 ? metadata : 2;
-        return kind == 1 && side == facing ? controllerOverlay : null;
+        return kind == 1 && side == facing ? gregtech.api.enums.Textures.BlockIcons.OVERLAY_SCREEN.getIcon() : null;
     }
 
     @Override

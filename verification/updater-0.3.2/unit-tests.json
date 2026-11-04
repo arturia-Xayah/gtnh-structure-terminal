@@ -1,0 +1,82 @@
+[
+  {
+    "suite": "dev.structureterminal.update.UpdateTransportTest",
+    "name": "refusesPartialNonJarOrUnrelatedContent",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateTransportTest",
+    "name": "cancellationAndSizeLimitsStopTransfer",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateTransportTest",
+    "name": "jarDescriptorMustMatchBothRequestedVersions",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateInstallerTest",
+    "name": "atomicReplacementKeepsExactlyOneJarAndVerifiedBackup",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateInstallerTest",
+    "name": "refusesDuplicateModInVersionSubdirectory",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateInstallerTest",
+    "name": "refusesInstallOutsideMods",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateInstallerTest",
+    "name": "refusesModifiedInstalledJarAndTamperedDownload",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.UpdateInstallerTest",
+    "name": "separateHelperWaitsForParentLockThenInstallsWithoutMinecraft",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ServerVersionProbeTest",
+    "name": "realLoopbackStatusRequestDoesNotAttemptLogin",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ServerVersionProbeTest",
+    "name": "parsesOnlyOurModAndRejectsAmbiguity",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ReleaseCatalogTest",
+    "name": "redirectsAreRestrictedToTlsGithubAssetHosts",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ReleaseCatalogTest",
+    "name": "semanticOrderingIncludesStagesAndNumericalParts",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ReleaseCatalogTest",
+    "name": "rejectsDraftsWrongSourcesUnverifiedAndOversizedFiles",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ReleaseCatalogTest",
+    "name": "detectsRealMenuVersionAndRcWithoutTruncation",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ReleaseCatalogTest",
+    "name": "serverExactVersionOverridesPreviewChannelButNeverSubstitutesLatest",
+    "passed": true
+  },
+  {
+    "suite": "dev.structureterminal.update.ReleaseCatalogTest",
+    "name": "choosesNewestCompatibleVersionNotListOrder",
+    "passed": true
+  }
+]

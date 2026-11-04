@@ -60,6 +60,7 @@ public final class VaultMod {
         GameRegistry.registerTileEntity(TileController.class, ID + ":controller");
         GameRegistry.registerTileEntity(TileAccess.class, ID + ":access");
         GameRegistry.registerTileEntity(TileOutput.class, ID + ":output");
+        dev.aestoragevault.world.VaultConstructable.register();
         FMLCommonHandler.instance()
             .bus()
             .register(Repositories.INSTANCE);

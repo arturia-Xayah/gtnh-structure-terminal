@@ -103,9 +103,15 @@ public final class VaultStructure {
             TileEntity tile = world.getTileEntity(x + dx, y + dy, z + dz);
             if (!(tile instanceof TileController) || !((TileController) tile).formed) continue;
             TileController controller = (TileController) tile;
-            Shape shape = inspectExclusive(controller);
-            if (shape != null && VaultGeometry.shell(x - shape.centerX, y - shape.centerY, z - shape.centerZ))
-                return controller;
+            // Rendering uses the server's Formed flag. ChunkCache is not a World and native
+            // hatch ownership is server-only; repeating inspectExclusive here rejects valid
+            // client structures and turns every face render into nested structure scans.
+            if (world instanceof World && !((World) world).isRemote && inspectExclusive(controller) == null) continue;
+            int front = world.getBlockMetadata(controller.xCoord, controller.yCoord, controller.zCoord);
+            int cx = controller.xCoord - VaultGeometry.normal(front, 0);
+            int cy = controller.yCoord - VaultGeometry.normal(front, 1);
+            int cz = controller.zCoord - VaultGeometry.normal(front, 2);
+            if (VaultGeometry.shell(x - cx, y - cy, z - cz)) return controller;
         }
         return null;
     }

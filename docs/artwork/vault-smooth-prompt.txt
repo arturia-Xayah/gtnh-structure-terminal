@@ -1,0 +1,8 @@
+Built-in image_gen mode; original generated artwork kept as vault-smooth-source.png.
+Technical packing: tools/artwork/PackVaultSkin.java; output 512px, shared atlas UV thirds;
+constant outer 16px guard band for cube edge continuity. No generated game screenshot.
+
+Use case: stylized-concept.
+Asset type: production game diffuse/albedo texture, a SINGLE perfectly flat square surface filling the entire image, straight orthographic view, no perspective, no object render.
+Primary request: one continuous smooth futuristic ceramic alloy skin for a whole Minecraft 3x3 multiblock machine face. Elegant restrained blue-white and faint lavender palette. Mostly light cool white satin ceramic, very fine smooth material detail; a few extremely thin cyan and lavender inset circuit traces in a symmetrical layout near the interior quarter positions. Center quiet and clear for a separate controller overlay. It is ONE big continuous surface, NOT nine panels. No grid, no individual block borders, no bolts, no rivets, no dark frames, no inset outer border, no text or labels. Avoid strong shadows, perspective, bright bloom and brushed noisy grain.
+Critical tiling constraints: The outermost 15 percent on ALL FOUR sides must be exactly uniform flat solid pale blue-white RGB (204,218,231), no noise or lighting gradients at the edges, no traces reaching the edges. Interior transitions gently into the identical edge color. Outer edges same color to allow a seamless wrap around cube corners. All graphical details remain well inside the middle 70 percent. Fine quality suitable for reducing to 384x384, with each 128x128 portion mapped to one block. The image itself is the usable square texture, with no margins or presentation backdrop.

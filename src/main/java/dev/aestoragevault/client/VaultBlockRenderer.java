@@ -18,7 +18,7 @@ import dev.aestoragevault.world.VaultBlock;
 import dev.aestoragevault.world.VaultSkin;
 import dev.aestoragevault.world.VaultStructure;
 
-/** Native LuV shell plus a transparent original front overlay; no baked vanilla textures. */
+/** Native unformed shell; continuous formed skin with separately rendered functional overlays. */
 @SideOnly(Side.CLIENT)
 public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
 
@@ -102,15 +102,41 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
                     y - owner.yCoord + VaultGeometry.normal(front, 1),
                     z - owner.zCoord + VaultGeometry.normal(front, 2),
                     side);
-                Tessellator.instance.setBrightness(
-                    block
-                        .getMixedBrightnessForBlock(world, x + normal.offsetX, y + normal.offsetY, z + normal.offsetZ));
-                float light = side == 0 ? .5f : side == 1 ? 1f : side < 4 ? .8f : .6f;
-                Tessellator.instance.setColorOpaque_F(light, light, light);
-                face(renderer, block, side, x, y, z, VaultSkin.icons[tile]);
+                renderShellFace(world, x, y, z, block, renderer, side, VaultSkin.icon(tile));
             }
         } finally {
             renderer.enableAO = oldAO;
+        }
+    }
+
+    /** Shared by casing, controller, ME ports and native GT buses, including identical UV orientation. */
+    public static void renderShellFace(IBlockAccess world, int x, int y, int z, Block block, RenderBlocks renderer,
+        int side, IIcon icon) {
+        boolean ao = renderer.enableAO, flip = renderer.flipTexture, mirror = renderer.field_152631_f;
+        int bottom = renderer.uvRotateBottom, top = renderer.uvRotateTop, north = renderer.uvRotateNorth;
+        int south = renderer.uvRotateSouth, east = renderer.uvRotateEast, west = renderer.uvRotateWest;
+        renderer.enableAO = false;
+        renderer.flipTexture = false;
+        renderer.field_152631_f = false;
+        renderer.uvRotateBottom = renderer.uvRotateTop = renderer.uvRotateNorth = 0;
+        renderer.uvRotateSouth = renderer.uvRotateEast = renderer.uvRotateWest = 0;
+        try {
+            ForgeDirection normal = ForgeDirection.getOrientation(side);
+            Tessellator.instance.setBrightness(
+                block.getMixedBrightnessForBlock(world, x + normal.offsetX, y + normal.offsetY, z + normal.offsetZ));
+            float light = side == 0 ? .5f : side == 1 ? 1f : side < 4 ? .8f : .6f;
+            Tessellator.instance.setColorOpaque_F(light, light, light);
+            face(renderer, block, side, x, y, z, icon);
+        } finally {
+            renderer.enableAO = ao;
+            renderer.flipTexture = flip;
+            renderer.field_152631_f = mirror;
+            renderer.uvRotateBottom = bottom;
+            renderer.uvRotateTop = top;
+            renderer.uvRotateNorth = north;
+            renderer.uvRotateSouth = south;
+            renderer.uvRotateEast = east;
+            renderer.uvRotateWest = west;
         }
     }
 

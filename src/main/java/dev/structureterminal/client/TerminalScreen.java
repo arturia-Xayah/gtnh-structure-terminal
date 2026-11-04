@@ -38,8 +38,12 @@ public final class TerminalScreen extends GuiScreen {
     private TerminalSettings settings;
     private Scan scan;
     private final StructureScene scene = new StructureScene();
+    private final StructureScene minimap = new StructureScene();
+    private boolean showMap;
+    private Scan minimapScan;
+    private int minimapWidth;
     public String status = "";
-    private boolean config = true, partsPage, demolish, replace, confirm;
+    private boolean config = true, partsPage, demolish, replace, confirm, help;
     private int cardX, cardY, cardW, cardH, scroll, lastX, lastY, dragButton = -1, dragStartX, dragStartY;
     private GuiTextField sizeField, search;
     private String popupChannel, popupGroup;
@@ -66,12 +70,12 @@ public final class TerminalScreen extends GuiScreen {
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
         if (settings == null) settings = TerminalSettings.fromTool(mc.thePlayer.getHeldItem());
-        bridge = NativeBridge.resolve(mc.theWorld, x, y, z, side);
-        cardW = Math.min(210, Math.max(164, width / 3));
-        cardX = width - 18 - cardW;
+        bridge = side < 0 ? null : NativeBridge.resolve(mc.theWorld, x, y, z, side);
+        cardW = Math.min(178, Math.max(164, width / 3));
+        cardX = width - 14 - cardW;
         cardY = 39;
         cardH = height - cardY - 33;
-        sizeField = new GuiTextField(fontRendererObj, cardX + cardW - 58, cardY + 30, 42, 12);
+        sizeField = new GuiTextField(fontRendererObj, cardX + cardW - 58, cardY + 30, 32, 12);
         sizeField.setMaxStringLength(2);
         sizeField.setText(Integer.toString(settings.size));
         search = new GuiTextField(fontRendererObj, 28, 65, 154, 14);
@@ -86,67 +90,64 @@ public final class TerminalScreen extends GuiScreen {
     private void buttons() {
         buttonList.clear();
         int offset = partsPage ? 0 : scroll * 23;
-        button(0, width - 31, 15, 14, "x");
-        button(1, width - 49, 15, 14, "=");
-        button(2, width - 67, 15, 14, "?");
-        button(3, width - 85, 15, 14, "H");
-        button(4, width - 103, 15, 14, "F");
-        button(5, width - 121, 15, 14, "+");
-        button(6, width - 139, 15, 14, "-");
+        button(0, width - 31, 15, 14, "×").tooltip = tr("close");
+        button(1, width - 49, 15, 14, "").iconRow = 11;
+        button(3, width - 67, 15, 14, "").iconRow = 10;
+        button(4, width - 103, 15, 14, "").viewIcon = 2;
+        button(7, width - 85, 15, 14, "").viewIcon = 3;
+        button(5, width - 121, 15, 14, "").viewIcon = 1;
+        button(6, width - 139, 15, 14, "").viewIcon = 0;
+        button(2, width - 157, 15, 14, "").iconRow = 12;
         if (config) {
-            button(10, cardX + 8, cardY + 10, cardW - 16, partsPage ? tr("back") : tr("parts"));
+            button(10, cardX + 8, cardY + 8, cardW - 16, partsPage ? tr("back") : tr("parts"));
             if (!partsPage) {
-                button(11, cardX + 8, cardY + 29 - offset, 14, "-");
-                button(12, cardX + 25, cardY + 29 - offset, 14, "+");
-                OreTheme.Button mirror = button(
-                    13,
-                    cardX + 8,
-                    cardY + 50 - offset,
-                    cardW - 16,
-                    tr("mirror") + ": " + on(settings.mirror));
-                mirror.enabled = bridge != null && bridge.canMirror(!settings.mirror);
-                mirror.variant = settings.mirror ? 1 : 0;
-                button(
-                    14,
-                    cardX + 8,
-                    cardY + 69 - offset,
-                    cardW - 16,
-                    tr("network") + ": " + on(settings.network)).variant = settings.network ? 1 : 0;
-                button(
-                    15,
-                    cardX + 8,
-                    cardY + 88 - offset,
-                    cardW - 16,
-                    tr("operation") + ": "
-                        + tr(demolish ? "demolish" : replace ? "replace" : "build")).variant = demolish || replace ? 2
-                            : 0;
+                button(11, cardX + cardW - 76, cardY + 29 - offset, 14, "−");
+                button(12, cardX + cardW - 22, cardY + 29 - offset, 14, "+");
+                int modesY = cardY + 57 + channelNames.size() * 23 - offset;
                 button(
                     16,
                     cardX + 8,
-                    cardY + 107 - offset,
+                    modesY,
                     cardW - 16,
                     tr("layer", scene.layer == Integer.MIN_VALUE ? tr("all") : scene.layer - y));
-                button(20, cardX + 8, cardY + cardH - 54, cardW - 16, tr("more_channels"));
+                OreTheme.Button mirror = button(13, cardX + 8, modesY + 20, cardW - 16, tr("mirror"));
+                mirror.enabled = bridge == null || bridge.canMirror(!settings.mirror);
+                mirror.switchValue = settings.mirror;
+                button(14, cardX + 8, modesY + 39, cardW - 16, tr("network")).switchValue = settings.network;
+                button(
+                    15,
+                    cardX + 8,
+                    modesY + 58,
+                    cardW - 16,
+                    tr("operation") + ": " + tr(demolish ? "demolish" : replace ? "replace" : "build"));
+                button(20, cardX + 8, modesY + 78, cardW - 16, tr("more_channels"));
             }
-            button(17, cardX + 8, cardY + cardH - 36, (cardW - 20) / 2, tr("project")).enabled = scan != null;
+            button(17, cardX + 8, cardY + cardH - 36, (cardW - 20) / 2, tr("project")).enabled = bridge != null
+                && scan != null;
             button(
                 18,
                 cardX + 12 + (cardW - 20) / 2,
                 cardY + cardH - 36,
                 (cardW - 20) / 2,
-                tr(demolish ? "demolish" : replace ? "replace" : "build")).enabled = scan != null;
+                tr(demolish ? "demolish" : replace ? "replace" : "build")).enabled = bridge != null && scan != null;
             ((OreTheme.Button) buttonList.get(buttonList.size() - 1)).variant = demolish || replace ? 2 : 1;
-            button(19, cardX + 8, cardY + cardH - 18, cardW - 16, tr("stop"));
+            button(19, cardX + 8, cardY + cardH - 18, cardW - (demolish || replace ? 48 : 16), tr("save_close"));
+            if (demolish || replace) button(21, cardX + cardW - 36, cardY + cardH - 18, 28, "■").tooltip = tr("stop");
         }
         for (Object object : buttonList) {
             GuiButton b = (GuiButton) object;
-            if (b.id >= 11 && b.id <= 16)
-                b.visible = b.yPosition >= cardY + 28 && b.yPosition + 14 <= cardY + cardH - 60;
+            if (b.id <= 7) {
+                String[] tips = { "close", "configuration", "help", "highlight", "fit", "zoom_in", "zoom_out",
+                    "minimap" };
+                ((OreTheme.Button) b).tooltip = tr(tips[b.id]);
+            }
+            if (b.id >= 11 && b.id <= 16 || b.id == 20)
+                b.visible = b.yPosition >= cardY + 28 && b.yPosition + 14 <= cardY + cardH - 43;
         }
         if (sizeField != null) {
             String text = sizeField.getText();
             boolean focused = sizeField.isFocused();
-            sizeField = new GuiTextField(fontRendererObj, cardX + cardW - 58, cardY + 30 - offset, 42, 12);
+            sizeField = new GuiTextField(fontRendererObj, cardX + cardW - 58, cardY + 30 - offset, 32, 12);
             sizeField.setMaxStringLength(2);
             sizeField.setText(text);
             sizeField.setFocused(focused && sizeVisible());
@@ -155,7 +156,7 @@ public final class TerminalScreen extends GuiScreen {
 
     private boolean sizeVisible() {
         int at = cardY + 30 - scroll * 23;
-        return !partsPage && at >= cardY + 28 && at + 12 <= cardY + cardH - 60;
+        return !partsPage && at >= cardY + 28 && at + 12 <= cardY + cardH - 43;
     }
 
     private OreTheme.Button button(int id, int bx, int by, int bw, String text) {
@@ -171,8 +172,12 @@ public final class TerminalScreen extends GuiScreen {
     private void refresh(boolean fit) {
         confirm = false;
         if (bridge == null) {
-            status = tr("unsupported");
+            status = tr(side < 0 ? "settings_hint" : "unsupported");
             scan = null;
+            if (side < 0) {
+                scan = new Scan();
+                expandChannels();
+            }
             return;
         }
         try {
@@ -204,19 +209,22 @@ public final class TerminalScreen extends GuiScreen {
                 config = !config;
                 break;
             case 2:
-                status = tr("controls");
+                help = !help;
                 break;
             case 3:
                 scene.highlight = !scene.highlight;
                 break;
             case 4:
-                if (scan != null) scene.fit(scan, width - cardW - 45, height - 80);
+                if (bridge != null && scan != null) scene.fit(scan, width - cardW - 45, height - 80);
                 break;
             case 5:
                 scene.zoom = Math.min(80, scene.zoom * 1.2);
                 break;
             case 6:
                 scene.zoom = Math.max(0.15, scene.zoom / 1.2);
+                break;
+            case 7:
+                showMap = !showMap;
                 break;
             case 10:
                 partsPage = !partsPage;
@@ -270,6 +278,9 @@ public final class TerminalScreen extends GuiScreen {
                 confirm = false;
                 break;
             case 19:
+                mc.displayGuiScreen(null);
+                return;
+            case 21:
                 send(2, false);
                 break;
             case 20:
@@ -283,7 +294,7 @@ public final class TerminalScreen extends GuiScreen {
 
     private void send(int action, boolean confirmed) {
         NBTTagCompound tag = new NBTTagCompound();
-        tag.setInteger("action", action);
+        tag.setInteger("action", action == 0 ? 5 : action);
         tag.setInteger("x", x);
         tag.setInteger("y", y);
         tag.setInteger("z", z);
@@ -322,21 +333,46 @@ public final class TerminalScreen extends GuiScreen {
             } catch (ReflectiveOperationException ignored) {}
         }
         fontRendererObj.drawString(
-            fontRendererObj.trimStringToWidth(tr("preview", name), Math.max(50, width - 170)),
+            fontRendererObj.trimStringToWidth(tr("preview", name), Math.max(35, width - 185)),
             16,
             17,
             OreTheme.TEXT);
         drawRect(14, 34, width - 14, height - 28, 0xffb4b4b4);
         for (int gx = 14; gx < width - 14; gx += 16) drawRect(gx, 34, gx + 1, height - 28, 0x14000000);
         for (int gy = 34; gy < height - 28; gy += 16) drawRect(14, gy, width - 14, gy + 1, 0x14000000);
-        if (scan != null) scene.draw(scan, settings, 14, 34, width - 28, height - 62);
+        if (bridge != null && scan != null) scene.draw(scan, settings, 14, 34, width - 28, height - 62);
+        if (showMap && bridge != null && scan != null) {
+            int mw = Math.min(100, Math.max(54, width - cardW - 45)), mh = 64;
+            OreTheme.panel(20, height - 100, mw, mh);
+            if (minimapScan != scan || minimapWidth != mw) {
+                minimap.fit(scan, mw - 8, mh - 8);
+                minimapScan = scan;
+                minimapWidth = mw;
+            }
+            minimap.yaw = 0;
+            minimap.pitch = 90;
+            minimap.draw(scan, settings, 24, height - 96, mw - 8, mh - 8);
+        }
         if (config) drawCard(mouseX, mouseY);
         for (Object object : buttonList) ((GuiButton) object).drawButton(mc, mouseX, mouseY);
         if (popupChannel == null && popupGroup == null && config && sizeVisible()) sizeField.drawTextBox();
         fontRendererObj
             .drawString(fontRendererObj.trimStringToWidth(status, width - 32), 16, height - 21, OreTheme.SECONDARY);
+        if (help) {
+            OreTheme.panel(18, 42, Math.min(230, width - 36), 86);
+            fontRendererObj.drawSplitString(tr("controls"), 26, 50, Math.min(214, width - 52), OreTheme.TEXT);
+        }
         if (scan != null && scene.rendered >= 24000)
             fontRendererObj.drawString(tr("render_limit"), 18, height - 40, 0x884400);
+        if (popupChannel == null && popupGroup == null) for (Object o : buttonList) {
+            OreTheme.Button b = (OreTheme.Button) o;
+            if (b.visible && b.tooltip != null
+                && mouseX >= b.xPosition
+                && mouseX < b.xPosition + b.width
+                && mouseY >= b.yPosition
+                && mouseY < b.yPosition + b.height)
+                drawHoveringText(Collections.singletonList(b.tooltip), mouseX, mouseY, fontRendererObj);
+        }
         if (popupChannel != null || popupGroup != null) {
             drawPopup(mouseX, mouseY);
             search.drawTextBox();
@@ -345,10 +381,11 @@ public final class TerminalScreen extends GuiScreen {
 
     private void drawCard(int mx, int my) {
         OreTheme.panel(cardX, cardY, cardW, cardH);
-        int start = partsPage ? cardY + 31 : cardY + 128 - scroll * 23;
-        if (sizeVisible()) fontRendererObj.drawString(tr("size"), cardX + 44, cardY + 32 - scroll * 23, OreTheme.TEXT);
+        int start = partsPage ? cardY + 31 : cardY + 54 - scroll * 23;
+        if (sizeVisible()) fontRendererObj.drawString(tr("size"), cardX + 8, cardY + 32 - scroll * 23, OreTheme.TEXT);
         List<String> rows = partsPage ? groups : channelNames;
-        int end = cardY + cardH - 60;
+        int end = cardY + cardH - 43;
+        fontRendererObj.drawString(tr("configuration"), cardX + 8, cardY - 12, OreTheme.TEXT);
         for (int row = partsPage ? scroll : 0; row < rows.size(); row++) {
             int ry = start + (row - (partsPage ? scroll : 0)) * 23;
             if (ry < cardY + 28) continue;
@@ -370,7 +407,9 @@ public final class TerminalScreen extends GuiScreen {
                 int at = vs.indexOf(value);
                 if (at >= 0) icon = scan.channels.get(key)
                     .get(at);
-                label = key + ": " + value;
+                String channelLabel = StatCollector.translateToLocal("structurelib.channel." + key);
+                if (channelLabel.startsWith("structurelib.channel.")) channelLabel = key;
+                label = channelLabel + ": " + value;
             }
             if (icon != null) icon(icon, cardX + 10, ry + 2);
             fontRendererObj
@@ -379,7 +418,7 @@ public final class TerminalScreen extends GuiScreen {
                 if (partsPage) scene.highlighted = key;
             }
         }
-        if (rows.isEmpty() && start >= cardY + 28 && start + 20 < end) fontRendererObj.drawSplitString(
+        if (partsPage && rows.isEmpty() && start >= cardY + 28 && start + 20 < end) fontRendererObj.drawSplitString(
             tr(partsPage ? "no_parts" : "no_channels"),
             cardX + 9,
             start,
@@ -527,11 +566,11 @@ public final class TerminalScreen extends GuiScreen {
         }
         if (config && sizeVisible()) sizeField.mouseClicked(mx, my, button);
         if (config && mx >= cardX && mx < cardX + cardW && my >= cardY && my < cardY + cardH) {
-            int start = partsPage ? cardY + 31 : cardY + 128 - scroll * 23;
-            if (my >= Math.max(start, cardY + 28) && my < cardY + cardH - 60) {
+            int start = partsPage ? cardY + 31 : cardY + 54 - scroll * 23;
+            if (my >= Math.max(start, cardY + 28) && my < cardY + cardH - 43) {
                 int index = (partsPage ? scroll : 0) + (my - start) / 23;
                 List<String> rows = partsPage ? groups : channelNames;
-                if (index < rows.size()) {
+                if (index >= 0 && index < rows.size()) {
                     if (partsPage) {
                         Cell cell = scan.groups.get(rows.get(index));
                         boolean hatches = false;
@@ -589,7 +628,7 @@ public final class TerminalScreen extends GuiScreen {
             popupScroll = Math.max(0, popupScroll + (wheel < 0 ? 1 : -1));
         else if (config && mx >= cardX && my >= cardY) {
             int maximum = partsPage ? Math.max(0, groups.size() - 1)
-                : Math.max(0, (100 + channelNames.size() * 23 - (cardH - 88) + 22) / 23);
+                : Math.max(0, (140 + channelNames.size() * 23 - (cardH - 70) + 22) / 23);
             scroll = Math.max(0, Math.min(maximum, scroll + (wheel < 0 ? 1 : -1)));
             buttons();
         } else scene.zoom = Math.max(0.15, Math.min(80, scene.zoom * (wheel > 0 ? 1.15 : 1 / 1.15)));
@@ -597,6 +636,14 @@ public final class TerminalScreen extends GuiScreen {
 
     @Override
     protected void keyTyped(char c, int key) {
+        if (key == Keyboard.KEY_F && !sizeField.isFocused()
+            && popupChannel == null
+            && popupGroup == null
+            && bridge != null
+            && scan != null) {
+            scene.fit(scan, width - cardW - 45, height - 80);
+            return;
+        }
         if (key == Keyboard.KEY_ESCAPE && (popupChannel != null || popupGroup != null)) {
             popupChannel = popupGroup = null;
             return;
