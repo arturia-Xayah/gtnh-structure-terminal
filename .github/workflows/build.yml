@@ -15,7 +15,7 @@ jobs:
             17
             25
       - uses: gradle/actions/setup-gradle@v4
-      - run: chmod +x gradlew && ./gradlew build prepareUpdateAsset --no-daemon --console=plain
+      - run: chmod +x gradlew && ./gradlew build prepareUpdateAsset --no-daemon --no-configuration-cache --console=plain
       - uses: actions/upload-artifact@v4
         if: success()
         with:
