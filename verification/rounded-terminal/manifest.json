@@ -1,0 +1,27 @@
+{
+  "internal_version": "0.3.3-alpha",
+  "label": "rounded-terminal",
+  "target": "GTNH 2.9.0",
+  "published": false,
+  "client_launched": false,
+  "unit_tests": 161,
+  "unit_failures": 0,
+  "backend_checks": 71,
+  "backend_passed": true,
+  "extra_assertions": "Native glass channel retention; all registered glass options sorted and deduplicated, every icon accepted by native glass element for its channel; all 14 native coils match their tier.",
+  "browser_preview": {
+    "javascript_errors": 0,
+    "tested_widths": [
+      760,
+      320
+    ],
+    "narrow_overflow": false,
+    "glass_preview": "Main borosilicate variants only; in-game selector includes all registered variants.",
+    "fonts": "Browser uses system font; game uses configured Minecraft renderer."
+  },
+  "fixture_differences": [
+    "dev/structureterminal/client/TerminalStyle.class"
+  ],
+  "jar": "/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/dist/0.3.3-alpha-rounded-terminal-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.3-alpha-rounded-terminal-GTNH-2.9.0.jar",
+  "sha256": "6a47e4e1f4c0b5205f8f1e207832133ba20980dd11069dc76cb8e2f446565239"
+}

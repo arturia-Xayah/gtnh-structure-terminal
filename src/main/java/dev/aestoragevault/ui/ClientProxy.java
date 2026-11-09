@@ -21,6 +21,15 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
+    public void updateSkin(TileController controller, boolean remove) {
+        if (controller.clientSkin == null) {
+            if (remove) return;
+            controller.clientSkin = new dev.aestoragevault.client.VaultCasingSkin();
+        }
+        ((dev.aestoragevault.client.VaultCasingSkin) controller.clientSkin).update(controller, remove);
+    }
+
+    @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == 1 && world.getTileEntity(x, y, z) instanceof dev.aestoragevault.world.TileOutput)
             return new OutputScreen(player, (dev.aestoragevault.world.TileOutput) world.getTileEntity(x, y, z));

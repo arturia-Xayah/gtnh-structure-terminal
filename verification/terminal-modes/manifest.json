@@ -1,0 +1,31 @@
+{
+  "target": "GTNH 2.9.0",
+  "internal_version": "0.3.3-alpha",
+  "published": false,
+  "client_launched": false,
+  "unit": {
+    "tests": 162,
+    "failures": 0,
+    "errors": 0
+  },
+  "backend_checks": 76,
+  "backend_passed": true,
+  "new_backend_cases": [
+    "replace_all",
+    "dismantle",
+    "dismantle_full",
+    "dismantle_protected",
+    "dismantle_disabled"
+  ],
+  "client_integration": {
+    "icon": "GuiContainerManager.drawItem",
+    "tooltip": "GuiContainerManager.itemDisplayNameMultiline + drawPagedTooltip",
+    "visual_runtime_verified": false
+  },
+  "fixture_differences": [
+    "dev/structureterminal/client/TerminalScreen.class"
+  ],
+  "fixture_difference_reason": "Client-only normalization of legacy coil mode and disabled-mode label styling. Server implementation matches tested fixture.",
+  "jar": "/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/dist/0.3.3-alpha-terminal-modes-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.3-alpha-terminal-modes-GTNH-2.9.0.jar",
+  "sha256": "53c7cba2b24430cdaec94c14e5d74c34c1c6f2e2820f75e050977415ec15ae0d"
+}

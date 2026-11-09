@@ -20,7 +20,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 - [Client updates](#client-updates): menu checks, exact server versions and exit-time installation
 - [Installation and upgrading](#installation-and-upgrading)
-- [Structure Terminal](#structure-terminal): preview, configure, build, replace and dismantle
+- [Structure Terminal](#structure-terminal): projection, material selection, instant building and coil replacement
 - [ME Packing Tape](#me-packing-tape)
 - [Integrated Pattern](#integrated-pattern): 36 real patterns in one interface slot
 - [AE order optimization](#ae-order-optimization): opt-in planning checks and bulk dispatch
@@ -52,15 +52,20 @@ Settings are in `config/gtnh-modernization-updates.cfg`. The pack version is rea
 
 ## Structure Terminal
 
-Find **Structure Terminal** in NEI. Craft it shapelessly from a **Multiblock Structure Hologram Projector + Ender Pearl + Book**.
+Find **Advanced Structure Terminal** in NEI. Craft it shapelessly from a **Multiblock Structure Hologram Projector + Ender Pearl + Book**.
 
-1. **Right-click a controller to project; sneak-right-click it to build immediately.**
-2. **Sneak-right-click air to open settings.** After targeting a controller, configure its dimensions, modes, coils, glass and individual hatch positions. Global subchannels remain available before targeting a controller.
-3. Supply inventory materials or enable authorized AE supply. Normal construction drains native building rounds in one server tick. Missing materials, obstructions or safety limits stop the request with a report; replenish and retry. Replacement and dismantling still need confirmation; `■` cancels those jobs.
+1. **Right-click a controller to project; sneak-right-click it to execute Build, Swap or Remove.**
+2. **Sneak-right-click air to open terminal settings.** Rounded controls include coil and glass selectors, repeat count, exclusive Build/Swap/Remove modes, and boolean checkboxes. The triangle opens a tier-sorted item list using NEI item rendering and full tooltips, including coil heat capacity and modifier-key details, scrolling and page buttons; select one material per group. Closing the screen saves the settings.
+3. The Auto coil option retains an existing coil ring or chooses the lowest carried tier; AE supply can also provide coils when enabled. Repeat count accepts `0–99`; `0` uses the native minimum. Exact dimensions follow the GTNH machine definition.
 
-Left-drag rotates, right/middle-drag pans, the wheel zooms, the fit button or `F` resets the view, and the layer selector shows individual layers. Scroll the configuration card; toggle the minimap from the toolbar. Matching blocks are kept. Inventory-bearing blocks are skipped during dismantling by default.
+Glass selection applies to structures using the native GTNH `glass` channel. Dedicated glass and fixed materials keep their machine rules. Auto restores the native default.
 
-Machines must expose a readable StructureLib definition; survival building follows their native rules. Previewing does not actively stop a running machine. Actual replacement, dismantling or structural changes may stop it. A linked, powered wireless terminal within range can provide an AE inventory supply entry point.
+4. Build fills empty positions; Swap replaces existing ordinary structure blocks; Remove recovers them. Keep hatches is enabled by default; disable it to recover empty basic GT hatches as well. Filled or special hatches and the controller remain in place. Swap always retains hatches. Swap also offers a Coils only checkbox. No-hatch mode defaults to on and suppresses optional hatches, while exclusive hatch-only positions retain native requirements. Coil replacement returns the old coils and consumes replacement materials.
+5. **AE demolition returns** go only to the network linked by a carried wireless terminal, with range, power and insertion permission required. Blocks remain when the destination cannot accept them; there is no backpack or ground fallback. If an actual insertion is rejected after removal, the terminal retains the remainder and displays a warning. Restore access and use it on a controller again to retry the pending return first. Without AE mode, recovery uses backpack space and skips blocks when full.
+
+A construction pass executes in one server tick, skips missing materials and continues with other positions. Existing ordinary blocks and hatches are retained. Replenish materials and click again to finish. Configured scan and build limits still apply and report an interrupted pass explicitly.
+
+Machines must expose a readable StructureLib definition. Normal building skips formed GT machines; projection does not force structure checks or stop them. Replacing coils or changing a structure can stop a running machine. AE supply requires a linked, powered wireless terminal within range and extraction permission.
 
 ## ME Packing Tape
 

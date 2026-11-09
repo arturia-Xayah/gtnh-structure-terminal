@@ -23,8 +23,14 @@ public final class SelectedSource implements IItemSource {
     private final TerminalSettings settings;
     private final EntityPlayerMP player;
     private final Map<String, Cell> cells;
+    private final boolean advanced;
 
     public SelectedSource(EntityPlayerMP player, TerminalSettings settings, Map<String, Cell> cells) {
+        this(player, settings, cells, false);
+    }
+
+    public SelectedSource(EntityPlayerMP player, TerminalSettings settings, Map<String, Cell> cells, boolean advanced) {
+        this.advanced = advanced;
         this.player = player;
         this.settings = settings;
         this.cells = cells;
@@ -40,6 +46,8 @@ public final class SelectedSource implements IItemSource {
             || !player.worldObj.canMineBlock(player, cell.x, cell.y, cell.z)
             || !player.canPlayerEdit(cell.x, cell.y, cell.z, 1, player.getHeldItem())) return false;
         ItemStack selected = cell.selected(settings);
+        if (advanced && !dev.structureterminal.bridge.AdvancedTerminalPlan.allowMaterial(settings, cell, stack))
+            return false;
         if (selected != null && !ItemKeys.same(selected, stack)) return false;
         if (player.capabilities.isCreativeMode) return true;
         if (source.takeOne(stack, simulate)) return true;
@@ -56,6 +64,8 @@ public final class SelectedSource implements IItemSource {
             || !player.canPlayerEdit(cell.x, cell.y, cell.z, 1, player.getHeldItem())) return Collections.emptyMap();
         ItemStack chosen = cell.selected(settings);
         Predicate<ItemStack> allowed = chosen == null ? predicate : s -> ItemKeys.same(s, chosen) && predicate.test(s);
+        if (advanced) allowed = allowed
+            .and(s -> dev.structureterminal.bridge.AdvancedTerminalPlan.allowMaterial(settings, cell, s));
         if (player.capabilities.isCreativeMode) {
             for (ItemStack candidate : cell.candidates) if (allowed.test(candidate)) {
                 ItemStack copy = candidate.copy();

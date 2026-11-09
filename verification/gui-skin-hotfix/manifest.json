@@ -1,0 +1,19 @@
+{
+  "mod_version": "0.3.3-alpha",
+  "build_label": "local-gui-skin-hotfix",
+  "gtnh": "2.9.0",
+  "java": "25.0.4.1",
+  "client_launched": false,
+  "github_published": false,
+  "artifact": "gtnh-modernization-upgrade-0.3.3-alpha-hotfix-GTNH-2.9.0.jar",
+  "sha256": "39e77f3e1d2cbe0d282916658c2113bd7a77da0165f871e9e8a4324a9b3921de",
+  "bytes": 791497,
+  "unit_tests": {
+    "tests": 161,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "production_classes_matching_test_fixture": 218,
+  "verification_limits": "Native right-click packet/server GUI registration and GT overlay registration/lifecycle tested. No client launch, OpenGL drawing or visual in-game confirmation."
+}

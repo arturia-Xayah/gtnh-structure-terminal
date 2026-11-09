@@ -498,6 +498,18 @@ public final class VaultSuite {
     }
 
     private void initialTests() throws Exception {
+        for (String mode : new String[] { "creative", "supply", "replace", "formed", "full", "replace_all", "dismantle",
+            "dismantle_full", "dismantle_protected", "dismantle_disabled", "dismantle_hatch_keep",
+            "dismantle_hatch_remove", "dismantle_hatch_filled", "dismantle_hatch_fluid" })
+            run("advanced_terminal_ebf_" + mode, () -> AdvancedTerminalChecks.run(world, player, mode));
+        run(
+            "ae_dismantle_partial_retry_nbt_journal",
+            () -> dev.structureterminal.server.AeReturnChecks.journal(player));
+        for (String mode : new String[] { "dismantle_ae", "dismantle_ae_full", "dismantle_ae_unlinked",
+            "dismantle_ae_unpowered" })
+            run(
+                "advanced_terminal_ebf_" + mode,
+                () -> AdvancedTerminalChecks.run(world, player, mode, storage().getItemInventory()));
         run("structurelib_nei_examples_three_variants_six_facings", () -> TerminalVaultChecks.previews(world));
         run("vault_complete_in_one_server_tick", () -> TerminalVaultChecks.instant(world, player, false));
         run(

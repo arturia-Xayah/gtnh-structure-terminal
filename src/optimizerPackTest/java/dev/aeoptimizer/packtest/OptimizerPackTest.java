@@ -996,7 +996,13 @@ public final class OptimizerPackTest {
         ForgeChunkManager.forceChunk(ticket, new net.minecraft.world.ChunkCoordIntPair(0, 0));
         player = new FakePlayer(
             world,
-            new GameProfile(UUID.fromString("ae000000-0000-4000-8000-000000000045"), "AEOptimizerTest"));
+            new GameProfile(UUID.fromString("ae000000-0000-4000-8000-000000000045"), "AEOptimizerTest")) {
+
+            @Override
+            public void openGui(Object mod, int id, net.minecraft.world.World guiWorld, int x, int y, int z) {
+                cpw.mods.fml.common.network.internal.FMLNetworkHandler.openGui(this, mod, id, guiWorld, x, y, z);
+            }
+        };
         NetworkManager wire = new NetworkManager(false);
         new EmbeddedChannel(wire);
         new NetHandlerPlayServer(server, wire, player) {

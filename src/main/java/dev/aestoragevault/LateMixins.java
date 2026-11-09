@@ -25,8 +25,6 @@ public final class LateMixins implements ILateMixinLoader {
                 "VisibleAmountMixin",
                 "ReturnBusMixin",
                 "ReturnInventoryGuardMixin"));
-        if (cpw.mods.fml.relauncher.FMLLaunchHandler.side()
-            .isClient()) mixins.add("client.VaultCasingRenderMixin");
         return mixins;
     }
 }

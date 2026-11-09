@@ -88,19 +88,20 @@ public final class BuildService {
             reply(player, "structureterminal.stopped", "");
             return;
         }
-        long now = System.nanoTime();
-        Long old = lastRequest.put(player.getUniqueID(), now);
-        if (old != null && now - old < 250000000L) return;
         if (player.isDead || player.playerNetServerHandler == null) return;
         ItemStack held = player.getHeldItem();
         if (held == null || held.getItem() != StructureTerminal.item)
             throw new IllegalArgumentException("Hold the structure terminal");
         if (action == 5) {
+            if (tag.hasKey("slot") && tag.getInteger("slot") != player.inventory.currentItem) return;
             TerminalSettings.read(tag.getCompoundTag("settings"))
                 .save(held);
             player.inventoryContainer.detectAndSendChanges();
             return;
         }
+        long now = System.nanoTime();
+        Long old = lastRequest.put(player.getUniqueID(), now);
+        if (old != null && now - old < 250000000L) return;
         int x = tag.getInteger("x"), y = tag.getInteger("y"), z = tag.getInteger("z"), side = tag.getInteger("side");
         if (side < 0 || side > 5
             || !Limits.inReach(player.posX, player.posY, player.posZ, x, y, z, TerminalConfig.reach)) {
@@ -111,6 +112,12 @@ public final class BuildService {
         NativeBridge bridge = NativeBridge.resolve(player.worldObj, x, y, z, side);
         if (bridge == null) throw new IllegalArgumentException("Unsupported controller");
         TerminalSettings settings = TerminalSettings.read(tag.getCompoundTag("settings"));
+        if (action == 6) {
+            jobs.remove(player.getUniqueID());
+            settings.save(held);
+            reply(player, "structureterminal.advanced.result", AdvancedBuild.build(bridge, player, settings));
+            return;
+        }
         if (!bridge.canMirror(settings.mirror)) throw new IllegalArgumentException("Unsupported mirror mode");
         if (action == 0) {
             settings.save(held);

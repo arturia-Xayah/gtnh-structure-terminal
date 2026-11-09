@@ -12,6 +12,8 @@ public class CommonProxy implements IGuiHandler {
 
     public void init() {}
 
+    public void updateSkin(TileController controller, boolean remove) {}
+
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == 1 && world.getTileEntity(x, y, z) instanceof dev.aestoragevault.world.TileOutput)

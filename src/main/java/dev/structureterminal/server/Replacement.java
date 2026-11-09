@@ -33,6 +33,11 @@ final class Replacement {
 
     static Result replace(NativeBridge bridge, EntityPlayerMP player, TerminalSettings settings, Cell cell,
         SelectedSource source) {
+        return replace(bridge, player, settings, cell, source, settings.trigger());
+    }
+
+    static Result replace(NativeBridge bridge, EntityPlayerMP player, TerminalSettings settings, Cell cell,
+        SelectedSource source, ItemStack trigger) {
         if (cell.air || cell.candidates.isEmpty()) return Result.SKIPPED;
         ItemStack selected = cell.selected(settings);
         final ItemStack target = (selected == null ? cell.candidates.get(0) : selected).copy();
@@ -49,6 +54,7 @@ final class Replacement {
             || old.getBlockHardness(player.worldObj, cell.x, cell.y, cell.z) < 0) return Result.SKIPPED;
         List<ItemStack> recovered = BlockMaterials.recover(player.worldObj, cell.x, cell.y, cell.z, player);
         if (!BlockMaterials.known(cell, old, recovered)) return Result.SKIPPED;
+        if (!BlockMaterials.canReturn(player, recovered, target)) return Result.BLOCKED;
         if (!source.takeOne(target, true)) return Result.BLOCKED;
         if (MinecraftForge.EVENT_BUS
             .post(new BlockEvent.BreakEvent(cell.x, cell.y, cell.z, player.worldObj, old, meta, player)))
@@ -73,11 +79,12 @@ final class Replacement {
                 cell.x,
                 cell.y,
                 cell.z,
-                settings.trigger(),
+                trigger,
                 AutoPlaceEnvironment.fromLegacy(deferred, player, chat -> {}));
             if (result != PlaceResult.ACCEPT && result != PlaceResult.ACCEPT_STOP) return Result.BLOCKED;
             if (used[0] != 1 || player.worldObj.getBlock(cell.x, cell.y, cell.z) != wanted
                 || player.worldObj.getBlockMetadata(cell.x, cell.y, cell.z) != wantedMeta) return Result.BLOCKED;
+            if (!BlockMaterials.canReturn(player, recovered, target)) return Result.BLOCKED;
             if (!source.takeOne(target, false)) return Result.BLOCKED;
             committed = true;
             BlockMaterials.give(player, recovered);
@@ -86,4 +93,5 @@ final class Replacement {
             if (!committed) player.worldObj.setBlock(cell.x, cell.y, cell.z, old, meta, 3);
         }
     }
+
 }

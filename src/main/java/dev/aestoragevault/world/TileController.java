@@ -32,7 +32,9 @@ public class TileController extends TileEntity {
     public BigInteger capacity = BigInteger.ZERO;
     public BigInteger used = BigInteger.ZERO;
     public int types;
-    public boolean formed;
+    public volatile boolean formed;
+    /** Client-owned render state; never serialized or referenced by the dedicated server. */
+    public Object clientSkin;
     public boolean automatic = true;
     public String status = "Waiting for structure check";
     private boolean invalidIdentity;
@@ -92,7 +94,10 @@ public class TileController extends TileEntity {
 
     @Override
     public void updateEntity() {
-        if (worldObj.isRemote) return;
+        if (worldObj.isRemote) {
+            if (worldObj.getTotalWorldTime() % 20 == 0) VaultMod.proxy.updateSkin(this, false);
+            return;
+        }
         if (!loaded) {
             loaded = true;
             if (invalidIdentity) {
@@ -286,6 +291,7 @@ public class TileController extends TileEntity {
     }
 
     private void detach() {
+        if (worldObj != null && worldObj.isRemote) VaultMod.proxy.updateSkin(this, true);
         if (store != null) {
             savedContributions = store.contributions();
             ledgerSequence = store.sequence();
@@ -407,6 +413,7 @@ public class TileController extends TileEntity {
         types = tag.getInteger("Types");
         formed = tag.getBoolean("Formed");
         status = tag.getString("Status");
+        VaultMod.proxy.updateSkin(this, false);
         worldObj.markBlockRangeForRenderUpdate(xCoord - 2, yCoord - 2, zCoord - 2, xCoord + 2, yCoord + 2, zCoord + 2);
     }
 

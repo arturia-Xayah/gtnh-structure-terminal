@@ -43,5 +43,7 @@ public final class TerminalItem extends Item {
     public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean advanced) {
         lines.add(StatCollector.translateToLocal("structureterminal.tooltip"));
         lines.add(StatCollector.translateToLocal("structureterminal.alpha"));
+        if (dev.structureterminal.server.AeReturn.pending(stack))
+            lines.add(StatCollector.translateToLocal("structureterminal.ae.pending"));
     }
 }

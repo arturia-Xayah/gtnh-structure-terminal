@@ -34,6 +34,11 @@ public final class SettingsTest {
     @Test
     public void allSelectionsSurviveRoundTrip() {
         TerminalSettings s = new TerminalSettings();
+        s.coilTier = 14;
+        s.repeatCount = 99;
+        s.noHatches = false;
+        s.keepHatches = false;
+        s.replaceCoils = true;
         s.size = 17;
         s.mirror = true;
         s.network = true;
@@ -42,6 +47,11 @@ public final class SettingsTest {
         s.choices.put(Fingerprints.digest("position"), "gregtech:gt.blockmachines@123");
         TerminalSettings copy = TerminalSettings.read(s.write());
         assertEquals(17, copy.size);
+        assertEquals(14, copy.coilTier);
+        assertEquals(99, copy.repeatCount);
+        assertEquals(false, copy.noHatches);
+        assertEquals(false, copy.keepHatches);
+        assertTrue(copy.replaceCoils);
         assertTrue(copy.mirror);
         assertTrue(copy.network);
         assertEquals(s.channels, copy.channels);
@@ -49,8 +59,24 @@ public final class SettingsTest {
     }
 
     @Test
+    public void operationPersistsAndLegacyCoilModeMigrates() {
+        for (int mode = TerminalSettings.BUILD; mode <= TerminalSettings.DISMANTLE; mode++) {
+            TerminalSettings settings = new TerminalSettings();
+            settings.operation = mode;
+            assertEquals(mode, TerminalSettings.read(settings.write()).operation);
+        }
+        NBTTagCompound old = new NBTTagCompound();
+        old.setInteger("ReplaceCoilMode", 1);
+        TerminalSettings migrated = TerminalSettings.read(old);
+        assertEquals(TerminalSettings.REPLACE, migrated.operation);
+        assertTrue(migrated.replaceCoils);
+        migrated.operation = TerminalSettings.DISMANTLE;
+        assertEquals(false, migrated.replacing());
+    }
+
+    @Test
     public void malformedAndExcessiveValuesAreRejectedBeforeMachineCalls() {
-        for (int size : new int[] { 0, -1, 65, Integer.MAX_VALUE }) {
+        for (int size : new int[] { 0, -1, 100, Integer.MAX_VALUE }) {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("size", size);
             try {
@@ -58,6 +84,18 @@ public final class SettingsTest {
                 fail("Accepted size " + size);
             } catch (IllegalArgumentException expected) {}
         }
+        for (String key : new String[] { "CoilTier", "RepeatCount", "Operation" }) {
+            for (int value : new int[] { -1, 100, Integer.MAX_VALUE }) {
+                NBTTagCompound invalid = new NBTTagCompound();
+                invalid.setInteger(key, value);
+                try {
+                    TerminalSettings.read(invalid);
+                    fail("Accepted " + key + "=" + value);
+                } catch (IllegalArgumentException expected) {}
+            }
+        }
+        assertTrue(TerminalSettings.read(new NBTTagCompound()).noHatches);
+        assertTrue(TerminalSettings.read(new NBTTagCompound()).keepHatches);
         NBTTagCompound tag = new NBTTagCompound(), channels = new NBTTagCompound();
         channels.setInteger("glass", Integer.MAX_VALUE);
         tag.setTag("channels", channels);

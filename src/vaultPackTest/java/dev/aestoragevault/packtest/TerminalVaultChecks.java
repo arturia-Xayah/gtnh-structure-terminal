@@ -46,11 +46,60 @@ final class TerminalVaultChecks {
                 ExtendedFacing.of(ForgeDirection.getOrientation(face)));
             t.checkStructure();
             check(t.formed, "preview not formed face=" + face + " variant=" + variant);
+            nativeSkin(world, t);
             VaultStructure.Shape shape = VaultStructure.inspect(t);
             check((shape.output != null) == (variant == 3), "preview optional output");
             check((shape.access instanceof dev.aestoragevault.world.TileOutput) == (variant == 2), "preview ME port");
         }
         clear(world, 24, 145, 24);
+    }
+
+    private static void nativeSkin(WorldServer world, TileController owner) {
+        VaultStructure.Shape shape = VaultStructure.inspect(owner);
+        dev.aestoragevault.client.VaultCasingSkin skin = new dev.aestoragevault.client.VaultCasingSkin();
+        // Exercise native RenderOverlay registration without launching a client or initializing GL.
+        boolean remote = world.isRemote;
+        world.isRemote = true;
+        try {
+            skin.update(owner, false);
+            int faces = 0;
+            for (int x = -1; x <= 1; x++) for (int y = -1; y <= 1; y++) for (int z = -1; z <= 1; z++) {
+                int wx = shape.centerX + x, wy = shape.centerY + y, wz = shape.centerZ + z;
+                gregtech.api.interfaces.ITexture[] textures = gregtech.api.render.RenderOverlay.get(world, wx, wy, wz);
+                if (!VaultMod.isLuVCasing(world, wx, wy, wz)) {
+                    check(textures == null, "overlay hid controller/port/hatch face");
+                    continue;
+                }
+                for (ForgeDirection side : ForgeDirection.VALID_DIRECTIONS) {
+                    boolean exterior = x * side.offsetX + y * side.offsetY + z * side.offsetZ == 1;
+                    check(
+                        (textures != null && textures[side.ordinal()] != null) == exterior,
+                        "casing face missing/inside overlay");
+                    if (exterior) faces++;
+                }
+                skin.update(owner, false);
+                check(
+                    gregtech.api.render.RenderOverlay.get(world, wx, wy, wz) == textures,
+                    "unchanged state duplicated overlay");
+            }
+            check(faces >= 42, "too few native casing faces: " + faces);
+            owner.formed = false;
+            skin.update(owner, false);
+            for (int x = -1; x <= 1; x++) for (int y = -1; y <= 1; y++) for (int z = -1; z <= 1; z++) check(
+                gregtech.api.render.RenderOverlay.get(world, shape.centerX + x, shape.centerY + y, shape.centerZ + z)
+                    == null,
+                "broken structure retained skin");
+            owner.formed = true;
+            skin.update(owner, false);
+            skin.update(owner, true);
+            check(
+                gregtech.api.render.RenderOverlay.get(world, shape.centerX + 1, shape.centerY + 1, shape.centerZ + 1)
+                    == null,
+                "unloaded controller retained skin");
+        } finally {
+            skin.update(owner, true);
+            world.isRemote = remote;
+        }
     }
 
     static void instant(WorldServer world, FakePlayer player, boolean partial) throws Exception {

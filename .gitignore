@@ -55,3 +55,6 @@ __pycache__/
 /dist/0.3.2-alpha-GTNH-2.9.0/
 
 /dist/0.3.3-alpha-GTNH-2.9.0/
+
+# Local preview and test JARs stay out of source commits.
+/dist/

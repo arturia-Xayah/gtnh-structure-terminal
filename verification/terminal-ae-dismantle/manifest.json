@@ -1,0 +1,34 @@
+{
+  "target": "GTNH 2.9.0",
+  "internal_version": "0.3.3-alpha",
+  "published": false,
+  "client_launched": false,
+  "unit": {
+    "tests": 162,
+    "failures": 0,
+    "errors": 0
+  },
+  "backend_checks": 85,
+  "backend_passed": true,
+  "fixture_differences": [],
+  "jar": "/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/dist/0.3.3-alpha-ae-dismantle-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.3-alpha-ae-dismantle-GTNH-2.9.0.jar",
+  "sha256": "94e5a86f63153521a4c6c42840eae6812d89b4ba54c5990e9fee5824e4c1d740",
+  "new_cases": [
+    "retain_empty_hatch",
+    "recover_empty_hatch_preserving_color",
+    "retain_item_filled_hatch",
+    "retain_fluid_filled_hatch",
+    "ae_partial_commit_retry_and_nbt_reload",
+    "ae_monitor_receives_16_coils",
+    "rejecting_ae_retains_blocks",
+    "missing_ae_retains_blocks",
+    "unpowered_ae_retains_blocks"
+  ],
+  "limitations": [
+    "No client runtime visual test.",
+    "AE monitor insertion exercised on an actual AE network; wireless discovery, range and security not exercised end-to-end.",
+    "Hatch recovery opts into native basic hatch classes; special or non-empty hatches remain in place.",
+    "The journal handles normal insertion rejection and item NBT reload; it is not a cross-world-storage crash transaction."
+  ],
+  "detection_mode": "Feasibility assessed against GT 5.09.54.265; not implemented."
+}

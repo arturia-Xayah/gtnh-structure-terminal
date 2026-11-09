@@ -9,6 +9,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
+import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
 /** Compatibility contracts checked as bytecode without initializing a game client. */
@@ -25,7 +26,7 @@ public class VaultRenderHookTest {
     }
 
     @Test
-    public void nativeCasingRendererSignatureMatchesClientHook() throws Exception {
+    public void nativeCasingRendererConsumesWorldScopedOverlays() throws Exception {
         boolean found = false;
         for (Object entry : read("gregtech/common/render/GTRendererCasing").methods) {
             MethodNode method = (MethodNode) entry;
@@ -33,7 +34,13 @@ public class VaultRenderHookTest {
                 assertEquals(
                     "(Lnet/minecraft/world/IBlockAccess;IIILnet/minecraft/block/Block;ILnet/minecraft/client/renderer/RenderBlocks;)Z",
                     method.desc);
-                found = true;
+                for (AbstractInsnNode in = method.instructions.getFirst(); in != null; in = in.getNext()) {
+                    if (in instanceof MethodInsnNode) {
+                        MethodInsnNode call = (MethodInsnNode) in;
+                        if (call.owner.equals("gregtech/api/render/RenderOverlay") && call.name.equals("get"))
+                            found = true;
+                    }
+                }
             }
         }
         assertTrue(found);

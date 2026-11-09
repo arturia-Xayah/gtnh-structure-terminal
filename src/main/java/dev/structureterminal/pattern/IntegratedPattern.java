@@ -16,7 +16,6 @@ import appeng.api.AEApi;
 import appeng.api.implementations.ICraftingPatternItem;
 import appeng.api.networking.crafting.ICraftingPatternDetails;
 import cpw.mods.fml.common.registry.GameRegistry;
-import dev.structureterminal.StructureTerminal;
 
 /** A physical pattern inventory, deliberately NOT an ICraftingPatternItem (one item is not one recipe). */
 public final class IntegratedPattern extends Item {
@@ -118,7 +117,7 @@ public final class IntegratedPattern extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (!world.isRemote) player.openGui(StructureTerminal.instance, GUI, world, player.inventory.currentItem, 0, 0);
+        if (!world.isRemote) IntegratedPatternOpening.INSTANCE.request(player);
         return stack;
     }
 

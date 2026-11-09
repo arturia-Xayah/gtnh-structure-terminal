@@ -91,6 +91,8 @@ public final class StructureScanner {
         public String description = "";
         public boolean candidateError;
         public boolean air;
+        public boolean heatingCoil;
+        public ItemStack advancedTrigger;
 
         public ItemStack selected(TerminalSettings settings) {
             String wanted = settings.choices.get(selectionKey);

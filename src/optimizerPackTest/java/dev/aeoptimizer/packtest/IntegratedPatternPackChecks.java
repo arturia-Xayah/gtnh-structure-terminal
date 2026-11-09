@@ -169,7 +169,33 @@ final class IntegratedPatternPackChecks {
             s.player.inventory.currentItem = 0;
             s.player.inventory.setItemStack(null);
             s.player.inventory.mainInventory[0] = new ItemStack(IntegratedPattern.ITEM);
-            IntegratedPatternContainer ui = new IntegratedPatternContainer(s.player, 0);
+            // Exercise the actual C08 handler: it copies the held stack AFTER onItemRightClick.
+            ItemStack beforeClick = s.player.getHeldItem();
+            s.player.openContainer = s.player.inventoryContainer;
+            net.minecraft.network.PacketBuffer packetBytes = new net.minecraft.network.PacketBuffer(
+                io.netty.buffer.Unpooled.buffer());
+            packetBytes.writeInt(-1)
+                .writeByte(255)
+                .writeInt(-1)
+                .writeByte(255);
+            packetBytes.writeItemStackToBuffer(beforeClick);
+            packetBytes.writeByte(0)
+                .writeByte(0)
+                .writeByte(0);
+            net.minecraft.network.play.client.C08PacketPlayerBlockPlacement click = new net.minecraft.network.play.client.C08PacketPlayerBlockPlacement();
+            click.readPacketData(packetBytes);
+            packetBytes.release();
+            s.player.playerNetServerHandler.processPlayerBlockPlacement(click);
+            check(
+                s,
+                "right_click_copies_stack_before_open",
+                s.player.getHeldItem() != beforeClick && s.player.openContainer == s.player.inventoryContainer);
+            dev.structureterminal.pattern.IntegratedPatternOpening.INSTANCE.tick(
+                new cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent(
+                    cpw.mods.fml.common.gameevent.TickEvent.Phase.END));
+            check(s, "right_click_opens_registered_gui", s.player.openContainer instanceof IntegratedPatternContainer);
+            IntegratedPatternContainer ui = (IntegratedPatternContainer) s.player.openContainer;
+            check(s, "right_click_gui_stays_open", ui.canInteractWith(s.player) && ui.holder == s.player.getHeldItem());
             check(s, "36_real_slots", ui.patterns.getSizeInventory() == 36 && ui.inventorySlots.size() == 72);
             check(
                 s,
@@ -308,6 +334,7 @@ final class IntegratedPatternPackChecks {
                     .getSimpleName()
                     .equals("PortableItemStack"));
         } finally {
+            s.player.openContainer = s.player.inventoryContainer;
             System.arraycopy(backup, 0, s.player.inventory.mainInventory, 0, backup.length);
             s.player.inventory.currentItem = selected;
             s.player.inventory.setItemStack(cursor);

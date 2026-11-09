@@ -46,11 +46,7 @@ public final class ClientProxy extends CommonProxy {
 
     @Override
     public void settings(EntityPlayer player) {
-        if (targetWorld == player.worldObj && lastTarget != null
-            && dev.structureterminal.bridge.NativeBridge
-                .resolve(player.worldObj, lastTarget[0], lastTarget[1], lastTarget[2], lastTarget[3]) != null) {
-            open(player, lastTarget[0], lastTarget[1], lastTarget[2], lastTarget[3]);
-        } else open(player, 0, 0, 0, -1);
+        open(player, 0, 0, 0, -1);
     }
 
     @Override
@@ -67,7 +63,7 @@ public final class ClientProxy extends CommonProxy {
                     .fromTool(player.getHeldItem());
                 if (build) {
                     NBTTagCompound tag = new NBTTagCompound();
-                    tag.setInteger("action", 1);
+                    tag.setInteger("action", 6);
                     tag.setInteger("x", x);
                     tag.setInteger("y", y);
                     tag.setInteger("z", z);
@@ -79,12 +75,12 @@ public final class ClientProxy extends CommonProxy {
                     dev.structureterminal.bridge.NativeBridge bridge = dev.structureterminal.bridge.NativeBridge
                         .resolve(player.worldObj, x, y, z, side);
                     if (bridge == null) return;
-                    dev.structureterminal.bridge.StructureScanner.Scan scan = dev.structureterminal.bridge.StructureScanner
-                        .scan(bridge, player, settings);
+                    dev.structureterminal.bridge.StructureScanner.Scan scan = dev.structureterminal.bridge.AdvancedTerminalPlan
+                        .create(bridge, player, settings).scan;
                     com.gtnewhorizon.structurelib.StructureLibAPI.startHinting(player.worldObj);
                     try {
                         for (dev.structureterminal.bridge.StructureScanner.Cell cell : scan.cells) cell.element
-                            .spawnHint(bridge.context, player.worldObj, cell.x, cell.y, cell.z, settings.trigger());
+                            .spawnHint(bridge.context, player.worldObj, cell.x, cell.y, cell.z, cell.advancedTrigger);
                     } finally {
                         com.gtnewhorizon.structurelib.StructureLibAPI.endHinting(player.worldObj);
                     }

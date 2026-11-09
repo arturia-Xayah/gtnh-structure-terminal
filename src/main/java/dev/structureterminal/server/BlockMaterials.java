@@ -64,4 +64,41 @@ final class BlockMaterials {
         player.inventory.markDirty();
         player.inventoryContainer.detectAndSendChanges();
     }
+
+    static boolean canReturn(EntityPlayerMP player, List<ItemStack> drops, ItemStack consumed) {
+        if (player.capabilities.isCreativeMode) return true;
+        ItemStack[] inventory = new ItemStack[player.inventory.mainInventory.length];
+        boolean charged = false;
+        for (int i = 0; i < inventory.length; i++) {
+            ItemStack stack = player.inventory.mainInventory[i];
+            if (stack == null) continue;
+            inventory[i] = stack.copy();
+            if (consumed != null && !charged && dev.structureterminal.bridge.ItemKeys.same(stack, consumed)) {
+                if (--inventory[i].stackSize == 0) inventory[i] = null;
+                charged = true;
+            }
+        }
+        for (ItemStack drop : drops) {
+            int left = drop.stackSize;
+            for (ItemStack stack : inventory) {
+                if (stack == null || !dev.structureterminal.bridge.ItemKeys.same(stack, drop)) continue;
+                int count = Math.min(
+                    left,
+                    Math.max(
+                        0,
+                        Math.min(stack.getMaxStackSize(), player.inventory.getInventoryStackLimit())
+                            - stack.stackSize));
+                stack.stackSize += count;
+                left -= count;
+            }
+            for (int i = 0; i < inventory.length && left > 0; i++) if (inventory[i] == null) {
+                inventory[i] = drop.copy();
+                inventory[i].stackSize = Math
+                    .min(left, Math.min(drop.getMaxStackSize(), player.inventory.getInventoryStackLimit()));
+                left -= inventory[i].stackSize;
+            }
+            if (left > 0) return false;
+        }
+        return true;
+    }
 }

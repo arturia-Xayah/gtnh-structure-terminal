@@ -1,5 +1,18 @@
 # 更新日志 / Changelog
 
+## 未发布 / Unreleased
+
+- 拆除新增“保留仓室”选项；关闭后回收空的基础 GT 仓室。AE 模式拆除只回收到网络，满仓／无连接时保留方块，实际存入被拒绝的余料保存在终端中供重试。 / Optional hatch retention and AE-only demolition recovery, including capacity checks and a persistent pending-return journal.
+- 终端物品图标和完整提示改用 NEI 渲染与提示接口；新增建造／替换／拆除模式单选，支持仅替换线圈、材料返还、背包容量和拆除权限检查。 / Native NEI item rendering and full tooltips; exclusive Build/Swap/Remove modes with coil-only replacement, material recovery, inventory capacity and protection checks.
+- 终端设置改为蓝白淡紫圆角界面：布尔勾选框、可展开的线圈／玻璃图标单选列表、悬停名称与翻页；玻璃选择接入 GTNH 原生通道。 / Rounded terminal UI with checkboxes, expandable coil/glass item selectors, hover names and paging; glass selections use native GTNH channels.
+- 高级终端按 GTMThings-gto `1.5.4-GTO-Port` 公开实现重写：原版高级终端贴图、基础设置、右键投影与 Shift 右键同 tick 搭建；缺料位置继续跳过，支持无仓室模式与仅线圈替换。
+- Reworked the advanced terminal against the public GTMThings-gto `1.5.4-GTO-Port` implementation: original advanced sprite, basic settings, right-click projection and same-tick sneak building; skip unavailable positions, suppress optional hatches and replace heating coils only.
+
+- 修复集成样板右键后立即关闭：等待原版处理手持物品副本后再打开 4×9 容器，保留手持槽保护与即时保存。
+- Fixed Integrated Pattern closing immediately after right-click: open after vanilla replaces the held stack, retaining held-slot protection and immediate saving.
+- 聚合器原生 LuV 外壳改用 GT 的表面覆盖接口，与主机、仓室共用整面连续底纹；同步成型、拆除和区块卸载状态，保留功能图案。
+- Route formed LuV casings through GT’s native surface overlay API with the same continuous skin as the controller and ports; refresh on formation, dismantling and chunk unload while retaining functional markings.
+
 ## 0.3.3-alpha — GTNH 2.9.0 · 2026-11-04
 
 包含此前未独立发布的 0.3.1／0.3.2 开发改动。Includes the previously unpublished 0.3.1/0.3.2 development changes.

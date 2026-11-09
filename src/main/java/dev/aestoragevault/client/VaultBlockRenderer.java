@@ -112,6 +112,11 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
     /** Shared by casing, controller, ME ports and native GT buses, including identical UV orientation. */
     public static void renderShellFace(IBlockAccess world, int x, int y, int z, Block block, RenderBlocks renderer,
         int side, IIcon icon) {
+        renderShellFace(world, x, y, z, block, renderer, side, icon, 0);
+    }
+
+    public static void renderShellFace(IBlockAccess world, int x, int y, int z, Block block, RenderBlocks renderer,
+        int side, IIcon icon, double offset) {
         boolean ao = renderer.enableAO, flip = renderer.flipTexture, mirror = renderer.field_152631_f;
         int bottom = renderer.uvRotateBottom, top = renderer.uvRotateTop, north = renderer.uvRotateNorth;
         int south = renderer.uvRotateSouth, east = renderer.uvRotateEast, west = renderer.uvRotateWest;
@@ -126,7 +131,14 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
                 block.getMixedBrightnessForBlock(world, x + normal.offsetX, y + normal.offsetY, z + normal.offsetZ));
             float light = side == 0 ? .5f : side == 1 ? 1f : side < 4 ? .8f : .6f;
             Tessellator.instance.setColorOpaque_F(light, light, light);
-            face(renderer, block, side, x, y, z, icon);
+            face(
+                renderer,
+                block,
+                side,
+                x + normal.offsetX * offset,
+                y + normal.offsetY * offset,
+                z + normal.offsetZ * offset,
+                icon);
         } finally {
             renderer.enableAO = ao;
             renderer.flipTexture = flip;

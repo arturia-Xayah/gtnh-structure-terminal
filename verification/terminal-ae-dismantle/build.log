@@ -1,0 +1,90 @@
+Calculating task graph as no cached configuration is available for tasks: check assemble
+
+> Configure project :
+You might want to check out './gradlew :faq' if your build fails.
+Build script update from 2.0.33 to 2.0.34 available! Run ./gradlew updateBuildScript
+Recommend replacing '4.19.0' with '4.19' for Eclipse JDT
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+
+> Task :downloadFernflower SKIPPED
+> Task :generateForgeSrgMappings SKIPPED
+> Task :downloadVanillaJars SKIPPED
+> Task :extractDependencyATs SKIPPED
+> Task :processMcLauncherResources NO-SOURCE
+> Task :extractNatives2 UP-TO-DATE
+> Task :compileInjectedInterfacesJava NO-SOURCE
+> Task :processInjectedInterfacesResources NO-SOURCE
+> Task :processInjectedTagsResources NO-SOURCE
+> Task :processApiResources NO-SOURCE
+> Task :injectTags UP-TO-DATE
+> Task :generateUpdateMetadata UP-TO-DATE
+> Task :createMcLauncherFiles UP-TO-DATE
+> Task :injectedInterfacesClasses UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :spotlessMisc UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :compileInjectedTagsJava UP-TO-DATE
+> Task :injectedTagsClasses UP-TO-DATE
+> Task :spotlessMiscCheck UP-TO-DATE
+> Task :checkstyleInjectedTags SKIPPED
+> Task :spotlessKotlin UP-TO-DATE
+> Task :spotlessKotlinCheck UP-TO-DATE
+> Task :checkstyleInjectedInterfaces NO-SOURCE
+> Task :compileMcLauncherJava UP-TO-DATE
+> Task :mcLauncherClasses UP-TO-DATE
+> Task :checkstyleMcLauncher SKIPPED
+> Task :packageMcLauncher UP-TO-DATE
+> Task :spotlessScala UP-TO-DATE
+> Task :spotlessScalaCheck UP-TO-DATE
+> Task :spotlessJava UP-TO-DATE
+> Task :spotlessJavaCheck UP-TO-DATE
+> Task :spotlessCheck UP-TO-DATE
+> Task :mergeVanillaSidedJars SKIPPED
+> Task :deobfuscateMergedJarToSrg SKIPPED
+> Task :decompileSrgJar SKIPPED
+> Task :cleanupDecompSrgJar SKIPPED
+> Task :patchDecompiledJar SKIPPED
+> Task :applyJST SKIPPED
+> Task :remapDecompiledJar SKIPPED
+> Task :sourcesJar
+> Task :decompressDecompiledSources UP-TO-DATE
+> Task :processPatchedMcResources UP-TO-DATE
+> Task :compilePatchedMcJava UP-TO-DATE
+> Task :patchedMcClasses UP-TO-DATE
+> Task :checkstylePatchedMc SKIPPED
+> Task :compileApiJava NO-SOURCE
+> Task :apiClasses UP-TO-DATE
+> Task :packagePatchedMc UP-TO-DATE
+> Task :checkstyleApi NO-SOURCE
+> Task :processIdeVirtualMainResources SKIPPED
+> Task :compileJava UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileIdeVirtualMainJava SKIPPED
+> Task :compileTestJava UP-TO-DATE
+> Task :testClasses UP-TO-DATE
+> Task :jar
+> Task :reobfJar
+> Task :ideVirtualMainClasses SKIPPED
+> Task :assemble
+> Task :checkstyleIdeVirtualMain SKIPPED
+
+> Task :verifyDistribution
+Verified 227 Java 8 compatible classes and coremod manifest; no game launched.
+
+> Task :checkstyleTest
+> Task :test
+> Task :checkstyleMain
+> Task :check
+
+[Incubating] Problems report is available at: file:///Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 5s
+29 actionable tasks: 7 executed, 22 up-to-date
+Configuration cache entry stored.

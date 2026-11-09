@@ -30,16 +30,23 @@ public final class VaultSkin {
     }
 
     public static synchronized ITexture texture(int tile) {
-        if (TEXTURES[tile] == null) TEXTURES[tile] = new ShellTexture(tile);
+        if (TEXTURES[tile] == null) TEXTURES[tile] = new ShellTexture(tile, false);
         return TEXTURES[tile];
+    }
+
+    public static ITexture overlayTexture(int tile) {
+        return new ShellTexture(tile, true);
     }
 
     private static final class ShellTexture implements ITexture {
 
         private final int tile;
 
-        ShellTexture(int tile) {
+        private final boolean overlay;
+
+        ShellTexture(int tile, boolean overlay) {
             this.tile = tile;
+            this.overlay = overlay;
         }
 
         @SideOnly(Side.CLIENT)
@@ -54,7 +61,8 @@ public final class VaultSkin {
                 context.getBlock(),
                 context.getRenderBlocks(),
                 side,
-                icon(tile));
+                icon(tile),
+                overlay ? .001 : 0);
         }
 
         @Override

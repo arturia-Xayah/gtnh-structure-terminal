@@ -1,0 +1,36 @@
+{
+  "base": "GTMThings-gto 1.5.4-GTO-Port",
+  "source_commit": "3c39f4d1377943eeab30cdf8d5f3358289cdf6c1",
+  "target": "GTNH 2.9.0",
+  "internal_version": "0.3.3-alpha",
+  "local_build_label": "classic-terminal",
+  "published": false,
+  "client_launched": false,
+  "unit_tests": 161,
+  "unit_failures": 0,
+  "backend_checks": 251,
+  "backend_passed": true,
+  "production_class_count": 220,
+  "fixture_class_differences": [
+    "dev/structureterminal/client/TerminalScreen.class"
+  ],
+  "difference_explanation": "Client-only tooltip newline formatting after backend fixture build; all other 219 production classes are byte-identical. Final build and unit tests pass. Client visuals not run.",
+  "jar": "/Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/dist/0.3.3-alpha-classic-terminal-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.3-alpha-classic-terminal-GTNH-2.9.0.jar",
+  "sha256": "998adac6e548cb108de5c3b9e9d3430c2221a92af98e252b5233f912a0369931",
+  "jar_bytes": 795263,
+  "coverage": [
+    "EBF creative placement of 16 tier-selected coils in one tick with repeat count independent",
+    "survival coil placement continues past missing casing materials",
+    "five available replacement coils consume five and return five old coils",
+    "normal build does not change a formed GT machine",
+    "full inventory prevents replacement without consuming stock",
+    "existing vault structure, rendering-hook, persistence and AE regressions"
+  ],
+  "limitations": [
+    "No client/GL visual verification",
+    "Not a claim of exhaustive GTNH machine coverage",
+    "GTNH repeat size follows native StructureLib definitions, not copied GTO geometries",
+    "Configured scan/build limits can stop a large pass",
+    "Latest protected GTOLib implementation is not included"
+  ]
+}

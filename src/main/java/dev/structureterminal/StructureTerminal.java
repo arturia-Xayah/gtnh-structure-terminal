@@ -40,6 +40,9 @@ public final class StructureTerminal {
         TerminalConfig.load(configFile);
         dev.structureterminal.packing.PackingItems.register();
         dev.structureterminal.pattern.IntegratedPattern.register();
+        FMLCommonHandler.instance()
+            .bus()
+            .register(dev.structureterminal.pattern.IntegratedPatternOpening.INSTANCE);
         cpw.mods.fml.common.network.NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         item = new TerminalItem();
         GameRegistry.registerItem(item, "structure_terminal");
