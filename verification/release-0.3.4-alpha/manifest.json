@@ -1,0 +1,28 @@
+{
+  "version": "0.3.4-alpha",
+  "gtnh": "2.9.0",
+  "asset": "gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar",
+  "sha256": "4f292accb1457a2fccda8a1b61b92cf12181a08a91d3e3eedd1c54cc7678fb45",
+  "size": 815380,
+  "unit_tests": {
+    "tests": 162,
+    "failures": 0,
+    "errors": 0
+  },
+  "distribution_classes": 227,
+  "client_launched": false,
+  "backend_evidence": "../terminal-ae-dismantle/manifest.json",
+  "backend_checks_previously_passed": 85,
+  "backend_rerun_for_version_bump": false,
+  "version_only_class_differences": [
+    "dev/aeoptimizer/OrderOptimizer.class",
+    "dev/aestoragevault/VaultMod.class",
+    "dev/plasmaforgepower/PlasmaForgePower.class",
+    "dev/structureterminal/StructureTerminal.class",
+    "dev/structureterminal/client/update/UpdateClient.class",
+    "dev/structureterminal/client/update/UpdateScreen.class",
+    "dev/structureterminal/Tags.class"
+  ],
+  "other_class_differences": [],
+  "build_uses_configuration_cache": false
+}

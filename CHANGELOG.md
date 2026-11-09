@@ -1,6 +1,6 @@
 # 更新日志 / Changelog
 
-## 未发布 / Unreleased
+## 0.3.4-alpha — GTNH 2.9.0 · 2026-11-09
 
 - 拆除新增“保留仓室”选项；关闭后回收空的基础 GT 仓室。AE 模式拆除只回收到网络，满仓／无连接时保留方块，实际存入被拒绝的余料保存在终端中供重试。 / Optional hatch retention and AE-only demolition recovery, including capacity checks and a persistent pending-return journal.
 - 终端物品图标和完整提示改用 NEI 渲染与提示接口；新增建造／替换／拆除模式单选，支持仅替换线圈、材料返还、背包容量和拆除权限检查。 / Native NEI item rendering and full tooltips; exclusive Build/Swap/Remove modes with coil-only replacement, material recovery, inventory capacity and protection checks.

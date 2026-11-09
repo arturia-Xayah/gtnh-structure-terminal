@@ -1,0 +1,109 @@
+
+> Configure project :
+You might want to check out './gradlew :faq' if your build fails.
+Build script update from 2.0.33 to 2.0.34 available! Run ./gradlew updateBuildScript
+Recommend replacing '4.19.0' with '4.19' for Eclipse JDT
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+
+> Task :compileInjectedInterfacesJava NO-SOURCE
+> Task :extractDependencyATs SKIPPED
+> Task :generateForgeSrgMappings SKIPPED
+> Task :downloadVanillaJars SKIPPED
+> Task :mergeVanillaSidedJars SKIPPED
+> Task :deobfuscateMergedJarToSrg SKIPPED
+> Task :downloadFernflower SKIPPED
+> Task :decompileSrgJar SKIPPED
+> Task :cleanupDecompSrgJar SKIPPED
+> Task :patchDecompiledJar SKIPPED
+> Task :applyJST SKIPPED
+> Task :remapDecompiledJar SKIPPED
+> Task :decompressDecompiledSources UP-TO-DATE
+> Task :processInjectedInterfacesResources NO-SOURCE
+> Task :injectedInterfacesClasses UP-TO-DATE
+> Task :compilePatchedMcJava UP-TO-DATE
+> Task :processPatchedMcResources UP-TO-DATE
+> Task :patchedMcClasses UP-TO-DATE
+> Task :compileApiJava NO-SOURCE
+> Task :processApiResources NO-SOURCE
+> Task :apiClasses UP-TO-DATE
+> Task :checkstyleApi NO-SOURCE
+> Task :injectTags UP-TO-DATE
+
+> Task :compileInjectedTagsJava
+警告: [options] 源值 8 已过时，将在未来发行版中删除
+警告: [options] 目标值 8 已过时，将在未来发行版中删除
+警告: [options] 要隐藏有关已过时选项的警告, 请使用 -Xlint:-options。
+3 个警告
+
+> Task :extractNatives2 UP-TO-DATE
+> Task :createMcLauncherFiles UP-TO-DATE
+> Task :compileMcLauncherJava UP-TO-DATE
+> Task :processInjectedTagsResources NO-SOURCE
+> Task :injectedTagsClasses
+> Task :processMcLauncherResources NO-SOURCE
+> Task :mcLauncherClasses UP-TO-DATE
+
+> Task :compileJava
+警告: [options] 源值 8 已过时，将在未来发行版中删除
+警告: [options] 目标值 8 已过时，将在未来发行版中删除
+警告: [options] 要隐藏有关已过时选项的警告, 请使用 -Xlint:-options。
+注: /Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/src/main/java/dev/structureterminal/client/update/UpdateClient.java使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+3 个警告
+
+> Task :generateUpdateMetadata
+> Task :processResources
+> Task :classes
+> Task :packageMcLauncher UP-TO-DATE
+> Task :packagePatchedMc UP-TO-DATE
+> Task :compileIdeVirtualMainJava SKIPPED
+> Task :jar
+> Task :processIdeVirtualMainResources SKIPPED
+> Task :reobfJar
+> Task :spotlessJava UP-TO-DATE
+> Task :spotlessJavaCheck UP-TO-DATE
+> Task :spotlessKotlin UP-TO-DATE
+> Task :spotlessKotlinCheck UP-TO-DATE
+> Task :spotlessMisc UP-TO-DATE
+> Task :spotlessMiscCheck UP-TO-DATE
+> Task :spotlessScala UP-TO-DATE
+> Task :spotlessScalaCheck UP-TO-DATE
+> Task :spotlessCheck UP-TO-DATE
+> Task :ideVirtualMainClasses SKIPPED
+> Task :checkstyleIdeVirtualMain SKIPPED
+> Task :checkstyleInjectedInterfaces NO-SOURCE
+> Task :checkstyleInjectedTags SKIPPED
+> Task :checkstyleMcLauncher SKIPPED
+> Task :checkstylePatchedMc SKIPPED
+
+> Task :compileTestJava
+警告: [options] 源值 8 已过时，将在未来发行版中删除
+警告: [options] 目标值 8 已过时，将在未来发行版中删除
+警告: [options] 要隐藏有关已过时选项的警告, 请使用 -Xlint:-options。
+3 个警告
+
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+> Task :sourcesJar UP-TO-DATE
+> Task :checkstyleTest
+> Task :test
+
+> Task :verifyDistribution
+Verified 227 Java 8 compatible classes and coremod manifest; no game launched.
+
+> Task :assemble
+> Task :prepareUpdateAsset
+> Task :checkstyleMain
+> Task :check
+
+[Incubating] Problems report is available at: file:///Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 6s
+30 actionable tasks: 12 executed, 18 up-to-date

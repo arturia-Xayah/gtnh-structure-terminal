@@ -10,7 +10,7 @@
 
 **简体中文** · [English](README.en.md) · [版本下载](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.3--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.3-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.3-alpha-GTNH-2.9.0.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.4--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.4-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0**
 
@@ -34,7 +34,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## 安装与旧版升级
 
-1. 获取 `gtnh-modernization-upgrade-0.3.3-alpha-GTNH-2.9.0.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
+1. 获取 `gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
 2. 移除旧版 **GTNH现代化升级 / 结构终端**，以及独立的 **AE Order Optimizer、Plasma Forge Power、AE Storage Vault** JAR。以上功能已包含在整合版中，不能重复安装。
 3. 升级前备份整个世界。终端、AE 元件和功率设置保留原注册 ID。**0.3.0 更改了聚合器库存格式，不能直接读取 0.2.x 的仓库文件**；已有聚合器需先在旧版导出库存，升级后新建仓库并重新投入容量来源。不要删除旧文件来解除锁定。
 
