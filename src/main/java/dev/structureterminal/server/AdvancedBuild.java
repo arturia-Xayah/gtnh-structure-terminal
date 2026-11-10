@@ -151,10 +151,21 @@ public final class AdvancedBuild {
         if (hatch != null && !ItemStack.areItemStacksEqual(hatch, HatchRecovery.preview(tile, player))) return false;
         if (!(returns == null ? BlockMaterials.canReturn(player, recovered, null) : returns.canAccept(recovered)))
             return false;
-        if (returns != null) returns.stage(recovered);
-        if (!player.worldObj.setBlockToAir(cell.x, cell.y, cell.z)) {
-            if (returns != null) returns.cancel();
-            return false;
+        if (hatch != null) {
+            // Native drops/break hooks decide what survives; do not serialize or relocate hatch contents.
+            try (NativeHatchDrops capture = NativeHatchDrops.capture(player.worldObj, cell.x, cell.y, cell.z)) {
+                recovered = new java.util.ArrayList<>(
+                    current.getDrops(player.worldObj, cell.x, cell.y, cell.z, meta, 0));
+                if (!player.worldObj.setBlockToAir(cell.x, cell.y, cell.z)) return false;
+                recovered.addAll(capture.items);
+            }
+            if (returns != null) returns.stage(recovered);
+        } else {
+            if (returns != null) returns.stage(recovered);
+            if (!player.worldObj.setBlockToAir(cell.x, cell.y, cell.z)) {
+                if (returns != null) returns.cancel();
+                return false;
+            }
         }
         if (returns == null) BlockMaterials.give(player, recovered);
         else returns.flush();

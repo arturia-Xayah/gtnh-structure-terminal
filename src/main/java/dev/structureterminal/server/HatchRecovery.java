@@ -4,8 +4,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
@@ -16,39 +14,29 @@ import gregtech.api.metatileentity.implementations.MTEHatch;
 final class HatchRecovery {
 
     static ItemStack preview(TileEntity tile, EntityPlayerMP player) {
+        if (tile instanceof appeng.api.networking.IGridHost) {
+            for (net.minecraftforge.common.util.ForgeDirection side : net.minecraftforge.common.util.ForgeDirection
+                .values()) {
+                appeng.api.networking.IGridNode node = ((appeng.api.networking.IGridHost) tile).getGridNode(side);
+                if (node == null) continue;
+                appeng.api.networking.security.ISecurityGrid security = node.getGrid()
+                    .getCache(appeng.api.networking.security.ISecurityGrid.class);
+                if (security != null && !security.hasPermission(player, appeng.api.config.SecurityPermissions.BUILD))
+                    return null;
+            }
+        }
+        if (tile instanceof dev.aestoragevault.world.TileAccess) {
+            dev.aestoragevault.world.TileAccess port = (dev.aestoragevault.world.TileAccess) tile;
+            java.util.List<ItemStack> drops = port.getBlockType()
+                .getDrops(port.getWorldObj(), port.xCoord, port.yCoord, port.zCoord, port.getBlockMetadata(), 0);
+            return drops.size() == 1 ? drops.get(0) : null;
+        }
         if (!(tile instanceof BaseMetaTileEntity)) return null;
         BaseMetaTileEntity base = (BaseMetaTileEntity) tile;
         if (!(base.getMetaTileEntity() instanceof MTEHatch)) return null;
         MTEHatch hatch = (MTEHatch) base.getMetaTileEntity();
-        // Unknown subclasses may keep inventories outside IInventory/IFluidHandler.
-        // Only opt in native basic hatches whose storage is covered by the checks below.
-        String kind = hatch.getClass()
-            .getName();
-        if (!kind.startsWith("gregtech.api.metatileentity.implementations.")) return null;
-        String simple = hatch.getClass()
-            .getSimpleName();
-        if (!java.util.Arrays
-            .asList(
-                "MTEHatchInputBus",
-                "MTEHatchOutputBus",
-                "MTEHatchInput",
-                "MTEHatchMultiInput",
-                "MTEHatchOutput",
-                "MTEHatchEnergy",
-                "MTEHatchDynamo",
-                "MTEHatchMaintenance",
-                "MTEHatchMuffler")
-            .contains(simple)) return null;
         if (!hatch.isAccessAllowed(player) || base.privateAccess() && !player.getUniqueID()
             .equals(base.getOwnerUuid())) return null;
-        // Non-empty/special stores retain their native lifecycle rather than losing contents or creating loose drops.
-        for (int i = 0; i < base.getSizeInventory(); i++) if (base.getStackInSlot(i) != null) return null;
-        for (ForgeDirection side : ForgeDirection.values()) {
-            FluidTankInfo[] tanks = base.getTankInfo(side);
-            if (tanks != null) for (FluidTankInfo tank : tanks)
-                if (tank != null && tank.fluid != null && tank.fluid.amount > 0) return null;
-        }
-        if (hatch.getDroppedItem() != null) return null;
         NBTTagCompound saved = new NBTTagCompound();
         base.writeToNBT(saved);
         NBTTagCompound item = new NBTTagCompound();

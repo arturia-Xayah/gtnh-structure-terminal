@@ -13,6 +13,7 @@ public final class VaultClientPreferences {
 
     private static Configuration config;
     private static boolean animations = true;
+    private static boolean terminalDark = true;
 
     private VaultClientPreferences() {}
 
@@ -24,7 +25,21 @@ public final class VaultClientPreferences {
             "client",
             true,
             "Animate the storage dashboard. Disable for a static/reduced-motion interface.");
+        terminalDark = config.getBoolean("terminalDarkMode", "client", true, "Use the dark advanced-terminal palette.");
         if (config.hasChanged()) config.save();
+    }
+
+    public static boolean terminalDark() {
+        return terminalDark;
+    }
+
+    public static void setTerminalDark(boolean value) {
+        terminalDark = value;
+        if (config != null) {
+            config.get("client", "terminalDarkMode", true)
+                .set(value);
+            config.save();
+        }
     }
 
     public static boolean animations() {

@@ -16,7 +16,7 @@ ME 下单优化元件的合成配方：
 
 有效元件存在时，网络使用改造后的 Lite 下单计算和支持接收端上的批量发配。没有有效元件时保留 AE 原本选定的模式。子网使用其他网络样板时，以下单网络为准。
 
-当前路线遇到循环或多输出样板会停止，并在玩家聊天及服务器日志报告。未选择的其他路线不会阻断订单。“详细模式”额外列出同产物的候选配方及最终选择，不会改变选择顺序。无环、单输出仍可能因为缺少原料或样板而无法下单。
+当前路线遇到循环或多输出样板会停止，并在玩家聊天及服务器日志报告。未选择的其他路线不会阻断订单。“详细模式”仅报告主产物及其配方数，不改变选择顺序。环报告只显示成环的主产物链。带颜色、下划线的主产物可点击查看样板方块坐标；当前维度已加载位置高亮 30 秒，跨维度报告维度名及坐标。定位链接有效期为 10 分钟，移动样板后需重新计算获取新位置。无环、单输出仍可能因为缺少原料或样板而无法下单。
 
 ## 批量发配
 
@@ -50,7 +50,7 @@ ME 下单优化元件的合成配方：
 
 Craft the optimizer with gold/quartz/gold, redstone/crafting table/redstone, gold/quartz/gold. Connect one to the submitting grid; right-click for detail mode. It uses 1 AE/t and no channel. Merged-grid duplicates disconnect until the conflict is resolved.
 
-An active optimizer selects the modified Lite planner and supported bulk dispatch. Without it, native planning and dispatch remain. The submitting grid governs cross-grid pattern borrowing. Selected-route cycles or multi-output patterns stop the order and report the issue. Detail mode lists alternatives without changing native route selection. Missing stock or patterns can still prevent crafting.
+An active optimizer selects the modified Lite planner and supported bulk dispatch. Without it, native planning and dispatch remain. The submitting grid governs cross-grid pattern borrowing. Selected-route cycles or multi-output patterns stop the order and report the issue. Detail mode reports main outputs and recipe counts without changing native route selection. Cycles display their main-output chain. Colored, underlined outputs link to provider coordinates and a 30-second outline in the current dimension; other dimensions report name and coordinates. Links expire after ten minutes; recalculate after moving patterns. Missing stock or patterns can still prevent crafting.
 
 Keep unit patterns. Batches contain at most 4096 crafts and follow stock, energy, coprocessor and receiver limits. Native ME interfaces support batching; unsupported receivers, workbench recipes and blocking mode retain unit dispatch. Batching does not add processing parallelism.
 

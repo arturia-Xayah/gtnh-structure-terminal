@@ -33,8 +33,15 @@ public final class StrictGraph<T> {
 
     public static final class InvalidPath extends RuntimeException {
 
+        public final List<?> products;
+
         public InvalidPath(String text) {
+            this(text, Collections.emptyList());
+        }
+
+        public InvalidPath(String text, List<?> products) {
             super(text);
+            this.products = new ArrayList<>(products);
         }
     }
 
@@ -68,20 +75,21 @@ public final class StrictGraph<T> {
             int state = colors.getOrDefault(child, 0);
             if (state == 1) {
                 StringBuilder path = new StringBuilder("AEO_CYCLE: ");
+                List<T> cycle = new ArrayList<>();
                 boolean include = false;
                 for (Frame<T> entry : stack) {
                     if (entry.key.equals(child)) include = true;
                     if (include) {
+                        cycle.add(entry.key);
                         path.append(label.apply(entry.key))
-                            .append(" --[");
-                        Recipe<T> recipe = recipes.get(entry.key);
-                        path.append(recipe == null ? "?" : recipe.description.get())
-                            .append("]--> ");
+                            .append(" → ");
                     }
                 }
+                cycle.add(child);
                 throw new InvalidPath(
                     path.append(label.apply(child))
-                        .toString());
+                        .toString(),
+                    cycle);
             }
             if (state == 0) enter(child, resolver, label, colors, stack);
         }

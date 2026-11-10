@@ -75,7 +75,23 @@ final class AdvancedTerminalChecks {
                 Integer.valueOf(2)
                     .equals(plan.settings.channels.get("glass")),
                 "native glass selection lost");
-            if (mode.equals("creative")) materialChoices(world, player);
+            if (mode.equals("creative")) {
+                materialChoices(world, player);
+                java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> variants = dev.structureterminal.client.TerminalMaterials
+                    .variants(3);
+                dev.structureterminal.client.TerminalMaterials.Entry variant = variants.get(variants.size() - 1);
+                TerminalSettings autoGlass = TerminalSettings.read(settings.write());
+                autoGlass.channels.remove("glass");
+                autoGlass.glassTier = 3;
+                player.inventory.mainInventory[1] = variant.icon.copy();
+                AdvancedTerminalPlan autoPlan = AdvancedTerminalPlan.create(bridge, player, autoGlass);
+                check(
+                    Integer.valueOf(variant.value)
+                        .equals(autoPlan.settings.channels.get("glass")),
+                    "per-tier Auto ignored supplied glass variant");
+                check(player.inventory.mainInventory[1].stackSize == 1, "Auto scan consumed glass");
+                player.inventory.mainInventory[1] = null;
+            }
             List<StructureScanner.Cell> coils = new ArrayList<StructureScanner.Cell>();
             for (StructureScanner.Cell cell : plan.scan.cells) if (cell.heatingCoil) coils.add(cell);
             check(coils.size() == 16, "EBF heating coil count=" + coils.size());
@@ -144,6 +160,7 @@ final class AdvancedTerminalChecks {
                         net.minecraftforge.fluids.FluidRegistry.WATER,
                         1000);
             }
+            java.util.Set<net.minecraft.entity.Entity> existingDrops = new java.util.HashSet<>(world.loadedEntityList);
             NBTTagCompound request = new NBTTagCompound();
             request.setInteger("action", 6);
             request.setInteger("x", x);
@@ -212,32 +229,51 @@ final class AdvancedTerminalChecks {
                 }
             }
             if (hatchTest) {
-                boolean removeHatch = mode.endsWith("remove");
+                boolean removeHatch = !mode.endsWith("keep");
                 check(
                     world.isAirBlock(protectedCell.x, protectedCell.y, protectedCell.z) == removeHatch,
                     "hatch retention mode=" + mode);
                 if (removeHatch) {
                     int recovered = 0;
-                    for (ItemStack item : player.inventory.mainInventory)
-                        if (item != null && item.isItemEqual(hatchDrop)) {
+                    java.util.List<ItemStack> returned = new java.util.ArrayList<>();
+                    if (ae) {
+                        for (appeng.api.storage.data.IAEItemStack entry : monitor.getStorageList()) {
+                            ItemStack item = entry.getItemStack();
+                            if (item.isItemEqual(hatchDrop) || item.getItem() == net.minecraft.init.Items.diamond) {
+                                returned.add(
+                                    monitor
+                                        .extractItems(
+                                            entry.copy(),
+                                            appeng.api.config.Actionable.MODULATE,
+                                            new appeng.api.networking.security.PlayerSource(player, null))
+                                        .getItemStack());
+                            }
+                        }
+                    } else java.util.Collections.addAll(returned, player.inventory.mainInventory);
+                    int diamonds = 0;
+                    for (ItemStack item : returned) {
+                        if (item == null) continue;
+                        check(
+                            item.getItem() != dev.structureterminal.packing.PackingItems.PACKAGE,
+                            "hatch should use native drop, not a full-state package");
+                        if (item.getItem() == net.minecraft.init.Items.diamond) diamonds += item.stackSize;
+                        if (item.isItemEqual(hatchDrop)) {
                             recovered += item.stackSize;
                             check(
                                 item.hasTagCompound() && item.getTagCompound()
                                     .getByte("mColor") == 5,
-                                "hatch color lost");
+                                "native hatch dye lost");
+                            check(
+                                !item.getTagCompound()
+                                    .hasKey("mFluid"),
+                                "fluid was specially packed");
                         }
-                    check(recovered == 1, "hatch return count=" + recovered);
-                } else if (mode.endsWith("filled")) {
-                    ItemStack kept = ((net.minecraft.inventory.IInventory) world
-                        .getTileEntity(protectedCell.x, protectedCell.y, protectedCell.z)).getStackInSlot(0);
-                    check(kept != null && kept.stackSize == 3, "filled hatch lost items");
-                } else if (mode.endsWith("fluid")) {
-                    IGregTechTileEntity hatch = (IGregTechTileEntity) world
-                        .getTileEntity(protectedCell.x, protectedCell.y, protectedCell.z);
-                    check(
-                        ((gregtech.api.metatileentity.implementations.MTEHatchInput) hatch
-                            .getMetaTileEntity()).mFluid.amount == 1000,
-                        "fluid hatch lost fluid");
+                    }
+                    check(recovered == 1, "native hatch return count=" + recovered);
+                    check(diamonds == (mode.endsWith("filled") ? 3 : 0), "native contents drop count=" + diamonds);
+                    for (Object entity : world.loadedEntityList)
+                        if (entity instanceof net.minecraft.entity.item.EntityItem)
+                            check(existingDrops.contains(entity), "native drops duplicated on ground");
                 }
             } else if (protectedCell != null) {
                 check(
@@ -286,6 +322,17 @@ final class AdvancedTerminalChecks {
         int previous = -1;
         java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> glass = dev.structureterminal.client.TerminalMaterials
             .glasses();
+        java.util.Set<Integer> tiers = new java.util.HashSet<>();
+        for (dev.structureterminal.client.TerminalMaterials.Entry e : dev.structureterminal.client.TerminalMaterials
+            .glassTiers()) {
+            if (e.value == 0) continue;
+            check(tiers.add(e.tier), "duplicate tier row");
+            java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> variants = dev.structureterminal.client.TerminalMaterials
+                .variants(e.tier);
+            check(variants.get(0).value == 0 && variants.size() > 1, "missing per-tier Auto");
+            for (dev.structureterminal.client.TerminalMaterials.Entry variant : variants)
+                check(variant.tier == e.tier, "variant tier mismatch");
+        }
         check(glass.size() > 11 && glass.get(0).value == 0, "glass catalog/auto missing");
         com.gtnewhorizon.structurelib.structure.IStructureElement<Object> element = gregtech.api.util.GTStructureUtility
             .chainAllGlasses(-1, (o, tier) -> {}, o -> -1);

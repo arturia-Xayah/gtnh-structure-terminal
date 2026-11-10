@@ -34,6 +34,16 @@ public final class OrderOptimizer {
     public static BlockOptimizer BLOCK;
 
     @Mod.EventHandler
+    public void serverStarting(cpw.mods.fml.common.event.FMLServerStartingEvent event) {
+        event.registerServerCommand(new dev.aeoptimizer.planning.PatternLocations());
+    }
+
+    @Mod.EventHandler
+    public void serverStopped(cpw.mods.fml.common.event.FMLServerStoppedEvent event) {
+        dev.aeoptimizer.planning.PatternLocations.clear();
+    }
+
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         BLOCK = new BlockOptimizer();
         GameRegistry.registerBlock(BLOCK, "core");

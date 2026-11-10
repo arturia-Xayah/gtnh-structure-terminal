@@ -21,6 +21,7 @@ public final class LateMixins implements ILateMixinLoader {
         List<String> mixins = new ArrayList<>(
             Arrays.asList(
                 "VaultHatchSkinMixin",
+                "VaultNetworkStatsMixin",
                 "NativeBusOwnershipMixin",
                 "VisibleAmountMixin",
                 "ReturnBusMixin",

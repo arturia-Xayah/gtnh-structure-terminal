@@ -69,6 +69,31 @@ public class VaultStoreTest {
     }
 
     @Test
+    public void channelStatisticsFollowInsertExtractAndRestartWithoutEnumeration() throws Exception {
+        try (VaultStore s = create(1000)) {
+            s.insert(item(1), 80, false);
+            s.insert(fluid(1), 4096, false);
+            assertEquals(BigInteger.TEN, s.channelUsedBytes("items"));
+            assertEquals(BigInteger.valueOf(2), s.channelUsedBytes("fluids"));
+            assertEquals(BigInteger.valueOf(998), s.channelCapacity("items"));
+            assertEquals(BigInteger.valueOf(990), s.channelCapacity("fluids"));
+            assertEquals(1, s.channelTypes("items"));
+            assertEquals(1, s.channelTypes("fluids"));
+            s.extract(item(1), 80, false);
+            s.checkpoint();
+        }
+        try (VaultStore s = new VaultStore(folder(), id, false)) {
+            assertEquals(0, s.channelTypes("items"));
+            assertEquals(1, s.channelTypes("fluids"));
+            assertEquals(BigInteger.ZERO, s.channelUsedBytes("items"));
+            assertEquals(BigInteger.valueOf(2), s.channelUsedBytes("fluids"));
+            s.extract(fluid(1), 4096, false);
+            assertEquals(0, s.channelTypes("fluids"));
+            assertEquals(BigInteger.valueOf(1000), s.channelCapacity("items"));
+        }
+    }
+
+    @Test
     public void moreThan63TypesAndNoTypeTax() throws Exception {
         try (VaultStore s = create(1250)) {
             for (int n = 0; n < 10000; n++) assertEquals(1, s.insert(item(n), 1, false));

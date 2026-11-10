@@ -55,12 +55,18 @@ public class VaultSkinTest {
             assertEquals(512, image.getWidth());
             assertEquals(512, image.getHeight());
             for (int d = 0; d < 16; d++) for (int p = 0; p < 512; p++) {
-                assertEquals(0xffccdae7, image.getRGB(d, p));
-                assertEquals(0xffccdae7, image.getRGB(511 - d, p));
-                assertEquals(0xffccdae7, image.getRGB(p, d));
-                assertEquals(0xffccdae7, image.getRGB(p, 511 - d));
+                whiteEdge(image.getRGB(d, p));
+                whiteEdge(image.getRGB(511 - d, p));
+                whiteEdge(image.getRGB(p, d));
+                whiteEdge(image.getRGB(p, 511 - d));
             }
         }
+    }
+
+    private static void whiteEdge(int rgba) {
+        assertEquals(255, rgba >>> 24);
+        // Generated porcelain has at most two levels of subvisible albedo variation at its margins.
+        for (int shift = 0; shift < 24; shift += 8) assertTrue(((rgba >>> shift) & 255) >= 253);
     }
 
     private static class TestIcon implements IIcon {

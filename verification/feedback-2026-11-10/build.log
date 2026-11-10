@@ -1,0 +1,99 @@
+
+> Configure project :
+You might want to check out './gradlew :faq' if your build fails.
+Build script update from 2.0.33 to 2.0.34 available! Run ./gradlew updateBuildScript
+Recommend replacing '4.19.0' with '4.19' for Eclipse JDT
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+'indentWithSpaces' is deprecated, use 'leadingTabsToSpaces' in your gradle build script instead.
+
+> Task :spotlessJava
+> Task :spotlessJavaApply
+> Task :spotlessKotlin UP-TO-DATE
+> Task :spotlessKotlinApply UP-TO-DATE
+> Task :spotlessMisc UP-TO-DATE
+> Task :spotlessMiscApply UP-TO-DATE
+> Task :spotlessScala UP-TO-DATE
+> Task :spotlessScalaApply UP-TO-DATE
+> Task :spotlessApply
+> Task :compileInjectedInterfacesJava NO-SOURCE
+> Task :extractDependencyATs SKIPPED
+> Task :generateForgeSrgMappings SKIPPED
+> Task :downloadVanillaJars SKIPPED
+> Task :mergeVanillaSidedJars SKIPPED
+> Task :deobfuscateMergedJarToSrg SKIPPED
+> Task :downloadFernflower SKIPPED
+> Task :decompileSrgJar SKIPPED
+> Task :cleanupDecompSrgJar SKIPPED
+> Task :patchDecompiledJar SKIPPED
+> Task :applyJST SKIPPED
+> Task :remapDecompiledJar SKIPPED
+> Task :decompressDecompiledSources UP-TO-DATE
+> Task :processInjectedInterfacesResources NO-SOURCE
+> Task :injectedInterfacesClasses UP-TO-DATE
+> Task :compilePatchedMcJava UP-TO-DATE
+> Task :processPatchedMcResources UP-TO-DATE
+> Task :patchedMcClasses UP-TO-DATE
+> Task :compileApiJava NO-SOURCE
+> Task :processApiResources NO-SOURCE
+> Task :apiClasses UP-TO-DATE
+> Task :checkstyleApi NO-SOURCE
+> Task :injectTags UP-TO-DATE
+> Task :compileInjectedTagsJava UP-TO-DATE
+> Task :extractNatives2 UP-TO-DATE
+> Task :createMcLauncherFiles UP-TO-DATE
+> Task :compileMcLauncherJava UP-TO-DATE
+> Task :processInjectedTagsResources NO-SOURCE
+> Task :injectedTagsClasses UP-TO-DATE
+> Task :processMcLauncherResources NO-SOURCE
+> Task :mcLauncherClasses UP-TO-DATE
+
+> Task :compileJava
+警告: [options] 源值 8 已过时，将在未来发行版中删除
+警告: [options] 目标值 8 已过时，将在未来发行版中删除
+警告: [options] 要隐藏有关已过时选项的警告, 请使用 -Xlint:-options。
+3 个警告
+
+> Task :generateUpdateMetadata UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :packageMcLauncher UP-TO-DATE
+> Task :packagePatchedMc UP-TO-DATE
+> Task :compileIdeVirtualMainJava SKIPPED
+> Task :jar
+> Task :processIdeVirtualMainResources SKIPPED
+> Task :reobfJar
+> Task :spotlessJavaCheck
+> Task :spotlessKotlinCheck UP-TO-DATE
+> Task :spotlessMiscCheck UP-TO-DATE
+> Task :spotlessScalaCheck UP-TO-DATE
+> Task :spotlessCheck
+> Task :ideVirtualMainClasses SKIPPED
+> Task :checkstyleIdeVirtualMain SKIPPED
+> Task :checkstyleInjectedInterfaces NO-SOURCE
+> Task :checkstyleInjectedTags SKIPPED
+> Task :checkstyleMcLauncher SKIPPED
+> Task :checkstylePatchedMc SKIPPED
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :sourcesJar
+> Task :checkstyleTest
+> Task :test
+
+> Task :verifyDistribution
+Verified 233 Java 8 compatible classes and coremod manifest; no game launched.
+
+> Task :assemble
+> Task :checkstyleMain
+> Task :check
+
+[Incubating] Problems report is available at: file:///Users/junjie01.hu/Documents/Codex/2026-10-09/referenced-chatgpt-conversation-this-is-an/outputs/structure_terminal/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.7.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 7s
+33 actionable tasks: 11 executed, 22 up-to-date

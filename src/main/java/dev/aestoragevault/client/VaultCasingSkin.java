@@ -15,6 +15,19 @@ import gregtech.api.render.RenderOverlay;
 /** Use GT's own world-scoped casing overlay path, also supported by Angelica WorldSlice. */
 public final class VaultCasingSkin {
 
+    private static final java.util.Map<World, java.util.concurrent.ConcurrentMap<net.minecraft.util.ChunkCoordinates, TileController>> OWNERS = java.util.Collections
+        .synchronizedMap(new java.util.WeakHashMap<>());
+    private final List<net.minecraft.util.ChunkCoordinates> positions = new ArrayList<>();
+
+    /** Chunk render snapshots may omit neighboring tile entities. Use the synced client footprint. */
+    @cpw.mods.fml.relauncher.SideOnly(cpw.mods.fml.relauncher.Side.CLIENT)
+    public static TileController owner(int x, int y, int z) {
+        World world = net.minecraft.client.Minecraft.getMinecraft().theWorld;
+        java.util.Map<net.minecraft.util.ChunkCoordinates, TileController> map = OWNERS.get(world);
+        TileController owner = map == null ? null : map.get(new net.minecraft.util.ChunkCoordinates(x, y, z));
+        return owner != null && owner.formed && !owner.isInvalid() ? owner : null;
+    }
+
     private final List<RenderOverlay.OverlayTicket> tickets = new ArrayList<>();
     private long shape = Long.MIN_VALUE;
 
@@ -34,6 +47,20 @@ public final class VaultCasingSkin {
             }
             next |= (long) (front + 1) << 27;
         }
+        java.util.concurrent.ConcurrentMap<net.minecraft.util.ChunkCoordinates, TileController> map = OWNERS
+            .computeIfAbsent(world, w -> new java.util.concurrent.ConcurrentHashMap<>());
+        for (net.minecraft.util.ChunkCoordinates pos : positions) map.remove(pos, owner);
+        positions.clear();
+        if (!remove && owner.formed && !owner.isInvalid())
+            for (int x = -1; x <= 1; x++) for (int y = -1; y <= 1; y++) for (int z = -1; z <= 1; z++) {
+                if (!VaultGeometry.shell(x, y, z)) continue;
+                net.minecraft.util.ChunkCoordinates pos = new net.minecraft.util.ChunkCoordinates(
+                    cx + x,
+                    cy + y,
+                    cz + z);
+                positions.add(pos);
+                map.put(pos, owner);
+            }
         if (next == shape) return;
         for (RenderOverlay.OverlayTicket ticket : tickets) ticket.remove();
         tickets.clear();

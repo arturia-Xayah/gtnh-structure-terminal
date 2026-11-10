@@ -35,7 +35,7 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int model,
         RenderBlocks renderer) {
-        if (VaultStructure.formedOwner(world, x, y, z) != null) renderShell(world, x, y, z, block, renderer);
+        if (skinOwner(world, x, y, z) != null) renderShell(world, x, y, z, block, renderer);
         else renderer.renderStandardBlock(block, x, y, z);
         VaultBlock vault = (VaultBlock) block;
         int metadata = world.getBlockMetadata(x, y, z);
@@ -63,6 +63,9 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int model, RenderBlocks renderer) {
+        metadata = 3; // Inventory face points toward the viewer; metadata 0 would put the screen underneath.
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+        GL11.glColor4f(1, 1, 1, 1);
         GL11.glPushMatrix();
         GL11.glRotatef(90, 0, 1, 0);
         GL11.glTranslatef(-.5f, -.5f, -.5f);
@@ -70,22 +73,32 @@ public final class VaultBlockRenderer implements ISimpleBlockRenderingHandler {
         for (int side = 0; side < 6; side++) {
             ForgeDirection normal = ForgeDirection.getOrientation(side);
             Tessellator.instance.startDrawingQuads();
+            Tessellator.instance.setColorOpaque_F(1, 1, 1);
+            Tessellator.instance.setBrightness(0xF000F0);
             Tessellator.instance.setNormal(normal.offsetX, normal.offsetY, normal.offsetZ);
             face(renderer, block, side, 0, 0, 0, block.getIcon(side, metadata));
             Tessellator.instance.draw();
             IIcon icon = ((VaultBlock) block).overlay(side, metadata);
             if (icon != null) {
                 Tessellator.instance.startDrawingQuads();
+                Tessellator.instance.setColorOpaque_F(1, 1, 1);
+                Tessellator.instance.setBrightness(0xF000F0);
                 Tessellator.instance.setNormal(normal.offsetX, normal.offsetY, normal.offsetZ);
                 face(renderer, block, side, normal.offsetX * .001, normal.offsetY * .001, normal.offsetZ * .001, icon);
                 Tessellator.instance.draw();
             }
         }
         GL11.glPopMatrix();
+        GL11.glPopAttrib();
+    }
+
+    private static TileController skinOwner(IBlockAccess world, int x, int y, int z) {
+        TileController owner = VaultCasingSkin.owner(x, y, z);
+        return owner != null ? owner : VaultStructure.formedOwner(world, x, y, z);
     }
 
     public static void renderShell(IBlockAccess world, int x, int y, int z, Block block, RenderBlocks renderer) {
-        TileController owner = VaultStructure.formedOwner(world, x, y, z);
+        TileController owner = skinOwner(world, x, y, z);
         if (owner == null) return;
         int front = world.getBlockMetadata(owner.xCoord, owner.yCoord, owner.zCoord);
         boolean oldAO = renderer.enableAO;

@@ -1,5 +1,14 @@
 # 更新日志 / Changelog
 
+## 未发布 / Unreleased — GTNH 2.9.0
+
+- 聚合器物品图标与世界外观统一为白蓝紫材质；修正主机、ME 接口在渲染缓存中的成型外观。 / White/blue/violet vault item and formed surfaces, including controller and ME ports in cached chunk rendering.
+- 高级终端增加本地深色模式，降低浅色亮度，修正材料图标照明；背包键（默认 E）关闭界面。 / Persistent dark mode, subdued light palette, corrected material-icon lighting and inventory-key close.
+- 玻璃按功能性电压等级分组，同级变体使用二级菜单和按等级 Auto。 / Tiered glass groups with variant submenus and per-tier Auto.
+- 取消保留仓室后按原版拆卸规则移除仓室，主机保留；不额外保存流体或打包库存，原生物品掉落走背包／AE 回收。 / Optional hatch removal follows native drops, retaining the controller without extra inventory/fluid packaging.
+- AE 网络工具同时统计聚合器的物品与流体存储、已用类型及共享空闲容量。 / Native AE network-tool statistics include both vault storage channels.
+- 优化器多配方报告简化为主产物与配方数；循环报告显示主产物链，彩色下划线链接定位样板方块并短暂高亮，跨维度显示名称和坐标。 / Compact clickable recipe/cycle reports with provider coordinates and temporary same-dimension highlights.
+
 ## 0.3.4-alpha — GTNH 2.9.0 · 2026-11-09
 
 - 拆除新增“保留仓室”选项；关闭后回收空的基础 GT 仓室。AE 模式拆除只回收到网络，满仓／无连接时保留方块，实际存入被拒绝的余料保存在终端中供重试。 / Optional hatch retention and AE-only demolition recovery, including capacity checks and a persistent pending-return journal.

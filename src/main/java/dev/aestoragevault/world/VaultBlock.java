@@ -58,7 +58,7 @@ public class VaultBlock extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int metadata) {
-        return gregtech.api.GregTechAPI.sBlockCasings1.getIcon(side, 6);
+        return VaultSkin.whole();
     }
 
     @SideOnly(Side.CLIENT)
@@ -78,7 +78,7 @@ public class VaultBlock extends BlockContainer {
 
     @Override
     public int colorMultiplier(net.minecraft.world.IBlockAccess world, int x, int y, int z) {
-        return gregtech.api.GregTechAPI.sBlockCasings1.colorMultiplier(world, x, y, z);
+        return 0xFFFFFF;
     }
 
     @Override

@@ -26,7 +26,7 @@ public final class TerminalScreen extends GuiScreen {
     private TerminalSettings settings;
     private GuiTextField repeats;
     private List<TerminalMaterials.Entry> coils, glasses;
-    private int left, top, slot, expanded = -1, scroll, focus;
+    private int left, top, slot, expanded = -1, scroll, focus, glassMenu = -1;
     private float scale = 1;
     public String status = "";
 
@@ -72,16 +72,23 @@ public final class TerminalScreen extends GuiScreen {
         return mx >= x && mx < x + w && my >= y && my < y + h;
     }
 
+    private int glassTier() {
+        if (settings.glassTier >= 0) return settings.glassTier;
+        TerminalMaterials.Entry e = find(glasses, glass());
+        return e.value == 0 ? -1 : e.tier;
+    }
+
     private int glass() {
         return settings.channels.getOrDefault("glass", 0);
     }
 
     private List<TerminalMaterials.Entry> entries() {
-        return expanded == 0 ? coils : glasses;
+        return expanded == 0 ? coils
+            : glassMenu < 0 ? TerminalMaterials.glassTiers() : TerminalMaterials.variants(glassMenu);
     }
 
     private int selected() {
-        return expanded == 0 ? settings.coilTier : glass();
+        return expanded == 0 ? settings.coilTier : glassMenu >= 0 ? glass() : glassTier() < 0 ? 0 : -glassTier() - 1;
     }
 
     private String tier(TerminalMaterials.Entry entry) {
@@ -96,12 +103,15 @@ public final class TerminalScreen extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partial) {
+        TerminalStyle.palette();
+        repeats.setTextColor(TerminalStyle.INK);
         drawDefaultBackground();
         int mx = (int) (mouseX / scale), my = (int) (mouseY / scale);
         GL11.glPushMatrix();
         GL11.glScalef(scale, scale, 1);
         panel(left, top, MAIN);
         fontRendererObj.drawString(tr("advanced.title"), left + 16, top + 17, TerminalStyle.INK);
+        TerminalStyle.check(left + MAIN - 33, top + 15, TerminalStyle.dark(), false);
         fontRendererObj.drawString(tr("modern.subtitle"), left + 16, top + 34, TerminalStyle.MUTED);
         String[] labels = { tr("advanced.1"), tr("modern.glass"), tr("advanced.2"), tr("modern.operation"),
             tr("advanced.3"), tr("modern.coilOnly"), tr("modern.keepHatches"), tr("advanced.5") };
@@ -116,7 +126,11 @@ public final class TerminalScreen extends GuiScreen {
                 i == 5 && currentOperation() != TerminalSettings.REPLACE ? TerminalStyle.MUTED : TerminalStyle.INK);
             if (i < 2) {
                 TerminalMaterials.Entry entry = find(i == 0 ? coils : glasses, i == 0 ? settings.coilTier : glass());
-                fontRendererObj.drawString(tier(entry), left + 153, y + 9, TerminalStyle.MUTED);
+                fontRendererObj.drawString(
+                    i == 1 && glassTier() >= 0 ? GTValues.VN[glassTier()] : tier(entry),
+                    left + 153,
+                    y + 9,
+                    TerminalStyle.MUTED);
                 TerminalStyle.round(left + 200, y + 3, 22, 19, 6, expanded == i ? 0xFFD7E6FC : 0xFFE3EBF8);
                 TerminalStyle.triangle(left + 208, y + 9, expanded == i);
             } else if (i == 2) {
@@ -142,13 +156,18 @@ public final class TerminalScreen extends GuiScreen {
             }
         }
         fontRendererObj.drawString(tr("modern.save"), left + 18, top + 291, TerminalStyle.MUTED);
-        List<String> tooltip = null;
+        List<String> tooltip = hit(mx, my, left + MAIN - 38, top + 10, 28, 28) ? Arrays.asList(tr("modern.dark"))
+            : null;
         ItemStack hoveredItem = null;
         if (expanded >= 0) {
             int x = left + MAIN + GAP;
             panel(x, top, SIDE);
-            fontRendererObj
-                .drawString(expanded == 0 ? tr("advanced.1") : tr("modern.glass"), x + 12, top + 17, TerminalStyle.INK);
+            fontRendererObj.drawString(
+                expanded == 0 ? tr("advanced.1")
+                    : glassMenu < 0 ? tr("modern.glass") : "‹ " + GTValues.VN[glassMenu] + " " + tr("modern.glass"),
+                x + 12,
+                top + 17,
+                TerminalStyle.INK);
             fontRendererObj.drawString(tr("modern.order"), x + 12, top + 34, TerminalStyle.MUTED);
             List<TerminalMaterials.Entry> entries = entries();
             for (int n = 0; n < ROWS && scroll + n < entries.size(); n++) {
@@ -163,14 +182,28 @@ public final class TerminalScreen extends GuiScreen {
                     6,
                     selected() == entry.value ? 0xFFE1EDFF : hover ? 0xFFF0F4FC : 0xFFF8FAFF);
                 if (entry.icon != null) {
+                    float oldLightX = net.minecraft.client.renderer.OpenGlHelper.lastBrightnessX;
+                    float oldLightY = net.minecraft.client.renderer.OpenGlHelper.lastBrightnessY;
                     GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                    net.minecraft.client.renderer.RenderHelper.enableGUIStandardItemLighting();
+                    GL11.glEnable(GL11.GL_DEPTH_TEST);
+                    GL11.glEnable(org.lwjgl.opengl.GL12.GL_RESCALE_NORMAL);
+                    GL11.glColor4f(1, 1, 1, 1);
+                    net.minecraft.client.renderer.OpenGlHelper
+                        .setLightmapTextureCoords(net.minecraft.client.renderer.OpenGlHelper.lightmapTexUnit, 240, 240);
                     codechicken.nei.guihook.GuiContainerManager.drawItem(x + 13, y + 3, entry.icon);
+                    net.minecraft.client.renderer.OpenGlHelper.setLightmapTextureCoords(
+                        net.minecraft.client.renderer.OpenGlHelper.lightmapTexUnit,
+                        oldLightX,
+                        oldLightY);
                     GL11.glPopAttrib();
                 } else {
                     fontRendererObj.drawString("A", x + 18, y + 8, TerminalStyle.MUTED);
                 }
                 fontRendererObj.drawString(tier(entry), x + 39, y + 8, TerminalStyle.INK);
                 TerminalStyle.check(x + SIDE - 31, y + 4, selected() == entry.value, hover);
+                if (expanded == 1 && glassMenu < 0 && entry.value < 0)
+                    TerminalStyle.triangle(x + SIDE - 48, y + 8, false);
                 if (hover) {
                     if (entry.icon != null) hoveredItem = entry.icon;
                     else tooltip = Arrays.asList(tr("modern.auto"), tr("modern.auto.tooltip"));
@@ -245,12 +278,12 @@ public final class TerminalScreen extends GuiScreen {
         TerminalStyle.round(x, y + 3, w, HEIGHT, 13, 0x2548669C);
         TerminalStyle.round(x, y, w, HEIGHT, 13, 0xFFE1EAF9);
         TerminalStyle.round(x + 1, y + 1, w - 2, HEIGHT - 2, 12, 0xFFFDFEFF);
-        TerminalStyle.round(x + w - 45, y + 13, 28, 5, 2.5f, 0xFFD9D1F7);
-        TerminalStyle.round(x + w - 36, y + 22, 19, 4, 2, 0xFFC8E2FB);
+
     }
 
     private void expand(int which) {
         expanded = expanded == which ? -1 : which;
+        glassMenu = -1;
         scroll = 0;
         if (expanded >= 0) {
             List<TerminalMaterials.Entry> list = entries();
@@ -265,6 +298,10 @@ public final class TerminalScreen extends GuiScreen {
         int x = (int) (mouseX / scale), y = (int) (mouseY / scale);
         repeats.mouseClicked(x, y, button);
         if (button != 0) return;
+        if (hit(x, y, left + MAIN - 38, top + 10, 28, 28)) {
+            dev.aestoragevault.client.VaultClientPreferences.setTerminalDark(!TerminalStyle.dark());
+            return;
+        }
         for (int i = 0; i < 8; i++) if (hit(x, y, left + 10, row(i), MAIN - 20, 25)) {
             focus = i;
             if (i < 2) expand(i);
@@ -278,6 +315,11 @@ public final class TerminalScreen extends GuiScreen {
         }
         if (expanded >= 0) {
             int sx = left + MAIN + GAP;
+            if (expanded == 1 && glassMenu >= 0 && hit(x, y, sx + 8, top + 10, SIDE - 16, 26)) {
+                glassMenu = -1;
+                scroll = 0;
+                return;
+            }
             for (int n = 0; n < ROWS && scroll + n < entries().size(); n++)
                 if (hit(x, y, sx + 8, top + 50 + n * 24, SIDE - 16, 23)) {
                     choose(entries().get(scroll + n).value);
@@ -290,8 +332,22 @@ public final class TerminalScreen extends GuiScreen {
 
     private void choose(int value) {
         if (expanded == 0) settings.coilTier = value;
-        else if (value == 0) settings.channels.remove("glass");
-        else settings.channels.put("glass", value);
+        else if (glassMenu < 0) {
+            if (value == 0) {
+                settings.glassTier = -1;
+                settings.channels.remove("glass");
+            } else {
+                int tier = -value - 1;
+                if (glassTier() != tier) settings.channels.remove("glass");
+                settings.glassTier = tier;
+                glassMenu = tier;
+                scroll = 0;
+            }
+        } else {
+            settings.glassTier = glassMenu;
+            if (value == 0) settings.channels.remove("glass");
+            else settings.channels.put("glass", value);
+        }
     }
 
     private void scroll(int delta) {
@@ -308,7 +364,8 @@ public final class TerminalScreen extends GuiScreen {
 
     @Override
     protected void keyTyped(char c, int key) {
-        if (key == Keyboard.KEY_ESCAPE || key == Keyboard.KEY_RETURN) {
+        if (key == Keyboard.KEY_ESCAPE || key == Keyboard.KEY_RETURN
+            || key == mc.gameSettings.keyBindInventory.getKeyCode()) {
             mc.displayGuiScreen(null);
         } else if (key == Keyboard.KEY_TAB) {
             focus = (focus + (isShiftKeyDown() ? 7 : 1)) % 8;

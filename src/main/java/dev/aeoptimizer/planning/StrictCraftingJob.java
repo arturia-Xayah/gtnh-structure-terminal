@@ -43,6 +43,7 @@ public final class StrictCraftingJob<StackType extends IAEStack<StackType>> impl
     private final AbstractObject2LongMap<ICraftingPatternDetails> tasks = new Object2LongOpenHashMap<>();
     private final AbstractObject2LongMap<IAEStack<?>> ingredients = new Object2LongOpenHashMap<>();
     private final AbstractObject2LongMap<IAEStack<?>> missingIngredients = new Object2LongOpenHashMap<>();
+    private final java.util.Map<IAEStack<?>, LongObjectPair<ICraftingPatternDetails>> chosen = new java.util.HashMap<>();
     private boolean calculated = false;
     private boolean isSimulated = false;
     private long byteCost = 0;
@@ -64,7 +65,7 @@ public final class StrictCraftingJob<StackType extends IAEStack<StackType>> impl
 
     /** Same precise first-match selection as native Lite. Only the selected dependency route is validated. */
     private void calculateImpl() {
-        java.util.Map<IAEStack<?>, LongObjectPair<ICraftingPatternDetails>> chosen = new java.util.HashMap<>();
+        chosen.clear();
         java.util.Map<IAEStack<?>, java.util.List<ICraftingPatternDetails>> diagnosticCatalog = detailed
             ? Reports.catalog(context)
             : java.util.Collections.emptyMap();
@@ -85,13 +86,7 @@ public final class StrictCraftingJob<StackType extends IAEStack<StackType>> impl
                 List<ICraftingPatternDetails> reported = detailed ? diagnosticCatalog.getOrDefault(stack, candidates)
                     : candidates;
                 if (detailed && reported.size() > 1) {
-                    StringBuilder text = new StringBuilder("AEO_ALTERNATIVES: ").append(stack.getDisplayName());
-                    for (int i = 0; i < reported.size(); i++) text.append("\n  ")
-                        .append(i + 1)
-                        .append(": ")
-                        .append(Reports.describe(reported.get(i)))
-                        .append(match != null && reported.get(i) == match.right() ? " [SELECTED]" : "");
-                    Reports.detail(text.toString(), reportSource);
+                    Reports.alternatives(stack, reported, reportSource, context);
                 }
                 if (match == null) return null;
                 chosen.put(stack, match);
@@ -160,7 +155,10 @@ public final class StrictCraftingJob<StackType extends IAEStack<StackType>> impl
             calculateImpl();
         } catch (Throwable t) {
             errorMsg = t.getMessage() == null ? t.toString() : t.getMessage();
-            Reports.error(errorMsg, reportSource);
+            if (t instanceof dev.aeoptimizer.core.StrictGraph.InvalidPath
+                && !((dev.aeoptimizer.core.StrictGraph.InvalidPath) t).products.isEmpty())
+                Reports.cycle((dev.aeoptimizer.core.StrictGraph.InvalidPath) t, chosen, reportSource, context);
+            else Reports.error(errorMsg, reportSource);
             isSimulated = true;
         } finally {
             calculated = true;

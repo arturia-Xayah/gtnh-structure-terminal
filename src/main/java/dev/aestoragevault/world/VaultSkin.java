@@ -13,6 +13,8 @@ public final class VaultSkin {
 
     @SideOnly(Side.CLIENT)
     private static IIcon[] icons;
+    @SideOnly(Side.CLIENT)
+    private static IIcon whole;
     private static final ITexture[] TEXTURES = new ITexture[9];
 
     private VaultSkin() {}
@@ -20,8 +22,14 @@ public final class VaultSkin {
     @SideOnly(Side.CLIENT)
     public static void register(net.minecraft.client.renderer.texture.IIconRegister registry) {
         IIcon face = registry.registerIcon("aestoragevault:formed_shell_smooth");
+        whole = face;
         icons = new IIcon[9];
         for (int tile = 0; tile < icons.length; tile++) icons[tile] = new FaceRegion(face, tile);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static IIcon whole() {
+        return whole;
     }
 
     @SideOnly(Side.CLIENT)

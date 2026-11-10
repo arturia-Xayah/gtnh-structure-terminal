@@ -29,6 +29,7 @@ public final class ClientProxy extends CommonProxy {
     @Override
     public void init() {
         dev.structureterminal.client.update.UpdateClient.INSTANCE.init();
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(dev.aeoptimizer.ui.PatternHighlights.INSTANCE);
         FMLCommonHandler.instance()
             .bus()
             .register(this);
@@ -97,6 +98,10 @@ public final class ClientProxy extends CommonProxy {
     public void receive(NBTTagCompound tag) {
         queue.add(() -> {
             Minecraft mc = Minecraft.getMinecraft();
+            if (tag.getBoolean("patternHighlight")) {
+                dev.aeoptimizer.ui.PatternHighlights.INSTANCE.receive(tag);
+                return;
+            }
             String text = StatCollector.translateToLocalFormatted(tag.getString("key"), tag.getString("value"));
             if (mc.currentScreen instanceof TerminalScreen) ((TerminalScreen) mc.currentScreen).status = text;
             else if (mc.thePlayer != null) mc.thePlayer.addChatComponentMessage(new ChatComponentText(text));

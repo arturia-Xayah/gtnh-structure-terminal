@@ -14,3 +14,9 @@ aeo.rename.encode.permission=Cannot create rename patterns: no pattern editing p
 aeo.rename.encode.space=Cannot create rename patterns: inventory full. Import cancelled; no blanks consumed.
 aeo.rename.encode.blanks=Cannot create rename patterns: insufficient blanks, network extraction unavailable or insufficient power. Import cancelled; any extracted blanks remain in the terminal's blank slot.
 aeo.rename.encode.limit=Cannot create rename patterns: too many assembly-line inputs. Import cancelled.
+
+aeoptimizer.report.alternatives=Main output %s: %s recipes
+aeoptimizer.report.cycle=Recipe cycle:
+aeoptimizer.locate.hint=Click for pattern locations; same-dimension blocks glow for 30 seconds
+aeoptimizer.locate.expired=Location report expired. Submit the order again to refresh it.
+aeoptimizer.locate.unknown=%s: this pattern provider does not expose block coordinates.

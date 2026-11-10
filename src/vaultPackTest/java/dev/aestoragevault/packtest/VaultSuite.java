@@ -506,10 +506,44 @@ public final class VaultSuite {
             "ae_dismantle_partial_retry_nbt_journal",
             () -> dev.structureterminal.server.AeReturnChecks.journal(player));
         for (String mode : new String[] { "dismantle_ae", "dismantle_ae_full", "dismantle_ae_unlinked",
-            "dismantle_ae_unpowered" })
+            "dismantle_ae_unpowered", "dismantle_ae_hatch_filled", "dismantle_ae_hatch_fluid" })
             run(
                 "advanced_terminal_ebf_" + mode,
                 () -> AdvancedTerminalChecks.run(world, player, mode, storage().getItemInventory()));
+        run("network_tool_reports_vault_on_both_storage_tabs", () -> {
+            appeng.me.cache.GridStorageCache grid = (appeng.me.cache.GridStorageCache) storage();
+            java.lang.reflect.Method update = grid.getClass()
+                .getDeclaredMethod("updateBytesInfo");
+            update.setAccessible(true);
+            update.invoke(grid);
+            check(
+                grid.getItemCellCount() == 1 && grid.getFluidCellCount() == 1,
+                "vault missing/duplicated from network tool");
+            check(
+                grid.getItemTypesUsed() == controller.store()
+                    .channelTypes("items"),
+                "item type stats");
+            check(
+                grid.getFluidTypesUsed() == controller.store()
+                    .channelTypes("fluids"),
+                "fluid type stats");
+            check(
+                grid.getItemBytesUsed() == controller.store()
+                    .channelUsedBytes("items")
+                    .doubleValue(),
+                "item byte stats");
+            check(
+                grid.getFluidBytesUsed() == controller.store()
+                    .channelUsedBytes("fluids")
+                    .doubleValue(),
+                "fluid byte stats");
+            check(
+                grid.getItemCells()
+                    .containsKey(new ItemStack(VaultMod.CONTROLLER))
+                    && grid.getFluidCells()
+                        .containsKey(new ItemStack(VaultMod.CONTROLLER)),
+                "vault missing cell icons");
+        });
         run("structurelib_nei_examples_three_variants_six_facings", () -> TerminalVaultChecks.previews(world));
         run("vault_complete_in_one_server_tick", () -> TerminalVaultChecks.instant(world, player, false));
         run(

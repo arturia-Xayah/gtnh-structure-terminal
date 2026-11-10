@@ -19,6 +19,7 @@ public final class TerminalSettings {
     public boolean mirror;
     public boolean network;
     public int coilTier;
+    public int glassTier = -1;
     public int repeatCount;
     public boolean noHatches = true;
     public boolean replaceCoils;
@@ -33,6 +34,7 @@ public final class TerminalSettings {
         tag.setBoolean("mirror", mirror);
         tag.setBoolean("network", network);
         tag.setInteger("CoilTier", coilTier);
+        tag.setInteger("GlassTier", glassTier);
         tag.setInteger("RepeatCount", repeatCount);
         tag.setInteger("NoHatchMode", noHatches ? 1 : 0);
         tag.setInteger("ReplaceCoilMode", replaceCoils ? 1 : 0);
@@ -54,6 +56,8 @@ public final class TerminalSettings {
         s.mirror = tag.getBoolean("mirror");
         s.network = tag.getBoolean("network");
         s.coilTier = tag.getInteger("CoilTier");
+        s.glassTier = tag.hasKey("GlassTier") ? tag.getInteger("GlassTier") : -1;
+        if (s.glassTier < -1 || s.glassTier > 15) throw new IllegalArgumentException("Invalid glass tier");
         s.repeatCount = tag.hasKey("RepeatCount") ? tag.getInteger("RepeatCount") : (s.size == 1 ? 0 : s.size);
         if (s.coilTier < 0 || s.coilTier > 14 || s.repeatCount < 0 || s.repeatCount > 99)
             throw new IllegalArgumentException("Invalid advanced terminal settings");

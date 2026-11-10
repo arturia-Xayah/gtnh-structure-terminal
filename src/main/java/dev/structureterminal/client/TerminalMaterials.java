@@ -54,7 +54,7 @@ public final class TerminalMaterials {
             if (glass == null || glass.getLeft() == null) continue;
             int value = GlassTier.getGlassChannelValue(glass.getLeft(), glass.getRight());
             Integer tier = GlassTier.getGlassBlockTier(glass.getLeft(), glass.getRight());
-            if (value > 0 && tier != null && seen.add(value))
+            if (value > 0 && tier != null && tier >= 3 && tier < 3 + GlassTier.getMaxTierIndex() && seen.add(value))
                 entries.add(new Entry(value, tier, new ItemStack(glass.getLeft(), 1, glass.getRight())));
         }
         entries.sort(
@@ -62,6 +62,22 @@ public final class TerminalMaterials {
                 .thenComparingInt(e -> e.value));
         entries.add(0, new Entry(0, 0, null));
         return entries;
+    }
+
+    public static List<Entry> glassTiers() {
+        List<Entry> result = new ArrayList<>();
+        result.add(new Entry(0, 0, null));
+        Set<Integer> seen = new HashSet<>();
+        for (Entry e : glasses())
+            if (e.value > 0 && seen.add(e.tier)) result.add(new Entry(-e.tier - 1, e.tier, e.icon));
+        return result;
+    }
+
+    public static List<Entry> variants(int tier) {
+        List<Entry> result = new ArrayList<>();
+        for (Entry e : glasses()) if (e.value > 0 && e.tier == tier) result.add(e);
+        result.add(0, new Entry(0, tier, result.isEmpty() ? null : result.get(0).icon));
+        return result;
     }
 
     private TerminalMaterials() {}

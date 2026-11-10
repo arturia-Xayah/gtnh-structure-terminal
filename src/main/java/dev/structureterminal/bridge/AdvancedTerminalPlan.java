@@ -44,10 +44,59 @@ public final class AdvancedTerminalPlan {
             && glass <= gregtech.api.util.GlassTier.getGlassList()
                 .size())
             settings.channels.put("glass", glass);
+        if (settings.glassTier >= 3) {
+            java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> options = dev.structureterminal.client.TerminalMaterials
+                .variants(settings.glassTier);
+            if (options.size() > 1 && (glass == null || options.stream()
+                .noneMatch(e -> e.value == glass))) settings.channels.put("glass", options.get(1).value);
+        }
         // Enumerate and permit native hatch placement. The material source filters optional hatches separately.
         settings.channels.put("gt_hatch", 1);
         settings.channels.put("coil", Math.max(1, settings.coilTier));
         StructureScanner.Scan scan = StructureScanner.scan(bridge, player, settings);
+        if (settings.glassTier >= 3 && (glass == null || glass == 0)) {
+            int chosenGlass = 0;
+            for (StructureScanner.Cell cell : scan.cells) {
+                boolean glassCell = cell.description.contains("glass");
+                for (ItemStack candidate : cell.candidates) if (gregtech.api.util.GlassTier
+                    .getGlassBlockTier(Block.getBlockFromItem(candidate.getItem()), candidate.getItemDamage()) != null)
+                    glassCell = true;
+                if (!glassCell) continue;
+                Block existing = player.worldObj.getBlock(cell.x, cell.y, cell.z);
+                int meta = player.worldObj.getBlockMetadata(cell.x, cell.y, cell.z);
+                if (Integer.valueOf(settings.glassTier)
+                    .equals(gregtech.api.util.GlassTier.getGlassBlockTier(existing, meta))) {
+                    chosenGlass = gregtech.api.util.GlassTier.getGlassChannelValue(existing, meta);
+                    break;
+                }
+            }
+            if (chosenGlass == 0) for (ItemStack stack : player.inventory.mainInventory) {
+                if (stack != null && Integer.valueOf(settings.glassTier)
+                    .equals(
+                        gregtech.api.util.GlassTier
+                            .getGlassBlockTier(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage()))) {
+                    chosenGlass = gregtech.api.util.GlassTier
+                        .getGlassChannelValue(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage());
+                    break;
+                }
+            }
+            if (chosenGlass == 0 && settings.network
+                && !player.worldObj.isRemote
+                && player instanceof net.minecraft.entity.player.EntityPlayerMP) {
+                for (dev.structureterminal.client.TerminalMaterials.Entry e : dev.structureterminal.client.TerminalMaterials
+                    .variants(settings.glassTier))
+                    if (e.value > 0 && dev.structureterminal.server.AeSupply
+                        .takeOne((net.minecraft.entity.player.EntityPlayerMP) player, e.icon, true)) {
+                            chosenGlass = e.value;
+                            break;
+                        }
+            }
+            if (chosenGlass > 0 && !Integer.valueOf(chosenGlass)
+                .equals(settings.channels.get("glass"))) {
+                settings.channels.put("glass", chosenGlass);
+                scan = StructureScanner.scan(bridge, player, settings);
+            }
+        }
         int coil = settings.coilTier;
         if (coil == 0) {
             // Preserve an already partially built coil ring before selecting material from the inventory.

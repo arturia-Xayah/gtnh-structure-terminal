@@ -56,6 +56,8 @@ public final class VaultStore implements Closeable {
     private FileLock lock;
     private boolean needsFlush;
     private BigInteger used = BigInteger.ZERO;
+    private final Map<String, BigInteger> channelUnits = new HashMap<>();
+    private final Map<String, Integer> channelTypes = new HashMap<>();
     private BigInteger capacity = BigInteger.ZERO;
     private BigInteger capacityUnits = BigInteger.ZERO;
     private long sequence;
@@ -204,6 +206,22 @@ public final class VaultStore implements Closeable {
     public synchronized BigInteger usedBytesCeil() {
         return used.add(UNITS.subtract(BigInteger.ONE))
             .divide(UNITS);
+    }
+
+    /** Constant-time channel accounting; both views share the same physical capacity. */
+    public synchronized BigInteger channelUsedBytes(String channel) {
+        return channelUnits.getOrDefault(channel, BigInteger.ZERO)
+            .add(UNITS.subtract(BigInteger.ONE))
+            .divide(UNITS);
+    }
+
+    public synchronized int channelTypes(String channel) {
+        return channelTypes.getOrDefault(channel, 0);
+    }
+
+    public synchronized BigInteger channelCapacity(String channel) {
+        return capacity.subtract(usedBytesCeil())
+            .add(channelUsedBytes(channel));
     }
 
     public synchronized int types() {
@@ -364,7 +382,8 @@ public final class VaultStore implements Closeable {
     }
 
     private void apply(Resource r, BigInteger delta) {
-        BigInteger next = exactAmount(r).add(delta);
+        BigInteger old = exactAmount(r);
+        BigInteger next = old.add(delta);
         if (next.signum() < 0) throw new IllegalArgumentException("Negative stock");
         if (next.signum() == 0) {
             stock.remove(r);
@@ -375,7 +394,16 @@ public final class VaultStore implements Closeable {
         }
         NativeInventoryView view = readViews.get(r.channel);
         if (view != null) view.update(r, next);
-        used = used.add(delta.multiply(BigInteger.valueOf(r.units())));
+        BigInteger units = delta.multiply(BigInteger.valueOf(r.units()));
+        used = used.add(units);
+        channelUnits.put(
+            r.channel,
+            channelUnits.getOrDefault(r.channel, BigInteger.ZERO)
+                .add(units));
+        channelTypes.put(
+            r.channel,
+            channelTypes.getOrDefault(r.channel, 0)
+                + (old.signum() == 0 && next.signum() > 0 ? 1 : old.signum() > 0 && next.signum() == 0 ? -1 : 0));
     }
 
     private void append(byte[] body, boolean durable) throws IOException {

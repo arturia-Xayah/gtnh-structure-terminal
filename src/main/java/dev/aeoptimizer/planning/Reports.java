@@ -28,6 +28,78 @@ public final class Reports {
 
     private Reports() {}
 
+    private static net.minecraft.util.IChatComponent product(IAEStack<?> stack,
+        java.util.Collection<ICraftingPatternDetails> patterns, BaseActionSource source,
+        appeng.crafting.v2.CraftingContext context) {
+        net.minecraft.util.EnumChatFormatting[] colors = { net.minecraft.util.EnumChatFormatting.AQUA,
+            net.minecraft.util.EnumChatFormatting.GREEN, net.minecraft.util.EnumChatFormatting.LIGHT_PURPLE,
+            net.minecraft.util.EnumChatFormatting.GOLD, net.minecraft.util.EnumChatFormatting.YELLOW };
+        ChatComponentText link = new ChatComponentText(
+            stack.getDisplayName()
+                .replaceAll("(?i)\\u00a7[0-9a-fk-or]", ""));
+        link.getChatStyle()
+            .setColor(colors[(stack.hashCode() & Integer.MAX_VALUE) % colors.length])
+            .setUnderlined(true);
+        if (source instanceof PlayerSource
+            && ((PlayerSource) source).player instanceof net.minecraft.entity.player.EntityPlayerMP) {
+            String command = PatternLocations.remember(
+                (net.minecraft.entity.player.EntityPlayerMP) ((PlayerSource) source).player,
+                stack.getDisplayName(),
+                patterns,
+                context);
+            link.getChatStyle()
+                .setChatClickEvent(
+                    new net.minecraft.event.ClickEvent(net.minecraft.event.ClickEvent.Action.RUN_COMMAND, command));
+            link.getChatStyle()
+                .setChatHoverEvent(
+                    new net.minecraft.event.HoverEvent(
+                        net.minecraft.event.HoverEvent.Action.SHOW_TEXT,
+                        new net.minecraft.util.ChatComponentTranslation("aeoptimizer.locate.hint")));
+        }
+        return link;
+    }
+
+    public static void alternatives(IAEStack<?> stack, java.util.List<ICraftingPatternDetails> patterns,
+        BaseActionSource source, appeng.crafting.v2.CraftingContext context) {
+        DETAILED_REPORTS.incrementAndGet();
+        OrderOptimizer.LOG.info("AEO_ALTERNATIVES: {} recipes={}", stack.getDisplayName(), patterns.size());
+        if (source instanceof PlayerSource) ((PlayerSource) source).player.addChatMessage(
+            new net.minecraft.util.ChatComponentTranslation(
+                "aeoptimizer.report.alternatives",
+                product(stack, patterns, source, context),
+                patterns.size()));
+    }
+
+    public static void cycle(dev.aeoptimizer.core.StrictGraph.InvalidPath error,
+        java.util.Map<IAEStack<?>, it.unimi.dsi.fastutil.longs.LongObjectPair<ICraftingPatternDetails>> chosen,
+        BaseActionSource source, appeng.crafting.v2.CraftingContext context) {
+        OrderOptimizer.LOG.warn(error.getMessage());
+        if (!(source instanceof PlayerSource)) return;
+        net.minecraft.util.IChatComponent line = new net.minecraft.util.ChatComponentTranslation(
+            "aeoptimizer.report.cycle");
+        for (int i = 0; i < error.products.size(); i++) {
+            IAEStack<?> stack = (IAEStack<?>) error.products.get(i);
+            if (i > 0 && i % 16 == 0) {
+                ((PlayerSource) source).player.addChatMessage(line);
+                line = new ChatComponentText("→ ");
+            } else if (i > 0) line.appendText(" → ");
+            it.unimi.dsi.fastutil.longs.LongObjectPair<ICraftingPatternDetails> choice = chosen.get(stack);
+            net.minecraft.util.IChatComponent link = product(
+                stack,
+                choice == null ? java.util.Collections.emptyList()
+                    : java.util.Collections.singletonList(choice.right()),
+                source,
+                context);
+            net.minecraft.util.EnumChatFormatting[] palette = { net.minecraft.util.EnumChatFormatting.AQUA,
+                net.minecraft.util.EnumChatFormatting.LIGHT_PURPLE, net.minecraft.util.EnumChatFormatting.GOLD,
+                net.minecraft.util.EnumChatFormatting.GREEN, net.minecraft.util.EnumChatFormatting.YELLOW };
+            link.getChatStyle()
+                .setColor(palette[(i == error.products.size() - 1 ? 0 : i) % palette.length]);
+            line.appendSibling(link);
+        }
+        ((PlayerSource) source).player.addChatMessage(line);
+    }
+
     public static String describe(ICraftingPatternDetails pattern) {
         StringBuilder out = new StringBuilder("pattern#");
         out.append(fingerprint(pattern))

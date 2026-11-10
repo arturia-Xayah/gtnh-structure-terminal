@@ -107,6 +107,7 @@ public final class OptimizerPackTest {
     long expected, returned, startTick;
     String current;
     final List<Map<String, Object>> rows = new ArrayList<>();
+    final List<net.minecraft.util.IChatComponent> capturedChat = new ArrayList<>();
     TileInterface realInterface;
     TileEntityChest chest;
     long chestItems, initialBatches;
@@ -318,6 +319,7 @@ public final class OptimizerPackTest {
                 return;
             }
             if (phase == 12) {
+                ReportPackChecks.nativeLocation(this);
                 future = order(token("real_interface"), 10000, false);
                 phase = 13;
                 return;
@@ -674,6 +676,7 @@ public final class OptimizerPackTest {
                 .contains("AEO_CYCLE"),
             "two-recipe loop accepted");
         row("reject_multi_node_cycle", true);
+        ReportPackChecks.cycle(this);
         setPatterns(pattern(new ItemStack[] { iron() }, a, b));
         check(
             order(a, 1, false).get()
@@ -729,6 +732,7 @@ public final class OptimizerPackTest {
                 .size() == 2,
             "registered alternative lost");
         row("alternatives_report_preserves_native_selection", true);
+        ReportPackChecks.alternatives(this);
         optimizer.detailed = false;
         setPatterns(
             pattern(new ItemStack[] { iron() }, new ItemStack(Items.gold_ingot, 4)),
@@ -997,6 +1001,11 @@ public final class OptimizerPackTest {
         player = new FakePlayer(
             world,
             new GameProfile(UUID.fromString("ae000000-0000-4000-8000-000000000045"), "AEOptimizerTest")) {
+
+            @Override
+            public void addChatMessage(net.minecraft.util.IChatComponent component) {
+                capturedChat.add(component);
+            }
 
             @Override
             public void openGui(Object mod, int id, net.minecraft.world.World guiWorld, int x, int y, int z) {

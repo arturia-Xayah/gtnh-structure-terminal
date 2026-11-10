@@ -25,7 +25,7 @@ public class StrictGraphTest {
         } catch (StrictGraph.InvalidPath e) {
             assertTrue(
                 e.getMessage()
-                    .contains("A --[recipe]--> A"));
+                    .contains("A → A"));
         }
     }
 

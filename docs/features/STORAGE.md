@@ -173,4 +173,10 @@ Items and fluids share an exact budget: 8 items or 2048 mB per byte, no type ove
 
 Normal harvesting retains the controller UUID; replacement reconnects the same inventory. Duplicate controllers cannot mount one UUID together. External files are `<world>/data/aestoragevault/<UUID>.snapshot` and `.wal`. Always back up and restore the complete stopped world including chunks and players. Missing/corrupt files lock rather than replace stock. Keep files/logs and restore a complete backup. Migration receipts prevent duplicate capacity credit; ordinary cross-container transfers are not a distributed transaction with all other mods. Partial rollback or abrupt power loss can still create inconsistencies.
 
+### AE 网络工具 / AE Network Tool
+
+成型并接入网络的聚合器会同时出现在物品、流体存储统计中。两页分别显示该频道已用字节、类型数以及“已用字节＋共享空闲容量”；空闲容量共用，不能把两页容量相加视为两份独立空间。网络工具沿用 AE 原生近似数值格式，聚合器自身界面和库存仍保留精确大整数。主动输出总线负责向其他存储输出，不作为网络可访问的存储元件重复计数。
+
+A formed, connected vault appears in both item and fluid storage statistics. Each tab shows its channel usage/types and channel-used bytes plus shared free capacity. The free pool is shared, so do not add both tabs as independent capacities. The network tool uses AE's approximate numeric display; the vault retains exact big-integer quantities. An export-only bus is not counted as accessible storage.
+
 [开发文档与存储格式 / Development and file format](../development/README.md)

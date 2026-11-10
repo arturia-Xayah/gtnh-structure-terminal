@@ -1,0 +1,26 @@
+{
+  "label": "unreleased local feedback build",
+  "version": "0.3.4-alpha",
+  "gtnh": "2.9.0",
+  "asset": "dist/feedback-2026-11-10-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.4-alpha-feedback-GTNH-2.9.0.jar",
+  "sha256": "66496a9ea657d55af130a1b678f6ebd36c567000abc99f085d2efdab25bff5b2",
+  "size": 865135,
+  "unit_tests": 163,
+  "unit_failures": 0,
+  "backend_cases": {
+    "ae/ae-order-report.json": 185,
+    "vault/vault-tests.json": 81,
+    "vault/vault-tests-restart.json": 7
+  },
+  "client_launched": false,
+  "server_java": "25.0.4.1",
+  "class_major_version": 52,
+  "production_classes": 233,
+  "test_helpers_in_production": false,
+  "all_runtime_instructions_match_executed_fixture": true,
+  "debug_line_only_differences": [
+    "dev/aeoptimizer/planning/PatternLocations.class",
+    "dev/aeoptimizer/planning/PatternLocations$Record.class"
+  ],
+  "published": false
+}
