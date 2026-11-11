@@ -77,6 +77,7 @@ final class AdvancedTerminalChecks {
                 "native glass selection lost");
             if (mode.equals("creative")) {
                 materialChoices(world, player);
+                channelChoices(bridge, world, player);
                 java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> variants = dev.structureterminal.client.TerminalMaterials
                     .variants(3);
                 dev.structureterminal.client.TerminalMaterials.Entry variant = variants.get(variants.size() - 1);
@@ -308,6 +309,108 @@ final class AdvancedTerminalChecks {
         public void cancel(net.minecraftforge.event.world.BlockEvent.BreakEvent event) {
             event.setCanceled(true);
         }
+    }
+
+    private static void channelChoices(NativeBridge bridge, WorldServer world, FakePlayer player) throws Exception {
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        com.google.gson.JsonObject catalog = new com.google.gson.JsonObject();
+        TerminalSettings configured = new TerminalSettings();
+        List<String> missing = new ArrayList<>();
+        for (String[] page : dev.structureterminal.TerminalChannels.PAGES) for (String channel : page) {
+            check(seen.add(channel), "duplicate channel " + channel);
+            check(!channel.equals("height") && !channel.contains("hatch"), "excluded channel exposed");
+            java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> entries = dev.structureterminal.TerminalChannels
+                .entries(channel);
+            com.google.gson.JsonArray items = new com.google.gson.JsonArray();
+            for (dev.structureterminal.client.TerminalMaterials.Entry e : entries) if (e.icon != null) {
+                com.google.gson.JsonObject item = new com.google.gson.JsonObject();
+                item.addProperty("value", e.value);
+                item.addProperty("name", e.icon.getDisplayName());
+                item.addProperty(
+                    "registry",
+                    String.valueOf(net.minecraft.item.Item.itemRegistry.getNameForObject(e.icon.getItem())));
+                item.addProperty("meta", e.icon.getItemDamage());
+                items.add(item);
+            }
+            catalog.add(channel, items);
+            if (dev.structureterminal.TerminalChannels.numericMax(channel) == 0
+                && !dev.structureterminal.TerminalChannels.toggle(channel))
+                if (entries.size() <= 1) missing.add(channel);
+            int value = entries.size() > 1 ? entries.get(entries.size() - 1).value : 1;
+            configured.channels.put(channel, value);
+        }
+        java.nio.file.Files.write(
+            java.nio.file.Paths.get("terminal-channels.json"),
+            new com.google.gson.GsonBuilder().setPrettyPrinting()
+                .create()
+                .toJson(catalog)
+                .getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        check(missing.isEmpty(), "missing native indicators: " + missing);
+        for (gregtech.common.misc.GTStructureChannels channel : gregtech.common.misc.GTStructureChannels.values())
+            if (!channel.get()
+                .equals("coil")
+                && !channel.get()
+                    .equals("glass")
+                && !channel.get()
+                    .equals("height")
+                && !channel.get()
+                    .equals("gt_hatch"))
+                check(seen.contains(channel.get()), "missing GT channel " + channel.get());
+        TerminalSettings restored = TerminalSettings.read(configured.write());
+        AdvancedTerminalPlan plan = AdvancedTerminalPlan.create(bridge, player, restored);
+        for (java.util.Map.Entry<String, Integer> e : configured.channels.entrySet()) {
+            check(
+                e.getValue()
+                    .equals(plan.settings.channels.get(e.getKey())),
+                "plan discarded " + e.getKey());
+            for (StructureScanner.Cell cell : plan.scan.cells) check(
+                com.gtnewhorizon.structurelib.alignment.constructable.ChannelDataAccessor
+                    .getChannelData(cell.advancedTrigger, e.getKey()) == e.getValue(),
+                "cell trigger lost " + e.getKey());
+        }
+        int x = 24, y = 185, z = 24;
+        world.setBlock(x, y, z, GregTechAPI.sBlockMachines, 0, 3);
+        try {
+            IGregTechTileEntity base = (IGregTechTileEntity) world.getTileEntity(x, y, z);
+            base.setInitialValuesAsNBT(
+                null,
+                (short) gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList.ChemicalPlant_Controller.get(1)
+                    .getItemDamage());
+            base.setFrontFacing(net.minecraftforge.common.util.ForgeDirection.NORTH);
+            base.setOwnerUuid(player.getUniqueID());
+            base.setOwnerName(player.getCommandSenderName());
+            NativeBridge plant = NativeBridge.resolve(world, x, y, z, 2);
+            java.util.List<dev.structureterminal.client.TerminalMaterials.Entry> pipes = dev.structureterminal.TerminalChannels
+                .entries("pipe");
+            java.util.Set<String> previousPipes = null;
+            for (int value : new int[] { 1, 4 }) {
+                TerminalSettings choice = new TerminalSettings();
+                choice.channels.put("pipe", value);
+                StructureScanner.Scan nativeScan = StructureScanner.scan(plant, player, choice);
+                AdvancedTerminalPlan chosen = AdvancedTerminalPlan.create(plant, player, choice);
+                java.util.Set<String> selectedPipes = new java.util.HashSet<>();
+                for (StructureScanner.Cell cell : chosen.scan.cells) for (ItemStack candidate : cell.candidates)
+                    for (dev.structureterminal.client.TerminalMaterials.Entry entry : pipes)
+                        if (entry.icon != null && dev.structureterminal.bridge.ItemKeys.same(entry.icon, candidate)) {
+                            StructureScanner.Cell nativeCell = nativeScan.byPosition.get(cell.position());
+                            String key = dev.structureterminal.bridge.ItemKeys.key(candidate);
+                            check(
+                                nativeCell != null && nativeCell.keyedCandidates.containsKey(key),
+                                "pipe differs from native projector");
+                            selectedPipes.add(key);
+                        }
+                check(!selectedPipes.isEmpty(), "chemical plant pipe candidates absent");
+                if (previousPipes != null) check(!previousPipes.equals(selectedPipes), "pipe selector had no effect");
+                previousPipes = selectedPipes;
+            }
+        } finally {
+            world.setBlockToAir(x, y, z);
+        }
+        // An unset channel must fall back to native main-channel semantics, rather than retain an old selection.
+        restored.channels.remove("solenoid");
+        check(
+            !AdvancedTerminalPlan.create(bridge, player, restored).settings.channels.containsKey("solenoid"),
+            "Auto did not clear channel");
     }
 
     private static void materialChoices(WorldServer world, FakePlayer player) {

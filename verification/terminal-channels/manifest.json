@@ -1,0 +1,32 @@
+{
+  "pack": "GTNH 2.9.0",
+  "settings_pages": 5,
+  "new_channels": 30,
+  "excluded_ui_channels": [
+    "hatch",
+    "gt_hatch",
+    "height"
+  ],
+  "unit_tests": 163,
+  "backend_cases": 81,
+  "restart_cases": 7,
+  "browser_picker_checks": 28,
+  "client_launched": false,
+  "jar_sha256": "fae48763f310ec795eb8647d0b99c2d7b98955df7fe99827292010ec43c73376",
+  "notes": [
+    "New material values use native projector registration, with explicit fallbacks for unregistered native channels.",
+    "Same-value indicators can belong to different machines; selections write the channel value, not a global forced block.",
+    "Chemical plant pipe selections are checked against native projector results, not assumed item ordinals. Native addTieredBlock indexes can differ from registry indicators.",
+    "The interactive web preview uses extracted native texture faces; Minecraft uses native NEI item rendering and full tooltips.",
+    "Dedicated server tests cover saved channels, cell triggers, native choices and existing terminal actions; Minecraft GUI not launched."
+  ],
+  "paging": "Fixed 9-entry pages, including wheel and keyboard navigation; final page is not backfilled.",
+  "chinese_label_corrections": [
+    "motor",
+    "field_restriction_coil",
+    "construct",
+    "essentia_cell",
+    "unit_casing",
+    "field"
+  ]
+}

@@ -1,6 +1,10 @@
 # 更新日志 / Changelog
 
-## 未发布 / Unreleased — GTNH 2.9.0
+## 0.3.5-alpha — GTNH 2.9.0 · 2026-11-11
+
+- 修复终端材料列表末页重复上一页条目；滚轮与方向键按固定分页定位，并校正通道中文名称。 / Fixed overlapping terminal material pages and aligned wheel/keyboard navigation; corrected Chinese channel labels.
+
+- 高级终端新增四页原生通道设置，材料图标列表、通道名悬停提示、尺寸输入和辅助开关；修复附加通道在搭建计划中被清除，并接入原生投影错误标记。 / Four additional native-channel pages with item selectors, channel-name tooltips, dimensions and toggles; preserve subchannels in build plans and enable native hint-error highlighting.
 
 - 聚合器物品图标与世界外观统一为白蓝紫材质；修正主机、ME 接口在渲染缓存中的成型外观。 / White/blue/violet vault item and formed surfaces, including controller and ME ports in cached chunk rendering.
 - 高级终端增加本地深色模式，降低浅色亮度，修正材料图标照明；背包键（默认 E）关闭界面。 / Persistent dark mode, subdued light palette, corrected material-icon lighting and inventory-key close.

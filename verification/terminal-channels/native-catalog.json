@@ -1,0 +1,1534 @@
+{
+  "casing": [
+    {
+      "value": 1,
+      "name": "Alchemically Resistant Thaumium Casing",
+      "registry": "gregtech:gt.blockcasings12",
+      "meta": 10
+    },
+    {
+      "value": 1,
+      "name": "ULV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 0
+    },
+    {
+      "value": 1,
+      "name": "Strong Bronze Machine Casing",
+      "registry": "miscutils:gtplusplus.blockspecialcasings.2",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Alchemically Inert Void Casing",
+      "registry": "gregtech:gt.blockcasings12",
+      "meta": 11
+    },
+    {
+      "value": 2,
+      "name": "Solid Steel Machine Casing",
+      "registry": "gregtech:gt.blockcasings2",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "LV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "Alchemically Immune Ichorium Casing",
+      "registry": "gregtech:gt.blockcasings12",
+      "meta": 12
+    },
+    {
+      "value": 3,
+      "name": "MV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 2
+    },
+    {
+      "value": 3,
+      "name": "Sturdy Aluminium Machine Casing",
+      "registry": "miscutils:gtplusplus.blockspecialcasings.2",
+      "meta": 1
+    },
+    {
+      "value": 4,
+      "name": "Clean Stainless Steel Machine Casing",
+      "registry": "gregtech:gt.blockcasings4",
+      "meta": 1
+    },
+    {
+      "value": 4,
+      "name": "HV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "Stable Titanium Machine Casing",
+      "registry": "gregtech:gt.blockcasings4",
+      "meta": 2
+    },
+    {
+      "value": 5,
+      "name": "EV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "Robust Tungstensteel Machine Casing",
+      "registry": "gregtech:gt.blockcasings4",
+      "meta": 0
+    },
+    {
+      "value": 6,
+      "name": "IV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "LuV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 6
+    },
+    {
+      "value": 7,
+      "name": "Vigorous Laurenium Machine Casing",
+      "registry": "miscutils:gtplusplus.blockspecialcasings.2",
+      "meta": 2
+    },
+    {
+      "value": 8,
+      "name": "ZPM Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 7
+    },
+    {
+      "value": 8,
+      "name": "Rugged Botmium Machine Casing",
+      "registry": "miscutils:gtplusplus.blockspecialcasings.2",
+      "meta": 3
+    },
+    {
+      "value": 9,
+      "name": "UV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 8
+    },
+    {
+      "value": 10,
+      "name": "UHV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 9
+    },
+    {
+      "value": 11,
+      "name": "UEV Machine Casing",
+      "registry": "gregtech:gt.blockcasingsNH",
+      "meta": 10
+    },
+    {
+      "value": 12,
+      "name": "UIV Machine Casing",
+      "registry": "gregtech:gt.blockcasingsNH",
+      "meta": 11
+    },
+    {
+      "value": 13,
+      "name": "UMV Machine Casing",
+      "registry": "gregtech:gt.blockcasingsNH",
+      "meta": 12
+    },
+    {
+      "value": 14,
+      "name": "UXV Machine Casing",
+      "registry": "gregtech:gt.blockcasingsNH",
+      "meta": 13
+    },
+    {
+      "value": 15,
+      "name": "MAX Machine Casing",
+      "registry": "gregtech:gt.blockcasingsNH",
+      "meta": 14
+    }
+  ],
+  "machine_casing": [
+    {
+      "value": 1,
+      "name": "ULV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "LV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "MV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "HV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "EV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "IV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "LuV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "ZPM Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 7
+    },
+    {
+      "value": 9,
+      "name": "UV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 8
+    },
+    {
+      "value": 10,
+      "name": "UHV Machine Casing",
+      "registry": "gregtech:gt.blockcasings",
+      "meta": 9
+    }
+  ],
+  "unit_casing": [
+    {
+      "value": 1,
+      "name": "Imprecise Electronic Unit Casing",
+      "registry": "GoodGenerator:impreciseUnitCasing",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Precise Electronic Unit Casing Mk-I",
+      "registry": "GoodGenerator:preciseUnitCasing",
+      "meta": 0
+    },
+    {
+      "value": 3,
+      "name": "Precise Electronic Unit Casing Mk-II",
+      "registry": "GoodGenerator:preciseUnitCasing",
+      "meta": 1
+    },
+    {
+      "value": 4,
+      "name": "Precise Electronic Unit Casing Mk-III",
+      "registry": "GoodGenerator:preciseUnitCasing",
+      "meta": 2
+    },
+    {
+      "value": 5,
+      "name": "Precise Electronic Unit Casing Mk-IV",
+      "registry": "GoodGenerator:preciseUnitCasing",
+      "meta": 3
+    },
+    {
+      "value": 6,
+      "name": "preciseUnitCasing.4.name",
+      "registry": "GoodGenerator:preciseUnitCasing",
+      "meta": 4
+    }
+  ],
+  "component_casing": [
+    {
+      "value": 1,
+      "name": "Component Assembly Line Casing (LV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Component Assembly Line Casing (MV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "Component Assembly Line Casing (HV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "Component Assembly Line Casing (EV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "Component Assembly Line Casing (IV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "Component Assembly Line Casing (LuV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "Component Assembly Line Casing (ZPM)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "Component Assembly Line Casing (UV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 7
+    },
+    {
+      "value": 9,
+      "name": "Component Assembly Line Casing (UHV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 8
+    },
+    {
+      "value": 10,
+      "name": "Component Assembly Line Casing (UEV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 9
+    },
+    {
+      "value": 11,
+      "name": "Component Assembly Line Casing (UIV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 10
+    },
+    {
+      "value": 12,
+      "name": "Component Assembly Line Casing (UMV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 11
+    },
+    {
+      "value": 13,
+      "name": "Component Assembly Line Casing (UXV)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 12
+    },
+    {
+      "value": 14,
+      "name": "Component Assembly Line Casing (MAX)",
+      "registry": "GoodGenerator:componentAssemblylineCasing",
+      "meta": 13
+    }
+  ],
+  "pipe": [
+    {
+      "value": 1,
+      "name": "Bronze Pipe Casing",
+      "registry": "gregtech:gt.blockcasings2",
+      "meta": 12
+    },
+    {
+      "value": 2,
+      "name": "Steel Pipe Casing",
+      "registry": "gregtech:gt.blockcasings2",
+      "meta": 13
+    },
+    {
+      "value": 3,
+      "name": "Titanium Pipe Casing",
+      "registry": "gregtech:gt.blockcasings2",
+      "meta": 14
+    },
+    {
+      "value": 4,
+      "name": "Tungstensteel Pipe Casing",
+      "registry": "gregtech:gt.blockcasings2",
+      "meta": 15
+    }
+  ],
+  "item_pipe": [
+    {
+      "value": 1,
+      "name": "Tin Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Brass Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "Electrum Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "Platinum Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "Osmium Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "Quantium Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "Fluxed Electrum Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "Black Plutonium Item Pipe Casing",
+      "registry": "gregtech:gt.blockcasings11",
+      "meta": 7
+    }
+  ],
+  "chassis": [
+    {
+      "value": 1,
+      "name": "Infinite Magnetic Chassis",
+      "registry": "gregtech:gt.foundrycasings",
+      "meta": 1
+    },
+    {
+      "value": 2,
+      "name": "Eternal Magnetic Chassis",
+      "registry": "gregtech:gt.foundrycasings",
+      "meta": 2
+    },
+    {
+      "value": 3,
+      "name": "Celestial Magnetic Chassis",
+      "registry": "gregtech:gt.foundrycasings",
+      "meta": 3
+    }
+  ],
+  "coke_oven_casing": [
+    {
+      "value": 1,
+      "name": "Heat Resistant Coke Oven Casing",
+      "registry": "miscutils:miscutils.blockcasings",
+      "meta": 2
+    },
+    {
+      "value": 2,
+      "name": "Heat Proof Coke Oven Casing",
+      "registry": "miscutils:miscutils.blockcasings",
+      "meta": 3
+    }
+  ],
+  "field_restriction_coil": [
+    {
+      "value": 1,
+      "name": "Field Restriction Coil",
+      "registry": "GoodGenerator:FRF_Coil_1",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Advanced Field Restriction Coil",
+      "registry": "GoodGenerator:FRF_Coil_2",
+      "meta": 0
+    },
+    {
+      "value": 3,
+      "name": "Ultimate Field Restriction Coil",
+      "registry": "GoodGenerator:FRF_Coil_3",
+      "meta": 0
+    },
+    {
+      "value": 4,
+      "name": "Temporal Field Restriction Coil",
+      "registry": "GoodGenerator:FRF_Coil_4",
+      "meta": 0
+    }
+  ],
+  "solenoid": [
+    {
+      "value": 1,
+      "name": "MV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "HV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "EV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "IV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "LuV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "ZPM Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "UV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "UHV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 7
+    },
+    {
+      "value": 9,
+      "name": "UEV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 8
+    },
+    {
+      "value": 10,
+      "name": "UIV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 9
+    },
+    {
+      "value": 11,
+      "name": "UMV Solenoid Superconductor Coil",
+      "registry": "gregtech:gt.blockcasings.cyclotron_coils",
+      "meta": 10
+    }
+  ],
+  "capacitor": [
+    {
+      "value": 1,
+      "name": "Empty Capacitor (-)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 6
+    },
+    {
+      "value": 2,
+      "name": "Lapotron Capacitor (EV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 7
+    },
+    {
+      "value": 3,
+      "name": "Lapotronic Capacitor (IV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 1
+    },
+    {
+      "value": 4,
+      "name": "Lapotronic Capacitor (LuV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 2
+    },
+    {
+      "value": 5,
+      "name": "Lapotronic Capacitor (ZPM)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 3
+    },
+    {
+      "value": 6,
+      "name": "Lapotronic Capacitor (UV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 4
+    },
+    {
+      "value": 7,
+      "name": "Ultimate Capacitor (UHV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 5
+    },
+    {
+      "value": 8,
+      "name": "Extremely Ultimate Capacitor (UEV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 8
+    },
+    {
+      "value": 9,
+      "name": "Insanely Ultimate Capacitor (UIV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 9
+    },
+    {
+      "value": 10,
+      "name": "Mega Ultimate Capacitor (UMV)",
+      "registry": "kekztech:kekztech_lapotronicenergyunit_block",
+      "meta": 10
+    }
+  ],
+  "cell": [
+    {
+      "value": 1,
+      "name": "Vanadium Redox Power Cell (EV)",
+      "registry": "miscutils:gtplusplus.blockcasings.2",
+      "meta": 7
+    },
+    {
+      "value": 2,
+      "name": "Vanadium Redox Power Cell (IV)",
+      "registry": "miscutils:gtplusplus.blockcasings.3",
+      "meta": 4
+    },
+    {
+      "value": 3,
+      "name": "Vanadium Redox Power Cell (LuV)",
+      "registry": "miscutils:gtplusplus.blockcasings.3",
+      "meta": 5
+    },
+    {
+      "value": 4,
+      "name": "Vanadium Redox Power Cell (ZPM)",
+      "registry": "miscutils:gtplusplus.blockcasings.3",
+      "meta": 6
+    },
+    {
+      "value": 5,
+      "name": "Vanadium Redox Power Cell (UV)",
+      "registry": "miscutils:gtplusplus.blockcasings.3",
+      "meta": 7
+    },
+    {
+      "value": 6,
+      "name": "Vanadium Redox Power Cell (UHV)",
+      "registry": "miscutils:gtplusplus.blockcasings.3",
+      "meta": 8
+    }
+  ],
+  "field": [
+    {
+      "value": 1,
+      "name": "TFFT Storage Field Block (Tier I)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 1
+    },
+    {
+      "value": 2,
+      "name": "TFFT Storage Field Block (Tier II)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 2
+    },
+    {
+      "value": 3,
+      "name": "TFFT Storage Field Block (Tier III)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 3
+    },
+    {
+      "value": 4,
+      "name": "TFFT Storage Field Block (Tier IV)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 4
+    },
+    {
+      "value": 5,
+      "name": "TFFT Storage Field Block (Tier V)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 5
+    },
+    {
+      "value": 6,
+      "name": "TFFT Storage Field Block (Tier VI)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 6
+    },
+    {
+      "value": 7,
+      "name": "TFFT Storage Field Block (Tier VII)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 7
+    },
+    {
+      "value": 8,
+      "name": "TFFT Storage Field Block (Tier VIII)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 8
+    },
+    {
+      "value": 9,
+      "name": "TFFT Storage Field Block (Tier IX)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 9
+    },
+    {
+      "value": 10,
+      "name": "TFFT Storage Field Block (Tier X)",
+      "registry": "kekztech:kekztech_tfftstoragefield_block",
+      "meta": 10
+    }
+  ],
+  "manipulator": [
+    {
+      "value": 1,
+      "name": "Neutron Pulse Manipulator",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 7
+    },
+    {
+      "value": 2,
+      "name": "Cosmic Fabric Manipulator",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 8
+    },
+    {
+      "value": 3,
+      "name": "Infinity Infused Manipulator",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 9
+    },
+    {
+      "value": 4,
+      "name": "SpaceTime Continuum Ripper",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 10
+    }
+  ],
+  "shielding": [
+    {
+      "value": 1,
+      "name": "Neutron Shielding Core",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 11
+    },
+    {
+      "value": 2,
+      "name": "Cosmic Fabric Shielding Core",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 12
+    },
+    {
+      "value": 3,
+      "name": "Infinity Infused Shielding Core",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 13
+    },
+    {
+      "value": 4,
+      "name": "SpaceTime Bending Core",
+      "registry": "miscutils:gtplusplus.blockcasings.5",
+      "meta": 14
+    }
+  ],
+  "antenna": [
+    {
+      "value": 1,
+      "name": "Antenna Casing (T1)",
+      "registry": "gtnhlanth:casing.antenna_t1",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Antenna Casing (T2)",
+      "registry": "gtnhlanth:casing.antenna_t2",
+      "meta": 0
+    }
+  ],
+  "motor": [
+    {
+      "value": 1,
+      "name": "Space Elevator Motor Mk-I",
+      "registry": "gtnhintergalactic:gt.blockcasingsSEMotor",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Space Elevator Motor Mk-II",
+      "registry": "gtnhintergalactic:gt.blockcasingsSEMotor",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "Space Elevator Motor Mk-III",
+      "registry": "gtnhintergalactic:gt.blockcasingsSEMotor",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "Space Elevator Motor Mk-IV",
+      "registry": "gtnhintergalactic:gt.blockcasingsSEMotor",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "Space Elevator Motor Mk-V",
+      "registry": "gtnhintergalactic:gt.blockcasingsSEMotor",
+      "meta": 4
+    }
+  ],
+  "spacetime_compression": [
+    {
+      "value": 1,
+      "name": "§fCrude§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "§fPrimitive§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "§fStable§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "§fAdvanced§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "§fSuperb§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "§fExotic§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "§fPerfect§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "§fTipler§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 7
+    },
+    {
+      "value": 9,
+      "name": "§f§lGallifreyan§r Spacetime Compression Field Generator",
+      "registry": "tectech:gt.spacetime_compression_field_generator",
+      "meta": 8
+    }
+  ],
+  "stabilisation": [
+    {
+      "value": 1,
+      "name": "§fCrude§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "§fPrimitive§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "§fStable§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "§fAdvanced§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "§fSuperb§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "§fExotic§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "§fPerfect§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "§fTipler§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 7
+    },
+    {
+      "value": 9,
+      "name": "§f§lGallifreyan§r Stabilisation Field Generator",
+      "registry": "tectech:gt.stabilisation_field_generator",
+      "meta": 8
+    }
+  ],
+  "time_dilation": [
+    {
+      "value": 1,
+      "name": "§fCrude§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "§fPrimitive§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "§fStable§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "§fAdvanced§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "§fSuperb§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 4
+    },
+    {
+      "value": 6,
+      "name": "§fExotic§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 5
+    },
+    {
+      "value": 7,
+      "name": "§fPerfect§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 6
+    },
+    {
+      "value": 8,
+      "name": "§fTipler§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 7
+    },
+    {
+      "value": 9,
+      "name": "§f§lGallifreyan§r Time Dilation Field Generator",
+      "registry": "tectech:gt.time_acceleration_field_generator",
+      "meta": 8
+    }
+  ],
+  "piston_block": [
+    {
+      "value": 1,
+      "name": "Block of Neutronium",
+      "registry": "gregtech:gt.blockmetal5",
+      "meta": 2
+    },
+    {
+      "value": 2,
+      "name": "Infinity Block",
+      "registry": "Avaritia:Resource_Block",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "Block of Transcendent Metal",
+      "registry": "gregtech:gt.blockmetal9",
+      "meta": 4
+    },
+    {
+      "value": 4,
+      "name": "Block of SpaceTime",
+      "registry": "gregtech:gt.blockmetal9",
+      "meta": 3
+    },
+    {
+      "value": 5,
+      "name": "Block of Universium",
+      "registry": "gregtech:gt.blockmetal9",
+      "meta": 8
+    }
+  ],
+  "construct": [
+    {
+      "value": 1,
+      "name": "Alchemical Construct",
+      "registry": "Thaumcraft:blockMetalDevice",
+      "meta": 9
+    },
+    {
+      "value": 2,
+      "name": "Advanced Alchemical Construct",
+      "registry": "Thaumcraft:blockMetalDevice",
+      "meta": 3
+    }
+  ],
+  "essentia_cell": [
+    {
+      "value": 1,
+      "name": "Novice Essentia Diffusion Cell",
+      "registry": "GoodGenerator:essentiaCell",
+      "meta": 0
+    },
+    {
+      "value": 2,
+      "name": "Adept Essentia Diffusion Cell",
+      "registry": "GoodGenerator:essentiaCell",
+      "meta": 1
+    },
+    {
+      "value": 3,
+      "name": "Master Essentia Diffusion Cell",
+      "registry": "GoodGenerator:essentiaCell",
+      "meta": 2
+    },
+    {
+      "value": 4,
+      "name": "Grandmaster Essentia Diffusion Cell",
+      "registry": "GoodGenerator:essentiaCell",
+      "meta": 3
+    }
+  ],
+  "super_chest": [
+    {
+      "value": 1,
+      "name": "Super Chest I",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 135
+    },
+    {
+      "value": 2,
+      "name": "Super Chest II",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 136
+    },
+    {
+      "value": 3,
+      "name": "Super Chest III",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 137
+    },
+    {
+      "value": 4,
+      "name": "Super Chest IV",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 138
+    },
+    {
+      "value": 5,
+      "name": "Super Chest V",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 139
+    },
+    {
+      "value": 6,
+      "name": "Quantum Chest I",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 125
+    },
+    {
+      "value": 7,
+      "name": "Quantum Chest II",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 126
+    },
+    {
+      "value": 8,
+      "name": "Quantum Chest III",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 127
+    },
+    {
+      "value": 9,
+      "name": "Quantum Chest IV",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 128
+    },
+    {
+      "value": 10,
+      "name": "Quantum Chest V",
+      "registry": "gregtech:gt.blockmachines",
+      "meta": 129
+    }
+  ],
+  "length": [],
+  "width": [],
+  "boiler": [
+    {
+      "value": 1,
+      "name": "Low Pressure Boiler Tank",
+      "registry": "Railcraft:machine.beta",
+      "meta": 3
+    },
+    {
+      "value": 2,
+      "name": "High Pressure Boiler Tank",
+      "registry": "Railcraft:machine.beta",
+      "meta": 4
+    }
+  ],
+  "if_tier": [
+    {
+      "value": 1,
+      "name": "Advanced Harvesting Unit (MV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 2
+    },
+    {
+      "value": 1,
+      "name": "Environmental Enhancement Unit (MV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 2
+    },
+    {
+      "value": 1,
+      "name": "Fertilization Unit (MV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 2
+    },
+    {
+      "value": 1,
+      "name": "Growth Acceleration Unit (MV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 2
+    },
+    {
+      "value": 1,
+      "name": "Seed Bed (MV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 2
+    },
+    {
+      "value": 2,
+      "name": "Advanced Harvesting Unit (HV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 3
+    },
+    {
+      "value": 2,
+      "name": "Environmental Enhancement Unit (HV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 3
+    },
+    {
+      "value": 2,
+      "name": "Fertilization Unit (HV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 3
+    },
+    {
+      "value": 2,
+      "name": "Growth Acceleration Unit (HV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 3
+    },
+    {
+      "value": 2,
+      "name": "Seed Bed (HV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 3
+    },
+    {
+      "value": 3,
+      "name": "Advanced Harvesting Unit (EV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 4
+    },
+    {
+      "value": 3,
+      "name": "Environmental Enhancement Unit (EV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 4
+    },
+    {
+      "value": 3,
+      "name": "Fertilization Unit (EV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 4
+    },
+    {
+      "value": 3,
+      "name": "Growth Acceleration Unit (EV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 4
+    },
+    {
+      "value": 3,
+      "name": "Seed Bed (EV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 4
+    },
+    {
+      "value": 4,
+      "name": "Advanced Harvesting Unit (IV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 5
+    },
+    {
+      "value": 4,
+      "name": "Environmental Enhancement Unit (IV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 5
+    },
+    {
+      "value": 4,
+      "name": "Fertilization Unit (IV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 5
+    },
+    {
+      "value": 4,
+      "name": "Growth Acceleration Unit (IV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 5
+    },
+    {
+      "value": 4,
+      "name": "Seed Bed (IV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 5
+    },
+    {
+      "value": 5,
+      "name": "Advanced Harvesting Unit (LuV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 6
+    },
+    {
+      "value": 5,
+      "name": "Environmental Enhancement Unit (LuV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 6
+    },
+    {
+      "value": 5,
+      "name": "Fertilization Unit (LuV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 6
+    },
+    {
+      "value": 5,
+      "name": "Growth Acceleration Unit (LuV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 6
+    },
+    {
+      "value": 5,
+      "name": "Seed Bed (LuV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 6
+    },
+    {
+      "value": 6,
+      "name": "Advanced Harvesting Unit (ZPM)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 7
+    },
+    {
+      "value": 6,
+      "name": "Environmental Enhancement Unit (ZPM)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 7
+    },
+    {
+      "value": 6,
+      "name": "Fertilization Unit (ZPM)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 7
+    },
+    {
+      "value": 6,
+      "name": "Growth Acceleration Unit (ZPM)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 7
+    },
+    {
+      "value": 6,
+      "name": "Overclocked Growth Acceleration Unit (ZPM)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 7
+    },
+    {
+      "value": 6,
+      "name": "Seed Bed (ZPM)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 7
+    },
+    {
+      "value": 7,
+      "name": "Advanced Harvesting Unit (UV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 8
+    },
+    {
+      "value": 7,
+      "name": "Environmental Enhancement Unit (UV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 8
+    },
+    {
+      "value": 7,
+      "name": "Fertilization Unit (UV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 8
+    },
+    {
+      "value": 7,
+      "name": "Growth Acceleration Unit (UV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 8
+    },
+    {
+      "value": 7,
+      "name": "Overclocked Growth Acceleration Unit (UV)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 8
+    },
+    {
+      "value": 7,
+      "name": "Seed Bed (UV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 8
+    },
+    {
+      "value": 8,
+      "name": "Advanced Harvesting Unit (UHV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 9
+    },
+    {
+      "value": 8,
+      "name": "Environmental Enhancement Unit (UHV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 9
+    },
+    {
+      "value": 8,
+      "name": "Fertilization Unit (UHV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 9
+    },
+    {
+      "value": 8,
+      "name": "Growth Acceleration Unit (UHV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 9
+    },
+    {
+      "value": 8,
+      "name": "Overclocked Growth Acceleration Unit (UHV)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 9
+    },
+    {
+      "value": 8,
+      "name": "Seed Bed (UHV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 9
+    },
+    {
+      "value": 9,
+      "name": "Advanced Harvesting Unit (UEV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 10
+    },
+    {
+      "value": 9,
+      "name": "Environmental Enhancement Unit (UEV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 10
+    },
+    {
+      "value": 9,
+      "name": "Fertilization Unit (UEV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 10
+    },
+    {
+      "value": 9,
+      "name": "Growth Acceleration Unit (UEV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 10
+    },
+    {
+      "value": 9,
+      "name": "Overclocked Growth Acceleration Unit (UEV)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 10
+    },
+    {
+      "value": 9,
+      "name": "Seed Bed (UEV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 10
+    },
+    {
+      "value": 10,
+      "name": "Advanced Harvesting Unit (UIV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 11
+    },
+    {
+      "value": 10,
+      "name": "Environmental Enhancement Unit (UIV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 11
+    },
+    {
+      "value": 10,
+      "name": "Fertilization Unit (UIV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 11
+    },
+    {
+      "value": 10,
+      "name": "Growth Acceleration Unit (UIV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 11
+    },
+    {
+      "value": 10,
+      "name": "Overclocked Growth Acceleration Unit (UIV)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 11
+    },
+    {
+      "value": 10,
+      "name": "Seed Bed (UIV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 11
+    },
+    {
+      "value": 11,
+      "name": "Advanced Harvesting Unit (UMV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 12
+    },
+    {
+      "value": 11,
+      "name": "Environmental Enhancement Unit (UMV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 12
+    },
+    {
+      "value": 11,
+      "name": "Fertilization Unit (UMV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 12
+    },
+    {
+      "value": 11,
+      "name": "Growth Acceleration Unit (UMV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 12
+    },
+    {
+      "value": 11,
+      "name": "Overclocked Growth Acceleration Unit (UMV)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 12
+    },
+    {
+      "value": 11,
+      "name": "Seed Bed (UMV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 12
+    },
+    {
+      "value": 12,
+      "name": "Advanced Harvesting Unit (UXV)",
+      "registry": "cropsnh:cropsnh.advancedHarvestingUnit",
+      "meta": 13
+    },
+    {
+      "value": 12,
+      "name": "Environmental Enhancement Unit (UXV)",
+      "registry": "cropsnh:cropsnh.environmentalEnhancementUnit",
+      "meta": 13
+    },
+    {
+      "value": 12,
+      "name": "Fertilization Unit (UXV)",
+      "registry": "cropsnh:cropsnh.fertilizerUnit",
+      "meta": 13
+    },
+    {
+      "value": 12,
+      "name": "Growth Acceleration Unit (UXV)",
+      "registry": "cropsnh:cropsnh.growthAccelerationUnit",
+      "meta": 13
+    },
+    {
+      "value": 12,
+      "name": "Overclocked Growth Acceleration Unit (UXV)",
+      "registry": "cropsnh:cropsnh.overclockedGrowthAccelerationUnit",
+      "meta": 13
+    },
+    {
+      "value": 12,
+      "name": "Seed Bed (UXV)",
+      "registry": "cropsnh:cropsnh.seedBed",
+      "meta": 13
+    }
+  ],
+  "if_upgrade": [],
+  "show_errors": []
+}

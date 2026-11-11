@@ -80,8 +80,25 @@ public final class ClientProxy extends CommonProxy {
                         .create(bridge, player, settings).scan;
                     com.gtnewhorizon.structurelib.StructureLibAPI.startHinting(player.worldObj);
                     try {
-                        for (dev.structureterminal.bridge.StructureScanner.Cell cell : scan.cells) cell.element
-                            .spawnHint(bridge.context, player.worldObj, cell.x, cell.y, cell.z, cell.advancedTrigger);
+                        for (dev.structureterminal.bridge.StructureScanner.Cell cell : scan.cells) {
+                            cell.element.spawnHint(
+                                bridge.context,
+                                player.worldObj,
+                                cell.x,
+                                cell.y,
+                                cell.z,
+                                cell.advancedTrigger);
+                            // The same read-only predicate used by StructureLib's native show_errors channel.
+                            if (settings.channels.containsKey("show_errors") && !cell.element.couldBeValid(
+                                bridge.context,
+                                player.worldObj,
+                                cell.x,
+                                cell.y,
+                                cell.z,
+                                cell.advancedTrigger))
+                                com.gtnewhorizon.structurelib.StructureLibAPI
+                                    .markHintParticleError(player, player.worldObj, cell.x, cell.y, cell.z);
+                        }
                     } finally {
                         com.gtnewhorizon.structurelib.StructureLibAPI.endHinting(player.worldObj);
                     }

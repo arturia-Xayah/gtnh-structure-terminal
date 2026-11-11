@@ -6,7 +6,7 @@ tasks.withType(JavaCompile).configureEach {
 tasks.named('compileJava', JavaCompile) { options.release = 8 }
 tasks.named('compileTestJava', JavaCompile) { options.release = 8 }
 tasks.named('compileInjectedTagsJava', JavaCompile) { options.release = 8 }
-version = '0.3.4-alpha'
+version = '0.3.5-alpha'
 
 
 ext.modVersion = version

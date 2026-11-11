@@ -10,7 +10,7 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.4--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.4-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.5--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.5-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.5-alpha-GTNH-2.9.0.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0**
 
@@ -34,7 +34,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+1. Install `gtnh-modernization-upgrade-0.3.5-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
 2. Remove older GTNH Modernization Upgrade / Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
 3. Back up the complete world first. Terminal, AE component and power-setting registration IDs are retained. **0.3.0 changes the vault inventory format and cannot directly open 0.2.x vault files**. Export existing stock using the old version, then create a new vault and supply capacity sources after upgrading. Do not delete old files to clear a lock.
 
@@ -56,6 +56,9 @@ Find **Advanced Structure Terminal** in NEI. Craft it shapelessly from a **Multi
 
 1. **Right-click a controller to project; sneak-right-click it to execute Build, Swap or Remove.**
 2. **Sneak-right-click air to open terminal settings.** Rounded controls include coil and glass selectors, repeat count, exclusive Build/Swap/Remove modes, and boolean checkboxes. The triangle opens a tier-sorted item list using NEI item rendering and full tooltips, including coil heat capacity and modifier-key details, scrolling and page buttons; select one material per group. Closing the screen saves the settings.
+
+   Five settings pages cover controls, casings/pipes, energy/fields, special parts and size/helpers. Use the bottom arrows or Page Up/Page Down. Hover settings or candidate items to see the raw channel name. New material selectors keep native projector values; Auto restores native defaults. Different machines may interpret the same value as different materials, especially `casing`. Length accepts 1–99 and boiler width 1–3; 0 means Auto, and valid combinations remain machine-specific. No `hatch`/`height` selectors are added; the existing no-hatch toggle remains.
+
 3. The Auto coil option retains an existing coil ring or chooses the lowest carried tier; AE supply can also provide coils when enabled. Repeat count accepts `0–99`; `0` uses the native minimum. Exact dimensions follow the GTNH machine definition.
 
 Glass selection applies to structures using the native GTNH `glass` channel. Dedicated glass and fixed materials keep their machine rules. The first list has one representative per voltage tier; its submenu selects a variant. Per-tier Auto prefers installed glass, then backpack/AE stock of that tier. The top-level Auto restores the native default.

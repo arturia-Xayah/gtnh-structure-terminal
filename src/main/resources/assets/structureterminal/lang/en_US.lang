@@ -146,3 +146,47 @@ structureterminal.advanced.5.tooltip=Build using a carried wireless AE terminal.
 structureterminal.ae.pending=Demolition materials await AE return inside this terminal. Restore connection/capacity and use it on a controller again to retry.
 
 structureterminal.modern.dark=Dark mode (saved locally)
+
+# Native projector channel pages
+structureterminal.channel.coil=Heating coil
+structureterminal.channel.glass=Glass tier
+structureterminal.channel.casing=General casing
+structureterminal.channel.machine_casing=Machine casing
+structureterminal.channel.unit_casing=Unit casing
+structureterminal.channel.component_casing=Component casing
+structureterminal.channel.pipe=Pipe casing
+structureterminal.channel.item_pipe=Item pipe
+structureterminal.channel.chassis=Magnetic chassis
+structureterminal.channel.coke_oven_casing=Coke oven casing
+structureterminal.channel.field_restriction_coil=Field restriction coil
+structureterminal.channel.solenoid=Solenoid
+structureterminal.channel.capacitor=Lapotronic capacitor
+structureterminal.channel.cell=Redox cell
+structureterminal.channel.field=Storage field
+structureterminal.channel.manipulator=Quantum manipulator
+structureterminal.channel.shielding=Quantum shielding
+structureterminal.channel.antenna=Synchrotron antenna
+structureterminal.channel.motor=Elevator motor
+structureterminal.channel.spacetime_compression=Spacetime compression
+structureterminal.channel.stabilisation=Stabilisation field
+structureterminal.channel.time_dilation=Time dilation field
+structureterminal.channel.piston_block=Implosion containment
+structureterminal.channel.construct=Alchemical construct
+structureterminal.channel.essentia_cell=Essentia diffusion cell
+structureterminal.channel.super_chest=Super / quantum chest
+structureterminal.channel.length=Structure length
+structureterminal.channel.width=Boiler width
+structureterminal.channel.boiler=Boiler pressure
+structureterminal.channel.if_tier=Industrial farm tier
+structureterminal.channel.if_upgrade=Place farm upgrades
+structureterminal.channel.show_errors=Highlight hint errors
+structureterminal.channels.key=Channel: %s
+structureterminal.channels.native=Auto uses the native default; # is the native channel value. Only applies to machines using this channel.
+structureterminal.channels.numeric=0 = Auto; length 1–99, width 1–3. Valid dimensions and combinations depend on the machine.
+structureterminal.channels.toggle=Checked enables this native channel; unchecked removes it.
+structureterminal.channels.shared=Several machines share this channel. The same value can represent different materials; the target machine decides.
+structureterminal.channels.page.0=Controls
+structureterminal.channels.page.1=Casings / pipes
+structureterminal.channels.page.2=Energy / fields
+structureterminal.channels.page.3=Special parts
+structureterminal.channels.page.4=Size / helpers

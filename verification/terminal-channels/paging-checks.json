@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "玻璃等级",
+      "first": 9,
+      "last": 3,
+      "overlap": 0
+    },
+    {
+      "name": "加热线圈",
+      "first": 9,
+      "last": 6,
+      "overlap": 0
+    }
+  ],
+  "motorLabel": "太空电梯加速模块",
+  "errors": []
+}

@@ -24,7 +24,7 @@ public final class TerminalMaterials {
         public final int value, tier;
         public final ItemStack icon;
 
-        Entry(int value, int tier, ItemStack icon) {
+        public Entry(int value, int tier, ItemStack icon) {
             this.value = value;
             this.tier = tier;
             this.icon = icon;

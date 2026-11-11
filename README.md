@@ -10,7 +10,7 @@
 
 **简体中文** · [English](README.en.md) · [版本下载](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.4--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.4-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.5--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.5-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.5-alpha-GTNH-2.9.0.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0**
 
@@ -34,7 +34,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## 安装与旧版升级
 
-1. 获取 `gtnh-modernization-upgrade-0.3.4-alpha-GTNH-2.9.0.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
+1. 获取 `gtnh-modernization-upgrade-0.3.5-alpha-GTNH-2.9.0.jar`，放入实例的 `mods`。联机时客户端与服务器安装相同版本；单人游戏只需安装在客户端。
 2. 移除旧版 **GTNH现代化升级 / 结构终端**，以及独立的 **AE Order Optimizer、Plasma Forge Power、AE Storage Vault** JAR。以上功能已包含在整合版中，不能重复安装。
 3. 升级前备份整个世界。终端、AE 元件和功率设置保留原注册 ID。**0.3.0 更改了聚合器库存格式，不能直接读取 0.2.x 的仓库文件**；已有聚合器需先在旧版导出库存，升级后新建仓库并重新投入容量来源。不要删除旧文件来解除锁定。
 
@@ -56,6 +56,9 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 1. **右键主机：投影；Shift＋右键主机：执行当前建造／替换／拆除模式。**
 2. **Shift＋右键空气：高级终端设置。** 圆角设置面板包含线圈、玻璃、重复结构次数，互斥的建造／替换／拆除模式，以及布尔勾选框。点击材料行右侧三角展开列表，按等级从低到高选择真实物品图标；使用 NEI 原生物品图标和完整悬停提示（包括线圈热容、按键展开信息），支持滚动与翻页，每组只能勾选一种。退出界面自动保存。
+
+   设置分为基础操作、外壳与管道、能源与力场、专用部件、尺寸与辅助五页，底部箭头或 Page Up／Page Down 翻页。悬停设置项或候选物品会显示原始通道名。新增材料选择沿用原版投影仪的通道值，Auto 恢复原生默认；同一个值可以被不同机器解释为不同材料，尤其是 `casing`。长度可填 1–99、锅炉宽度可填 1–3，0 表示 Auto；尺寸组合仍由目标机器决定。未增加 `hatch`／`height` 选择器，无仓室开关保留。
+
 3. 线圈选“自动”时优先沿用结构中已有线圈，再选背包中最低可用等级；开启 AE 后也可从授权网络取料。重复次数为 `0–99`，`0` 使用原机最小尺寸，具体长度由 GTNH 机器定义决定。
 
 玻璃选择仅作用于支持 GTNH 原生 `glass` 通道的结构；专用玻璃和固定材料仍遵循机器要求。一级列表每个电压等级显示一种代表图标，二级列表选择同等级的具体玻璃。每个等级默认 Auto：优先沿用已安装玻璃，再从背包／AE 查找同等级材料。总列表的“自动”恢复原生默认。

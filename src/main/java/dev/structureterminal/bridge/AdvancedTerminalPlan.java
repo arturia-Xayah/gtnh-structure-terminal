@@ -36,7 +36,8 @@ public final class AdvancedTerminalPlan {
         settings.size = Math.max(1, settings.repeatCount);
         settings.mirror = bridge.alignment != null && bridge.alignment.getFlip()
             .isHorizontallyFlipped();
-        settings.channels.clear();
+        // Keep every configured native subchannel through scanning, rescans and placement.
+        settings.channels.remove("glass");
         settings.choices.clear();
         // Preserve the actual native glass channel ID, not its position in the sorted UI list.
         Integer glass = saved.channels.get("glass");

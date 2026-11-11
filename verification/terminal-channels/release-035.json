@@ -1,0 +1,16 @@
+{
+  "release": "0.3.5-alpha",
+  "gtnh": "2.9.0",
+  "asset": "gtnh-modernization-upgrade-0.3.5-alpha-GTNH-2.9.0.jar",
+  "sha256": "3437a87fa2dd451a32c758e4e908f6145dd213d93155bd7090db6d39587dbc91",
+  "unit_tests": 163,
+  "runtime_metadata": {
+    "schema": 1,
+    "version": "0.3.5-alpha",
+    "gtnh": "2.9.0"
+  },
+  "test_fixture_excluded": true,
+  "game_client_launched": false,
+  "backend_verification": "verification/terminal-channels/backend-summary.json",
+  "paging_verification": "verification/terminal-channels/paging-checks.json"
+}

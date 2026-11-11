@@ -146,3 +146,47 @@ structureterminal.advanced.5.tooltip=建造时通过背包中的无线终端从 
 structureterminal.ae.pending=终端中有待归还 AE 的拆除材料。恢复连接与容量后，再次对主机使用终端重试。
 
 structureterminal.modern.dark=深色模式（保存在本地）
+
+# Native projector channel pages
+structureterminal.channel.coil=加热线圈
+structureterminal.channel.glass=玻璃等级
+structureterminal.channel.casing=通用外壳
+structureterminal.channel.machine_casing=机器外壳
+structureterminal.channel.unit_casing=电子单元机械方块
+structureterminal.channel.component_casing=部件装配线外壳
+structureterminal.channel.pipe=管道方块
+structureterminal.channel.item_pipe=物品管道
+structureterminal.channel.chassis=磁力底盘
+structureterminal.channel.coke_oven_casing=焦炉外壳
+structureterminal.channel.field_restriction_coil=力场约束线圈
+structureterminal.channel.solenoid=超导线圈
+structureterminal.channel.capacitor=兰波顿电容
+structureterminal.channel.cell=氧化还原电池
+structureterminal.channel.field=TFFT 存储库方块
+structureterminal.channel.manipulator=量子操纵器
+structureterminal.channel.shielding=量子屏蔽
+structureterminal.channel.antenna=同步辐射天线
+structureterminal.channel.motor=太空电梯加速模块
+structureterminal.channel.spacetime_compression=时空压缩力场
+structureterminal.channel.stabilisation=稳定力场
+structureterminal.channel.time_dilation=时间膨胀力场
+structureterminal.channel.piston_block=聚爆约束方块
+structureterminal.channel.construct=炼金构材
+structureterminal.channel.essentia_cell=源质扩散单元
+structureterminal.channel.super_chest=超级／量子箱
+structureterminal.channel.length=结构长度
+structureterminal.channel.width=锅炉宽度
+structureterminal.channel.boiler=锅炉压力
+structureterminal.channel.if_tier=工业农场等级
+structureterminal.channel.if_upgrade=放置农场升级
+structureterminal.channel.show_errors=标记投影错误
+structureterminal.channels.key=通道名：%s
+structureterminal.channels.native=Auto 使用原版默认值；# 数字为原生通道值，仅对支持此通道的机器有效。
+structureterminal.channels.numeric=0 = Auto；长度 1–99，宽度 1–3。具体尺寸范围与组合由机器决定。
+structureterminal.channels.toggle=勾选时启用此原生通道；取消时移除。
+structureterminal.channels.shared=该通道由多种机器共用。同一个数字可能对应多种材料，由目标机器解释。
+structureterminal.channels.page.0=基础操作
+structureterminal.channels.page.1=外壳与管道
+structureterminal.channels.page.2=能源与力场
+structureterminal.channels.page.3=专用部件
+structureterminal.channels.page.4=尺寸与辅助
