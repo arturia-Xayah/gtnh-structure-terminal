@@ -13,6 +13,13 @@ dependencies {
     compileOnly("it.unimi.dsi:fastutil:8.5.15")
     compileOnly("org.jetbrains:annotations:24.1.0")
     testImplementation("junit:junit:4.13.2")
+    // Inspect GT's Java 17 multi-release render classes when tests run on Java 25.
+    testImplementation("org.ow2.asm:asm-tree:9.10.1")
     // Read pinned AE bytecode to validate client hook selectors without starting a client.
     testRuntimeOnly("com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-1095-GTNH:dev") { transitive = false }
+}
+
+// Forge's bundled ASM 5 shadows ASM 9 unless removed from the test-only runtime.
+configurations.testRuntimeClasspath {
+    exclude group: "org.ow2.asm", module: "asm-debug-all"
 }

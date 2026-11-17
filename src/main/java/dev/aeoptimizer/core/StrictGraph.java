@@ -33,15 +33,29 @@ public final class StrictGraph<T> {
 
     public static final class InvalidPath extends RuntimeException {
 
+        public enum Kind {
+            UNKNOWN,
+            CYCLE,
+            MULTI_OUTPUT
+        }
+
         public final List<?> products;
+        public final Kind kind;
+        public final int outputKinds;
 
         public InvalidPath(String text) {
-            this(text, Collections.emptyList());
+            this(text, Collections.emptyList(), Kind.UNKNOWN, 0);
         }
 
         public InvalidPath(String text, List<?> products) {
+            this(text, products, Kind.CYCLE, 0);
+        }
+
+        private InvalidPath(String text, List<?> products, Kind kind, int outputKinds) {
             super(text);
             this.products = new ArrayList<>(products);
+            this.kind = kind;
+            this.outputKinds = outputKinds;
         }
     }
 
@@ -101,7 +115,10 @@ public final class StrictGraph<T> {
         Recipe<T> recipe = resolver.apply(key);
         if (recipe != null && recipe.outputKinds != 1) throw new InvalidPath(
             "AEO_MULTI_OUTPUT: " + label
-                .apply(key) + " [" + recipe.description.get() + "] outputs=" + recipe.outputKinds);
+                .apply(key) + " [" + recipe.description.get() + "] outputs=" + recipe.outputKinds,
+            Collections.singletonList(key),
+            InvalidPath.Kind.MULTI_OUTPUT,
+            recipe.outputKinds);
         colors.put(key, 1);
         recipes.put(key, recipe);
         stack.addLast(new Frame<>(key, recipe == null ? Collections.emptyList() : recipe.inputs));

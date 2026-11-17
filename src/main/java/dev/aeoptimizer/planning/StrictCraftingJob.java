@@ -156,7 +156,12 @@ public final class StrictCraftingJob<StackType extends IAEStack<StackType>> impl
         } catch (Throwable t) {
             errorMsg = t.getMessage() == null ? t.toString() : t.getMessage();
             if (t instanceof dev.aeoptimizer.core.StrictGraph.InvalidPath
-                && !((dev.aeoptimizer.core.StrictGraph.InvalidPath) t).products.isEmpty())
+                && ((dev.aeoptimizer.core.StrictGraph.InvalidPath) t).kind
+                    == dev.aeoptimizer.core.StrictGraph.InvalidPath.Kind.MULTI_OUTPUT)
+                Reports.multiOutput((dev.aeoptimizer.core.StrictGraph.InvalidPath) t, chosen, reportSource, context);
+            else if (t instanceof dev.aeoptimizer.core.StrictGraph.InvalidPath
+                && ((dev.aeoptimizer.core.StrictGraph.InvalidPath) t).kind
+                    == dev.aeoptimizer.core.StrictGraph.InvalidPath.Kind.CYCLE)
                 Reports.cycle((dev.aeoptimizer.core.StrictGraph.InvalidPath) t, chosen, reportSource, context);
             else Reports.error(errorMsg, reportSource);
             isSimulated = true;

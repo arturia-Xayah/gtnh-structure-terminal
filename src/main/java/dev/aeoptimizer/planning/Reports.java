@@ -100,6 +100,25 @@ public final class Reports {
         ((PlayerSource) source).player.addChatMessage(line);
     }
 
+    public static void multiOutput(dev.aeoptimizer.core.StrictGraph.InvalidPath error,
+        java.util.Map<IAEStack<?>, it.unimi.dsi.fastutil.longs.LongObjectPair<ICraftingPatternDetails>> chosen,
+        BaseActionSource source, appeng.crafting.v2.CraftingContext context) {
+        OrderOptimizer.LOG.warn(error.getMessage());
+        if (!(source instanceof PlayerSource)) return;
+        IAEStack<?> stack = (IAEStack<?>) error.products.get(0);
+        it.unimi.dsi.fastutil.longs.LongObjectPair<ICraftingPatternDetails> choice = chosen.get(stack);
+        ((PlayerSource) source).player.addChatMessage(
+            new net.minecraft.util.ChatComponentTranslation(
+                "aeoptimizer.report.multi_output",
+                product(
+                    stack,
+                    choice == null ? java.util.Collections.emptyList()
+                        : java.util.Collections.singletonList(choice.right()),
+                    source,
+                    context),
+                error.outputKinds));
+    }
+
     public static String describe(ICraftingPatternDetails pattern) {
         StringBuilder out = new StringBuilder("pattern#");
         out.append(fingerprint(pattern))
@@ -147,7 +166,10 @@ public final class Reports {
 
     public static void error(String text, BaseActionSource source) {
         OrderOptimizer.LOG.warn(text);
-        chat(text, source);
+        if (source instanceof PlayerSource) ((PlayerSource) source).player.addChatMessage(
+            new net.minecraft.util.ChatComponentTranslation(
+                "aeoptimizer.report.error",
+                text.length() > 1200 ? text.substring(0, 1200) + "…" : text));
     }
 
     public static void detail(String text, BaseActionSource source) {

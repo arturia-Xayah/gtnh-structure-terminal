@@ -1,5 +1,10 @@
 # 更新日志 / Changelog
 
+## 0.3.6-alpha — GTNH 2.9.0 · 2026-11-17
+
+- 下单检查明确标注多配方、回环、多输出和其他计算错误；保留主产物点击定位，多配方仍只报告、不打断下单。 / Explicit diagnostic types with clickable products; alternative recipes remain non-blocking.
+- 修复成型聚合器的原生外壳在 Angelica 下重复叠加光照，统一外壳、主机与仓室的底纹亮度，保留正常环境明暗。 / Prevent double lighting of formed native casings under Angelica, matching controller and hatch skin shading while retaining world lighting.
+
 ## 0.3.5-alpha — GTNH 2.9.0 · 2026-11-11
 
 - 修复终端材料列表末页重复上一页条目；滚轮与方向键按固定分页定位，并校正通道中文名称。 / Fixed overlapping terminal material pages and aligned wheel/keyboard navigation; corrected Chinese channel labels.

@@ -23,6 +23,7 @@ public class StrictGraphTest {
             new StrictGraph<>("A", x -> recipe("A"), x -> x);
             fail();
         } catch (StrictGraph.InvalidPath e) {
+            assertEquals(StrictGraph.InvalidPath.Kind.CYCLE, e.kind);
             assertTrue(
                 e.getMessage()
                     .contains("A → A"));
@@ -38,6 +39,7 @@ public class StrictGraphTest {
                 x -> x);
             fail();
         } catch (StrictGraph.InvalidPath e) {
+            assertEquals(StrictGraph.InvalidPath.Kind.CYCLE, e.kind);
             assertTrue(
                 e.getMessage()
                     .contains("AEO_CYCLE"));
@@ -53,6 +55,9 @@ public class StrictGraphTest {
             new StrictGraph<>("A", x -> new StrictGraph.Recipe<>(Collections.emptyList(), 2, "bad"), x -> x);
             fail();
         } catch (StrictGraph.InvalidPath e) {
+            assertEquals(StrictGraph.InvalidPath.Kind.MULTI_OUTPUT, e.kind);
+            assertEquals(Collections.singletonList("A"), e.products);
+            assertEquals(2, e.outputKinds);
             assertTrue(
                 e.getMessage()
                     .contains("AEO_MULTI_OUTPUT"));

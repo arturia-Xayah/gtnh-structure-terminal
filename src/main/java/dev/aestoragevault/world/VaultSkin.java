@@ -61,16 +61,25 @@ public final class VaultSkin {
         private void render(ISBRContext context, int side) {
             if (!(context instanceof ISBRWorldContext) || !context.canRenderInPass(pass -> pass == 0)) return;
             ISBRWorldContext world = (ISBRWorldContext) context;
-            dev.aestoragevault.client.VaultBlockRenderer.renderShellFace(
-                world.getBlockAccess(),
-                context.getX(),
-                context.getY(),
-                context.getZ(),
-                context.getBlock(),
-                context.getRenderBlocks(),
-                side,
-                icon(tile),
-                overlay ? .001 : 0);
+            // GT marks its native casing vertices for Angelica's deferred AO. Our shared shell
+            // renderer already writes diffuse color and neighbor light, just like the controller.
+            // Clear that marker or Angelica shades the casing a second time (0.8 -> 0.64 on Z).
+            world.finishLighting();
+            try {
+                dev.aestoragevault.client.VaultBlockRenderer.renderShellFace(
+                    world.getBlockAccess(),
+                    context.getX(),
+                    context.getY(),
+                    context.getZ(),
+                    context.getBlock(),
+                    context.getRenderBlocks(),
+                    side,
+                    icon(tile),
+                    overlay ? .001 : 0);
+            } finally {
+                // Subsequent native hatch/cover layers still need GT's normal lighting path.
+                world.tryStartAngelicaLighting();
+            }
         }
 
         @Override

@@ -47,6 +47,45 @@ public class VaultRenderHookTest {
     }
 
     @Test
+    public void manualShellLightingIsIsolatedFromGtDeferredAo() throws Exception {
+        MethodNode render = null;
+        for (Object entry : read("dev/aestoragevault/world/VaultSkin$ShellTexture").methods) {
+            MethodNode method = (MethodNode) entry;
+            if (method.name.equals("render")) render = method;
+        }
+        assertNotNull(render);
+        int stop = -1, draw = -1, restart = -1, position = 0;
+        for (AbstractInsnNode instruction : render.instructions.toArray()) {
+            if (instruction instanceof MethodInsnNode) {
+                MethodInsnNode call = (MethodInsnNode) instruction;
+                if (call.name.equals("finishLighting")) stop = position;
+                if (call.name.equals("renderShellFace")) draw = position;
+                if (call.name.equals("tryStartAngelicaLighting") && restart < 0) restart = position;
+            }
+            position++;
+        }
+        assertTrue(
+            "Clear the GT/Angelica AO marker before emitting manually shaded vertices",
+            stop >= 0 && stop < draw);
+        assertTrue("Restore native lighting for subsequent hatch and cover layers", restart > draw);
+        assertFalse("Lighting restoration must also run if face rendering throws", render.tryCatchBlocks.isEmpty());
+
+        // Check the pinned GT implementation: disabling RenderBlocks.enableAO alone does not clear these.
+        boolean rendererMarker = false, tessellatorMarker = false;
+        for (Object entry : read("gregtech/common/render/SBRWorldContext").methods) {
+            MethodNode method = (MethodNode) entry;
+            if (!method.name.equals("finishLighting")) continue;
+            for (AbstractInsnNode instruction : method.instructions.toArray()) {
+                if (!(instruction instanceof MethodInsnNode)) continue;
+                String name = ((MethodInsnNode) instruction).name;
+                rendererMarker |= name.equals("angelica$setApplyingCeleritasAO");
+                tessellatorMarker |= name.equals("angelica$setAppliedAo");
+            }
+        }
+        assertTrue("GT must clear both render and emitted-vertex AO state", rendererMarker && tessellatorMarker);
+    }
+
+    @Test
     public void serverClassInitializerNeverTouchesStrippedClientIconField() throws Exception {
         for (Object entry : read("dev/aestoragevault/world/VaultSkin").methods) {
             MethodNode method = (MethodNode) entry;
