@@ -61,7 +61,9 @@ structureterminal.minimap=Structure minimap
 structureterminal.result.limit=Stopped after %s blocks at the build safety limit (rounds or elapsed time). Adjust settings and retry.
 
 # Client updater
-modernization.update.entry=Modernization updates
+modernization.update.entry=Check mod updates
+modernization.update.entryChecking=Checking for updates…
+modernization.update.entryFailed=Update check failed
 modernization.update.entryAvailable=Modernization: update!
 modernization.update.entryReady=Modernization: ready
 modernization.update.title=GTNH Modernization · Updates
@@ -190,3 +192,20 @@ structureterminal.channels.page.1=Casings / pipes
 structureterminal.channels.page.2=Energy / fields
 structureterminal.channels.page.3=Special parts
 structureterminal.channels.page.4=Size / helpers
+
+bc.range.title=Set range
+bc.range.width=Width (+right / -left)
+bc.range.height=Height (+up / -down)
+bc.range.depth=Depth (forward)
+bc.range.anchor=Starts at the block touching the front.
+bc.range.preview=Preview
+bc.range.edit=Edit
+bc.range.apply=Apply
+bc.range.dimensions=Check size limits, signs and zeroes.
+bc.range.rotated=Facing changed. Preview again.
+bc.range.outside=Outside world bounds.
+bc.range.queued=Saved range for after the current job.
+bc.range.applied=Machine work range applied.
+bc.range.denied=Cannot edit this machine.
+
+bc.range.vertical=This BuildCraft machine requires a horizontal front.

@@ -151,21 +151,13 @@ public final class UpdateClient {
     }
 
     public static boolean isMenu(GuiScreen screen) {
-        if (screen instanceof GuiMainMenu) return true;
-        if (screen == null || !screen.getClass()
+        return screen instanceof GuiMainMenu || isCustomMenu(screen) && CustomMenuAccess.isMain(screen);
+    }
+
+    private static boolean isCustomMenu(GuiScreen screen) {
+        return screen != null && screen.getClass()
             .getName()
-            .equals("lumien.custommainmenu.gui.GuiCustom")) return false;
-        try {
-            Object value = screen.getClass()
-                .getField("guiConfig")
-                .get(screen);
-            return "mainmenu".equals(
-                value.getClass()
-                    .getField("name")
-                    .get(value));
-        } catch (ReflectiveOperationException error) {
-            return false;
-        }
+            .equals("lumien.custommainmenu.gui.GuiCustom");
     }
 
     private void detectPack() {
@@ -188,13 +180,21 @@ public final class UpdateClient {
 
     @SubscribeEvent
     public void menu(GuiScreenEvent.InitGuiEvent.Post event) {
-        if (!isMenu(event.gui)) return;
+        GuiScreen displayed = Minecraft.getMinecraft().currentScreen;
+        if (event.gui == displayed || isCustomMenu(displayed) && event.gui instanceof GuiMainMenu)
+            attachMenuButton(displayed, event.buttonList);
+    }
+
+    public void attachMenuButton(GuiScreen gui, java.util.List<GuiButton> eventButtons) {
+        if (!isMenu(gui)) return;
+        // CMM 1.14.1 replaces both fields of InitGuiEvent.Post and then prunes its temporary list.
+        java.util.List<GuiButton> buttons = isCustomMenu(gui) ? CustomMenuAccess.buttons(gui) : eventButtons;
         detectPack();
-        int width = 136, x = Math.max(2, event.gui.width - width - 6), y = 6;
+        int width = 136, x = Math.max(2, gui.width - width - 6), y = 6;
         // Avoid the existing GTNH/CMM controls instead of replacing or reordering them.
-        for (; y + 20 < event.gui.height - 4; y += 22) {
+        for (; y + 20 < gui.height - 4; y += 22) {
             boolean occupied = false;
-            for (Object item : event.buttonList) {
+            for (Object item : buttons) {
                 GuiButton b = (GuiButton) item;
                 if (b.id == BUTTON_ID) return;
                 if (b.visible && x < b.xPosition + b.width
@@ -204,7 +204,7 @@ public final class UpdateClient {
             }
             if (!occupied) break;
         }
-        event.buttonList.add(new UpdateButton(BUTTON_ID, x, Math.min(y, event.gui.height - 24), width, tr("entry")));
+        buttons.add(new UpdateButton(BUTTON_ID, x, Math.min(y, gui.height - 24), width, tr("entry")));
         if (!startupChecked) {
             startupChecked = true;
             if (enabled) check(null);

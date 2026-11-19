@@ -1,5 +1,19 @@
 # 更新日志 / Changelog
 
+## 0.3.7-alpha — GTNH 2.9.0 · 2026-11-19
+
+### 中文
+
+- **更新入口**　修复 GTNH 自定义主菜单清理更新按钮的问题。右上角现在始终保留「现代化升级 · 检查更新」，关闭启动检查后也可手动检查。
+- **BuildCraft 范围设置**　填充机和建筑师工作台都可以从正前方第一格设置工作范围。宽、高可填负数，深度为正数。先预览边框，再应用。机器忙时会在当前作业完成后切换到最近一次确认的范围。
+- **搬迁与复制**　挖下机器会将已确认的范围保存在掉落物上。重新放置后按新朝向计算。使用物质操纵者复制、水平旋转或阵列粘贴时，蓝色线框显示每台目标机器的工作范围。
+
+### English
+
+- **Update button**　Fixed the missing button on GTNH’s custom main menu. **Check mod updates** stays in the upper right and remains available when startup checks are off.
+- **BuildCraft work ranges**　Set the Filler or Architect Table’s range from the first block in front of the machine. Width and height accept negative values. Depth must be positive. Preview the outline before applying. Busy machines finish their current job before switching to the last confirmed range.
+- **Moving and copying machines**　Mining a machine saves the confirmed dimensions on its dropped item. Placing it again anchors the range to its new front. When copying with the Matter Manipulator, blue outlines show each destination machine’s work range, including horizontal rotations and arrays.
+
 ## 0.3.6-alpha — GTNH 2.9.0 · 2026-11-17
 
 - 下单检查明确标注多配方、回环、多输出和其他计算错误；保留主产物点击定位，多配方仍只报告、不打断下单。 / Explicit diagnostic types with clickable products; alternative recipes remain non-blocking.

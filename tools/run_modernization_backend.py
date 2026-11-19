@@ -12,6 +12,7 @@ from summarize_pack_validation import classify
 
 EXCLUDED = ('structureterminal','aeorderoptimizer','aeoptimizer','aeorderbench','plasmaforgepower','aestoragevault','gtnh-modernization')
 SUITES = {
+    'bc_range': ('bc-range-validation', ['-Dstructureterminal.bcRangeTests=true'], ['bc-range-tests.json']),
     'cache_config': ('cache-config-validation', ['-Daestoragevault.cacheConfigTests=true'], ['cache-config-tests.json','cache-config-tests-restart.json']),
     'big_quantity': ('big-quantity-validation', ['-Daestoragevault.bigQuantityTests=true'], ['big-quantity-tests.json','big-quantity-tests-restart.json']),
     'vault_io': ('vault-io-validation', ['-Daestoragevault.ioTests=true'], ['vault-io-tests.json','vault-io-tests-restart.json']),

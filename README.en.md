@@ -10,7 +10,7 @@
 
 [简体中文](README.md) · **English** · [Releases](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases)
 
-[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.6--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.6-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.6-alpha-GTNH-2.9.0.jar)
+[![Download JAR](https://img.shields.io/badge/Download_JAR-0.3.7--alpha-4aa8e8?logo=github)](https://github.com/arturia-Xayah/gtnh-structure-terminal/releases/download/v0.3.7-alpha-GTNH-2.9.0/gtnh-modernization-upgrade-0.3.7-alpha-GTNH-2.9.0.jar)
 
 Minecraft **1.7.10** · GTNH **2.9.0**
 
@@ -18,6 +18,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## Contents
 
+- [BuildCraft work range](#buildcraft-work-range)
 - [Client updates](#client-updates): menu checks, exact server versions and exit-time installation
 - [Installation and upgrading](#installation-and-upgrading)
 - [Structure Terminal](#structure-terminal): projection, material selection, instant building and coil replacement
@@ -34,7 +35,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## Installation and upgrading
 
-1. Install `gtnh-modernization-upgrade-0.3.6-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
+1. Install `gtnh-modernization-upgrade-0.3.7-alpha-GTNH-2.9.0.jar` in `mods`. Multiplayer clients and servers need the same version; install on the client for single-player.
 2. Remove older GTNH Modernization Upgrade / Structure Terminal JARs and standalone **AE Order Optimizer, Plasma Forge Power and AE Storage Vault** JARs. Their features are included; installing both creates duplicate modules.
 3. Back up the complete world first. Terminal, AE component and power-setting registration IDs are retained. **0.3.0 changes the vault inventory format and cannot directly open 0.2.x vault files**. Export existing stock using the old version, then create a new vault and supply capacity sources after upgrading. Do not delete old files to clear a lock.
 
@@ -42,7 +43,7 @@ Dependencies are supplied by the target pack: GregTech, StructureLib, GTNHLib, A
 
 ## Client updates
 
-Starting with 0.3.3, **Modernization updates** appears near the top right of GTNH's main menu. Each launch checks once in the background. Network failures do not block play. The update screen offers download, cancellation, later and skip-version actions, plus switches for startup checks, prereleases and automatic server-version downloads.
+Use **Check mod updates** at the top right of GTNH’s main menu, including when startup checks are off. Each launch checks once in the background. Network failures do not block play. The update screen offers download, cancellation, later and skip-version actions, plus switches for startup checks, prereleases and automatic server-version downloads.
 
 On a version-mismatch disconnect, the updater queries the server's public Forge status and looks for **that exact server version**. Disabled status queries, network failures or unavailable releases leave the ordinary connection error in place; compatibility checks are never relaxed. Server auto-download is optional, and installation still requires confirmation.
 
@@ -71,6 +72,12 @@ The top-right checkbox switches dark mode, saved locally. Press the inventory ke
 A construction pass executes in one server tick, skips missing materials and continues with other positions. Existing ordinary blocks and hatches are retained. Replenish materials and click again to finish. Configured scan and build limits still apply and report an interrupted pass explicitly.
 
 Machines must expose a readable StructureLib definition. Normal building skips formed GT machines; projection does not force structure checks or stop them. Replacing coils or changing a structure can stop a running machine. AE supply requires a linked, powered wireless terminal within range and extraction permission.
+
+## BuildCraft work range
+
+Choose **Set range** in the Filler or Architect Table. Right-click an unconfigured Architect Table with an empty hand. The first block touching the front is included. Looking in the machine’s forward direction, positive width extends right and negative width left. Positive height extends up and negative height down. Depth is always positive. Each dimension is limited by the server’s BC marker range. Preview the outline in the world, then apply. If the machine is busy, the last confirmed range takes effect after its current job.
+
+Mining the machine saves the last confirmed dimensions on its dropped item. Placing it again anchors the range to its new front. In Matter Manipulator copy mode, a blue outline previews each destination machine’s work range, including horizontal rotations and arrays.
 
 ## ME Packing Tape
 

@@ -51,6 +51,8 @@ public final class StructureTerminal {
         FMLCommonHandler.instance()
             .bus()
             .register(BuildService.INSTANCE);
+        if (cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders"))
+            MinecraftForge.EVENT_BUS.register(new dev.structureterminal.bc.RangeAccess());
         proxy.init();
     }
 

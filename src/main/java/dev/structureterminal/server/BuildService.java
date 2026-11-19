@@ -82,6 +82,11 @@ public final class BuildService {
     }
 
     private void request(EntityPlayerMP player, NBTTagCompound tag) {
+        if (tag.getBoolean("bcRange")) {
+            if (cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders"))
+                dev.structureterminal.bc.RangeAccess.request(player, tag);
+            return;
+        }
         int action = tag.getInteger("action");
         if (action == 2) {
             jobs.remove(player.getUniqueID());

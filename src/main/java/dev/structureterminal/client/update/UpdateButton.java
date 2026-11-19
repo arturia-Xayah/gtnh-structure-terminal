@@ -34,9 +34,22 @@ public final class UpdateButton extends GuiButton {
         String text = displayString;
         if (id == 209731) {
             UpdateClient updater = UpdateClient.INSTANCE;
-            text = UpdateClient.tr(
-                updater.state.equals("available") ? "entryAvailable"
-                    : updater.state.equals("ready") ? "entryReady" : "entry");
+            switch (updater.state) {
+                case "available":
+                    text = UpdateClient.tr("entryAvailable");
+                    break;
+                case "ready":
+                    text = UpdateClient.tr("entryReady");
+                    break;
+                case "checking":
+                    text = UpdateClient.tr("entryChecking");
+                    break;
+                case "failed":
+                    text = UpdateClient.tr("entryFailed");
+                    break;
+                default:
+                    text = UpdateClient.tr("entry");
+            }
         }
         String label = mc.fontRenderer.trimStringToWidth(text, width - 8);
         drawCenteredString(

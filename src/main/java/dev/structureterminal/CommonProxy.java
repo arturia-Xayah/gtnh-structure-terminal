@@ -7,6 +7,8 @@ public class CommonProxy implements cpw.mods.fml.common.network.IGuiHandler {
 
     public Object getServerGuiElement(int id, EntityPlayer player, net.minecraft.world.World world, int x, int y,
         int z) {
+        if (id == 37 && cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders"))
+            return dev.structureterminal.bc.RangeContainer.at(player, world, x, y, z);
         return id == dev.structureterminal.pattern.IntegratedPattern.GUI
             && dev.structureterminal.pattern.IntegratedPatternContainer.canOpen(player, x)
                 ? new dev.structureterminal.pattern.IntegratedPatternContainer(player, x)

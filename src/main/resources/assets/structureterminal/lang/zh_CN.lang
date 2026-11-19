@@ -61,7 +61,9 @@ structureterminal.minimap=结构缩略图
 structureterminal.result.limit=放置 %s 个方块后达到搭建安全上限（轮次或耗时）；修正设置后可再次搭建。
 
 # Client updater
-modernization.update.entry=现代化升级 · 更新
+modernization.update.entry=现代化升级 · 检查更新
+modernization.update.entryChecking=现代化升级 · 正在检查…
+modernization.update.entryFailed=现代化升级 · 检查失败
 modernization.update.entryAvailable=现代化升级 · 有新版本
 modernization.update.entryReady=现代化升级 · 等待安装
 modernization.update.title=GTNH现代化升级 · 更新中心
@@ -190,3 +192,20 @@ structureterminal.channels.page.1=外壳与管道
 structureterminal.channels.page.2=能源与力场
 structureterminal.channels.page.3=专用部件
 structureterminal.channels.page.4=尺寸与辅助
+
+bc.range.title=范围设置
+bc.range.width=宽（＋右／－左）
+bc.range.height=高（＋上／－下）
+bc.range.depth=深（向前）
+bc.range.anchor=从正前方第一格起算，包含起始格
+bc.range.preview=预览范围
+bc.range.edit=返回修改
+bc.range.apply=应用范围
+bc.range.dimensions=请输入限额内的非零整数，深度须为正
+bc.range.rotated=机器朝向已改变，请重新预览
+bc.range.outside=选区超出了世界边界
+bc.range.queued=范围已保存，将在当前任务完成后生效。
+bc.range.applied=已应用机器工作范围。
+bc.range.denied=无法编辑这台机器
+
+bc.range.vertical=该 BC 机器的正面只能朝向水平方向

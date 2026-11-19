@@ -18,6 +18,11 @@ public final class ClientProxy extends CommonProxy {
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, net.minecraft.world.World world, int x, int y,
         int z) {
+        if (id == 37 && cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders")) {
+            dev.structureterminal.bc.RangeContainer c = dev.structureterminal.bc.RangeContainer
+                .at(player, world, x, y, z);
+            return c == null ? null : new RangeScreen(c);
+        }
         return id == dev.structureterminal.pattern.IntegratedPattern.GUI
             && dev.structureterminal.pattern.IntegratedPatternContainer.canOpen(player, x)
                 ? new IntegratedPatternScreen(player, x)
@@ -28,6 +33,8 @@ public final class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
+        if (cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders"))
+            net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new RangeScreen.Events());
         dev.structureterminal.client.update.UpdateClient.INSTANCE.init();
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(dev.aeoptimizer.ui.PatternHighlights.INSTANCE);
         FMLCommonHandler.instance()
@@ -115,6 +122,10 @@ public final class ClientProxy extends CommonProxy {
     public void receive(NBTTagCompound tag) {
         queue.add(() -> {
             Minecraft mc = Minecraft.getMinecraft();
+            if (tag.getBoolean("bcRange")) {
+                if (mc.currentScreen instanceof RangeScreen) ((RangeScreen) mc.currentScreen).receive(tag);
+                return;
+            }
             if (tag.getBoolean("patternHighlight")) {
                 dev.aeoptimizer.ui.PatternHighlights.INSTANCE.receive(tag);
                 return;
