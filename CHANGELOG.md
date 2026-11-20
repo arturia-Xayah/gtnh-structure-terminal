@@ -1,5 +1,17 @@
 # 更新日志 / Changelog
 
+## 0.3.8-alpha — GTNH 2.9.0 · 2026-11-20
+
+### 中文
+
+- **传送门投影主机**　自定义门形、尺寸和配色，两台同频主机可双向跨维度传送。可设置站名、门顶显示的目的站名和抵达朝向。
+- **目的地画面**　默认关闭。开启后，玩家在入口中心 16 格范围内可以透过门看到出口前方最多 16 格内已加载的场景。视野内的多扇门可同时显示各自的目的地。实时模式随玩家视角位置变化，快照模式朝向出口正前方，每 200 个游戏 tick 更新。
+
+### English
+
+- **Portal Projector**　Customize the gate’s shape, size and colours. Pair two projectors on the same frequency for two-way travel between dimensions. Set station names, the destination label above the gate and the arrival direction.
+- **Destination views**　Enable this option on each projector to see loaded scenery up to 16 blocks ahead of its exit while within 16 blocks of the entrance centre. All eligible gates in view display their own destinations. Live views follow the player’s eye position. Snapshots face forward from the exit and refresh every 200 game ticks.
+
 ## 0.3.7-alpha — GTNH 2.9.0 · 2026-11-19
 
 ### 中文
