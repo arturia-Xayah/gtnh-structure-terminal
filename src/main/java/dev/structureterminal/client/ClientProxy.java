@@ -18,6 +18,11 @@ public final class ClientProxy extends CommonProxy {
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, net.minecraft.world.World world, int x, int y,
         int z) {
+        if (id == dev.structureterminal.projection.ProjectorMenu.ID) {
+            dev.structureterminal.projection.ProjectorMenu menu = dev.structureterminal.projection.ProjectorMenu
+                .at(world, x, y, z);
+            return menu == null ? null : new dev.structureterminal.client.projection.ProjectorScreen(menu);
+        }
         if (id == 37 && cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders")) {
             dev.structureterminal.bc.RangeContainer c = dev.structureterminal.bc.RangeContainer
                 .at(player, world, x, y, z);
@@ -33,6 +38,14 @@ public final class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
+        ((net.minecraft.client.resources.IReloadableResourceManager) Minecraft.getMinecraft()
+            .getResourceManager()).registerReloadListener(dev.structureterminal.client.projection.SceneClient.INSTANCE);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(dev.structureterminal.client.projection.SceneClient.INSTANCE);
+        cpw.mods.fml.client.registry.ClientRegistry.bindTileEntitySpecialRenderer(
+            dev.structureterminal.projection.ProjectorTile.class,
+            new dev.structureterminal.client.projection.ProjectorRenderer());
         if (cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders"))
             net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new RangeScreen.Events());
         dev.structureterminal.client.update.UpdateClient.INSTANCE.init();
@@ -122,6 +135,10 @@ public final class ClientProxy extends CommonProxy {
     public void receive(NBTTagCompound tag) {
         queue.add(() -> {
             Minecraft mc = Minecraft.getMinecraft();
+            if (tag.getBoolean("sceneReply")) {
+                dev.structureterminal.client.projection.SceneClient.INSTANCE.receive(tag);
+                return;
+            }
             if (tag.getBoolean("bcRange")) {
                 if (mc.currentScreen instanceof RangeScreen) ((RangeScreen) mc.currentScreen).receive(tag);
                 return;

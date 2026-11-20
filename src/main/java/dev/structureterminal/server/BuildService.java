@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -44,6 +45,8 @@ public final class BuildService {
     public static final BuildService INSTANCE = new BuildService();
     private final ConcurrentLinkedQueue<Runnable> requests = new ConcurrentLinkedQueue<Runnable>();
     private final AtomicInteger queued = new AtomicInteger();
+    private final ArrayBlockingQueue<Runnable> sceneRequests = new ArrayBlockingQueue<>(128);
+
     private final Map<UUID, Job> jobs = new HashMap<UUID, Job>();
     private final Map<UUID, Long> lastRequest = new HashMap<UUID, Long>();
     private int ticks;
@@ -63,12 +66,7 @@ public final class BuildService {
     }
 
     public void enqueue(EntityPlayerMP player, NBTTagCompound tag) {
-        if (queued.incrementAndGet() > 128) {
-            queued.decrementAndGet();
-            return;
-        }
-        requests.add(() -> {
-            queued.decrementAndGet();
+        Runnable task = () -> {
             try {
                 request(player, tag);
             } catch (RuntimeException e) {
@@ -78,10 +76,37 @@ public final class BuildService {
                     e.getMessage() == null ? e.getClass()
                         .getSimpleName() : e.getMessage());
             }
+        };
+        if (tag.getBoolean("sceneRequest")) {
+            sceneRequests.offer(task);
+            return;
+        }
+        if (queued.incrementAndGet() > 128) {
+            queued.decrementAndGet();
+            return;
+        }
+        requests.add(() -> {
+            queued.decrementAndGet();
+            task.run();
         });
     }
 
+    public void clearScenes() {
+        sceneRequests.clear();
+        dev.structureterminal.projection.SceneService.clear();
+    }
+
     private void request(EntityPlayerMP player, NBTTagCompound tag) {
+        if (tag.getBoolean("sceneRequest")) {
+            if (player.isDead || player.playerNetServerHandler == null
+                || !player.playerNetServerHandler.netManager.isChannelOpen()) return;
+            dev.structureterminal.projection.SceneService.request(player, tag);
+            return;
+        }
+        if (tag.getBoolean("projector")) {
+            dev.structureterminal.projection.ProjectorMenu.apply(player, tag);
+            return;
+        }
         if (tag.getBoolean("bcRange")) {
             if (cpw.mods.fml.common.Loader.isModLoaded("BuildCraft|Builders"))
                 dev.structureterminal.bc.RangeAccess.request(player, tag);
@@ -180,7 +205,18 @@ public final class BuildService {
             if (task == null) break;
             task.run();
         }
+        // Scene work has a FIFO of its own so visible portals make progress without delaying terminal edits.
+        for (int n = 0; n < 2; n++) {
+            Runnable task = sceneRequests.poll();
+            if (task == null) break;
+            task.run();
+        }
         ticks++;
+        if (ticks % dev.structureterminal.projection.SceneView.SNAPSHOT_TICKS == 0) {
+            net.minecraft.world.WorldServer world = MinecraftServer.getServer()
+                .worldServerForDimension(0);
+            if (world != null) dev.structureterminal.projection.SceneService.expire(world.getTotalWorldTime());
+        }
 
         for (Iterator<Job> it = jobs.values()
             .iterator(); it.hasNext();) {

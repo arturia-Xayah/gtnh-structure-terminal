@@ -80,6 +80,7 @@ public final class BundleChecks {
                 .create()
                 .toJson(report)
                 .getBytes(StandardCharsets.UTF_8));
+        if (Boolean.getBoolean("structureterminal.projectorTests")) ProjectorChecks.run();
         if (Boolean.getBoolean("structureterminal.bcRangeTests")) BcRangeChecks.run();
     }
 

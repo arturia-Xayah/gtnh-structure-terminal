@@ -38,6 +38,10 @@ public final class StructureTerminal {
     public void preInit(FMLPreInitializationEvent event) {
         configFile = event.getSuggestedConfigurationFile();
         TerminalConfig.load(configFile);
+        dev.structureterminal.projection.ProjectorBlock.register();
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new dev.structureterminal.projection.GateTravel());
         dev.structureterminal.packing.PackingItems.register();
         dev.structureterminal.pattern.IntegratedPattern.register();
         FMLCommonHandler.instance()
@@ -64,6 +68,11 @@ public final class StructureTerminal {
         Item projector = GameRegistry.findItem("structurelib", "item.structurelib.constructableTrigger");
         if (projector != null) GameRegistry
             .addShapelessRecipe(new ItemStack(item), new ItemStack(projector), Items.ender_pearl, Items.book);
+    }
+
+    @Mod.EventHandler
+    public void stopped(cpw.mods.fml.common.event.FMLServerStoppedEvent e) {
+        dev.structureterminal.server.BuildService.INSTANCE.clearScenes();
     }
 
     @Mod.EventHandler

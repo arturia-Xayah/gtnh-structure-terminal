@@ -24,6 +24,7 @@ public final class TerminalNetwork {
         channel = NetworkRegistry.INSTANCE.newSimpleChannel(StructureTerminal.ID);
         channel.registerMessage(RequestHandler.class, Request.class, 0, Side.SERVER);
         channel.registerMessage(ReplyHandler.class, Reply.class, 1, Side.CLIENT);
+        channel.registerMessage(SceneHandler.class, SceneReply.class, 2, Side.CLIENT);
     }
 
     public static class Request implements IMessage {
@@ -54,6 +55,46 @@ public final class TerminalNetwork {
 
         public Reply(NBTTagCompound tag) {
             super(tag);
+        }
+    }
+
+    // A bounded region can exceed the signed-short length in vanilla's NBT packet codec.
+    public static final class SceneReply implements IMessage {
+
+        public NBTTagCompound tag;
+
+        public SceneReply() {}
+
+        public SceneReply(NBTTagCompound tag) {
+            this.tag = tag;
+        }
+
+        public void toBytes(ByteBuf buf) {
+            try {
+                buf.writeBytes(net.minecraft.nbt.CompressedStreamTools.compress(tag));
+            } catch (java.io.IOException ex) {
+                throw new IllegalStateException(ex);
+            }
+        }
+
+        public void fromBytes(ByteBuf buf) {
+            if (buf.readableBytes() > 256 * 1024) throw new IllegalArgumentException("Oversized scene");
+            byte[] bytes = new byte[buf.readableBytes()];
+            buf.readBytes(bytes);
+            try {
+                tag = net.minecraft.nbt.CompressedStreamTools
+                    .func_152457_a(bytes, new net.minecraft.nbt.NBTSizeTracker(1024 * 1024));
+            } catch (java.io.IOException ex) {
+                throw new IllegalArgumentException(ex);
+            }
+        }
+    }
+
+    public static final class SceneHandler implements IMessageHandler<SceneReply, IMessage> {
+
+        public IMessage onMessage(SceneReply m, MessageContext ctx) {
+            StructureTerminal.proxy.receive(m.tag);
+            return null;
         }
     }
 

@@ -18,6 +18,7 @@ Minecraft **1.7.10** · GTNH **2.9.0**
 
 ## Contents
 
+- [Portal Projector](#portal-projector)
 - [BuildCraft work range](#buildcraft-work-range)
 - [Client updates](#client-updates): menu checks, exact server versions and exit-time installation
 - [Installation and upgrading](#installation-and-upgrading)
@@ -72,6 +73,14 @@ The top-right checkbox switches dark mode, saved locally. Press the inventory ke
 A construction pass executes in one server tick, skips missing materials and continues with other positions. Existing ordinary blocks and hatches are retained. Replenish materials and click again to finish. Configured scan and build limits still apply and report an interrupted pass explicitly.
 
 Machines must expose a readable StructureLib definition. Normal building skips formed GT machines; projection does not force structure checks or stop them. Replacing coils or changing a structure can stop a running machine. AE supply requires a linked, powered wireless terminal within range and extraction permission.
+
+## Portal Projector
+
+Take two projectors from the Redstone creative tab. Right-click each to edit its shape, dimensions and colours. Open **Connection**, enter the same frequency at both ends, and select **Apply & open** on each. The pair transports players in both directions, including between dimensions. Opening a gate with an empty frequency shows a projection-only notice. In **Connection**, name the local station and choose whether to display the destination name above this gate. The label updates when the other station is renamed.
+
+Enable **Scene** to see up to 16 blocks ahead of the exit. **Live** aims the camera from the exit centre according to your eye position relative to the entrance. **Snapshot** faces the configured exit direction and refreshes every 200 game ticks. The viewer must be within 16 blocks of the entrance centre. Only loaded destination chunks are shown. All eligible gates in view display their own destinations simultaneously, each using its selected mode. The feature defaults to off.
+
+Set the arrival direction on the destination projector. It follows the projector by default and can be set to any cardinal direction. Keep the space above the projector clear for landing. Open apertures cannot intersect. Select **Save and close gate** to release its frequency slot.
 
 ## BuildCraft work range
 
